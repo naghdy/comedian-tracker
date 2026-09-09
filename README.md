@@ -2,14 +2,30 @@
 
 Personal dashboard for tracking live comedy shows for a curated roster. No account — roster and shows persist in `localStorage`.
 
-## Run
+**Live site:** [https://naghdy.github.io/comedian-tracker/](https://naghdy.github.io/comedian-tracker/)
+
+Day-to-day use is the live URL. You do not need to run anything locally.
+
+## GitHub Pages (one-time)
+
+The site deploys from GitHub Actions on every push to `main` (workflow: `.github/workflows/pages.yml`).
+
+If the live URL 404s after the first merge, enable Pages in the repo:
+
+1. Open **Settings → Pages**
+2. Under **Build and deployment → Source**, choose **GitHub Actions**
+3. Re-run the **Deploy GitHub Pages** workflow (Actions tab), or push an empty commit to `main`
+
+No API keys are required. The map uses Leaflet + OpenStreetMap / Carto.
+
+## Run locally (optional)
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open the printed local URL (default [http://localhost:5173](http://localhost:5173)).
+Vite is configured with `base: '/comedian-tracker/'`, so the printed URL is [http://localhost:5173/comedian-tracker/](http://localhost:5173/comedian-tracker/).
 
 ```bash
 npm run build    # production bundle

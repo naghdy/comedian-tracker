@@ -1,0 +1,92 @@
+[
+  {
+    "comedianId": "andrew-schulz",
+    "url": "https://newbrunswick.stressfactory.com/events/142216",
+    "title": "Andrew Schulz",
+    "venue": "Stress Factory",
+    "city": "New Brunswick",
+    "region": "NJ",
+    "country": "US"
+  },
+  {
+    "comedianId": "andrew-schulz",
+    "url": "https://improvtx.com/houston/comic/andrew+schulz/",
+    "title": "Andrew Schulz",
+    "venue": "Houston Improv",
+    "city": "Houston",
+    "region": "TX",
+    "country": "US"
+  },
+  {
+    "comedianId": "andrew-schulz",
+    "url": "https://levitylive.com/nyack/comic/andrew+schulz/",
+    "title": "Andrew Schulz",
+    "venue": "Levity Live",
+    "city": "West Nyack",
+    "region": "NY",
+    "country": "US"
+  },
+  {
+    "comedianId": "andrew-schulz",
+    "url": "https://indianapolis.heliumcomedy.com/events/142211",
+    "title": "Andrew Schulz",
+    "venue": "Helium Comedy Club",
+    "city": "Indianapolis",
+    "region": "IN",
+    "country": "US"
+  },
+  {
+    "comedianId": "andrew-schulz",
+    "url": "https://www.stardome.com/events/142204",
+    "title": "Andrew Schulz",
+    "venue": "Stardome Comedy Club",
+    "city": "Birmingham, AL",
+    "region": "AL",
+    "country": "US"
+  },
+  {
+    "comedianId": "andrew-schulz",
+    "url": "https://hilarities.com/events/142270",
+    "title": "Andrew Schulz",
+    "venue": "Hilarities",
+    "city": "Cleveland",
+    "region": "OH",
+    "country": "US"
+  },
+  {
+    "comedianId": "andrew-schulz",
+    "url": "https://www.goodnightscomedy.com/events/142206",
+    "title": "Andrew Schulz",
+    "venue": "Goodnights Comedy Club",
+    "city": "Raleigh",
+    "region": "NC",
+    "country": "US"
+  },
+  {
+    "comedianId": "jeff-arcuri",
+    "url": "https://www.summitcitycomedy.com/events/134902",
+    "title": "Jeff Arcuri: Fresh Cut",
+    "venue": "Summit City Comedy Club",
+    "city": "Fort Wayne",
+    "region": "IN",
+    "country": "US"
+  },
+  {
+    "comedianId": "jeff-arcuri",
+    "url": "https://improv.com/brea/comic/jeff+arcuri/",
+    "title": "Jeff Arcuri: Fresh Cut",
+    "venue": "Brea Improv",
+    "city": "Brea",
+    "region": "CA",
+    "country": "US"
+  },
+  {
+    "comedianId": "jeff-arcuri",
+    "url": "https://www.improvftl.com/events/134911",
+    "title": "Jeff Arcuri: Fresh Cut",
+    "venue": "Fort Lauderdale Improv",
+    "city": "Dania Beach",
+    "region": "FL",
+    "country": "US"
+  }
+]

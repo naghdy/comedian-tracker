@@ -25,6 +25,8 @@ const extra: City[] = [
   { city: "Knoxville", lat: 35.9606, lng: -83.9207, aliases: ["knoxville, tn"] },
   { city: "Madison", lat: 43.0731, lng: -89.4012, aliases: ["madison, wi"] },
   { city: "Minneapolis", lat: 44.9778, lng: -93.265, aliases: ["minneapolis, mn"] },
+  { city: "Nashville", lat: 36.1627, lng: -86.7816, aliases: ["nashville, tn"] },
+  { city: "New Brunswick", lat: 40.4862, lng: -74.4518, aliases: ["new brunswick, nj"] },
   { city: "New Orleans", lat: 29.9511, lng: -90.0715, aliases: ["new orleans, la"] },
   { city: "Orlando", lat: 28.5383, lng: -81.3792, aliases: ["orlando, fl"] },
   { city: "Pensacola", lat: 30.4213, lng: -87.2169, aliases: ["pensacola, fl"] },

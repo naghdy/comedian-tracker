@@ -45,6 +45,7 @@
   {"city":"Miami","lat":25.7617,"lng":-80.1918,"aliases":["miami, fl"]},
   {"city":"Minneapolis","lat":44.9778,"lng":-93.265,"aliases":["minneapolis, mn"]},
   {"city":"Nashville","lat":36.1627,"lng":-86.7816,"aliases":["nashville, tn"]},
+  {"city":"New Brunswick","lat":40.4862,"lng":-74.4518,"aliases":["new brunswick, nj"]},
   {"city":"New Orleans","lat":29.9511,"lng":-90.0715,"aliases":["new orleans, la"]},
   {"city":"New York","lat":40.7128,"lng":-74.006,"aliases":["nyc","new york city","new york, ny","manhattan"]},
   {"city":"Newcastle upon Tyne","lat":54.9783,"lng":-1.6178,"aliases":["newcastle","newcastle, uk"]},

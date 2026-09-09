@@ -27,16 +27,16 @@ The roster, trip checker, and agenda work without a key. The map panel shows a s
 
 Do not commit a real key. For local runs, copy `.env.example` to `.env.local`.
 
-### Ticketmaster key (required for live date lookup)
+### Ticketmaster key (optional — theater dates)
 
-GitHub Pages has no backend, so **Add comedian** and **Refresh shows** call the [Ticketmaster Discovery API](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) from the browser (the API supports CORS). SeatGeek is an optional fallback.
+GitHub Pages has no backend, so **Add comedian** and **Refresh shows** call the [Ticketmaster Discovery API](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) from the browser (the API supports CORS). SeatGeek is an optional fallback. Ticketmaster is **not** enough on its own: club calendars such as Andrew Schulz’s official Laylo embed are fetched without a TM key.
 
 1. Create a Discovery API key at [developer.ticketmaster.com](https://developer.ticketmaster.com/).
 2. Add a repo secret named **`VITE_TICKETMASTER_API_KEY`**.
 3. Optional: create a SeatGeek app at [seatgeek.com/account/develop](https://seatgeek.com/account/develop) and add **`VITE_SEATGEEK_CLIENT_ID`**.
 4. Re-run **Deploy GitHub Pages** so Vite can bake the keys into the build.
 
-These values are public in the JavaScript bundle, same as the Maps key. Do not commit them. Without a Ticketmaster key, adding a comedian still creates the roster entry and shows a clear message; dates can be added by hand.
+These values are public in the JavaScript bundle, same as the Maps key. Do not commit them. Without a Ticketmaster key, adding a comedian still creates the roster entry; seed club dates and known Laylo drops still populate. Other artists can be dated by hand.
 
 Locally, put the keys in `.env.local` next to the Maps key.
 
@@ -67,14 +67,15 @@ Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Ma
 
 ## Live lookup
 
-On **Add comedian** the app:
+On **Add comedian** / **Refresh** the app merges:
 
-1. Saves the roster row immediately (name required, tour URL optional).
-2. Searches Ticketmaster attractions/events for a name match (first + last name). Optional SeatGeek query if that client id is set.
-3. Collapses multiple showtimes on the same night at the same venue to one agenda row.
-4. Merges new shows into `localStorage` and they appear on the map + agenda right away.
+1. Curated seed / club-calendar nights for that name (so Helium, Improv, and Levity dates Ticketmaster misses still appear).
+2. Ticketmaster Discovery (if `VITE_TICKETMASTER_API_KEY` is set).
+3. SeatGeek (if `VITE_SEATGEEK_CLIENT_ID` is set).
+4. Official **Laylo** drop JSON (`data/laylo-drops.json`) when seed has no nights yet. The CloudFront file has no CORS headers, so GitHub Pages cannot read it from the browser; `npm run refresh-tours` parses it from Node into `data/shows.json`. Ticketmaster only lists Houston + West Nyack for Schulz — the 16-night seed is that official calendar.
+5. Club HTML is not fetched in the browser (CORS). `npm run refresh-tours` scrapes Helium / Improv / Laylo from Node.
 
-If the API key is missing, the request fails, or nothing matches, the comedian **stays on the roster** and the add form shows what happened. Refresh replaces previous lookup-sourced rows for that person and keeps seed (`listed`) and manually added (`user`) dates.
+Multiple showtimes on the same night at the same venue collapse to one agenda row. If lookup finds nothing, the comedian **stays on the roster**. Refresh reapplies seed listed dates and live listings; manually added (`user`) dates are kept.
 
 ## Seed data
 
@@ -84,6 +85,8 @@ If the API key is missing, the request fails, or nothing matches, the comedian *
 | `data/shows.json` | Upcoming dates for the original four |
 | `data/jeff-arcuri-shows.json` | Jeff Arcuri seed dates |
 | `data/cities.json` | Static lat/lng lookup (no geocoding API key) |
+| `data/laylo-drops.json` | Official Laylo embed drop IDs (Andrew Schulz homepage calendar) |
+| `data/venue-pages.json` | Club event URLs to scrape from Node (`npm run refresh-tours`) |
 
 Dates were seeded from public listings on **2026-09-09**. There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
 
@@ -91,11 +94,11 @@ Dates were seeded from public listings on **2026-09-09**. There are **no Sample 
 | --- | --- | --- |
 | Ricky Gervais | 22 (Legend, 9 Sep–10 Dec 2026) | [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051) |
 | Dave Chappelle | 2 | [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682): MSG 10 Sep benefit; Fastball Festival, Sloan Park, Mesa 18 Oct. No solo tour found. |
-| Andrew Schulz | 4 | [theandrewschulz.com](https://theandrewschulz.com/) / [Live Nation](https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events): Houston 18–19 Sep, West Nyack 25–26 Sep only. |
+| Andrew Schulz | **16** | Official Laylo embed on [theandrewschulz.com](https://www.theandrewschulz.com/) (`tourUrl`; drop [1e3551fe-33d5-4a86-8364-3edb80ccdd62](https://d21i0hc4hl3bvt.cloudfront.net/drops/1e3551fe-33d5-4a86-8364-3edb80ccdd62.json)): New Brunswick Stress Factory 11–12 Sep; Houston Improv 18–19 Sep; West Nyack Levity Live 25–26 Sep; Indianapolis Helium 23–24 Oct; Birmingham Stardome 6–7 Nov; Cleveland Hilarities 13–14 Nov; Raleigh Goodnights 4–5 Dec; Columbus Funny Bone 11–12 Dec. Ticketmaster/Live Nation only list Houston + Nyack. |
 | Mark Gagnon | 11 | [markgagnonlive.com](https://markgagnonlive.com/) through 9 Jan 2027 |
 | Jeff Arcuri | 50 (18 club nights in 2026 + 32 confirmed 2027 Road Trip nights; one row per calendar day) | [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows); [Live Nation artist page](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) (`tourUrl`); [Ticketmaster artist page](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710); venue pages (Summit City, Brea Improv, Orlando Funny Bone, Fort Lauderdale Improv, Huntsville Levity Live). Unverified **Oxnard Oct 2026** and **Mississauga Sep 2026** are omitted. No 2026-01 dates. |
 
-Existing browsers may still have an older `localStorage` snapshot. **v4** / **v5** snapshots are migrated once into `comedian-tracker:v6`: if Jeff Arcuri is missing or has no shows, the verified seed nights are added; stale listed Jeff nights from an older seed are replaced. Manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
+Existing browsers may still have an older `localStorage` snapshot. **v4–v6** snapshots are migrated once into `comedian-tracker:v7`: Jeff Arcuri empty rows pick up seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **16-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
 
 Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
 
@@ -107,13 +110,13 @@ If you add a city that is not in `data/cities.json` and the show has no lat/lng 
 npm run refresh-tours
 ```
 
-`scripts/refresh-tours.ts` is a **stub**. It validates `data/shows.json` against the roster and prints how to wire a weekly refresh. It does not scrape yet.
+`scripts/refresh-tours.ts` fetches official **Laylo** drop JSON plus Helium / Improv / SeatEngine club pages listed in `data/venue-pages.json` and `data/laylo-drops.json`, parses unique calendar nights, and merges them into `data/shows.json` / `data/jeff-arcuri-shows.json`. Ticketmaster theater dates are still filled at runtime in the browser.
 
-Suggested sources (respect robots.txt / ToS; prefer official pages):
+Suggested extra sources (respect robots.txt / ToS; prefer official pages):
 
 - Ricky Gervais — [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051)
 - Dave Chappelle — [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682)
-- Andrew Schulz — [theandrewschulz.com](https://theandrewschulz.com/) / [Live Nation](https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events)
+- Andrew Schulz — [theandrewschulz.com](https://www.theandrewschulz.com/) Laylo embed / venue pages
 - Mark Gagnon — [markgagnonlive.com](https://markgagnonlive.com/)
 - Jeff Arcuri — [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows) / [Live Nation](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) / [Ticketmaster](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710)
 

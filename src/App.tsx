@@ -159,6 +159,7 @@ export default function App() {
     let found = 0;
     let failures = 0;
     let empties = 0;
+    let lastResult: LookupResult | undefined;
     try {
       for (const comedian of targets) {
         const result = await lookupUpcomingShows({
@@ -167,6 +168,7 @@ export default function App() {
           aliases: comedian.aliases,
           tourUrl: comedian.tourUrl,
         });
+        lastResult = result;
         if (result.status !== "error") {
           setState((prev) => ({
             ...prev,
@@ -180,10 +182,10 @@ export default function App() {
       if (targets.length === 1) {
         const only = targets[0];
         const result: LookupResult = found
-          ? { status: "ok", shows: [] }
+          ? { status: "ok", shows: [], provider: lastResult?.provider }
           : failures
-            ? { status: "error", shows: [] }
-            : { status: "empty", shows: [] };
+            ? { status: "error", shows: [], detail: lastResult?.detail }
+            : { status: "empty", shows: [], detail: lastResult?.detail };
         setLookupBanner({
           tone: toneFor(result),
           text: lookupMessage(result, {

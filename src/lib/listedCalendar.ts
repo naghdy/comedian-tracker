@@ -37,10 +37,11 @@ export function seedListedShows(opts: {
   aliases?: string[];
 }): Show[] {
   const match = matchSeedComedian(opts);
-  if (!match) return [];
+  const ids = new Set<string>([opts.comedianId]);
+  if (match) ids.add(match.id);
   const today = todayISO();
   return listed
-    .filter((show) => show.comedianId === match.id && show.date >= today)
+    .filter((show) => ids.has(show.comedianId) && show.date >= today)
     .map((show) => ({
       ...show,
       comedianId: opts.comedianId,

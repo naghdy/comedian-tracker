@@ -94,10 +94,20 @@ export function applyRefreshedShows(
   comedianId: string,
   incoming: Show[],
 ) {
-  const kept = existing.filter(
-    (show) => show.comedianId !== comedianId || show.source === "user",
+  const others = existing.filter((show) => show.comedianId !== comedianId);
+  const user = existing.filter(
+    (show) => show.comedianId === comedianId && show.source === "user",
   );
-  return mergeShows(kept, incoming);
+  if (!incoming.length) {
+    const listed = existing.filter(
+      (show) =>
+        show.comedianId === comedianId &&
+        show.source !== "lookup" &&
+        show.source !== "user",
+    );
+    return [...others, ...listed, ...user];
+  }
+  return mergeShows([...others, ...user], incoming);
 }
 
 function todayISO() {
@@ -528,15 +538,18 @@ export async function lookupUpcomingShows(query: LookupQuery): Promise<LookupRes
     errors.push(`Laylo: ${error instanceof Error ? error.message : "request failed"}`);
   }
 
-  try {
-    const shows = await lookupVenuePages(query);
-    const before = collected.length;
-    const merged = mergeShows(collected, shows);
-    collected.length = 0;
-    collected.push(...merged);
-    if (collected.length > before) providers.push("venue");
-  } catch (error) {
-    errors.push(`Venue pages: ${error instanceof Error ? error.message : "request failed"}`);
+  // Club sites usually block browser CORS; skip when seed/Laylo already has nights.
+  if (!collected.length) {
+    try {
+      const shows = await lookupVenuePages(query);
+      const before = collected.length;
+      const merged = mergeShows(collected, shows);
+      collected.length = 0;
+      collected.push(...merged);
+      if (collected.length > before) providers.push("venue");
+    } catch (error) {
+      errors.push(`Venue pages: ${error instanceof Error ? error.message : "request failed"}`);
+    }
   }
 
   const shows = collapseByNight(collected);

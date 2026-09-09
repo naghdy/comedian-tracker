@@ -7,6 +7,7 @@ import {
   replaceLookupShows,
   showDedupeKey,
 } from "./lookupShows";
+import { seedListedShows } from "./listedCalendar";
 import type { Show } from "../types";
 
 describe("namesMatch", () => {
@@ -19,6 +20,19 @@ describe("namesMatch", () => {
   it("does not match a different first+last pair", () => {
     assert.equal(namesMatch("Jeff Arcuri", "Jeff Dunham"), false);
     assert.equal(namesMatch("Jeff Arcuri", "Arcuri"), false);
+  });
+});
+
+describe("seedListedShows", () => {
+  it("returns all 16 official Andrew Schulz nights", () => {
+    const rows = seedListedShows({
+      comedianId: "andrew-schulz",
+      name: "Andrew Schulz",
+      aliases: ["Andrew Schultz", "Schulz", "Schultz"],
+    });
+    assert.equal(rows.length, 16);
+    assert.equal(rows.filter((show) => show.city === "Columbus").length, 2);
+    assert.equal(rows.filter((show) => show.city === "New Brunswick").length, 2);
   });
 });
 
@@ -118,5 +132,29 @@ describe("mergeShows", () => {
     assert.equal(next.some((show) => show.id === "user-1"), true);
     assert.equal(next.some((show) => show.city === "Indianapolis"), true);
     assert.equal(next.some((show) => show.city === "Houston"), true);
+  });
+
+  it("keeps listed seed nights when refresh finds nothing", () => {
+    const helium: Show = {
+      id: "as-2026-10-23-indianapolis",
+      comedianId: "andrew-schulz",
+      title: "Andrew Schulz",
+      venue: "Helium Comedy Club",
+      city: "Indianapolis",
+      date: "2026-10-23",
+      source: "listed",
+    };
+    const staleLookup: Show = {
+      id: "lookup-old",
+      comedianId: "andrew-schulz",
+      title: "Andrew Schulz",
+      venue: "Old Room",
+      city: "Miami",
+      date: "2026-10-01",
+      source: "lookup",
+    };
+    const next = applyRefreshedShows([helium, staleLookup], "andrew-schulz", []);
+    assert.equal(next.some((show) => show.city === "Indianapolis"), true);
+    assert.equal(next.some((show) => show.id === "lookup-old"), false);
   });
 });

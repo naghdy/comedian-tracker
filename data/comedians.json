@@ -3,31 +3,31 @@
     {
       "id": "ricky-gervais",
       "name": "Ricky Gervais",
-      "color": "#f5c542",
-      "tourUrl": "https://www.rickygervais.com",
-      "notes": "Legend tour listings from Live Nation UK / Comedy.co.uk, June 2026 announcements."
+      "color": "#e2b93b",
+      "tourUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
+      "notes": "Legend tour: Live Nation UK / Chortle listings as of 2026-09-09."
     },
     {
       "id": "dave-chappelle",
       "name": "Dave Chappelle",
-      "color": "#4ade80",
-      "tourUrl": "https://www.davechappelle.com",
-      "notes": "Public arena/festival dates plus a few clearly marked Sample placeholders where listings are thin."
+      "color": "#2f9e5a",
+      "tourUrl": "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
+      "notes": "No solo tour found. Only MSG 10 Sep benefit and Fastball Festival Mesa 18 Oct. No Sample placeholders."
     },
     {
       "id": "andrew-schulz",
       "name": "Andrew Schulz",
       "aliases": ["Andrew Schultz", "Schulz", "Schultz"],
-      "color": "#60a5fa",
-      "tourUrl": "https://www.andrewschulz.com",
-      "notes": "Club dates aggregated from Live Nation and venue calendars. Alias Schultz is treated as the same person."
+      "color": "#3b82d6",
+      "tourUrl": "https://theandrewschulz.com/",
+      "notes": "Verified Live Nation dates only: Houston Improv 18–19 Sep, Levity Live West Nyack 25–26 Sep. Also listed at livenation.com/artist/K8vZ917Cf37. Alias Schultz is the same person."
     },
     {
       "id": "mark-gagnon",
       "name": "Mark Gagnon",
-      "color": "#f472b6",
-      "tourUrl": "https://markgagnonlive.com",
-      "notes": "Official tour page (markgagnonlive.com) as of late 2026."
+      "color": "#d4539a",
+      "tourUrl": "https://markgagnonlive.com/",
+      "notes": "Official tour page https://markgagnonlive.com/ as of 2026-09-09."
     }
   ]
 }

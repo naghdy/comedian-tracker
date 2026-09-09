@@ -26,7 +26,7 @@
   { "city": "Miami", "lat": 25.7617, "lng": -80.1918, "aliases": ["miami, fl"] },
   { "city": "Nashville", "lat": 36.1627, "lng": -86.7816, "aliases": ["nashville, tn"] },
   { "city": "New York", "lat": 40.7128, "lng": -74.006, "aliases": ["nyc", "new york city", "new york, ny", "manhattan"] },
-  { "city": "Newcastle", "lat": 54.9783, "lng": -1.6178, "aliases": ["newcastle upon tyne", "newcastle, uk"] },
+  { "city": "Newcastle upon Tyne", "lat": 54.9783, "lng": -1.6178, "aliases": ["newcastle", "newcastle, uk"] },
   { "city": "Pasadena", "lat": 34.1478, "lng": -118.1445, "aliases": ["pasadena, ca"] },
   { "city": "Philadelphia", "lat": 39.9526, "lng": -75.1652, "aliases": ["philly", "philadelphia, pa"] },
   { "city": "Phoenix", "lat": 33.4484, "lng": -112.074, "aliases": ["phoenix, az"] },

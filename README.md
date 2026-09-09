@@ -72,10 +72,10 @@ On **Add comedian** / **Refresh** the app merges:
 1. Curated seed / club-calendar nights for that name (so Helium, Improv, and Levity dates Ticketmaster misses still appear).
 2. Ticketmaster Discovery (if `VITE_TICKETMASTER_API_KEY` is set).
 3. SeatGeek (if `VITE_SEATGEEK_CLIENT_ID` is set).
-4. Official **Laylo** drop JSON when the artist has a known embed (Andrew Schulz: CloudFront `drops/1e3551fe-33d5-4a86-8364-3edb80ccdd62.json`). Ticketmaster only lists Houston + West Nyack for him.
-5. Official Helium / Improv / Levity pages are **not** fetched in the browser (CORS). `npm run refresh-tours` scrapes them from Node and writes `data/shows.json`.
+4. Official **Laylo** drop JSON (`data/laylo-drops.json`) when seed has no nights yet. The CloudFront file has no CORS headers, so GitHub Pages cannot read it from the browser; `npm run refresh-tours` parses it from Node into `data/shows.json`. Ticketmaster only lists Houston + West Nyack for Schulz — the 16-night seed is that official calendar.
+5. Club HTML is not fetched in the browser (CORS). `npm run refresh-tours` scrapes Helium / Improv / Laylo from Node.
 
-Multiple showtimes on the same night at the same venue collapse to one agenda row. If lookup finds nothing, the comedian **stays on the roster**. Refresh reapplies seed listed dates and API/venue rows; manually added (`user`) dates are kept.
+Multiple showtimes on the same night at the same venue collapse to one agenda row. If lookup finds nothing, the comedian **stays on the roster**. Refresh reapplies seed listed dates and live listings; manually added (`user`) dates are kept.
 
 ## Seed data
 

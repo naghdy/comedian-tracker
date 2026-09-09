@@ -453,11 +453,16 @@ export async function lookupUpcomingShows(query: LookupQuery): Promise<LookupRes
   }
 
   try {
-    const shows = await lookupLaylo(query);
-    const merged = mergeShows(collected, shows);
-    collected.length = 0;
-    collected.push(...merged);
-    if (shows.length) providers.push("laylo");
+    // The CloudFront drop JSON has no Access-Control-Allow-Origin, so a
+    // browser fetch hangs on CORS preflight. Parse it in Node
+    // (`npm run refresh-tours`) and on this path only when not in a window.
+    if (typeof window === "undefined") {
+      const shows = await lookupLaylo(query);
+      const merged = mergeShows(collected, shows);
+      collected.length = 0;
+      collected.push(...merged);
+      if (shows.length) providers.push("laylo");
+    }
   } catch (error) {
     errors.push(`Laylo: ${error instanceof Error ? error.message : "request failed"}`);
   }

@@ -28,6 +28,13 @@
       "color": "#d4539a",
       "tourUrl": "https://markgagnonlive.com/",
       "notes": "Official tour page https://markgagnonlive.com/ as of 2026-09-09."
+    },
+    {
+      "id": "jeff-arcuri",
+      "name": "Jeff Arcuri",
+      "color": "#f97316",
+      "tourUrl": "https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710",
+      "notes": "Seeded 2026-09-09 from venue pages + Ticketmaster + Live Nation Road Trip announcement. Lookup uses Ticketmaster Discovery when a key is configured."
     }
   ]
 }

@@ -2,7 +2,8 @@
  * Weekly tour refresh hook.
  *
  * This is a stub. Wire it to a cron job or GitHub Action (suggested: Mondays)
- * once scrapers exist. v1 does not hit live ticketing APIs.
+ * once scrapers exist. The web app looks up dates live via Ticketmaster
+ * Discovery (see README); this script only validates committed seed JSON.
  *
  * Suggested public sources (respect robots.txt / ToS; prefer official pages):
  *   - Ricky Gervais — Live Nation UK, Comedy.co.uk, rickygervais.com
@@ -37,6 +38,7 @@ type ShowsFile = {
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const showsPath = resolve(root, "data/shows.json");
+const jeffPath = resolve(root, "data/jeff-arcuri-shows.json");
 const comediansPath = resolve(root, "data/comedians.json");
 
 function main() {
@@ -44,22 +46,25 @@ function main() {
     comedians: { id: string; name: string }[];
   };
   const data = JSON.parse(readFileSync(showsPath, "utf8")) as ShowsFile;
+  const jeff = JSON.parse(readFileSync(jeffPath, "utf8")) as ShowsFile;
+  const shows = [...data.shows, ...jeff.shows];
   const ids = new Set(comedians.comedians.map((c) => c.id));
 
-  const missingComedian = data.shows.filter((s) => !ids.has(s.comedianId));
-  const missingFields = data.shows.filter(
+  const missingComedian = shows.filter((s) => !ids.has(s.comedianId));
+  const missingFields = shows.filter(
     (s) => !s.id || !s.comedianId || !s.city || !s.date,
   );
-  const samples = data.shows.filter((s) => s.sample || s.source === "sample");
+  const samples = shows.filter((s) => s.sample || s.source === "sample");
 
   console.log("Comedian Tracker — tour refresh stub");
   console.log("====================================");
   console.log(`shows.json generatedAt: ${data.generatedAt ?? "(none)"}`);
-  console.log(`Seed shows: ${data.shows.length}`);
+  console.log(`jeff-arcuri-shows.json generatedAt: ${jeff.generatedAt ?? "(none)"}`);
+  console.log(`Seed shows: ${shows.length}`);
   console.log(`Sample / placeholder shows: ${samples.length}`);
   console.log(`Comedians with at least one show:`);
   for (const c of comedians.comedians) {
-    const n = data.shows.filter((s) => s.comedianId === c.id).length;
+    const n = shows.filter((s) => s.comedianId === c.id).length;
     console.log(`  - ${c.name}: ${n}`);
   }
 

@@ -20,7 +20,9 @@ export type Show = {
   ticketUrl?: string;
   sample?: boolean;
   notes?: string;
-  source?: "listed" | "sample" | "user";
+  source?: "listed" | "sample" | "user" | "lookup";
+  lat?: number;
+  lng?: number;
 };
 
 export type CityCoord = {

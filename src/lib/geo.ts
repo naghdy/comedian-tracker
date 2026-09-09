@@ -42,7 +42,17 @@ export function cityMatches(showCity: string, query: string) {
 }
 
 export function coordsForShow(show: Show): { lat: number; lng: number } | null {
-  const match = findCity(show.city);
+  if (
+    typeof show.lat === "number" &&
+    typeof show.lng === "number" &&
+    Number.isFinite(show.lat) &&
+    Number.isFinite(show.lng)
+  ) {
+    return { lat: show.lat, lng: show.lng };
+  }
+  const qualified = [show.city, show.region].filter(Boolean).join(", ");
+  const match =
+    (show.region ? findCity(qualified) : undefined) ?? findCity(show.city);
   if (!match) return null;
   return { lat: match.lat, lng: match.lng };
 }

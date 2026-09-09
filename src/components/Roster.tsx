@@ -1,6 +1,11 @@
 import type { FormEvent } from "react";
 import type { Comedian } from "../types";
 
+type LookupBanner = {
+  tone: "info" | "ok" | "warn" | "error";
+  text: string;
+};
+
 type Props = {
   comedians: Comedian[];
   showCounts: Record<string, number>;
@@ -8,6 +13,10 @@ type Props = {
   onToggle: (id: string) => void;
   onAdd: (name: string, tourUrl?: string) => void;
   onRemove: (id: string) => void;
+  onRefresh: (id: string) => void;
+  onRefreshAll: () => void;
+  lookupBusy: string | "all" | null;
+  lookupBanner: LookupBanner | null;
   onReset: () => void;
   theme: "dark" | "light";
   onToggleTheme: () => void;
@@ -20,6 +29,10 @@ export function Roster({
   onToggle,
   onAdd,
   onRemove,
+  onRefresh,
+  onRefreshAll,
+  lookupBusy,
+  lookupBanner,
   onReset,
   theme,
   onToggleTheme,
@@ -34,6 +47,8 @@ export function Roster({
     onAdd(name, tourUrl || undefined);
     form.reset();
   }
+
+  const refreshingAll = lookupBusy === "all";
 
   return (
     <aside className="sidebar">
@@ -79,6 +94,7 @@ export function Roster({
             comedians.map((comedian) => {
             const active =
               selectedIds.length === 0 || selectedIds.includes(comedian.id);
+            const refreshing = refreshingAll || lookupBusy === comedian.id;
             return (
               <div
                 key={comedian.id}
@@ -115,6 +131,16 @@ export function Roster({
                 ) : null}
                 <button
                   type="button"
+                  className="icon-btn quiet"
+                  aria-label={`Refresh shows for ${comedian.name}`}
+                  title={`Refresh shows for ${comedian.name}`}
+                  disabled={Boolean(lookupBusy)}
+                  onClick={() => onRefresh(comedian.id)}
+                >
+                  {refreshing ? "…" : "Refresh"}
+                </button>
+                <button
+                  type="button"
                   className="icon-btn"
                   aria-label={`Remove ${comedian.name}`}
                   title={`Remove ${comedian.name}`}
@@ -127,6 +153,17 @@ export function Roster({
           })
           )}
         </div>
+        {comedians.length > 0 ? (
+          <button
+            type="button"
+            className="reset"
+            style={{ marginTop: 8 }}
+            disabled={Boolean(lookupBusy)}
+            onClick={onRefreshAll}
+          >
+            {refreshingAll ? "Refreshing all shows…" : "Refresh all shows"}
+          </button>
+        ) : null}
         {selectedIds.length > 0 ? (
           <button
             type="button"
@@ -141,6 +178,10 @@ export function Roster({
 
       <form className="add-form" onSubmit={handleAdd}>
         <p className="section-label">Add comedian</p>
+        <p className="lede add-hint">
+          We’ll look up upcoming Ticketmaster dates and drop them on the map
+          and agenda. The comedian stays on the roster even if nothing is found.
+        </p>
         <label className="field">
           <span>Name</span>
           <input name="name" placeholder="e.g. Ali Wong" required />
@@ -149,6 +190,11 @@ export function Roster({
           <span>Tour / site URL (optional)</span>
           <input name="tourUrl" type="url" placeholder="https://" />
         </label>
+        {lookupBanner ? (
+          <p className={`lookup-status ${lookupBanner.tone}`} role="status">
+            {lookupBanner.text}
+          </p>
+        ) : null}
         <div className="row-actions">
           <button className="btn" type="submit">
             Add to roster

@@ -148,13 +148,6 @@ export default function App() {
         }}
       />
       <main className="main">
-        <TripChecker
-          comedians={state.comedians}
-          matches={tripHits}
-          active={trip}
-          onSearch={setTrip}
-          onClear={() => setTrip(null)}
-        />
         <ShowMap shows={visibleShows} comedians={state.comedians} theme={theme} />
         <Agenda
           shows={visibleShows}
@@ -165,6 +158,13 @@ export default function App() {
           onComedianFilter={setComedianFilter}
           onAdd={() => setFormOpen(true)}
           onRemove={removeShow}
+        />
+        <TripChecker
+          comedians={state.comedians}
+          matches={tripHits}
+          active={trip}
+          onSearch={setTrip}
+          onClear={() => setTrip(null)}
         />
       </main>
       {formOpen ? (

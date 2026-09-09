@@ -18,7 +18,26 @@ import {
   sortChronological,
   tripMatches,
 } from "./lib/filters";
-import type { Show, TripQuery } from "./types";
+import {
+  hasShowLookupKey,
+  lookupMessage,
+  lookupUpcomingShows,
+  mergeShows,
+  replaceLookupShows,
+  type LookupResult,
+} from "./lib/lookupShows";
+import type { Comedian, Show, TripQuery } from "./types";
+
+type LookupBanner = {
+  tone: "info" | "ok" | "warn" | "error";
+  text: string;
+};
+
+function toneFor(result: LookupResult): LookupBanner["tone"] {
+  if (result.status === "ok") return "ok";
+  if (result.status === "error") return "error";
+  return "warn";
+}
 
 export default function App() {
   const [state, setState] = useTrackerState();
@@ -30,6 +49,8 @@ export default function App() {
   const [comedianFilter, setComedianFilter] = useState("");
   const [trip, setTrip] = useState<TripQuery | null>(null);
   const [formOpen, setFormOpen] = useState(false);
+  const [lookupBusy, setLookupBusy] = useState<string | "all" | null>(null);
+  const [lookupBanner, setLookupBanner] = useState<LookupBanner | null>(null);
 
   useEffect(() => {
     applyTheme(theme);
@@ -75,18 +96,129 @@ export default function App() {
     );
   }
 
-  function addComedian(name: string, tourUrl?: string) {
+  async function addComedian(name: string, tourUrl?: string) {
     const base = slugify(name) || `comedian-${Date.now()}`;
     let id = base;
     let n = 2;
-    while (state.comedians.some((c) => c.id === id)) {
+    const taken = new Set(state.comedians.map((c) => c.id));
+    while (taken.has(id)) {
       id = `${base}-${n++}`;
     }
     const color = ROSTER_COLORS[state.comedians.length % ROSTER_COLORS.length];
-    setState({
-      ...state,
-      comedians: [...state.comedians, { id, name, color, tourUrl }],
+    const comedian: Comedian = { id, name, color, tourUrl };
+    setState((prev) => ({
+      ...prev,
+      comedians: [...prev.comedians, comedian],
+    }));
+    setLookupBusy(id);
+    setLookupBanner({
+      tone: "info",
+      text: `Looking up upcoming shows for ${name}…`,
     });
+    try {
+      const result = await lookupUpcomingShows({
+        comedianId: id,
+        name,
+      });
+      if (result.shows.length) {
+        setState((prev) => ({
+          ...prev,
+          shows: mergeShows(prev.shows, result.shows),
+        }));
+      }
+      setLookupBanner({
+        tone: toneFor(result),
+        text: lookupMessage(result, { action: "add", name }),
+      });
+    } catch {
+      setLookupBanner({
+        tone: "error",
+        text: `${name} is on the roster. Show lookup failed. Try Refresh later or add dates manually.`,
+      });
+    } finally {
+      setLookupBusy(null);
+    }
+  }
+
+  async function refreshShows(comedianId?: string) {
+    const targets = comedianId
+      ? state.comedians.filter((c) => c.id === comedianId)
+      : state.comedians;
+    if (!targets.length) return;
+
+    setLookupBusy(comedianId ?? "all");
+    if (!hasShowLookupKey()) {
+      setLookupBanner({
+        tone: "warn",
+        text: lookupMessage(
+          { status: "no-key", shows: [] },
+          { action: "refresh", name: comedianId ? targets[0].name : "the roster" },
+        ),
+      });
+      setLookupBusy(null);
+      return;
+    }
+
+    const names = targets.map((c) => c.name).join(", ");
+    setLookupBanner({
+      tone: "info",
+      text:
+        targets.length === 1
+          ? `Refreshing shows for ${names}…`
+          : `Refreshing upcoming shows for ${targets.length} comedians…`,
+    });
+
+    let found = 0;
+    let failures = 0;
+    let empties = 0;
+    try {
+      for (const comedian of targets) {
+        const result = await lookupUpcomingShows({
+          comedianId: comedian.id,
+          name: comedian.name,
+          aliases: comedian.aliases,
+        });
+        if (result.status !== "error") {
+          setState((prev) => ({
+            ...prev,
+            shows: replaceLookupShows(prev.shows, comedian.id, result.shows),
+          }));
+        }
+        if (result.status === "ok") found += result.shows.length;
+        else if (result.status === "error") failures += 1;
+        else empties += 1;
+      }
+      if (targets.length === 1) {
+        const only = targets[0];
+        const result: LookupResult = found
+          ? { status: "ok", shows: [] }
+          : failures
+            ? { status: "error", shows: [] }
+            : { status: "empty", shows: [] };
+        setLookupBanner({
+          tone: toneFor(result),
+          text: lookupMessage(result, {
+            action: "refresh",
+            name: only.name,
+            count: found,
+          }),
+        });
+      } else {
+        setLookupBanner({
+          tone: failures && !found ? "error" : found ? "ok" : "warn",
+          text: `Refresh finished. ${found} lookup ${found === 1 ? "show" : "shows"} saved.${
+            empties ? ` ${empties} with no matches.` : ""
+          }${failures ? ` ${failures} failed.` : ""} Listed and manually added dates were kept.`,
+        });
+      }
+    } catch {
+      setLookupBanner({
+        tone: "error",
+        text: "Show refresh failed. Listed dates were left as-is. Try again later.",
+      });
+    } finally {
+      setLookupBusy(null);
+    }
   }
 
   function removeComedian(id: string) {
@@ -108,18 +240,18 @@ export default function App() {
 
   function addShow(show: Omit<Show, "id">) {
     const id = `${show.comedianId}-${show.date}-${slugify(show.city)}-${Date.now()}`;
-    setState({
-      ...state,
-      shows: [...state.shows, { ...show, id }],
-    });
+    setState((prev) => ({
+      ...prev,
+      shows: [...prev.shows, { ...show, id }],
+    }));
     setFormOpen(false);
   }
 
   function removeShow(id: string) {
-    setState({
-      ...state,
-      shows: state.shows.filter((s) => s.id !== id),
-    });
+    setState((prev) => ({
+      ...prev,
+      shows: prev.shows.filter((s) => s.id !== id),
+    }));
   }
 
   return (
@@ -131,6 +263,10 @@ export default function App() {
         onToggle={toggleComedian}
         onAdd={addComedian}
         onRemove={removeComedian}
+        onRefresh={(id) => void refreshShows(id)}
+        onRefreshAll={() => void refreshShows()}
+        lookupBusy={lookupBusy}
+        lookupBanner={lookupBanner}
         onReset={() => {
           if (window.confirm("Restore the starter roster and seed shows?")) {
             setState(resetSeed());
@@ -138,6 +274,7 @@ export default function App() {
             setCityFilter("");
             setComedianFilter("");
             setTrip(null);
+            setLookupBanner(null);
           }
         }}
         theme={theme}

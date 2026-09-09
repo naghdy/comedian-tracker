@@ -412,7 +412,10 @@ export function lookupMessage(
     return `${added}Found ${n} upcoming ${n === 1 ? "show" : "shows"} on ${src}.`;
   }
   if (result.status === "no-key") {
-    return `${added}Live date lookup needs a Ticketmaster Discovery API key (see README). Use Refresh shows after the key is set, or add dates manually.`;
+    if (action === "add") {
+      return `${name} is on the roster. Live date lookup needs a Ticketmaster Discovery API key (see README). Use Refresh shows after the key is set, or add dates manually.`;
+    }
+    return `Could not refresh ${name}. Live date lookup needs a Ticketmaster Discovery API key (see README).`;
   }
   if (result.status === "empty") {
     return `${added}No upcoming Ticketmaster dates matched “${name}”. The roster entry was kept — add shows manually or try Refresh later.`;

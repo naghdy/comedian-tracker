@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-09",
-  "sourceNotes": "Verified public listings only, 2026-09-09. No Sample placeholders. Gervais: Live Nation UK Legend tour. Chappelle: MSG 10 Sep benefit + Fastball Festival Mesa 18 Oct only (no solo tour). Schulz: Live Nation Houston + West Nyack only. Gagnon: markgagnonlive.com.",
+  "sourceNotes": "Verified public listings only, 2026-09-09. No Sample placeholders. Gervais: Live Nation UK Legend tour. Chappelle: MSG 10 Sep benefit + Fastball Festival Mesa 18 Oct only (no solo tour). Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -317,6 +317,30 @@
       "source": "listed"
     },
     {
+      "id": "as-2026-09-11-new-brunswick",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Stress Factory",
+      "city": "New Brunswick",
+      "region": "NJ",
+      "country": "US",
+      "date": "2026-09-11",
+      "ticketUrl": "https://newbrunswick.stressfactory.com/events/142216",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-09-12-new-brunswick",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Stress Factory",
+      "city": "New Brunswick",
+      "region": "NJ",
+      "country": "US",
+      "date": "2026-09-12",
+      "ticketUrl": "https://newbrunswick.stressfactory.com/events/142216",
+      "source": "listed"
+    },
+    {
       "id": "as-2026-09-18-houston",
       "comedianId": "andrew-schulz",
       "title": "Andrew Schulz",
@@ -325,8 +349,7 @@
       "region": "TX",
       "country": "US",
       "date": "2026-09-18",
-      "time": "19:30",
-      "ticketUrl": "https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events",
+      "ticketUrl": "https://improvtx.com/houston/comic/andrew+schulz/",
       "source": "listed"
     },
     {
@@ -338,8 +361,7 @@
       "region": "TX",
       "country": "US",
       "date": "2026-09-19",
-      "time": "19:00",
-      "ticketUrl": "https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events",
+      "ticketUrl": "https://improvtx.com/houston/comic/andrew+schulz/",
       "source": "listed"
     },
     {
@@ -351,8 +373,7 @@
       "region": "NY",
       "country": "US",
       "date": "2026-09-25",
-      "time": "19:00",
-      "ticketUrl": "https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events",
+      "ticketUrl": "https://levitylive.com/nyack/comic/andrew+schulz/",
       "source": "listed"
     },
     {
@@ -364,8 +385,127 @@
       "region": "NY",
       "country": "US",
       "date": "2026-09-26",
-      "time": "18:30",
-      "ticketUrl": "https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events",
+      "ticketUrl": "https://levitylive.com/nyack/comic/andrew+schulz/",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-10-23-indianapolis",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Helium Comedy Club",
+      "city": "Indianapolis",
+      "region": "IN",
+      "country": "US",
+      "date": "2026-10-23",
+      "ticketUrl": "https://indianapolis.heliumcomedy.com/events/142211",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-10-24-indianapolis",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Helium Comedy Club",
+      "city": "Indianapolis",
+      "region": "IN",
+      "country": "US",
+      "date": "2026-10-24",
+      "ticketUrl": "https://indianapolis.heliumcomedy.com/events/142211",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-11-06-birmingham-al",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Stardome Comedy Club",
+      "city": "Birmingham, AL",
+      "region": "AL",
+      "country": "US",
+      "date": "2026-11-06",
+      "ticketUrl": "https://www.stardome.com/events/142204",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-11-07-birmingham-al",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Stardome Comedy Club",
+      "city": "Birmingham, AL",
+      "region": "AL",
+      "country": "US",
+      "date": "2026-11-07",
+      "ticketUrl": "https://www.stardome.com/events/142204",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-11-13-cleveland",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Hilarities",
+      "city": "Cleveland",
+      "region": "OH",
+      "country": "US",
+      "date": "2026-11-13",
+      "ticketUrl": "https://hilarities.com/events/142270",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-11-14-cleveland",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Hilarities",
+      "city": "Cleveland",
+      "region": "OH",
+      "country": "US",
+      "date": "2026-11-14",
+      "ticketUrl": "https://hilarities.com/events/142270",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-12-04-raleigh",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Goodnights Comedy Club",
+      "city": "Raleigh",
+      "region": "NC",
+      "country": "US",
+      "date": "2026-12-04",
+      "ticketUrl": "https://www.goodnightscomedy.com/events/142206",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-12-05-raleigh",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Goodnights Comedy Club",
+      "city": "Raleigh",
+      "region": "NC",
+      "country": "US",
+      "date": "2026-12-05",
+      "ticketUrl": "https://www.goodnightscomedy.com/events/142206",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-12-11-columbus",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Funny Bone",
+      "city": "Columbus",
+      "region": "OH",
+      "country": "US",
+      "date": "2026-12-11",
+      "ticketUrl": "https://www.etix.com/ticket/e/1060481/andrew-schulz-columbus-funny-bone-comedy-club-columbus",
+      "source": "listed"
+    },
+    {
+      "id": "as-2026-12-12-columbus",
+      "comedianId": "andrew-schulz",
+      "title": "Andrew Schulz",
+      "venue": "Funny Bone",
+      "city": "Columbus",
+      "region": "OH",
+      "country": "US",
+      "date": "2026-12-12",
+      "ticketUrl": "https://www.etix.com/ticket/e/1060481/andrew-schulz-columbus-funny-bone-comedy-club-columbus",
       "source": "listed"
     },
     {

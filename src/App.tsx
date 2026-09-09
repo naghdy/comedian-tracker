@@ -19,11 +19,10 @@ import {
   tripMatches,
 } from "./lib/filters";
 import {
-  hasShowLookupKey,
+  applyRefreshedShows,
   lookupMessage,
   lookupUpcomingShows,
   mergeShows,
-  replaceLookupShows,
   type LookupResult,
 } from "./lib/lookupShows";
 import type { Comedian, Show, TripQuery } from "./types";
@@ -119,6 +118,7 @@ export default function App() {
       const result = await lookupUpcomingShows({
         comedianId: id,
         name,
+        tourUrl,
       });
       if (result.shows.length) {
         setState((prev) => ({
@@ -147,18 +147,6 @@ export default function App() {
     if (!targets.length) return;
 
     setLookupBusy(comedianId ?? "all");
-    if (!hasShowLookupKey()) {
-      setLookupBanner({
-        tone: "warn",
-        text: lookupMessage(
-          { status: "no-key", shows: [] },
-          { action: "refresh", name: comedianId ? targets[0].name : "the roster" },
-        ),
-      });
-      setLookupBusy(null);
-      return;
-    }
-
     const names = targets.map((c) => c.name).join(", ");
     setLookupBanner({
       tone: "info",
@@ -177,11 +165,12 @@ export default function App() {
           comedianId: comedian.id,
           name: comedian.name,
           aliases: comedian.aliases,
+          tourUrl: comedian.tourUrl,
         });
         if (result.status !== "error") {
           setState((prev) => ({
             ...prev,
-            shows: replaceLookupShows(prev.shows, comedian.id, result.shows),
+            shows: applyRefreshedShows(prev.shows, comedian.id, result.shows),
           }));
         }
         if (result.status === "ok") found += result.shows.length;

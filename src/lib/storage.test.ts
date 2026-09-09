@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { hydrateJeffSeed } from "./storage";
 import type { StoredState } from "../types";
+import comedianShows from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
 
 describe("hydrateJeffSeed", () => {
@@ -91,6 +92,85 @@ describe("jeff seed dates", () => {
     assert.equal(
       jeffArcuriShows.shows.filter((show) => show.city === "San Francisco").length,
       3,
+    );
+  });
+});
+
+describe("Andrew Schulz seed", () => {
+  it("has 16 official Laylo nights including Columbus Funny Bone", () => {
+    const schulz = comedianShows.shows.filter(
+      (show) => show.comedianId === "andrew-schulz",
+    );
+    assert.equal(schulz.length, 16);
+    assert.equal(schulz.filter((show) => show.city === "New Brunswick").length, 2);
+    assert.equal(schulz.filter((show) => show.city === "Indianapolis").length, 2);
+    assert.equal(schulz.filter((show) => show.city === "Columbus").length, 2);
+    assert.equal(schulz.filter((show) => show.city === "Birmingham, AL").length, 2);
+  });
+
+  it("migrates a 4-date Schulz snapshot to the full 16-night Laylo calendar", () => {
+    const incoming: StoredState = {
+      comedians: [
+        {
+          id: "andrew-schulz",
+          name: "Andrew Schulz",
+          color: "#3b82d6",
+          tourUrl: "https://theandrewschulz.com/",
+        },
+      ],
+      shows: [
+        {
+          id: "as-2026-09-18-houston",
+          comedianId: "andrew-schulz",
+          title: "Andrew Schulz",
+          venue: "Houston Improv",
+          city: "Houston",
+          date: "2026-09-18",
+          source: "listed",
+        },
+        {
+          id: "as-2026-09-19-houston",
+          comedianId: "andrew-schulz",
+          title: "Andrew Schulz",
+          venue: "Houston Improv",
+          city: "Houston",
+          date: "2026-09-19",
+          source: "listed",
+        },
+        {
+          id: "as-2026-09-25-westnyack",
+          comedianId: "andrew-schulz",
+          title: "Andrew Schulz",
+          venue: "Levity Live",
+          city: "West Nyack",
+          date: "2026-09-25",
+          source: "listed",
+        },
+        {
+          id: "as-2026-09-26-westnyack",
+          comedianId: "andrew-schulz",
+          title: "Andrew Schulz",
+          venue: "Levity Live",
+          city: "West Nyack",
+          date: "2026-09-26",
+          source: "listed",
+        },
+      ],
+    };
+    const next = hydrateJeffSeed(incoming);
+    const schulz = next.shows.filter((show) => show.comedianId === "andrew-schulz");
+    assert.equal(schulz.length, 16);
+    assert.equal(
+      schulz.some((show) => show.city === "Indianapolis"),
+      true,
+    );
+    assert.equal(
+      schulz.some((show) => show.city === "Columbus"),
+      true,
+    );
+    assert.equal(
+      next.comedians[0]?.tourUrl,
+      "https://www.theandrewschulz.com/",
     );
   });
 });

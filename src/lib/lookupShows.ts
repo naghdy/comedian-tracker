@@ -1,12 +1,29 @@
 import type { Show } from "../types";
 import { slugify } from "./filters";
+import { namesMatch, normalizePersonName } from "./names";
+import { seedListedShows } from "./listedCalendar";
+import { isClubVenueUrl, parseVenueNights } from "./parseVenueHtml";
+import { parseLayloDrop } from "./parseLaylo";
+import venuePages from "../../data/venue-pages.json";
+import layloDrops from "../../data/laylo-drops.json";
 
 export type LookupStatus = "ok" | "no-key" | "empty" | "error";
+
+export type LookupProvider =
+  | "ticketmaster"
+  | "seatgeek"
+  | "seed"
+  | "venue"
+  | "laylo"
+  | "ticketmaster+seatgeek"
+  | "ticketmaster+seed"
+  | "seatgeek+seed"
+  | "mixed";
 
 export type LookupResult = {
   status: LookupStatus;
   shows: Show[];
-  provider?: "ticketmaster" | "seatgeek" | "ticketmaster+seatgeek";
+  provider?: LookupProvider;
   detail?: string;
 };
 
@@ -14,7 +31,10 @@ export type LookupQuery = {
   comedianId: string;
   name: string;
   aliases?: string[];
+  tourUrl?: string;
 };
+
+export { namesMatch, normalizePersonName } from "./names";
 
 const TM_ROOT = "https://app.ticketmaster.com/discovery/v2";
 const SG_ROOT = "https://api.seatgeek.com/2/events";
@@ -38,33 +58,6 @@ export function seatgeekClientId() {
 
 export function hasShowLookupKey() {
   return Boolean(ticketmasterKey() || seatgeekClientId());
-}
-
-export function normalizePersonName(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim()
-    .replace(/\s+/g, " ");
-}
-
-export function namesMatch(comedianName: string, candidate: string) {
-  const comedian = normalizePersonName(comedianName);
-  const other = normalizePersonName(candidate);
-  if (!comedian || !other) return false;
-  if (comedian === other) return true;
-  if (other.startsWith(`${comedian} `) || other.includes(` ${comedian} `)) {
-    return true;
-  }
-  const comedianParts = comedian.split(" ");
-  const otherParts = other.split(" ");
-  if (comedianParts.length >= 2) {
-    const first = comedianParts[0];
-    const last = comedianParts[comedianParts.length - 1];
-    if (otherParts.includes(first) && otherParts.includes(last)) return true;
-  }
-  return false;
 }
 
 export function showDedupeKey(show: Pick<Show, "comedianId" | "date" | "venue" | "city">) {
@@ -91,6 +84,18 @@ export function mergeShows(existing: Show[], incoming: Show[]) {
 export function replaceLookupShows(existing: Show[], comedianId: string, incoming: Show[]) {
   const kept = existing.filter(
     (show) => show.comedianId !== comedianId || show.source !== "lookup",
+  );
+  return mergeShows(kept, incoming);
+}
+
+/** Refresh keeps user-added rows; reapplies seed listed nights and API/venue lookup. */
+export function applyRefreshedShows(
+  existing: Show[],
+  comedianId: string,
+  incoming: Show[],
+) {
+  const kept = existing.filter(
+    (show) => show.comedianId !== comedianId || show.source === "user",
   );
   return mergeShows(kept, incoming);
 }
@@ -344,22 +349,157 @@ async function lookupSeatgeek(query: LookupQuery): Promise<Show[]> {
   );
 }
 
+type VenuePage = {
+  comedianId: string;
+  url: string;
+  title: string;
+  venue: string;
+  city: string;
+  region: string;
+  country: string;
+};
+
+function venuePagesFor(query: LookupQuery): VenuePage[] {
+  const pages = venuePages as VenuePage[];
+  const urls = new Set<string>();
+  const matched = pages.filter((page) => {
+    if (page.comedianId === query.comedianId) return true;
+    return namesMatch(query.name, page.title);
+  });
+  if (query.tourUrl && isClubVenueUrl(query.tourUrl)) {
+    matched.push({
+      comedianId: query.comedianId,
+      url: query.tourUrl,
+      title: query.name,
+      venue: "",
+      city: "",
+      region: "",
+      country: "US",
+    });
+  }
+  return matched.filter((page) => {
+    if (urls.has(page.url)) return false;
+    urls.add(page.url);
+    return true;
+  });
+}
+
+async function fetchHtml(url: string) {
+  const response = await fetch(url, { headers: { Accept: "text/html" } });
+  if (!response.ok) throw new Error(`${response.status}`);
+  return response.text();
+}
+
+async function lookupVenuePages(query: LookupQuery): Promise<Show[]> {
+  const pages = venuePagesFor(query);
+  const collected: Show[] = [];
+  for (const page of pages) {
+    try {
+      const html = await fetchHtml(page.url);
+      const nights = parseVenueNights(html);
+      for (const night of nights) {
+        if (night.date < todayISO()) continue;
+        const city = night.city || page.city;
+        const venue = night.venue || page.venue;
+        if (!city || !venue) continue;
+        const show: Omit<Show, "id"> = {
+          comedianId: query.comedianId,
+          title: page.title || query.name,
+          venue,
+          city,
+          region: night.region || page.region || undefined,
+          country: page.country || undefined,
+          date: night.date,
+          time: night.time,
+          ticketUrl: page.url,
+          source: "lookup",
+        };
+        collected.push({ ...show, id: lookupShowId(show) });
+      }
+    } catch {
+      // Club sites often block browser CORS; npm run refresh-tours still works.
+    }
+  }
+  return collapseByNight(collected);
+}
+
+type LayloDrop = {
+  comedianId: string;
+  name: string;
+  dropId: string;
+  url: string;
+};
+
+async function lookupLaylo(query: LookupQuery): Promise<Show[]> {
+  const drops = (layloDrops as LayloDrop[]).filter(
+    (drop) =>
+      drop.comedianId === query.comedianId || namesMatch(query.name, drop.name),
+  );
+  const collected: Show[] = [];
+  for (const drop of drops) {
+    const json = await fetchJson(drop.url);
+    for (const night of parseLayloDrop(json)) {
+      if (night.date < todayISO()) continue;
+      const show: Omit<Show, "id"> = {
+        comedianId: query.comedianId,
+        title: night.title || query.name,
+        venue: night.venue,
+        city: night.city,
+        region: night.region,
+        country: night.country,
+        date: night.date,
+        ticketUrl: night.ticketUrl,
+        source: "lookup",
+        lat: night.lat,
+        lng: night.lng,
+      };
+      collected.push({ ...show, id: lookupShowId(show) });
+    }
+  }
+  return collapseByNight(collected);
+}
+
+function hasLayloDrop(query: LookupQuery) {
+  return (layloDrops as LayloDrop[]).some(
+    (drop) =>
+      drop.comedianId === query.comedianId || namesMatch(query.name, drop.name),
+  );
+}
+
+function describeProviders(providers: string[]): LookupProvider {
+  const unique = [...new Set(providers)];
+  if (unique.length === 1) return unique[0] as LookupProvider;
+  if (unique.length === 2) {
+    const key = unique.sort().join("+");
+    if (key === "laylo+seed") return "laylo";
+    if (key === "seatgeek+ticketmaster") return "ticketmaster+seatgeek";
+    if (key === "seed+ticketmaster") return "ticketmaster+seed";
+    if (key === "seatgeek+seed") return "seatgeek+seed";
+  }
+  return "mixed";
+}
+
 export async function lookupUpcomingShows(query: LookupQuery): Promise<LookupResult> {
   const tm = ticketmasterKey();
   const sg = seatgeekClientId();
-  if (!tm && !sg) {
-    return { status: "no-key", shows: [] };
-  }
-
   const collected: Show[] = [];
-  const providers: Array<"ticketmaster" | "seatgeek"> = [];
+  const providers: string[] = [];
   const errors: string[] = [];
+
+  const seedShows = seedListedShows(query);
+  if (seedShows.length) {
+    collected.push(...seedShows);
+    providers.push("seed");
+  }
 
   if (tm) {
     try {
       const shows = await lookupTicketmaster(query);
-      collected.push(...shows);
-      if (shows.length) providers.push("ticketmaster");
+      const before = collected.length;
+      const merged = mergeShows(collected, shows);
+      collected.length = 0;
+      collected.push(...merged);
+      if (collected.length > before) providers.push("ticketmaster");
     } catch (error) {
       errors.push(`Ticketmaster: ${error instanceof Error ? error.message : "request failed"}`);
     }
@@ -378,21 +518,67 @@ export async function lookupUpcomingShows(query: LookupQuery): Promise<LookupRes
     }
   }
 
+  try {
+    const shows = await lookupLaylo(query);
+    const merged = mergeShows(collected, shows);
+    collected.length = 0;
+    collected.push(...merged);
+    if (shows.length) providers.push("laylo");
+  } catch (error) {
+    errors.push(`Laylo: ${error instanceof Error ? error.message : "request failed"}`);
+  }
+
+  try {
+    const shows = await lookupVenuePages(query);
+    const before = collected.length;
+    const merged = mergeShows(collected, shows);
+    collected.length = 0;
+    collected.push(...merged);
+    if (collected.length > before) providers.push("venue");
+  } catch (error) {
+    errors.push(`Venue pages: ${error instanceof Error ? error.message : "request failed"}`);
+  }
+
   const shows = collapseByNight(collected);
   if (shows.length) {
-    const provider =
-      providers.length === 2
-        ? "ticketmaster+seatgeek"
-        : providers[0];
-    return { status: "ok", shows, provider, detail: errors[0] };
-  }
-  if (errors.length && !tm && sg) {
-    return { status: "error", shows: [], detail: errors.join(" ") };
+    return {
+      status: "ok",
+      shows,
+      provider: describeProviders(providers),
+      detail: errors[0],
+    };
   }
   if (errors.length && collected.length === 0) {
     return { status: "error", shows: [], detail: errors.join(" ") };
   }
+  if (
+    !hasShowLookupKey() &&
+    !seedShows.length &&
+    !hasLayloDrop(query) &&
+    !venuePagesFor(query).length
+  ) {
+    return { status: "no-key", shows: [], detail: errors[0] };
+  }
   return { status: "empty", shows: [], detail: errors[0] };
+}
+
+function providerLabel(provider?: LookupProvider) {
+  switch (provider) {
+    case "seatgeek":
+      return "SeatGeek";
+    case "seed":
+      return "the roster club calendar";
+    case "venue":
+      return "official venue pages";
+    case "laylo":
+      return "the official Laylo calendar";
+    case "mixed":
+      return "Ticketmaster, Laylo, and club calendars";
+    default:
+      if (provider?.includes("laylo")) return "the official Laylo calendar plus other sources";
+      if (provider?.includes("seed")) return "the roster club calendar plus live listings";
+      return "Ticketmaster";
+  }
 }
 
 export function lookupMessage(
@@ -403,22 +589,16 @@ export function lookupMessage(
   const added = action === "add" ? `${name} is on the roster. ` : "";
   if (result.status === "ok") {
     const n = opts.count ?? result.shows.length;
-    const src =
-      result.provider === "seatgeek"
-        ? "SeatGeek"
-        : result.provider === "ticketmaster+seatgeek"
-          ? "Ticketmaster and SeatGeek"
-          : "Ticketmaster";
-    return `${added}Found ${n} upcoming ${n === 1 ? "show" : "shows"} on ${src}.`;
+    return `${added}Found ${n} upcoming ${n === 1 ? "show" : "shows"} from ${providerLabel(result.provider)}.`;
   }
   if (result.status === "no-key") {
     if (action === "add") {
-      return `${name} is on the roster. Live date lookup needs a Ticketmaster Discovery API key (see README). Use Refresh shows after the key is set, or add dates manually.`;
+      return `${name} is on the roster. Ticketmaster lookup needs a Discovery API key (see README). Official Laylo calendars and seed club dates still load without it.`;
     }
-    return `Could not refresh ${name}. Live date lookup needs a Ticketmaster Discovery API key (see README).`;
+    return `Could not refresh ${name}. Ticketmaster lookup needs a Discovery API key (see README). Official Laylo calendars and seed club dates still load without it.`;
   }
   if (result.status === "empty") {
-    return `${added}No upcoming Ticketmaster dates matched “${name}”. The roster entry was kept — add shows manually or try Refresh later.`;
+    return `${added}No upcoming Ticketmaster, Laylo, or club-calendar dates matched “${name}”. The roster entry was kept — add shows manually or try Refresh later.`;
   }
   return `${added}Show lookup failed${result.detail ? ` (${result.detail})` : ""}. The roster entry was kept — try Refresh later or add dates manually.`;
 }

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  applyRefreshedShows,
   mergeShows,
   namesMatch,
   replaceLookupShows,
@@ -83,5 +84,39 @@ describe("mergeShows", () => {
     assert.equal(next.some((show) => show.id === "listed-1"), true);
     assert.equal(next.some((show) => show.id === "user-1"), true);
     assert.equal(next.some((show) => show.id === "lookup-2"), true);
+  });
+
+  it("reapplies seed listed nights on refresh and keeps user rows", () => {
+    const user: Show = {
+      id: "user-1",
+      comedianId: "andrew-schulz",
+      title: "Andrew Schulz",
+      venue: "Local Club",
+      city: "Austin",
+      date: "2026-12-01",
+      source: "user",
+    };
+    const helium: Show = {
+      id: "as-2026-10-23-indianapolis",
+      comedianId: "andrew-schulz",
+      title: "Andrew Schulz",
+      venue: "Helium Comedy Club",
+      city: "Indianapolis",
+      date: "2026-10-23",
+      source: "listed",
+    };
+    const tmOnly: Show = {
+      id: "lookup-houston",
+      comedianId: "andrew-schulz",
+      title: "Andrew Schulz",
+      venue: "Houston Improv",
+      city: "Houston",
+      date: "2026-09-18",
+      source: "lookup",
+    };
+    const next = applyRefreshedShows([user], "andrew-schulz", [helium, tmOnly]);
+    assert.equal(next.some((show) => show.id === "user-1"), true);
+    assert.equal(next.some((show) => show.city === "Indianapolis"), true);
+    assert.equal(next.some((show) => show.city === "Houston"), true);
   });
 });

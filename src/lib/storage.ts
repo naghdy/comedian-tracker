@@ -4,13 +4,15 @@ import comedianSeed from "../../data/comedians.json";
 import showSeed from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
 import { mergeShows } from "./lookupShows";
+import { namesMatch } from "./names";
 
-const KEY = "comedian-tracker:v6";
-const LEGACY_KEYS = ["comedian-tracker:v5", "comedian-tracker:v4"];
-const STALE_JEFF_TOUR_URLS = [
+const KEY = "comedian-tracker:v7";
+const LEGACY_KEYS = ["comedian-tracker:v6", "comedian-tracker:v5", "comedian-tracker:v4"];
+const STALE_TOUR_URLS = [
   "https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710",
-  "https://www.jeffarcuri.com/",
+  "https://www.jeffarcuri.com",
   "https://www.jeffarcuri.com/shows",
+  "https://theandrewschulz.com",
 ];
 
 const seed: StoredState = {
@@ -18,58 +20,64 @@ const seed: StoredState = {
   shows: [...(showSeed.shows as Show[]), ...(jeffArcuriShows.shows as Show[])],
 };
 
-function isJeff(comedian: Comedian) {
-  return (
-    comedian.id === "jeff-arcuri" ||
-    comedian.name.trim().toLowerCase() === "jeff arcuri"
+function matchRoster(state: StoredState, seedComedian: Comedian) {
+  return state.comedians.find(
+    (item) =>
+      item.id === seedComedian.id || namesMatch(item.name, seedComedian.name),
   );
 }
 
-function jeffFromSeed() {
-  const comedian = seed.comedians.find((item) => item.id === "jeff-arcuri");
-  const shows = seed.shows.filter((item) => item.comedianId === "jeff-arcuri");
-  return { comedian, shows };
-}
-
-function pickJeffTourUrl(existing: string | undefined, seedUrl: string | undefined) {
-  if (!existing || STALE_JEFF_TOUR_URLS.includes(existing)) return seedUrl;
+function pickTourUrl(existing: string | undefined, seedUrl: string | undefined) {
+  if (!existing) return seedUrl;
+  const normalized = existing.replace(/\/$/, "");
+  if (STALE_TOUR_URLS.includes(normalized)) return seedUrl;
   return existing;
 }
 
-export function hydrateJeffSeed(state: StoredState): StoredState {
-  const { comedian, shows } = jeffFromSeed();
-  if (!comedian) return state;
+export function hydrateSeedShows(state: StoredState): StoredState {
+  let comedians = [...state.comedians];
+  let shows = [...state.shows];
 
-  const existing = state.comedians.find(isJeff);
-  const jeffId = existing?.id ?? comedian.id;
-  const remapped = shows.map((show) => ({
-    ...show,
-    comedianId: jeffId,
-    id: jeffId === "jeff-arcuri" ? show.id : show.id.replaceAll("jeff-arcuri", jeffId),
-  }));
+  for (const seedComedian of seed.comedians) {
+    const existing = matchRoster({ comedians, shows }, seedComedian);
+    const seedRows = seed.shows.filter((show) => show.comedianId === seedComedian.id);
+    if (!existing) {
+      if (seedComedian.id !== "jeff-arcuri") continue;
+      comedians = [...comedians, seedComedian];
+      shows = [...shows, ...seedRows];
+      continue;
+    }
 
-  const kept = state.shows.filter((show) => {
-    if (show.comedianId !== jeffId) return true;
-    return show.source === "user" || show.source === "lookup";
-  });
+    const remapped = seedRows.map((show) => ({
+      ...show,
+      comedianId: existing.id,
+      id:
+        existing.id === seedComedian.id
+          ? show.id
+          : show.id.replaceAll(seedComedian.id, existing.id),
+    }));
+    const kept = shows.filter((show) => {
+      if (show.comedianId !== existing.id) return true;
+      return show.source === "user" || show.source === "lookup";
+    });
+    shows = mergeShows(kept, remapped);
+    comedians = comedians.map((item) =>
+      item.id === existing.id
+        ? {
+            ...item,
+            tourUrl: pickTourUrl(item.tourUrl, seedComedian.tourUrl),
+            notes: item.notes || seedComedian.notes,
+            aliases: item.aliases?.length ? item.aliases : seedComedian.aliases,
+          }
+        : item,
+    );
+  }
 
-  const comedians = existing
-    ? state.comedians.map((item) =>
-        item.id === existing.id
-          ? {
-              ...item,
-              tourUrl: pickJeffTourUrl(item.tourUrl, comedian.tourUrl),
-              notes: item.notes || comedian.notes,
-            }
-          : item,
-      )
-    : [...state.comedians, comedian];
-
-  return {
-    comedians,
-    shows: mergeShows(kept, remapped),
-  };
+  return { comedians, shows };
 }
+
+/** @deprecated Use hydrateSeedShows */
+export const hydrateJeffSeed = hydrateSeedShows;
 
 function parseState(raw: string | null): StoredState | null {
   if (!raw) return null;
@@ -92,7 +100,7 @@ function load(): StoredState {
   if (current) return current;
   for (const legacyKey of LEGACY_KEYS) {
     const legacy = parseState(localStorage.getItem(legacyKey));
-    if (legacy) return hydrateJeffSeed(legacy);
+    if (legacy) return hydrateSeedShows(legacy);
   }
   return structuredClone(seed);
 }

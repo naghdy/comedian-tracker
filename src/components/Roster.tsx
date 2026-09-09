@@ -129,7 +129,6 @@ export function Roster({
                 selectedIds.length === 0 || selectedIds.includes(comedian.id);
               const refreshing = refreshingAll || lookupBusy === comedian.id;
               const count = showCounts[comedian.id] ?? 0;
-              const alias = comedian.aliases?.[0];
               return (
                 <div
                   key={comedian.id}
@@ -143,14 +142,11 @@ export function Roster({
                     aria-pressed={selectedIds.includes(comedian.id)}
                   >
                     <span className="swatch" />
-                    <span className="chip-body">
-                      <span className="chip-name">{comedian.name}</span>
-                      <span className="chip-meta">
-                        {count} {count === 1 ? "show" : "shows"}
-                        {alias ? ` · aka ${alias}` : ""}
-                      </span>
-                    </span>
+                    <span className="chip-name">{comedian.name}</span>
                   </button>
+                  <p className="chip-meta">
+                    {count} {count === 1 ? "show" : "shows"}
+                  </p>
                   <div className="chip-actions">
                     {comedian.tourUrl ? (
                       <a

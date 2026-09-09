@@ -188,7 +188,7 @@ function matchesComedian(query: LookupQuery, candidate: string) {
 }
 
 async function fetchJson(url: string) {
-  const response = await fetch(url);
+  const response = await fetch(url, { signal: AbortSignal.timeout(8000) });
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`.trim());
   }
@@ -395,7 +395,10 @@ function venuePagesFor(query: LookupQuery): VenuePage[] {
 }
 
 async function fetchHtml(url: string) {
-  const response = await fetch(url, { headers: { Accept: "text/html" } });
+  const response = await fetch(url, {
+    headers: { Accept: "text/html" },
+    signal: AbortSignal.timeout(8000),
+  });
   if (!response.ok) throw new Error(`${response.status}`);
   return response.text();
 }
@@ -538,8 +541,8 @@ export async function lookupUpcomingShows(query: LookupQuery): Promise<LookupRes
     errors.push(`Laylo: ${error instanceof Error ? error.message : "request failed"}`);
   }
 
-  // Club sites usually block browser CORS; skip when seed/Laylo already has nights.
-  if (!collected.length) {
+  // Club sites usually block browser CORS; skip when seed already has nights.
+  if (!seedShows.length) {
     try {
       const shows = await lookupVenuePages(query);
       const before = collected.length;

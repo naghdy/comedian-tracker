@@ -11,23 +11,23 @@
       "id": "dave-chappelle",
       "name": "Dave Chappelle",
       "color": "#2f9e5a",
-      "tourUrl": "https://www.davechappelle.com",
-      "notes": "Sparse public calendar after the June 2026 arena run. Only independently listed dates are included; no placeholders."
+      "tourUrl": "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
+      "notes": "No solo tour found. Only MSG 10 Sep benefit and Fastball Festival Mesa 18 Oct. No Sample placeholders."
     },
     {
       "id": "andrew-schulz",
       "name": "Andrew Schulz",
       "aliases": ["Andrew Schultz", "Schulz", "Schultz"],
       "color": "#3b82d6",
-      "tourUrl": "https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events",
-      "notes": "Live Nation (Houston, West Nyack) plus Helium Indianapolis venue calendar. Alias Schultz is the same person."
+      "tourUrl": "https://theandrewschulz.com/",
+      "notes": "Verified Live Nation dates only: Houston Improv 18–19 Sep, Levity Live West Nyack 25–26 Sep. Also listed at livenation.com/artist/K8vZ917Cf37. Alias Schultz is the same person."
     },
     {
       "id": "mark-gagnon",
       "name": "Mark Gagnon",
       "color": "#d4539a",
-      "tourUrl": "https://markgagnonlive.com",
-      "notes": "Official tour page markgagnonlive.com as of 2026-09-09."
+      "tourUrl": "https://markgagnonlive.com/",
+      "notes": "Official tour page https://markgagnonlive.com/ as of 2026-09-09."
     }
   ]
 }

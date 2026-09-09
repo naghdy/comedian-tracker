@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-09",
-  "sourceNotes": "Public listings only as of 2026-09-09. No Sample placeholders. Gervais: Live Nation UK / Chortle Legend tour from 9 Sep onward. Chappelle: MSG 10 Sep benefit + Fastball Festival Mesa 18 Oct (headline night). Schulz: Live Nation Houston/West Nyack + Helium Indianapolis venue calendar. Gagnon: markgagnonlive.com. Aggregator-only dates (e.g. Schulz Raleigh/Columbus) omitted.",
+  "sourceNotes": "Verified public listings only, 2026-09-09. No Sample placeholders. Gervais: Live Nation UK Legend tour. Chappelle: MSG 10 Sep benefit + Fastball Festival Mesa 18 Oct only (no solo tour). Schulz: Live Nation Houston + West Nyack only. Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -280,7 +280,7 @@
       "comedianId": "ricky-gervais",
       "title": "Ricky Gervais: Legend",
       "venue": "Utilita Arena Newcastle",
-      "city": "Newcastle",
+      "city": "Newcastle upon Tyne",
       "region": "England",
       "country": "UK",
       "date": "2026-12-10",
@@ -298,8 +298,8 @@
       "country": "US",
       "date": "2026-09-10",
       "time": "19:00",
-      "ticketUrl": "https://www.msg.com",
-      "notes": "9/11 charities comedy benefit; Chappelle is on the billed lineup (StandUpdates / MSG listings).",
+      "ticketUrl": "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
+      "notes": "MSG benefit lineup (NYC Still Rising After 25 Years) — not a solo Chappelle tour date.",
       "source": "listed"
     },
     {
@@ -312,8 +312,8 @@
       "country": "US",
       "date": "2026-10-18",
       "time": "19:00",
-      "ticketUrl": "https://www.sloanpark.com",
-      "notes": "Headlines night two of the inaugural Fastball Comedy Festival (Cubs / Sloan Park announcement).",
+      "ticketUrl": "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
+      "notes": "Fastball Comedy Festival — Chappelle headlines night two. Not a solo tour date.",
       "source": "listed"
     },
     {
@@ -369,32 +369,6 @@
       "source": "listed"
     },
     {
-      "id": "as-2026-10-23-indianapolis",
-      "comedianId": "andrew-schulz",
-      "title": "Andrew Schulz",
-      "venue": "Helium Comedy Club",
-      "city": "Indianapolis",
-      "region": "IN",
-      "country": "US",
-      "date": "2026-10-23",
-      "time": "19:00",
-      "ticketUrl": "https://indianapolis.heliumcomedy.com/events/142211",
-      "source": "listed"
-    },
-    {
-      "id": "as-2026-10-24-indianapolis",
-      "comedianId": "andrew-schulz",
-      "title": "Andrew Schulz",
-      "venue": "Helium Comedy Club",
-      "city": "Indianapolis",
-      "region": "IN",
-      "country": "US",
-      "date": "2026-10-24",
-      "time": "19:00",
-      "ticketUrl": "https://indianapolis.heliumcomedy.com/events/142211",
-      "source": "listed"
-    },
-    {
       "id": "mg-2026-10-02-plano",
       "comedianId": "mark-gagnon",
       "title": "Mark Gagnon",
@@ -404,7 +378,7 @@
       "country": "US",
       "date": "2026-10-02",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -417,7 +391,7 @@
       "country": "US",
       "date": "2026-10-03",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -430,7 +404,7 @@
       "country": "US",
       "date": "2026-10-16",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -443,7 +417,7 @@
       "country": "US",
       "date": "2026-10-17",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -456,7 +430,7 @@
       "country": "US",
       "date": "2026-11-06",
       "time": "19:30",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -469,7 +443,7 @@
       "country": "US",
       "date": "2026-11-07",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -482,7 +456,7 @@
       "country": "US",
       "date": "2026-11-08",
       "time": "18:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -495,7 +469,7 @@
       "country": "US",
       "date": "2026-12-17",
       "time": "19:30",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
@@ -508,33 +482,33 @@
       "country": "US",
       "date": "2026-12-18",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
       "id": "mg-2027-01-08-slc",
       "comedianId": "mark-gagnon",
       "title": "Mark Gagnon",
-      "venue": "The Showroom at The Gateway",
+      "venue": "The Showroom @ The Gateway",
       "city": "Salt Lake City",
       "region": "UT",
       "country": "US",
       "date": "2027-01-08",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     },
     {
       "id": "mg-2027-01-09-slc",
       "comedianId": "mark-gagnon",
       "title": "Mark Gagnon",
-      "venue": "The Showroom at The Gateway",
+      "venue": "The Showroom @ The Gateway",
       "city": "Salt Lake City",
       "region": "UT",
       "country": "US",
       "date": "2027-01-09",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com",
+      "ticketUrl": "https://markgagnonlive.com/",
       "source": "listed"
     }
   ]

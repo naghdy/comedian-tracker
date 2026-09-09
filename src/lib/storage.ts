@@ -3,7 +3,7 @@ import type { Comedian, Show, StoredState } from "../types";
 import comedianSeed from "../../data/comedians.json";
 import showSeed from "../../data/shows.json";
 
-const KEY = "comedian-tracker:v3";
+const KEY = "comedian-tracker:v4";
 
 const seed: StoredState = {
   comedians: comedianSeed.comedians as Comedian[],

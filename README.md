@@ -63,12 +63,12 @@ Dates were seeded from public listings on **2026-09-09**. There are **no Sample 
 
 | Comedian | Real dates seeded | Sources |
 | --- | --- | --- |
-| Ricky Gervais | 22 (Legend, 9 Sep–10 Dec 2026) | [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051), Chortle |
-| Dave Chappelle | 2 | MSG 10 Sep benefit; Fastball Festival, Sloan Park, Mesa 18 Oct. Public calendar is sparse after the June 2026 arena run. |
-| Andrew Schulz | 6 | Live Nation (Houston 18–19 Sep, West Nyack 25–26 Sep); [Helium Indianapolis](https://indianapolis.heliumcomedy.com/events/142211) 23–24 Oct. Aggregator-only dates omitted. |
-| Mark Gagnon | 11 | [markgagnonlive.com](https://markgagnonlive.com) through 9 Jan 2027 |
+| Ricky Gervais | 22 (Legend, 9 Sep–10 Dec 2026) | [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051) |
+| Dave Chappelle | 2 | [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682): MSG 10 Sep benefit; Fastball Festival, Sloan Park, Mesa 18 Oct. No solo tour found. |
+| Andrew Schulz | 4 | [theandrewschulz.com](https://theandrewschulz.com/) / [Live Nation](https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events): Houston 18–19 Sep, West Nyack 25–26 Sep only. |
+| Mark Gagnon | 11 | [markgagnonlive.com](https://markgagnonlive.com/) through 9 Jan 2027 |
 
-Existing browsers may still have an older `localStorage` snapshot. Use **Reset seed** (or a fresh browser profile) to pick up this file. The app now stores state under `comedian-tracker:v3`.
+Existing browsers may still have an older `localStorage` snapshot. Use **Reset seed** (or a fresh browser profile) to pick up this file. The app now stores state under `comedian-tracker:v4`.
 
 Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
 
@@ -84,10 +84,10 @@ npm run refresh-tours
 
 Suggested sources (respect robots.txt / ToS; prefer official pages):
 
-- Ricky Gervais — [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051), Comedy.co.uk, rickygervais.com
-- Dave Chappelle — Live Nation, MSG, venue calendars (dates often land late)
-- Andrew Schulz — [Live Nation artist page](https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events) (also listed as Schultz)
-- Mark Gagnon — [markgagnonlive.com](https://markgagnonlive.com)
+- Ricky Gervais — [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051)
+- Dave Chappelle — [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682)
+- Andrew Schulz — [theandrewschulz.com](https://theandrewschulz.com/) / [Live Nation](https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events)
+- Mark Gagnon — [markgagnonlive.com](https://markgagnonlive.com/)
 
 A reasonable cadence is a Monday cron or GitHub Action that rewrites `data/shows.json` and bumps `generatedAt`. User-added shows live only in `localStorage` and are not overwritten by that file.
 

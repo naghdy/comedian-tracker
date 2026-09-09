@@ -179,10 +179,12 @@ a {
 
 .icon-btn {
   border: 0;
-  background: transparent;
-  color: var(--faint);
-  padding: 4px 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  padding: 4px 8px;
   border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
 }
 
 .icon-btn:hover {

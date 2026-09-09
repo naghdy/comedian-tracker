@@ -101,9 +101,10 @@ export function Roster({
                   type="button"
                   className="icon-btn"
                   aria-label={`Remove ${comedian.name}`}
+                  title={`Remove ${comedian.name}`}
                   onClick={() => onRemove(comedian.id)}
                 >
-                  ×
+                  Remove
                 </button>
               </div>
             );

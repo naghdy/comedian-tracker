@@ -7,6 +7,7 @@ type City = { city: string; lat: number; lng: number; aliases?: string[] };
 const extra: City[] = [
   { city: "Atlanta", lat: 33.749, lng: -84.388, aliases: ["atlanta, ga"] },
   { city: "Baltimore", lat: 39.2904, lng: -76.6122, aliases: ["baltimore, md"] },
+  { city: "Brea", lat: 33.9169, lng: -117.9001, aliases: ["brea, ca"] },
   { city: "Birmingham, AL", lat: 33.5186, lng: -86.8104, aliases: ["birmingham al"] },
   { city: "Cedar Rapids", lat: 41.9779, lng: -91.6656, aliases: ["cedar rapids, ia"] },
   { city: "Charleston", lat: 32.7765, lng: -79.9311, aliases: ["charleston, sc"] },

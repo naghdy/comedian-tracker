@@ -33,8 +33,8 @@
       "id": "jeff-arcuri",
       "name": "Jeff Arcuri",
       "color": "#f97316",
-      "tourUrl": "https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710",
-      "notes": "Seeded 2026-09-09 from venue pages + Ticketmaster + Live Nation Road Trip announcement. Lookup uses Ticketmaster Discovery when a key is configured."
+      "tourUrl": "https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events",
+      "notes": "Seeded 2026-09-09 from jeffarcuri.com/shows, Live Nation artist page, Ticketmaster artist 2569710, and venue pages. Lookup uses Ticketmaster Discovery when a key is configured."
     }
   ]
 }

@@ -5,8 +5,13 @@ import showSeed from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
 import { mergeShows } from "./lookupShows";
 
-const KEY = "comedian-tracker:v5";
-const LEGACY_KEYS = ["comedian-tracker:v4"];
+const KEY = "comedian-tracker:v6";
+const LEGACY_KEYS = ["comedian-tracker:v5", "comedian-tracker:v4"];
+const STALE_JEFF_TOUR_URLS = [
+  "https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710",
+  "https://www.jeffarcuri.com/",
+  "https://www.jeffarcuri.com/shows",
+];
 
 const seed: StoredState = {
   comedians: comedianSeed.comedians as Comedian[],
@@ -26,35 +31,43 @@ function jeffFromSeed() {
   return { comedian, shows };
 }
 
-function hydrateJeff(state: StoredState): StoredState {
+function pickJeffTourUrl(existing: string | undefined, seedUrl: string | undefined) {
+  if (!existing || STALE_JEFF_TOUR_URLS.includes(existing)) return seedUrl;
+  return existing;
+}
+
+export function hydrateJeffSeed(state: StoredState): StoredState {
   const { comedian, shows } = jeffFromSeed();
   if (!comedian) return state;
+
   const existing = state.comedians.find(isJeff);
-  if (!existing) {
-    return {
-      comedians: [...state.comedians, comedian],
-      shows: [...state.shows, ...shows],
-    };
-  }
+  const jeffId = existing?.id ?? comedian.id;
   const remapped = shows.map((show) => ({
     ...show,
-    comedianId: existing.id,
-    id:
-      existing.id === "jeff-arcuri"
-        ? show.id
-        : show.id.replaceAll("jeff-arcuri", existing.id),
+    comedianId: jeffId,
+    id: jeffId === "jeff-arcuri" ? show.id : show.id.replaceAll("jeff-arcuri", jeffId),
   }));
+
+  const kept = state.shows.filter((show) => {
+    if (show.comedianId !== jeffId) return true;
+    return show.source === "user" || show.source === "lookup";
+  });
+
+  const comedians = existing
+    ? state.comedians.map((item) =>
+        item.id === existing.id
+          ? {
+              ...item,
+              tourUrl: pickJeffTourUrl(item.tourUrl, comedian.tourUrl),
+              notes: item.notes || comedian.notes,
+            }
+          : item,
+      )
+    : [...state.comedians, comedian];
+
   return {
-    comedians: state.comedians.map((item) =>
-      item.id === existing.id
-        ? {
-            ...item,
-            tourUrl: item.tourUrl || comedian.tourUrl,
-            notes: item.notes || comedian.notes,
-          }
-        : item,
-    ),
-    shows: mergeShows(state.shows, remapped),
+    comedians,
+    shows: mergeShows(kept, remapped),
   };
 }
 
@@ -79,7 +92,7 @@ function load(): StoredState {
   if (current) return current;
   for (const legacyKey of LEGACY_KEYS) {
     const legacy = parseState(localStorage.getItem(legacyKey));
-    if (legacy) return hydrateJeff(legacy);
+    if (legacy) return hydrateJeffSeed(legacy);
   }
   return structuredClone(seed);
 }

@@ -93,9 +93,9 @@ Dates were seeded from public listings on **2026-09-09**. There are **no Sample 
 | Dave Chappelle | 2 | [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682): MSG 10 Sep benefit; Fastball Festival, Sloan Park, Mesa 18 Oct. No solo tour found. |
 | Andrew Schulz | 4 | [theandrewschulz.com](https://theandrewschulz.com/) / [Live Nation](https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events): Houston 18–19 Sep, West Nyack 25–26 Sep only. |
 | Mark Gagnon | 11 | [markgagnonlive.com](https://markgagnonlive.com/) through 9 Jan 2027 |
-| Jeff Arcuri | 66 (2026 clubs + 2027 Road Trip, one row per night) | Summit City Comedy Club; Fort Lauderdale Improv; [Levity Live Huntsville](https://levitylive.com/comic/jeff+arcuri/); [Comedy Works Denver](https://comedyworks.com/comedians/jeff-arcuri); [Ticketmaster artist page](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710) (Sacramento, Orlando, early 2027 nights); Live Nation Road Trip announcement (remaining 2027 theaters). Oxnard Levity weekend omitted (official Oxnard calendar lists someone else). |
+| Jeff Arcuri | 50 (18 club nights in 2026 + 32 confirmed 2027 Road Trip nights; one row per calendar day) | [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows); [Live Nation artist page](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) (`tourUrl`); [Ticketmaster artist page](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710); venue pages (Summit City, Brea Improv, Orlando Funny Bone, Fort Lauderdale Improv, Huntsville Levity Live). Unverified **Oxnard Oct 2026** and **Mississauga Sep 2026** are omitted. No 2026-01 dates. |
 
-Existing browsers may still have an older `localStorage` snapshot. **v4** snapshots are migrated once into `comedian-tracker:v5` and, if Jeff Arcuri was added with no dates, the seed shows are merged in. Use **Reset seed** (or a fresh profile) to restore the JSON files.
+Existing browsers may still have an older `localStorage` snapshot. **v4** / **v5** snapshots are migrated once into `comedian-tracker:v6`: if Jeff Arcuri is missing or has no shows, the verified seed nights are added; stale listed Jeff nights from an older seed are replaced. Manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
 
 Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
 
@@ -115,7 +115,7 @@ Suggested sources (respect robots.txt / ToS; prefer official pages):
 - Dave Chappelle — [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682)
 - Andrew Schulz — [theandrewschulz.com](https://theandrewschulz.com/) / [Live Nation](https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events)
 - Mark Gagnon — [markgagnonlive.com](https://markgagnonlive.com/)
-- Jeff Arcuri — [Ticketmaster](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710) / venue pages / Live Nation Road Trip list
+- Jeff Arcuri — [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows) / [Live Nation](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) / [Ticketmaster](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710)
 
 A reasonable cadence is a Monday cron or GitHub Action that rewrites `data/shows.json` and bumps `generatedAt`. User-added shows live only in `localStorage` and are not overwritten by that file.
 

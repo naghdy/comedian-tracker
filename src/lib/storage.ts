@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Comedian, Show, StoredState } from "../types";
-import comedianSeed from "../../data/comedians.json";
-import showSeed from "../../data/shows.json";
-import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
+import type { Comedian, StoredState } from "../types";
 import { mergeShows } from "./lookupShows";
 import { namesMatch } from "./names";
+import { SEED_COMEDIANS, SEED_SHOWS } from "./seedData";
 
 const KEY = "comedian-tracker:v7";
 const LEGACY_KEYS = ["comedian-tracker:v6", "comedian-tracker:v5", "comedian-tracker:v4"];
@@ -16,8 +14,8 @@ const STALE_TOUR_URLS = [
 ];
 
 const seed: StoredState = {
-  comedians: comedianSeed.comedians as Comedian[],
-  shows: [...(showSeed.shows as Show[]), ...(jeffArcuriShows.shows as Show[])],
+  comedians: SEED_COMEDIANS,
+  shows: SEED_SHOWS,
 };
 
 function matchRoster(state: StoredState, seedComedian: Comedian) {

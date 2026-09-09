@@ -1,11 +1,6 @@
-import type { Comedian, Show } from "../types";
-import comedianSeed from "../../data/comedians.json";
-import showSeed from "../../data/shows.json";
-import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
+import type { Show } from "../types";
 import { namesMatch } from "./names";
-
-const comedians = comedianSeed.comedians as Comedian[];
-const listed = [...(showSeed.shows as Show[]), ...(jeffArcuriShows.shows as Show[])];
+import { SEED_COMEDIANS, SEED_SHOWS } from "./seedData";
 
 function todayISO() {
   const now = new Date();
@@ -22,7 +17,7 @@ export function matchSeedComedian(opts: {
   aliases?: string[];
 }) {
   const names = [opts.name, ...(opts.aliases ?? [])];
-  return comedians.find((comedian) => {
+  return SEED_COMEDIANS.find((comedian) => {
     if (opts.comedianId && comedian.id === opts.comedianId) return true;
     if (names.some((name) => namesMatch(comedian.name, name))) return true;
     return comedian.aliases?.some((alias) =>
@@ -40,11 +35,11 @@ export function seedListedShows(opts: {
   const ids = new Set<string>([opts.comedianId]);
   if (match) ids.add(match.id);
   const today = todayISO();
-  return listed
-    .filter((show) => ids.has(show.comedianId) && show.date >= today)
-    .map((show) => ({
-      ...show,
-      comedianId: opts.comedianId,
-      source: "listed" as const,
-    }));
+  return SEED_SHOWS.filter(
+    (show) => ids.has(show.comedianId) && show.date >= today,
+  ).map((show) => ({
+    ...show,
+    comedianId: opts.comedianId,
+    source: "listed" as const,
+  }));
 }

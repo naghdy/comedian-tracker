@@ -73,7 +73,7 @@ On **Add comedian** / **Refresh** the app merges:
 2. Ticketmaster Discovery (if `VITE_TICKETMASTER_API_KEY` is set).
 3. SeatGeek (if `VITE_SEATGEEK_CLIENT_ID` is set).
 4. Official **Laylo** drop JSON when the artist has a known embed (Andrew Schulz: CloudFront `drops/1e3551fe-33d5-4a86-8364-3edb80ccdd62.json`). Ticketmaster only lists Houston + West Nyack for him.
-5. Best-effort fetch of official Helium / Improv / Levity pages when `tourUrl` or `data/venue-pages.json` points at them. GitHub Pages browsers often hit CORS here; `npm run refresh-tours` fetches Laylo + those pages from Node and writes `data/shows.json`.
+5. Official Helium / Improv / Levity pages are **not** fetched in the browser (CORS). `npm run refresh-tours` scrapes them from Node and writes `data/shows.json`.
 
 Multiple showtimes on the same night at the same venue collapse to one agenda row. If lookup finds nothing, the comedian **stays on the roster**. Refresh reapplies seed listed dates and API/venue rows; manually added (`user`) dates are kept.
 

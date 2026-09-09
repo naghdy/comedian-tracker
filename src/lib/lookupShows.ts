@@ -2,9 +2,7 @@ import type { Show } from "../types";
 import { slugify } from "./filters";
 import { namesMatch, normalizePersonName } from "./names";
 import { seedListedShows } from "./listedCalendar";
-import { isClubVenueUrl, parseVenueNights } from "./parseVenueHtml";
 import { parseLayloDrop } from "./parseLaylo";
-import venuePages from "../../data/venue-pages.json";
 import layloDrops from "../../data/laylo-drops.json";
 
 export type LookupStatus = "ok" | "no-key" | "empty" | "error";
@@ -359,83 +357,6 @@ async function lookupSeatgeek(query: LookupQuery): Promise<Show[]> {
   );
 }
 
-type VenuePage = {
-  comedianId: string;
-  url: string;
-  title: string;
-  venue: string;
-  city: string;
-  region: string;
-  country: string;
-};
-
-function venuePagesFor(query: LookupQuery): VenuePage[] {
-  const pages = venuePages as VenuePage[];
-  const urls = new Set<string>();
-  const matched = pages.filter((page) => {
-    if (page.comedianId === query.comedianId) return true;
-    return namesMatch(query.name, page.title);
-  });
-  if (query.tourUrl && isClubVenueUrl(query.tourUrl)) {
-    matched.push({
-      comedianId: query.comedianId,
-      url: query.tourUrl,
-      title: query.name,
-      venue: "",
-      city: "",
-      region: "",
-      country: "US",
-    });
-  }
-  return matched.filter((page) => {
-    if (urls.has(page.url)) return false;
-    urls.add(page.url);
-    return true;
-  });
-}
-
-async function fetchHtml(url: string) {
-  const response = await fetch(url, {
-    headers: { Accept: "text/html" },
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!response.ok) throw new Error(`${response.status}`);
-  return response.text();
-}
-
-async function lookupVenuePages(query: LookupQuery): Promise<Show[]> {
-  const pages = venuePagesFor(query);
-  const collected: Show[] = [];
-  for (const page of pages) {
-    try {
-      const html = await fetchHtml(page.url);
-      const nights = parseVenueNights(html);
-      for (const night of nights) {
-        if (night.date < todayISO()) continue;
-        const city = night.city || page.city;
-        const venue = night.venue || page.venue;
-        if (!city || !venue) continue;
-        const show: Omit<Show, "id"> = {
-          comedianId: query.comedianId,
-          title: page.title || query.name,
-          venue,
-          city,
-          region: night.region || page.region || undefined,
-          country: page.country || undefined,
-          date: night.date,
-          time: night.time,
-          ticketUrl: page.url,
-          source: "lookup",
-        };
-        collected.push({ ...show, id: lookupShowId(show) });
-      }
-    } catch {
-      // Club sites often block browser CORS; npm run refresh-tours still works.
-    }
-  }
-  return collapseByNight(collected);
-}
-
 type LayloDrop = {
   comedianId: string;
   name: string;
@@ -541,20 +462,6 @@ export async function lookupUpcomingShows(query: LookupQuery): Promise<LookupRes
     errors.push(`Laylo: ${error instanceof Error ? error.message : "request failed"}`);
   }
 
-  // Club sites usually block browser CORS; skip when seed already has nights.
-  if (!seedShows.length) {
-    try {
-      const shows = await lookupVenuePages(query);
-      const before = collected.length;
-      const merged = mergeShows(collected, shows);
-      collected.length = 0;
-      collected.push(...merged);
-      if (collected.length > before) providers.push("venue");
-    } catch (error) {
-      errors.push(`Venue pages: ${error instanceof Error ? error.message : "request failed"}`);
-    }
-  }
-
   const shows = collapseByNight(collected);
   if (shows.length) {
     return {
@@ -570,8 +477,7 @@ export async function lookupUpcomingShows(query: LookupQuery): Promise<LookupRes
   if (
     !hasShowLookupKey() &&
     !seedShows.length &&
-    !hasLayloDrop(query) &&
-    !venuePagesFor(query).length
+    !hasLayloDrop(query)
   ) {
     return { status: "no-key", shows: [], detail: errors[0] };
   }

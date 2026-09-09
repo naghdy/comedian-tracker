@@ -17,9 +17,9 @@ export function TripChecker({
   onClear,
   active,
 }: Props) {
-  const [city, setCity] = useState("Seattle");
-  const [start, setStart] = useState("2026-11-18");
-  const [end, setEnd] = useState("2026-11-24");
+  const [city, setCity] = useState("Houston");
+  const [start, setStart] = useState("2026-09-17");
+  const [end, setEnd] = useState("2026-09-20");
 
   function submit(event: FormEvent) {
     event.preventDefault();
@@ -34,7 +34,7 @@ export function TripChecker({
       <div>
         <h2>Trip checker</h2>
         <p className="lede">
-          City + dates, case-insensitive partial match. Try “Sea” or “seattle”.
+          City + dates, case-insensitive partial match. Try “Houston” or “Manch”.
         </p>
         <form className="trip-fields" onSubmit={submit}>
           <label className="field">

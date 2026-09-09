@@ -1,10 +1,16 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Roster } from "./components/Roster";
 import { TripChecker } from "./components/TripChecker";
 import { ShowMap } from "./components/ShowMap";
 import { Agenda } from "./components/Agenda";
 import { ShowForm } from "./components/ShowForm";
 import { resetSeed, useTrackerState } from "./lib/storage";
+import {
+  applyTheme,
+  persistTheme,
+  readTheme,
+  type Theme,
+} from "./lib/theme";
 import {
   filterShows,
   ROSTER_COLORS,
@@ -16,11 +22,18 @@ import type { Show, TripQuery } from "./types";
 
 export default function App() {
   const [state, setState] = useTrackerState();
+  const [theme, setTheme] = useState<Theme>(() =>
+    typeof window === "undefined" ? "dark" : readTheme(),
+  );
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [cityFilter, setCityFilter] = useState("");
   const [comedianFilter, setComedianFilter] = useState("");
   const [trip, setTrip] = useState<TripQuery | null>(null);
   const [formOpen, setFormOpen] = useState(false);
+
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
 
   const showCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -127,6 +140,12 @@ export default function App() {
             setTrip(null);
           }
         }}
+        theme={theme}
+        onToggleTheme={() => {
+          const next = theme === "dark" ? "light" : "dark";
+          persistTheme(next);
+          setTheme(next);
+        }}
       />
       <main className="main">
         <TripChecker
@@ -136,7 +155,7 @@ export default function App() {
           onSearch={setTrip}
           onClear={() => setTrip(null)}
         />
-        <ShowMap shows={visibleShows} comedians={state.comedians} />
+        <ShowMap shows={visibleShows} comedians={state.comedians} theme={theme} />
         <Agenda
           shows={visibleShows}
           comedians={state.comedians}

@@ -44,9 +44,9 @@ npm run preview  # serve the build
 
 ## What you get
 
-- **Roster** (left): color chips, click-to-filter, add/remove comedian (name + optional tour URL).
-- **Trip checker** (top): city + start/end dates. Case-insensitive partial city match. Headline: *In Seattle these days…*
-- **Map**: Google Maps, color-coded pins by comedian, clickable info windows.
+- **Roster** (left): color chips, click-to-filter, add/remove comedian (name + optional tour URL). Light/dark toggle (persisted).
+- **Trip checker** (top): city + start/end dates. Case-insensitive partial city match. Headline: *In Houston these days…*
+- **Map**: Google Maps, color-coded pins by comedian, clickable info windows. Dark vs default-light tiles follow the theme.
 - **Agenda**: chronological list, extra comedian/city filters, empty states, add/remove shows.
 
 Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Mark Gagnon.
@@ -59,7 +59,16 @@ Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Ma
 | `data/shows.json` | Upcoming dates |
 | `data/cities.json` | Static lat/lng lookup (no geocoding API key) |
 
-Dates were seeded from public listings on **2026-09-09** (Live Nation, official tour pages, venue calendars). Rows with `"sample": true` / a **Sample** badge are placeholders, not confirmed on-sale dates. Chappelle’s public calendar is thin after the June 2026 arena run, so Seattle / Chicago / Las Vegas rows are marked Sample so the map and trip checker still have coverage.
+Dates were seeded from public listings on **2026-09-09**. There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
+
+| Comedian | Real dates seeded | Sources |
+| --- | --- | --- |
+| Ricky Gervais | 22 (Legend, 9 Sep–10 Dec 2026) | [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051), Chortle |
+| Dave Chappelle | 2 | MSG 10 Sep benefit; Fastball Festival, Sloan Park, Mesa 18 Oct. Public calendar is sparse after the June 2026 arena run. |
+| Andrew Schulz | 6 | Live Nation (Houston 18–19 Sep, West Nyack 25–26 Sep); [Helium Indianapolis](https://indianapolis.heliumcomedy.com/events/142211) 23–24 Oct. Aggregator-only dates omitted. |
+| Mark Gagnon | 11 | [markgagnonlive.com](https://markgagnonlive.com) through 9 Jan 2027 |
+
+Existing browsers may still have an older `localStorage` snapshot. Use **Reset seed** (or a fresh browser profile) to pick up this file. The app now stores state under `comedian-tracker:v3`.
 
 Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
 

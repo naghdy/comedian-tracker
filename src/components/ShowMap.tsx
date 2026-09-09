@@ -13,6 +13,7 @@ import { DARK_MAP_STYLES } from "../lib/mapStyles";
 type Props = {
   shows: Show[];
   comedians: Comedian[];
+  theme: "dark" | "light";
 };
 
 type Plotted = {
@@ -78,6 +79,17 @@ function fitMap(map: google.maps.Map, markers: Plotted[]) {
   map.fitBounds(bounds, 56);
 }
 
+function mapOptions(theme: "dark" | "light"): google.maps.MapOptions {
+  return {
+    styles: theme === "dark" ? DARK_MAP_STYLES : [],
+    backgroundColor: theme === "dark" ? "#0b1018" : "#d7e0ea",
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: true,
+    gestureHandling: "greedy",
+  };
+}
+
 function MapFallback({
   title,
   children,
@@ -99,6 +111,7 @@ function GoogleMapCanvas({
   apiKey,
   shows,
   comedians,
+  theme,
 }: Props & { apiKey: string }) {
   const { isLoaded, loadError } = useJsApiLoader({
     id: "comedian-tracker-maps",
@@ -124,6 +137,11 @@ function GoogleMapCanvas({
     if (!map) return;
     fitMap(map, markers);
   }, [map, markers]);
+
+  useEffect(() => {
+    if (!map) return;
+    map.setOptions(mapOptions(theme));
+  }, [map, theme]);
 
   if (loadError) {
     return (
@@ -154,14 +172,7 @@ function GoogleMapCanvas({
       onLoad={onLoad}
       onUnmount={onUnmount}
       onClick={() => setActiveId(null)}
-      options={{
-        styles: DARK_MAP_STYLES,
-        backgroundColor: "#0b1018",
-        streetViewControl: false,
-        mapTypeControl: false,
-        fullscreenControl: true,
-        gestureHandling: "greedy",
-      }}
+      options={mapOptions(theme)}
     >
       {markers.map((marker) => {
         const comedian = byId[marker.show.comedianId];
@@ -205,7 +216,7 @@ function GoogleMapCanvas({
   );
 }
 
-export function ShowMap({ shows, comedians }: Props) {
+export function ShowMap({ shows, comedians, theme }: Props) {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY?.trim() ?? "";
   const plotted = plotShows(shows).length;
   const missing = shows.length - plotted;
@@ -228,6 +239,7 @@ export function ShowMap({ shows, comedians }: Props) {
           apiKey={apiKey}
           shows={shows}
           comedians={comedians}
+          theme={theme}
         />
       ) : (
         <MapFallback title="Google Maps API key missing">

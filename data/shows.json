@@ -1,20 +1,7 @@
 {
   "generatedAt": "2026-09-09",
-  "sourceNotes": "Seeded from public tour listings on 2026-09-09. Entries with sample:true are placeholders, not confirmed on-sale dates.",
+  "sourceNotes": "Public listings only as of 2026-09-09. No Sample placeholders. Gervais: Live Nation UK / Chortle Legend tour from 9 Sep onward. Chappelle: MSG 10 Sep benefit + Fastball Festival Mesa 18 Oct (headline night). Schulz: Live Nation Houston/West Nyack + Helium Indianapolis venue calendar. Gagnon: markgagnonlive.com. Aggregator-only dates (e.g. Schulz Raleigh/Columbus) omitted.",
   "shows": [
-    {
-      "id": "rg-2026-09-08-cambridge",
-      "comedianId": "ricky-gervais",
-      "title": "Ricky Gervais: Legend",
-      "venue": "Cambridge Corn Exchange",
-      "city": "Cambridge",
-      "region": "England",
-      "country": "UK",
-      "date": "2026-09-08",
-      "time": "19:30",
-      "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
-      "source": "listed"
-    },
     {
       "id": "rg-2026-09-09-cambridge",
       "comedianId": "ricky-gervais",
@@ -63,7 +50,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-09-22",
-      "time": "19:30",
+      "time": "18:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -76,7 +63,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-09-23",
-      "time": "19:30",
+      "time": "18:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -141,7 +128,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-10-12",
-      "time": "19:30",
+      "time": "18:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -154,7 +141,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-10-13",
-      "time": "19:30",
+      "time": "18:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -232,7 +219,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-11-16",
-      "time": "19:30",
+      "time": "18:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -245,7 +232,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-11-17",
-      "time": "19:30",
+      "time": "18:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -312,7 +299,7 @@
       "date": "2026-09-10",
       "time": "19:00",
       "ticketUrl": "https://www.msg.com",
-      "notes": "9/11 charities comedy benefit; Chappelle is on the billed lineup.",
+      "notes": "9/11 charities comedy benefit; Chappelle is on the billed lineup (StandUpdates / MSG listings).",
       "source": "listed"
     },
     {
@@ -325,51 +312,9 @@
       "country": "US",
       "date": "2026-10-18",
       "time": "19:00",
-      "ticketUrl": "https://fastballcomedy.com",
-      "notes": "Headlines night two of the inaugural Fastball Comedy Festival.",
+      "ticketUrl": "https://www.sloanpark.com",
+      "notes": "Headlines night two of the inaugural Fastball Comedy Festival (Cubs / Sloan Park announcement).",
       "source": "listed"
-    },
-    {
-      "id": "dc-2026-11-21-seattle",
-      "comedianId": "dave-chappelle",
-      "title": "Dave Chappelle (Sample)",
-      "venue": "Paramount Theatre",
-      "city": "Seattle",
-      "region": "WA",
-      "country": "US",
-      "date": "2026-11-21",
-      "time": "20:00",
-      "sample": true,
-      "notes": "Placeholder so the trip checker can demo a Seattle window. Not a confirmed on-sale date.",
-      "source": "sample"
-    },
-    {
-      "id": "dc-2026-12-05-chicago",
-      "comedianId": "dave-chappelle",
-      "title": "Dave Chappelle (Sample)",
-      "venue": "Chicago Theatre",
-      "city": "Chicago",
-      "region": "IL",
-      "country": "US",
-      "date": "2026-12-05",
-      "time": "20:00",
-      "sample": true,
-      "notes": "Placeholder. June 2026 United Center date already passed; this keeps Chicago on the map.",
-      "source": "sample"
-    },
-    {
-      "id": "dc-2026-12-12-vegas",
-      "comedianId": "dave-chappelle",
-      "title": "Dave Chappelle (Sample)",
-      "venue": "Dolby Live at Park MGM",
-      "city": "Las Vegas",
-      "region": "NV",
-      "country": "US",
-      "date": "2026-12-12",
-      "time": "22:00",
-      "sample": true,
-      "notes": "Placeholder residency-style date for demo coverage.",
-      "source": "sample"
     },
     {
       "id": "as-2026-09-18-houston",
@@ -393,7 +338,7 @@
       "region": "TX",
       "country": "US",
       "date": "2026-09-19",
-      "time": "19:30",
+      "time": "19:00",
       "ticketUrl": "https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events",
       "source": "listed"
     },
@@ -406,7 +351,7 @@
       "region": "NY",
       "country": "US",
       "date": "2026-09-25",
-      "time": "19:30",
+      "time": "19:00",
       "ticketUrl": "https://www.livenation.com/artist/K8vZ917Cf37/andrew-schulz-events",
       "source": "listed"
     },
@@ -432,7 +377,8 @@
       "region": "IN",
       "country": "US",
       "date": "2026-10-23",
-      "time": "19:30",
+      "time": "19:00",
+      "ticketUrl": "https://indianapolis.heliumcomedy.com/events/142211",
       "source": "listed"
     },
     {
@@ -444,55 +390,8 @@
       "region": "IN",
       "country": "US",
       "date": "2026-10-24",
-      "time": "19:30",
-      "source": "listed"
-    },
-    {
-      "id": "as-2026-11-07-hoover",
-      "comedianId": "andrew-schulz",
-      "title": "Andrew Schulz",
-      "venue": "Stardome Comedy Club",
-      "city": "Hoover",
-      "region": "AL",
-      "country": "US",
-      "date": "2026-11-07",
       "time": "19:00",
-      "source": "listed"
-    },
-    {
-      "id": "as-2026-11-13-cleveland",
-      "comedianId": "andrew-schulz",
-      "title": "Andrew Schulz",
-      "venue": "Hilarities 4th Street Theatre",
-      "city": "Cleveland",
-      "region": "OH",
-      "country": "US",
-      "date": "2026-11-13",
-      "time": "21:45",
-      "source": "listed"
-    },
-    {
-      "id": "as-2026-12-04-raleigh",
-      "comedianId": "andrew-schulz",
-      "title": "Andrew Schulz",
-      "venue": "Goodnights Comedy Club",
-      "city": "Raleigh",
-      "region": "NC",
-      "country": "US",
-      "date": "2026-12-04",
-      "time": "20:30",
-      "source": "listed"
-    },
-    {
-      "id": "as-2026-12-11-columbus",
-      "comedianId": "andrew-schulz",
-      "title": "Andrew Schulz",
-      "venue": "Funny Bone",
-      "city": "Columbus",
-      "region": "OH",
-      "country": "US",
-      "date": "2026-12-11",
-      "time": "19:30",
+      "ticketUrl": "https://indianapolis.heliumcomedy.com/events/142211",
       "source": "listed"
     },
     {

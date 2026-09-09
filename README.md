@@ -2,26 +2,36 @@
 
 Personal dashboard for tracking live comedy shows for a curated roster. No account — roster and shows persist in `localStorage`.
 
-**Live site:** [https://naghdy.github.io/comedian-tracker/](https://naghdy.github.io/comedian-tracker/)
+**Live site:** [https://naghdy.com/comedian-tracker/](https://naghdy.com/comedian-tracker/)
 
 Day-to-day use is the live URL. You do not need to run anything locally.
 
-## GitHub Pages (one-time)
+## GitHub Pages
 
 The site deploys from GitHub Actions on every push to `main` (workflow: `.github/workflows/pages.yml`).
 
-If the live URL 404s after the first merge, enable Pages in the repo:
+If the live URL 404s:
 
 1. Open **Settings → Pages**
 2. Under **Build and deployment → Source**, choose **GitHub Actions**
-3. Re-run the **Deploy GitHub Pages** workflow (Actions tab), or push an empty commit to `main`
+3. Re-run the **Deploy GitHub Pages** workflow (Actions tab), or push to `main`
 
-No API keys are required. The map uses Leaflet + OpenStreetMap / Carto.
+### Google Maps API key (required for the map)
+
+The roster, trip checker, and agenda work without a key. The map panel shows a setup message until one is provided.
+
+1. Create a [Maps JavaScript API](https://console.cloud.google.com/google/maps-apis) key in Google Cloud.
+2. Restrict it to `https://naghdy.com/comedian-tracker/*` (and `http://localhost:5173/*` if you develop locally).
+3. Add a repo secret named **`VITE_GOOGLE_MAPS_API_KEY`**: **Settings → Secrets and variables → Actions**.
+4. Re-run **Deploy GitHub Pages** so Vite can bake the key into the build.
+
+Do not commit a real key. For local runs, copy `.env.example` to `.env.local`.
 
 ## Run locally (optional)
 
 ```bash
 npm install
+cp .env.example .env.local   # then paste your Maps key
 npm run dev
 ```
 
@@ -36,7 +46,7 @@ npm run preview  # serve the build
 
 - **Roster** (left): color chips, click-to-filter, add/remove comedian (name + optional tour URL).
 - **Trip checker** (top): city + start/end dates. Case-insensitive partial city match. Headline: *In Seattle these days…*
-- **Map**: Leaflet + OpenStreetMap / Carto dark tiles, color-coded pins, clickable popups.
+- **Map**: Google Maps, color-coded pins by comedian, clickable info windows.
 - **Agenda**: chronological list, extra comedian/city filters, empty states, add/remove shows.
 
 Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Mark Gagnon.

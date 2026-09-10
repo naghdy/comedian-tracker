@@ -201,6 +201,16 @@ describe("Chris D'Elia seed", () => {
       true,
     );
     assert.equal(
+      chrisDeliaShows.shows.filter((show) => show.city === "Addison").length,
+      3,
+    );
+    assert.equal(
+      chrisDeliaShows.shows.every((show) =>
+        Boolean(show.ticketUrl && show.ticketUrl !== "https://www.chrisdelia.com/"),
+      ),
+      true,
+    );
+    assert.equal(
       chrisDeliaShows.shows.some((show) => /sample/i.test(show.title)),
       false,
     );

@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 type City = { city: string; lat: number; lng: number; aliases?: string[] };
 
 const extra: City[] = [
+  { city: "Addison", lat: 32.9618, lng: -96.8292, aliases: ["addison, tx"] },
   { city: "Alpharetta", lat: 34.0754, lng: -84.2941, aliases: ["alpharetta, ga"] },
   { city: "Appleton", lat: 44.2619, lng: -88.4154, aliases: ["appleton, wi"] },
   { city: "Atlanta", lat: 33.749, lng: -84.388, aliases: ["atlanta, ga"] },

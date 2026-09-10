@@ -35,6 +35,14 @@
       "color": "#f97316",
       "tourUrl": "https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events",
       "notes": "Seeded 2026-09-09 from jeffarcuri.com/shows, Live Nation artist page, Ticketmaster artist 2569710, and venue pages. Lookup uses Ticketmaster Discovery when a key is configured."
+    },
+    {
+      "id": "chris-delia",
+      "name": "Chris D'Elia",
+      "aliases": ["Chris Delia", "Chris D Elia"],
+      "color": "#22d3ee",
+      "tourUrl": "https://www.chrisdelia.com/",
+      "notes": "Seeded 2026-09-10 from official hub chrisdelia.com. One row per calendar night. Hamburg time from Elbphilharmonie/Laeiszhalle. No Sample placeholders."
     }
   ]
 }

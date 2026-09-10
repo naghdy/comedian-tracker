@@ -4,8 +4,13 @@ import { mergeShows } from "./lookupShows";
 import { namesMatch } from "./names";
 import { SEED_COMEDIANS, SEED_SHOWS } from "./seedData";
 
-const KEY = "comedian-tracker:v7";
-const LEGACY_KEYS = ["comedian-tracker:v6", "comedian-tracker:v5", "comedian-tracker:v4"];
+const KEY = "comedian-tracker:v8";
+const LEGACY_KEYS = [
+  "comedian-tracker:v7",
+  "comedian-tracker:v6",
+  "comedian-tracker:v5",
+  "comedian-tracker:v4",
+];
 const STALE_TOUR_URLS = [
   "https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710",
   "https://www.jeffarcuri.com",
@@ -40,7 +45,6 @@ export function hydrateSeedShows(state: StoredState): StoredState {
     const existing = matchRoster({ comedians, shows }, seedComedian);
     const seedRows = seed.shows.filter((show) => show.comedianId === seedComedian.id);
     if (!existing) {
-      if (seedComedian.id !== "jeff-arcuri") continue;
       comedians = [...comedians, seedComedian];
       shows = [...shows, ...seedRows];
       continue;

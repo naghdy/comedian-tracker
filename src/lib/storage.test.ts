@@ -4,6 +4,8 @@ import { hydrateJeffSeed } from "./storage";
 import type { StoredState } from "../types";
 import comedianShows from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
+import chrisDeliaShows from "../../data/chris-delia-shows.json";
+import comedians from "../../data/comedians.json";
 
 describe("hydrateJeffSeed", () => {
   it("adds Jeff and seed shows when the roster has an empty Jeff row", () => {
@@ -174,3 +176,52 @@ describe("Andrew Schulz seed", () => {
     );
   });
 });
+
+describe("Chris D'Elia seed", () => {
+  it("uses an apostrophe in the display name", () => {
+    const row = comedians.comedians.find((item) => item.id === "chris-delia");
+    assert.equal(row?.name, "Chris D'Elia");
+    assert.equal(row?.tourUrl, "https://www.chrisdelia.com/");
+  });
+
+  it("has one listed night per official calendar day", () => {
+    const dates = chrisDeliaShows.shows.map((show) => show.date);
+    assert.equal(chrisDeliaShows.shows.length, 62);
+    assert.equal(new Set(dates).size, 62);
+    assert.equal(
+      chrisDeliaShows.shows.every((show) => show.source === "listed"),
+      true,
+    );
+    assert.equal(
+      chrisDeliaShows.shows.some((show) => show.city === "Alpharetta"),
+      true,
+    );
+    assert.equal(
+      chrisDeliaShows.shows.some((show) => show.city === "Hamburg"),
+      true,
+    );
+    assert.equal(
+      chrisDeliaShows.shows.some((show) => /sample/i.test(show.title)),
+      false,
+    );
+  });
+
+  it("adds Chris and seed nights when the roster does not have him", () => {
+    const incoming: StoredState = {
+      comedians: [
+        {
+          id: "jeff-arcuri",
+          name: "Jeff Arcuri",
+          color: "#fff",
+        },
+      ],
+      shows: [],
+    };
+    const next = hydrateJeffSeed(incoming);
+    const chris = next.comedians.find((item) => item.id === "chris-delia");
+    const chrisShows = next.shows.filter((show) => show.comedianId === "chris-delia");
+    assert.equal(chris?.name, "Chris D'Elia");
+    assert.equal(chrisShows.length, chrisDeliaShows.shows.length);
+  });
+});
+

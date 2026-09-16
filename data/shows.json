@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-09",
-  "sourceNotes": "Verified public listings only, 2026-09-09. No Sample placeholders. Gervais: Live Nation UK Legend tour. Chappelle: MSG 10 Sep benefit + Fastball Festival Mesa 18 Oct only (no solo tour). Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
+  "generatedAt": "2026-09-16",
+  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09). Chappelle: Fastball Festival Mesa 18 Oct plus Karmageddon arena dates from Live Nation artist page (2026-09-16). Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -289,20 +289,6 @@
       "source": "listed"
     },
     {
-      "id": "dc-2026-09-10-nyc",
-      "comedianId": "dave-chappelle",
-      "title": "NYC Still Rising After 25 Years",
-      "venue": "Madison Square Garden",
-      "city": "New York",
-      "region": "NY",
-      "country": "US",
-      "date": "2026-09-10",
-      "time": "19:00",
-      "ticketUrl": "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
-      "notes": "MSG benefit lineup (NYC Still Rising After 25 Years) — not a solo Chappelle tour date.",
-      "source": "listed"
-    },
-    {
       "id": "dc-2026-10-18-mesa",
       "comedianId": "dave-chappelle",
       "title": "Fastball Comedy Festival",
@@ -312,8 +298,100 @@
       "country": "US",
       "date": "2026-10-18",
       "time": "19:00",
-      "ticketUrl": "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
+      "ticketUrl": "https://www.fastballcomedy.com/home",
       "notes": "Fastball Comedy Festival — Chappelle headlines night two. Not a solo tour date.",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-10-20-nashville",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "Bridgestone Arena",
+      "city": "Nashville",
+      "region": "TN",
+      "country": "US",
+      "date": "2026-10-20",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/G5viZ_3lQjNZe/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-10-21-charlotte",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "Spectrum Center",
+      "city": "Charlotte",
+      "region": "NC",
+      "country": "US",
+      "date": "2026-10-21",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/G5eVZ_3CWRP7O/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-10-23-toronto",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "Scotiabank Arena",
+      "city": "Toronto",
+      "region": "ON",
+      "country": "CA",
+      "date": "2026-10-23",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/1k7ZvPFyGA1LM7f/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-10-24-louisville",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "KFC Yum! Center",
+      "city": "Louisville",
+      "region": "KY",
+      "country": "US",
+      "date": "2026-10-24",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/1AvbZ_3GkUxqfI3/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-10-26-austin",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "Moody Center ATX",
+      "city": "Austin",
+      "region": "TX",
+      "country": "US",
+      "date": "2026-10-26",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/G5dIZ_3ItNC-L/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-10-28-houston",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "Toyota Center",
+      "city": "Houston",
+      "region": "TX",
+      "country": "US",
+      "date": "2026-10-28",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/G5dIZ_3MEndBZ/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-11-06-nyc",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "Madison Square Garden",
+      "city": "New York",
+      "region": "NY",
+      "country": "US",
+      "date": "2026-11-06",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/G5diZ_33LKKbQ/new-york-comedy-festival-ln-present-dave-chappelle-karmageddon",
+      "notes": "New York Comedy Festival & Live Nation present Karmageddon.",
       "source": "listed"
     },
     {

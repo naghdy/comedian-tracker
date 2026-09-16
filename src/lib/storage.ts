@@ -4,8 +4,9 @@ import { mergeShows } from "./lookupShows";
 import { namesMatch } from "./names";
 import { SEED_COMEDIANS, SEED_SHOWS } from "./seedData";
 
-const KEY = "comedian-tracker:v8";
+const KEY = "comedian-tracker:v9";
 const LEGACY_KEYS = [
+  "comedian-tracker:v8",
   "comedian-tracker:v7",
   "comedian-tracker:v6",
   "comedian-tracker:v5",
@@ -13,6 +14,7 @@ const LEGACY_KEYS = [
 ];
 const STALE_TOUR_URLS = [
   "https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710",
+  "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
   "https://www.jeffarcuri.com",
   "https://www.jeffarcuri.com/shows",
   "https://theandrewschulz.com",

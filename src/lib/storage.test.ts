@@ -177,6 +177,117 @@ describe("Andrew Schulz seed", () => {
   });
 });
 
+describe("Dave Chappelle seed", () => {
+  const LN_ARTIST = "https://www.livenation.com/artist/K8vZ9171rcf/dave-chappelle-events";
+  const karmageddon = [
+    ["2026-10-20", "Nashville", "Bridgestone Arena"],
+    ["2026-10-21", "Charlotte", "Spectrum Center"],
+    ["2026-10-23", "Toronto", "Scotiabank Arena"],
+    ["2026-10-24", "Louisville", "KFC Yum! Center"],
+    ["2026-10-26", "Austin", "Moody Center ATX"],
+    ["2026-10-28", "Houston", "Toyota Center"],
+    ["2026-11-06", "New York", "Madison Square Garden"],
+  ] as const;
+
+  it("has Fastball Mesa plus the 7-night Karmageddon arena run", () => {
+    const chappelle = comedianShows.shows.filter(
+      (show) => show.comedianId === "dave-chappelle",
+    );
+    assert.equal(chappelle.length, 8);
+    assert.equal(new Set(chappelle.map((show) => show.date)).size, 8);
+    assert.equal(
+      chappelle.some(
+        (show) =>
+          show.date === "2026-10-18" &&
+          show.city === "Mesa" &&
+          show.venue === "Sloan Park" &&
+          show.ticketUrl === "https://www.fastballcomedy.com/home",
+      ),
+      true,
+    );
+    for (const [date, city, venue] of karmageddon) {
+      const row = chappelle.find((show) => show.date === date);
+      assert.equal(row?.city, city);
+      assert.equal(row?.venue, venue);
+      assert.equal(row?.title, "Dave Chappelle: Karmageddon");
+      assert.equal(row?.time, "19:30");
+      assert.equal(row?.ticketUrl?.startsWith("https://www.livenation.com/event/"), true);
+    }
+    assert.equal(
+      chappelle.some((show) => show.date === "2026-09-10"),
+      false,
+    );
+    assert.equal(
+      chappelle.some((show) => show.date === "2026-09-25"),
+      false,
+    );
+    const roster = comedians.comedians.find((item) => item.id === "dave-chappelle");
+    assert.equal(roster?.tourUrl, LN_ARTIST);
+  });
+
+  it("migrates a v8 MSG+Fastball snapshot to Karmageddon nights", () => {
+    const incoming: StoredState = {
+      comedians: [
+        {
+          id: "dave-chappelle",
+          name: "Dave Chappelle",
+          color: "#2f9e5a",
+          tourUrl: "https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682",
+        },
+      ],
+      shows: [
+        {
+          id: "dc-2026-09-10-nyc",
+          comedianId: "dave-chappelle",
+          title: "NYC Still Rising After 25 Years",
+          venue: "Madison Square Garden",
+          city: "New York",
+          date: "2026-09-10",
+          source: "listed",
+        },
+        {
+          id: "dc-2026-10-18-mesa",
+          comedianId: "dave-chappelle",
+          title: "Fastball Comedy Festival",
+          venue: "Sloan Park",
+          city: "Mesa",
+          date: "2026-10-18",
+          source: "listed",
+        },
+        {
+          id: "user-chappelle-club",
+          comedianId: "dave-chappelle",
+          title: "Dave Chappelle",
+          venue: "Local Club",
+          city: "Chicago",
+          date: "2026-12-01",
+          source: "user",
+        },
+      ],
+    };
+    const next = hydrateJeffSeed(incoming);
+    const chappelle = next.shows.filter((show) => show.comedianId === "dave-chappelle");
+    assert.equal(
+      chappelle.some((show) => show.date === "2026-09-10"),
+      false,
+    );
+    assert.equal(
+      chappelle.some((show) => show.city === "Nashville"),
+      true,
+    );
+    assert.equal(
+      chappelle.some((show) => show.city === "Louisville"),
+      true,
+    );
+    assert.equal(
+      chappelle.some((show) => show.id === "user-chappelle-club"),
+      true,
+    );
+    assert.equal(chappelle.filter((show) => show.source === "listed").length, 8);
+    assert.equal(next.comedians[0]?.tourUrl, LN_ARTIST);
+  });
+});
+
 describe("Chris D'Elia seed", () => {
   it("uses an apostrophe in the display name", () => {
     const row = comedians.comedians.find((item) => item.id === "chris-delia");

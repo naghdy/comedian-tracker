@@ -89,18 +89,18 @@ Multiple showtimes on the same night at the same venue collapse to one agenda ro
 | `data/laylo-drops.json` | Official Laylo embed drop IDs (Andrew Schulz homepage calendar) |
 | `data/venue-pages.json` | Club event URLs to scrape from Node (`npm run refresh-tours`) |
 
-Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026-09-10**). There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
+Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026-09-10**; Chappelle Karmageddon on **2026-09-16**). There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
 
 | Comedian | Real dates seeded | Sources |
 | --- | --- | --- |
 | Ricky Gervais | 22 (Legend, 9 Sep–10 Dec 2026) | [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051) |
-| Dave Chappelle | 2 | [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682): MSG 10 Sep benefit; Fastball Festival, Sloan Park, Mesa 18 Oct. No solo tour found. |
+| Dave Chappelle | **8** (one row per calendar night) | [Live Nation artist page](https://www.livenation.com/artist/K8vZ9171rcf/dave-chappelle-events) (`tourUrl`): Karmageddon arenas — Nashville Bridgestone 20 Oct; Charlotte Spectrum Center 21 Oct; Toronto Scotiabank 23 Oct; Louisville KFC Yum! Center 24 Oct; Austin Moody Center ATX 26 Oct; Houston Toyota Center 28 Oct; New York MSG 6 Nov (NY Comedy Festival). Plus [Fastball Comedy Festival](https://www.fastballcomedy.com/home) Sloan Park, Mesa 18 Oct. Past MSG 10 Sep benefit removed. DC benefit 25 Sep not seeded. |
 | Andrew Schulz | **16** | Official Laylo embed on [theandrewschulz.com](https://www.theandrewschulz.com/) (`tourUrl`; drop [1e3551fe-33d5-4a86-8364-3edb80ccdd62](https://d21i0hc4hl3bvt.cloudfront.net/drops/1e3551fe-33d5-4a86-8364-3edb80ccdd62.json)): New Brunswick Stress Factory 11–12 Sep; Houston Improv 18–19 Sep; West Nyack Levity Live 25–26 Sep; Indianapolis Helium 23–24 Oct; Birmingham Stardome 6–7 Nov; Cleveland Hilarities 13–14 Nov; Raleigh Goodnights 4–5 Dec; Columbus Funny Bone 11–12 Dec. Ticketmaster/Live Nation only list Houston + Nyack. |
 | Mark Gagnon | 11 | [markgagnonlive.com](https://markgagnonlive.com/) through 9 Jan 2027 |
 | Jeff Arcuri | 50 (18 club nights in 2026 + 32 confirmed 2027 Road Trip nights; one row per calendar day) | [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows); [Live Nation artist page](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) (`tourUrl`); [Ticketmaster artist page](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710); venue pages (Summit City, Brea Improv, Orlando Funny Bone, Fort Lauderdale Improv, Huntsville Levity Live). Unverified **Oxnard Oct 2026** and **Mississauga Sep 2026** are omitted. No 2026-01 dates. |
 | Chris D'Elia | **62** (one row per calendar night, 11 Sep 2026–15 May 2027) | Official hub [chrisdelia.com](https://www.chrisdelia.com/) (`tourUrl`) plus each night’s Buy Tickets URL. Hamburg 25 Oct corroborated by [Elbphilharmonie/Laeiszhalle](https://www.elbphilharmonie.de/en/whats-on/chris-delia/29092). Multiple club showtimes on the same night collapsed. San Antonio Live Nation-only dates omitted. |
 
-Existing browsers may still have an older `localStorage` snapshot. **v4–v7** snapshots are migrated once into `comedian-tracker:v8`: missing seed comedians (including **Chris D'Elia**) and their listed nights are added, Jeff Arcuri empty rows pick up seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **16-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
+Existing browsers may still have an older `localStorage` snapshot. **v4–v8** snapshots are migrated once into `comedian-tracker:v9`: Dave Chappelle’s listed nights become Fastball Mesa plus the **7-night Karmageddon** arena run (stale Ticketmaster tour URL replaced with Live Nation), missing seed comedians (including **Chris D'Elia**) and their listed nights are added, Jeff Arcuri empty rows pick up seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **16-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
 
 Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
 
@@ -117,7 +117,7 @@ npm run refresh-tours
 Suggested extra sources (respect robots.txt / ToS; prefer official pages):
 
 - Ricky Gervais — [Live Nation UK](https://www.livenation.co.uk/ricky-gervais-tickets-adp2051)
-- Dave Chappelle — [Ticketmaster](https://www.ticketmaster.com/dave-chappelle-tickets/artist/803682)
+- Dave Chappelle — [Live Nation artist page](https://www.livenation.com/artist/K8vZ9171rcf/dave-chappelle-events) / [Fastball](https://www.fastballcomedy.com/home)
 - Andrew Schulz — [theandrewschulz.com](https://www.theandrewschulz.com/) Laylo embed / venue pages
 - Mark Gagnon — [markgagnonlive.com](https://markgagnonlive.com/)
 - Jeff Arcuri — [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows) / [Live Nation](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) / [Ticketmaster](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710)

@@ -187,14 +187,28 @@ describe("Dave Chappelle seed", () => {
     ["2026-10-26", "Austin", "Moody Center ATX"],
     ["2026-10-28", "Houston", "Toyota Center"],
     ["2026-11-06", "New York", "Madison Square Garden"],
+    ["2026-11-07", "New York", "Madison Square Garden"],
   ] as const;
 
-  it("has Fastball Mesa plus the 7-night Karmageddon arena run", () => {
+  it("has the DC benefit, Fastball Mesa, and the 8-night Karmageddon arena run", () => {
     const chappelle = comedianShows.shows.filter(
       (show) => show.comedianId === "dave-chappelle",
     );
-    assert.equal(chappelle.length, 8);
-    assert.equal(new Set(chappelle.map((show) => show.date)).size, 8);
+    assert.equal(chappelle.length, 10);
+    assert.equal(new Set(chappelle.map((show) => show.date)).size, 10);
+    assert.equal(
+      chappelle.some(
+        (show) =>
+          show.date === "2026-09-25" &&
+          show.city === "Washington" &&
+          show.venue === "DAR Constitution Hall" &&
+          show.title === "Dave Chappelle: Benefit for Duke Ellington School of the Arts" &&
+          show.time === "19:30" &&
+          show.ticketUrl ===
+            "https://www.livenation.com/event/1AvfZ_3GkMzylrt/dave-chappelle-benefit-for-duke-ellington-school-of-the-arts",
+      ),
+      true,
+    );
     assert.equal(
       chappelle.some(
         (show) =>
@@ -214,11 +228,11 @@ describe("Dave Chappelle seed", () => {
       assert.equal(row?.ticketUrl?.startsWith("https://www.livenation.com/event/"), true);
     }
     assert.equal(
-      chappelle.some((show) => show.date === "2026-09-10"),
-      false,
+      chappelle.find((show) => show.date === "2026-11-07")?.ticketUrl,
+      "https://www.livenation.com/event/G5diZ_Ke-zg7I/new-york-comedy-festival-ln-present-dave-chappelle-karmageddon",
     );
     assert.equal(
-      chappelle.some((show) => show.date === "2026-09-25"),
+      chappelle.some((show) => show.date === "2026-09-10"),
       false,
     );
     const roster = comedians.comedians.find((item) => item.id === "dave-chappelle");
@@ -283,7 +297,27 @@ describe("Dave Chappelle seed", () => {
       chappelle.some((show) => show.id === "user-chappelle-club"),
       true,
     );
-    assert.equal(chappelle.filter((show) => show.source === "listed").length, 8);
+    assert.equal(chappelle.filter((show) => show.source === "listed").length, 10);
+    assert.equal(
+      chappelle.some(
+        (show) => show.date === "2026-09-25" && show.city === "Washington",
+      ),
+      true,
+    );
+    assert.equal(
+      chappelle.some(
+        (show) =>
+          show.date === "2026-11-06" && show.venue === "Madison Square Garden",
+      ),
+      true,
+    );
+    assert.equal(
+      chappelle.some(
+        (show) =>
+          show.date === "2026-11-07" && show.venue === "Madison Square Garden",
+      ),
+      true,
+    );
     assert.equal(next.comedians[0]?.tourUrl, LN_ARTIST);
   });
 });

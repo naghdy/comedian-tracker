@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-16",
-  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09). Chappelle: Fastball Festival Mesa 18 Oct plus Karmageddon arena dates from Live Nation artist page (2026-09-16). Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
+  "generatedAt": "2026-09-21",
+  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including NY Comedy Festival MSG 6–7 Nov (second MSG night added ~2026-09-17). Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -289,6 +289,20 @@
       "source": "listed"
     },
     {
+      "id": "dc-2026-09-25-washington",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Benefit for Duke Ellington School of the Arts",
+      "venue": "DAR Constitution Hall",
+      "city": "Washington",
+      "region": "DC",
+      "country": "US",
+      "date": "2026-09-25",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/1AvfZ_3GkMzylrt/dave-chappelle-benefit-for-duke-ellington-school-of-the-arts",
+      "notes": "Duke Ellington School of the Arts benefit. Proceeds support The Donal Leace Endowment for the Theater Department.",
+      "source": "listed"
+    },
+    {
       "id": "dc-2026-10-18-mesa",
       "comedianId": "dave-chappelle",
       "title": "Fastball Comedy Festival",
@@ -392,6 +406,20 @@
       "time": "19:30",
       "ticketUrl": "https://www.livenation.com/event/G5diZ_33LKKbQ/new-york-comedy-festival-ln-present-dave-chappelle-karmageddon",
       "notes": "New York Comedy Festival & Live Nation present Karmageddon.",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-11-07-nyc",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "Madison Square Garden",
+      "city": "New York",
+      "region": "NY",
+      "country": "US",
+      "date": "2026-11-07",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/G5diZ_Ke-zg7I/new-york-comedy-festival-ln-present-dave-chappelle-karmageddon",
+      "notes": "New York Comedy Festival & Live Nation present Karmageddon (2nd MSG night).",
       "source": "listed"
     },
     {

@@ -14,7 +14,7 @@ type Row = [
   time?: string,
 ];
 
-/** One row per calendar night from chrisdelia.com as of 2026-09-10. */
+/** One row per calendar night from chrisdelia.com. Stockholm 27 Oct added 2026-09-28. */
 const rows: Row[] = [
   ["2026-09-11", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700"],
   ["2026-09-12", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700", "20:45"],
@@ -37,6 +37,7 @@ const rows: Row[] = [
   ["2026-10-24", "Berio Hall at Wiener Konzerthaus", "Vienna", undefined, "Austria", "https://bilit.events/event/chris-delia-go-for-it-the-tour-vienna"],
   ["2026-10-25", "Laeiszhalle Kleiner Saal", "Hamburg", undefined, "Germany", "https://www.ticketmaster.de/event/chris-delia-go-for-it-the-tour-tickets/1393853007", "19:00"],
   ["2026-10-26", "Sodra Teatern", "Stockholm", undefined, "Sweden", "https://secure.tickster.com/sv/z80c330086b36fg/selectproductgroup"],
+  ["2026-10-27", "Sodra Teatern", "Stockholm", undefined, "Sweden", "https://secure.tickster.com/en/l0bc1wwkv6t5bd0/selectevent"],
   ["2026-11-07", "Xcite Center at Parx Casino", "Bensalem", "PA", "US", "https://www.axs.com/events/1447719/chris-delia-21-event-tickets?skin=parxcasino"],
   ["2026-11-13", "Palm Beach Improv", "Wellington, FL", "FL", "US", "https://www.palmbeachimprov.com/events/140732"],
   ["2026-11-14", "Palm Beach Improv", "Wellington, FL", "FL", "US", "https://www.palmbeachimprov.com/events/140732"],
@@ -105,9 +106,9 @@ writeFileSync(
   out,
   `${JSON.stringify(
     {
-      generatedAt: "2026-09-10",
+      generatedAt: "2026-09-28",
       sourceNotes:
-        "Chris D'Elia verified 2026-09-10 from official hub chrisdelia.com. One row per calendar night (multiple club showtimes collapsed). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
+        "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28). One row per calendar night (multiple club showtimes collapsed). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
       shows,
     },
     null,

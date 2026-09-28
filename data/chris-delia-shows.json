@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-10",
-  "sourceNotes": "Chris D'Elia verified 2026-09-10 from official hub chrisdelia.com. One row per calendar night (multiple club showtimes collapsed). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
+  "generatedAt": "2026-09-28",
+  "sourceNotes": "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28). One row per calendar night (multiple club showtimes collapsed). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
   "shows": [
     {
       "id": "cd-2026-09-11-phoenix",
@@ -247,6 +247,17 @@
       "country": "Sweden",
       "date": "2026-10-26",
       "ticketUrl": "https://secure.tickster.com/sv/z80c330086b36fg/selectproductgroup",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2026-10-27-stockholm",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Sodra Teatern",
+      "city": "Stockholm",
+      "country": "Sweden",
+      "date": "2026-10-27",
+      "ticketUrl": "https://secure.tickster.com/en/l0bc1wwkv6t5bd0/selectevent",
       "source": "listed"
     },
     {

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-21",
-  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including NY Comedy Festival MSG 6–7 Nov (second MSG night added ~2026-09-17). Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
+  "generatedAt": "2026-09-28",
+  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Atlanta State Farm Arena 4 Nov and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -392,6 +392,19 @@
       "date": "2026-10-28",
       "time": "19:30",
       "ticketUrl": "https://www.livenation.com/event/G5dIZ_3MEndBZ/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-11-04-atlanta",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle: Karmageddon",
+      "venue": "State Farm Arena",
+      "city": "Atlanta",
+      "region": "GA",
+      "country": "US",
+      "date": "2026-11-04",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/vvG1zZ_KQsfasA/dave-chappelle",
       "source": "listed"
     },
     {

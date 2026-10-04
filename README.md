@@ -6,6 +6,15 @@ Personal dashboard for tracking live comedy shows for a curated roster. No accou
 
 Day-to-day use is the live URL. You do not need to run anything locally.
 
+## Project context
+
+Agents and humans picking this up should start at [AGENTS.md](AGENTS.md). Detail lives in [docs/](docs/):
+
+- [Architecture](docs/ARCHITECTURE.md) — stack, layout, Maps, theme, seed key, lookup
+- [Data](docs/DATA.md) — file schemas and each comedian’s source of truth
+- [Operations](docs/OPERATIONS.md) — roster updates, deploy, weekly digest
+- [Decisions](docs/DECISIONS.md) — why the product looks like this
+
 ## GitHub Pages
 
 The site deploys from GitHub Actions on every push to `main` (workflow: `.github/workflows/pages.yml`).

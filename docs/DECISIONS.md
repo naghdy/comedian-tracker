@@ -88,7 +88,7 @@ Added Dave Chappelle, 4 Nov 2026, State Farm Arena, Atlanta, Karmageddon (Live N
 
 Rationale: the Monday digest found two nights the previous seed did not have. Existing nights were not rewritten.
 
-## 2026-10-05 — Weekly refresh
+## 2026-10-05 — Weekly refresh ([#14](https://github.com/naghdy/comedian-tracker/pull/14))
 
 Jeff Arcuri gained 32 nights from the official Seated widget on jeffarcuri.com/shows (artist `ca51f2fa-2a2d-4864-ab5c-857e4d1536cc`). 2026 clubs stay titled "Jeff Arcuri: Fresh Cut" (Stamford 15–17 Oct, New Brunswick 12–14 Nov, Denver Comedy Works 17–19 Dec). 2027 "Jeff Arcuri: The Road Trip Tour" adds Portland OR 27–28 Jan, Victoria 31 Jan, Salt Lake City 3–4 Feb, Cleveland 23 Feb, Columbus 24 Feb, Cedar Rapids 4 Mar, Kansas City 11 Mar, Tulsa 13 Mar, San Antonio 17 Mar, Sugar Land 18 Mar, Dallas 19–20 Mar, Jacksonville 9 Apr, Clearwater 10 Apr, Tallahassee 11 Apr, Charlotte 21 Apr, Richmond 22 Apr, Wilmington 23 Apr, Charleston 25 Apr, Providence 15 May, and a second Beacon Theatre night on 6 Jun. The previous 50 nights stayed. Jeff is 82.
 

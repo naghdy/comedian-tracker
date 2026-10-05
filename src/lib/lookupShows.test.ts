@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import comedianShows from "../../data/shows.json";
 import {
   applyRefreshedShows,
   mergeShows,
@@ -9,6 +10,15 @@ import {
 } from "./lookupShows";
 import { seedListedShows } from "./listedCalendar";
 import type { Show } from "../types";
+
+function todayISO() {
+  const now = new Date();
+  return [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
+}
 
 describe("namesMatch", () => {
   it("matches exact and titled events", () => {
@@ -24,15 +34,28 @@ describe("namesMatch", () => {
 });
 
 describe("seedListedShows", () => {
-  it("returns all 16 official Andrew Schulz nights", () => {
+  it("returns upcoming Andrew Schulz nights from the 16-night Laylo calendar", () => {
     const rows = seedListedShows({
       comedianId: "andrew-schulz",
       name: "Andrew Schulz",
       aliases: ["Andrew Schultz", "Schulz", "Schultz"],
     });
-    assert.equal(rows.length, 16);
+    const today = todayISO();
+    const upcoming = comedianShows.shows.filter(
+      (show) => show.comedianId === "andrew-schulz" && show.date >= today,
+    );
+    assert.equal(
+      comedianShows.shows.filter((show) => show.comedianId === "andrew-schulz").length,
+      16,
+    );
+    assert.equal(rows.length, upcoming.length);
+    assert.deepEqual(
+      rows.map((show) => show.date),
+      upcoming.map((show) => show.date),
+    );
+    assert.equal(rows.every((show) => show.date >= today), true);
     assert.equal(rows.filter((show) => show.city === "Columbus").length, 2);
-    assert.equal(rows.filter((show) => show.city === "New Brunswick").length, 2);
+    assert.equal(rows.filter((show) => show.city === "New Brunswick").length, 0);
   });
 });
 

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-28",
-  "sourceNotes": "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28). One row per calendar night (multiple club showtimes collapsed). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
+  "generatedAt": "2026-10-05",
+  "sourceNotes": "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
   "shows": [
     {
       "id": "cd-2026-09-11-phoenix",
@@ -723,6 +723,45 @@
       "country": "US",
       "date": "2027-04-24",
       "ticketUrl": "https://www.comedyzone.com/events/142381",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-04-29-uncasville",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Comix Roadhouse",
+      "city": "Uncasville",
+      "region": "CT",
+      "country": "US",
+      "date": "2027-04-29",
+      "time": "20:00",
+      "ticketUrl": "https://www.comixroadhouse.com/comics/chris-d-elia-050127",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-04-30-uncasville",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Comix Roadhouse",
+      "city": "Uncasville",
+      "region": "CT",
+      "country": "US",
+      "date": "2027-04-30",
+      "time": "20:00",
+      "ticketUrl": "https://www.comixroadhouse.com/comics/chris-d-elia-050127",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-05-01-uncasville",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Comix Roadhouse",
+      "city": "Uncasville",
+      "region": "CT",
+      "country": "US",
+      "date": "2027-05-01",
+      "time": "18:00",
+      "ticketUrl": "https://www.comixroadhouse.com/comics/chris-d-elia-050127",
       "source": "listed"
     },
     {

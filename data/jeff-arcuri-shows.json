@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-09",
-  "sourceNotes": "Jeff Arcuri verified 2026-09-09. Official hubs: jeffarcuri.com/shows, Live Nation artist page K8vZ9179td0, Ticketmaster artist 2569710. 2026 clubs from venue pages + LN/TM. 2027 Road Trip: confirmed LN/TM nights only, one row per calendar day. Excluded unverified: Oxnard Oct 2026, Mississauga Sep 2026. No 2026-01 dates.",
+  "generatedAt": "2026-10-05",
+  "sourceNotes": "Jeff Arcuri verified 2026-10-05. Primary source: official Seated widget on jeffarcuri.com/shows (artist ca51f2fa-2a2d-4864-ab5c-857e4d1536cc). Also Live Nation artist page K8vZ9179td0, Ticketmaster artist 2569710, and venue pages. 2026 clubs title \"Jeff Arcuri: Fresh Cut\". 2027 title \"Jeff Arcuri: The Road Trip Tour\". One row per calendar day. Excluded unverified: Oxnard Oct 2026, Mississauga Sep 2026. No 2026-01 dates.",
   "shows": [
     {
       "id": "ja-2026-09-24-fort-wayne",
@@ -72,6 +72,42 @@
       "country": "US",
       "date": "2026-10-10",
       "ticketUrl": "https://improv.com/brea/comic/jeff+arcuri/",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-10-15-stamford",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "New York Comedy Club Stamford",
+      "city": "Stamford",
+      "region": "CT",
+      "country": "US",
+      "date": "2026-10-15",
+      "ticketUrl": "https://link.seated.com/f5ee622e-5dab-4d9e-86c8-d6c3f49912c4",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-10-16-stamford",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "New York Comedy Club Stamford",
+      "city": "Stamford",
+      "region": "CT",
+      "country": "US",
+      "date": "2026-10-16",
+      "ticketUrl": "https://link.seated.com/f5ee622e-5dab-4d9e-86c8-d6c3f49912c4",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-10-17-stamford",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "New York Comedy Club Stamford",
+      "city": "Stamford",
+      "region": "CT",
+      "country": "US",
+      "date": "2026-10-17",
+      "ticketUrl": "https://link.seated.com/f5ee622e-5dab-4d9e-86c8-d6c3f49912c4",
       "source": "listed"
     },
     {
@@ -147,6 +183,42 @@
       "source": "listed"
     },
     {
+      "id": "ja-2026-11-12-new-brunswick",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "Stress Factory",
+      "city": "New Brunswick",
+      "region": "NJ",
+      "country": "US",
+      "date": "2026-11-12",
+      "ticketUrl": "https://link.seated.com/917e8288-2267-45e7-95f6-fa617467b681",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-11-13-new-brunswick",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "Stress Factory",
+      "city": "New Brunswick",
+      "region": "NJ",
+      "country": "US",
+      "date": "2026-11-13",
+      "ticketUrl": "https://link.seated.com/917e8288-2267-45e7-95f6-fa617467b681",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-11-14-new-brunswick",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "Stress Factory",
+      "city": "New Brunswick",
+      "region": "NJ",
+      "country": "US",
+      "date": "2026-11-14",
+      "ticketUrl": "https://link.seated.com/917e8288-2267-45e7-95f6-fa617467b681",
+      "source": "listed"
+    },
+    {
       "id": "ja-2026-11-20-sacramento",
       "comedianId": "jeff-arcuri",
       "title": "Jeff Arcuri: Fresh Cut",
@@ -216,6 +288,42 @@
       "country": "US",
       "date": "2026-12-05",
       "ticketUrl": "https://www.ticketweb.com/event/jeff-arcuri-fresh-cut-huntsville-levity-live-tickets/14829763",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-12-17-denver",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "Comedy Works",
+      "city": "Denver",
+      "region": "CO",
+      "country": "US",
+      "date": "2026-12-17",
+      "ticketUrl": "https://link.seated.com/16b79907-3f4c-4b16-ba6d-73b54394d36f",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-12-18-denver",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "Comedy Works",
+      "city": "Denver",
+      "region": "CO",
+      "country": "US",
+      "date": "2026-12-18",
+      "ticketUrl": "https://link.seated.com/16b79907-3f4c-4b16-ba6d-73b54394d36f",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2026-12-19-denver",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: Fresh Cut",
+      "venue": "Comedy Works",
+      "city": "Denver",
+      "region": "CO",
+      "country": "US",
+      "date": "2026-12-19",
+      "ticketUrl": "https://link.seated.com/16b79907-3f4c-4b16-ba6d-73b54394d36f",
       "source": "listed"
     },
     {
@@ -291,6 +399,30 @@
       "source": "listed"
     },
     {
+      "id": "ja-2027-01-27-portland",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Arlene Schnitzer Concert Hall",
+      "city": "Portland",
+      "region": "OR",
+      "country": "US",
+      "date": "2027-01-27",
+      "ticketUrl": "https://www.livenation.com/event/vvG1HZ_u5DS-3U/jeff-arcuri-the-road-trip-tour",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-01-28-portland",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Arlene Schnitzer Concert Hall",
+      "city": "Portland",
+      "region": "OR",
+      "country": "US",
+      "date": "2027-01-28",
+      "ticketUrl": "https://www.livenation.com/event/vvG1HZ_uE9fe7Q/jeff-arcuri-the-road-trip-tour",
+      "source": "listed"
+    },
+    {
       "id": "ja-2027-01-29-seattle",
       "comedianId": "jeff-arcuri",
       "title": "Jeff Arcuri: The Road Trip Tour",
@@ -315,6 +447,42 @@
       "source": "listed"
     },
     {
+      "id": "ja-2027-01-31-victoria",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Royal Theatre",
+      "city": "Victoria",
+      "region": "BC",
+      "country": "CA",
+      "date": "2027-01-31",
+      "ticketUrl": "https://link.seated.com/6fdd8012-f43c-4a51-8c20-cd6f8f2ba2a4",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-02-03-salt-lake-city",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Eccles Theater",
+      "city": "Salt Lake City",
+      "region": "UT",
+      "country": "US",
+      "date": "2027-02-03",
+      "ticketUrl": "https://link.seated.com/dd1de5e9-6b29-4c13-b21e-8b44f0d3f5a2",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-02-04-salt-lake-city",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Eccles Theater",
+      "city": "Salt Lake City",
+      "region": "UT",
+      "country": "US",
+      "date": "2027-02-04",
+      "ticketUrl": "https://link.seated.com/bca75719-86f9-417d-a079-25388099321a",
+      "source": "listed"
+    },
+    {
       "id": "ja-2027-02-05-las-vegas",
       "comedianId": "jeff-arcuri",
       "title": "Jeff Arcuri: The Road Trip Tour",
@@ -336,6 +504,30 @@
       "country": "US",
       "date": "2027-02-06",
       "ticketUrl": "https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-02-23-cleveland",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Connor Palace at Playhouse Square",
+      "city": "Cleveland",
+      "region": "OH",
+      "country": "US",
+      "date": "2027-02-23",
+      "ticketUrl": "https://link.seated.com/a99835b3-c0d7-47e6-a03b-5377ffa9bd21",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-02-24-columbus",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Palace Theatre",
+      "city": "Columbus",
+      "region": "OH",
+      "country": "US",
+      "date": "2027-02-24",
+      "ticketUrl": "https://link.seated.com/56b2f717-344c-44b9-b3ba-b0660a07efd3",
       "source": "listed"
     },
     {
@@ -384,6 +576,18 @@
       "country": "US",
       "date": "2027-03-03",
       "ticketUrl": "https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-03-04-cedar-rapids",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Paramount Theatre",
+      "city": "Cedar Rapids",
+      "region": "IA",
+      "country": "US",
+      "date": "2027-03-04",
+      "ticketUrl": "https://link.seated.com/ca04f25c-5075-4ef2-a69b-077e992841a2",
       "source": "listed"
     },
     {
@@ -447,6 +651,18 @@
       "source": "listed"
     },
     {
+      "id": "ja-2027-03-11-kansas-city",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "The Midland Theatre",
+      "city": "Kansas City",
+      "region": "MO",
+      "country": "US",
+      "date": "2027-03-11",
+      "ticketUrl": "https://link.seated.com/c263b0c4-574b-491a-a4be-d2a179b5e57d",
+      "source": "listed"
+    },
+    {
       "id": "ja-2027-03-12-wichita",
       "comedianId": "jeff-arcuri",
       "title": "Jeff Arcuri: The Road Trip Tour",
@@ -459,6 +675,66 @@
       "source": "listed"
     },
     {
+      "id": "ja-2027-03-13-tulsa",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Tulsa Theater",
+      "city": "Tulsa",
+      "region": "OK",
+      "country": "US",
+      "date": "2027-03-13",
+      "ticketUrl": "https://link.seated.com/e8bb4af4-fcad-4fdd-bbd2-ede0a19199a2",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-03-17-san-antonio",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Tobin Center for the Performing Arts",
+      "city": "San Antonio",
+      "region": "TX",
+      "country": "US",
+      "date": "2027-03-17",
+      "ticketUrl": "https://link.seated.com/43ad644e-f846-4541-8d2b-41cc7895bde3",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-03-18-sugar-land",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Smart Financial Centre at Sugar Land",
+      "city": "Sugar Land",
+      "region": "TX",
+      "country": "US",
+      "date": "2027-03-18",
+      "ticketUrl": "https://www.livenation.com/event/G5dIZ_uFbs1xR/jeff-arcuri-the-road-trip-tour",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-03-19-dallas",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Majestic Theatre",
+      "city": "Dallas",
+      "region": "TX",
+      "country": "US",
+      "date": "2027-03-19",
+      "ticketUrl": "https://link.seated.com/c3852066-ae97-41b2-acda-5b4c3b172ca7",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-03-20-dallas",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Majestic Theatre",
+      "city": "Dallas",
+      "region": "TX",
+      "country": "US",
+      "date": "2027-03-20",
+      "ticketUrl": "https://link.seated.com/d922ba1e-0f63-42d0-9bce-118fcf7f94a3",
+      "source": "listed"
+    },
+    {
       "id": "ja-2027-03-21-new-orleans",
       "comedianId": "jeff-arcuri",
       "title": "Jeff Arcuri: The Road Trip Tour",
@@ -468,6 +744,42 @@
       "country": "US",
       "date": "2027-03-21",
       "ticketUrl": "https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-04-09-jacksonville",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Florida Theatre",
+      "city": "Jacksonville",
+      "region": "FL",
+      "country": "US",
+      "date": "2027-04-09",
+      "ticketUrl": "https://link.seated.com/a2c0b184-daa9-417a-b1b2-a8ba2b2f9ccc",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-04-10-clearwater",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Ruth Eckerd Hall",
+      "city": "Clearwater",
+      "region": "FL",
+      "country": "US",
+      "date": "2027-04-10",
+      "ticketUrl": "https://link.seated.com/cbeff1e9-6aed-4e91-9a13-1e9c8718c932",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-04-11-tallahassee",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Ruby Diamond Concert Hall",
+      "city": "Tallahassee",
+      "region": "FL",
+      "country": "US",
+      "date": "2027-04-11",
+      "ticketUrl": "https://link.seated.com/a3de0f91-d523-4215-ad16-4076192aed39",
       "source": "listed"
     },
     {
@@ -519,6 +831,42 @@
       "source": "listed"
     },
     {
+      "id": "ja-2027-04-21-charlotte",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Belk Theater",
+      "city": "Charlotte",
+      "region": "NC",
+      "country": "US",
+      "date": "2027-04-21",
+      "ticketUrl": "https://link.seated.com/43061dcd-8ee8-4078-b2b9-ac6744c9a774",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-04-22-richmond",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Altria Theater",
+      "city": "Richmond",
+      "region": "VA",
+      "country": "US",
+      "date": "2027-04-22",
+      "ticketUrl": "https://link.seated.com/abb3779e-2333-4628-bc20-070854b5d371",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-04-23-wilmington",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Wilson Center",
+      "city": "Wilmington",
+      "region": "NC",
+      "country": "US",
+      "date": "2027-04-23",
+      "ticketUrl": "https://link.seated.com/c3fe2ecd-c281-4133-9d38-c5546bd9a709",
+      "source": "listed"
+    },
+    {
       "id": "ja-2027-04-24-durham",
       "comedianId": "jeff-arcuri",
       "title": "Jeff Arcuri: The Road Trip Tour",
@@ -531,6 +879,18 @@
       "source": "listed"
     },
     {
+      "id": "ja-2027-04-25-charleston",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Charleston Gaillard Center",
+      "city": "Charleston",
+      "region": "SC",
+      "country": "US",
+      "date": "2027-04-25",
+      "ticketUrl": "https://link.seated.com/d584b189-af0a-4158-ab91-c1a7d116d57e",
+      "source": "listed"
+    },
+    {
       "id": "ja-2027-05-14-portland-me",
       "comedianId": "jeff-arcuri",
       "title": "Jeff Arcuri: The Road Trip Tour",
@@ -540,6 +900,18 @@
       "country": "US",
       "date": "2027-05-14",
       "ticketUrl": "https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-05-15-providence",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Veterans Memorial Auditorium",
+      "city": "Providence",
+      "region": "RI",
+      "country": "US",
+      "date": "2027-05-15",
+      "ticketUrl": "https://link.seated.com/24a3712d-2828-4213-b8f8-4dffed38edf7",
       "source": "listed"
     },
     {
@@ -600,6 +972,18 @@
       "country": "US",
       "date": "2027-06-05",
       "ticketUrl": "https://www.ticketmaster.com/jeff-arcuri-the-road-trip-tour-new-york-new-york-06-05-2027/event/3B0064D3C28F5CD3",
+      "source": "listed"
+    },
+    {
+      "id": "ja-2027-06-06-new-york",
+      "comedianId": "jeff-arcuri",
+      "title": "Jeff Arcuri: The Road Trip Tour",
+      "venue": "Beacon Theatre",
+      "city": "New York",
+      "region": "NY",
+      "country": "US",
+      "date": "2027-06-06",
+      "ticketUrl": "https://link.seated.com/243aa34d-a61b-4e2f-ac06-54799fea9bb5",
       "source": "listed"
     }
   ]

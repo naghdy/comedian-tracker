@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-28",
-  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Atlanta State Farm Arena 4 Nov and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
+  "generatedAt": "2026-10-05",
+  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09; Manchester 12–13 Oct and Brighton 16–17 Nov start times corrected to 19:30 on 2026-10-05, doors were 18:30). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (16 club nights). Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -128,7 +128,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-10-12",
-      "time": "18:30",
+      "time": "19:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -141,7 +141,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-10-13",
-      "time": "18:30",
+      "time": "19:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -219,7 +219,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-11-16",
-      "time": "18:30",
+      "time": "19:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -232,7 +232,7 @@
       "region": "England",
       "country": "UK",
       "date": "2026-11-17",
-      "time": "18:30",
+      "time": "19:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
       "source": "listed"
     },
@@ -379,6 +379,19 @@
       "date": "2026-10-26",
       "time": "19:30",
       "ticketUrl": "https://www.livenation.com/event/G5dIZ_3ItNC-L/dave-chappelle-karmageddon",
+      "source": "listed"
+    },
+    {
+      "id": "dc-2026-10-27-austin",
+      "comedianId": "dave-chappelle",
+      "title": "Dave Chappelle Karmageddon",
+      "venue": "Moody Center ATX",
+      "city": "Austin",
+      "region": "TX",
+      "country": "US",
+      "date": "2026-10-27",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.com/event/G5dIZ_3Ii5CH1/dave-chappelle-karmageddon",
       "source": "listed"
     },
     {

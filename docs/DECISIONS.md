@@ -87,3 +87,17 @@ Rationale: both nights are on Live Nation (the MSG pair also on the NY Comedy Fe
 Added Dave Chappelle, 4 Nov 2026, State Farm Arena, Atlanta, Karmageddon (Live Nation event page; the arena page slug says 11-06 and the page date is 4 Nov). Added Chris D'Elia, 27 Oct 2026, Sodra Teatern, Stockholm, from chrisdelia.com / Tickster. The 26 Oct Stockholm night stayed. Atlanta was already in `cities.json`. Seed key `v10` → `v11`. Chappelle 11 nights, D'Elia 63.
 
 Rationale: the Monday digest found two nights the previous seed did not have. Existing nights were not rewritten.
+
+## 2026-10-05 — Weekly refresh
+
+Jeff Arcuri gained 32 nights from the official Seated widget on jeffarcuri.com/shows (artist `ca51f2fa-2a2d-4864-ab5c-857e4d1536cc`). 2026 clubs stay titled "Jeff Arcuri: Fresh Cut" (Stamford 15–17 Oct, New Brunswick 12–14 Nov, Denver Comedy Works 17–19 Dec). 2027 "Jeff Arcuri: The Road Trip Tour" adds Portland OR 27–28 Jan, Victoria 31 Jan, Salt Lake City 3–4 Feb, Cleveland 23 Feb, Columbus 24 Feb, Cedar Rapids 4 Mar, Kansas City 11 Mar, Tulsa 13 Mar, San Antonio 17 Mar, Sugar Land 18 Mar, Dallas 19–20 Mar, Jacksonville 9 Apr, Clearwater 10 Apr, Tallahassee 11 Apr, Charlotte 21 Apr, Richmond 22 Apr, Wilmington 23 Apr, Charleston 25 Apr, Providence 15 May, and a second Beacon Theatre night on 6 Jun. The previous 50 nights stayed. Jeff is 82.
+
+Dave Chappelle gained 27 Oct 2026, 19:30, Moody Center ATX, Austin, title "Dave Chappelle Karmageddon" (Live Nation). The 26 Oct Austin night stayed. Chappelle is 12.
+
+Chris D'Elia gained Comix Roadhouse (Mohegan Sun), Uncasville: 29 Apr 2027 20:00, 30 Apr 2027 20:00, and 1 May 2027 18:00 (earliest of 18:00/20:00), from chrisdelia.com. D'Elia is 66.
+
+Ricky Gervais start times for Manchester 12–13 Oct and Brighton 16–17 Nov moved from 18:30 to 19:30. Live Nation UK lists 19:30 as the show; 18:30 is doors.
+
+New city pins: Stamford CT and Uncasville CT. Seed key `v11` → `v12`.
+
+Rationale: the Monday digest checked these nights on the official sources the same day. Existing listed nights that those sources still show were kept.

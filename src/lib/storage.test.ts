@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { findCity } from "./geo";
 import { hydrateJeffSeed } from "./storage";
 import type { StoredState } from "../types";
 import comedianShows from "../../data/shows.json";
@@ -61,8 +62,12 @@ describe("hydrateJeffSeed", () => {
     };
     const next = hydrateJeffSeed(incoming);
     assert.equal(
-      next.shows.some((show) => show.city === "Denver"),
+      next.shows.some((show) => show.id === "stale-denver"),
       false,
+    );
+    assert.equal(
+      next.shows.some((show) => show.id === "ja-2026-12-17-denver"),
+      true,
     );
     assert.equal(
       next.shows.some((show) => show.id === "user-austin"),
@@ -80,12 +85,29 @@ describe("hydrateJeffSeed", () => {
 });
 
 describe("jeff seed dates", () => {
-  it("is the verified 2026-09-09 list only", () => {
+  it("is the verified 2026-10-05 list", () => {
     const dates = jeffArcuriShows.shows.map((show) => `${show.date} ${show.city} ${show.venue}`);
-    assert.equal(jeffArcuriShows.shows.length, 50);
+    assert.equal(jeffArcuriShows.shows.length, 82);
+    assert.equal(new Set(jeffArcuriShows.shows.map((show) => show.date)).size, 82);
     assert.equal(
-      dates.some((row) => /oxnard|mississauga|denver|comedy works/i.test(row)),
+      dates.some((row) => /oxnard|mississauga/i.test(row)),
       false,
+    );
+    assert.equal(
+      jeffArcuriShows.shows.filter((show) => show.city === "Denver" && show.venue === "Comedy Works").length,
+      3,
+    );
+    assert.equal(
+      jeffArcuriShows.shows.filter((show) => show.city === "Stamford").length,
+      3,
+    );
+    assert.equal(
+      jeffArcuriShows.shows.filter((show) => show.date === "2027-06-06" && show.venue === "Beacon Theatre").length,
+      1,
+    );
+    assert.equal(
+      jeffArcuriShows.shows.every((show) => show.source === "listed"),
+      true,
     );
     assert.equal(
       jeffArcuriShows.shows.some((show) => show.date.startsWith("2026-01")),
@@ -191,12 +213,12 @@ describe("Dave Chappelle seed", () => {
     ["2026-11-07", "New York", "Madison Square Garden"],
   ] as const;
 
-  it("has the DC benefit, Fastball Mesa, and the 9-night Karmageddon arena run", () => {
+  it("has the DC benefit, Fastball Mesa, and the 10-night Karmageddon arena run", () => {
     const chappelle = comedianShows.shows.filter(
       (show) => show.comedianId === "dave-chappelle",
     );
-    assert.equal(chappelle.length, 11);
-    assert.equal(new Set(chappelle.map((show) => show.date)).size, 11);
+    assert.equal(chappelle.length, 12);
+    assert.equal(new Set(chappelle.map((show) => show.date)).size, 12);
     assert.equal(
       chappelle.some(
         (show) =>
@@ -237,9 +259,30 @@ describe("Dave Chappelle seed", () => {
       "https://www.livenation.com/event/G5diZ_Ke-zg7I/new-york-comedy-festival-ln-present-dave-chappelle-karmageddon",
     );
     assert.equal(
+      chappelle.some(
+        (show) =>
+          show.id === "dc-2026-10-27-austin" &&
+          show.date === "2026-10-27" &&
+          show.time === "19:30" &&
+          show.city === "Austin" &&
+          show.venue === "Moody Center ATX" &&
+          show.title === "Dave Chappelle Karmageddon" &&
+          show.ticketUrl ===
+            "https://www.livenation.com/event/G5dIZ_3Ii5CH1/dave-chappelle-karmageddon",
+      ),
+      true,
+    );
+    assert.equal(
       chappelle.some((show) => show.date === "2026-09-10"),
       false,
     );
+    const gervaisTimes = ["rg-2026-10-12-manchester", "rg-2026-10-13-manchester", "rg-2026-11-16-brighton", "rg-2026-11-17-brighton"];
+    for (const id of gervaisTimes) {
+      assert.equal(
+        comedianShows.shows.find((show) => show.id === id)?.time,
+        "19:30",
+      );
+    }
     const roster = comedians.comedians.find((item) => item.id === "dave-chappelle");
     assert.equal(roster?.tourUrl, LN_ARTIST);
   });
@@ -302,7 +345,7 @@ describe("Dave Chappelle seed", () => {
       chappelle.some((show) => show.id === "user-chappelle-club"),
       true,
     );
-    assert.equal(chappelle.filter((show) => show.source === "listed").length, 11);
+    assert.equal(chappelle.filter((show) => show.source === "listed").length, 12);
     assert.equal(
       chappelle.some(
         (show) =>
@@ -343,8 +386,21 @@ describe("Chris D'Elia seed", () => {
 
   it("has one listed night per official calendar day", () => {
     const dates = chrisDeliaShows.shows.map((show) => show.date);
-    assert.equal(chrisDeliaShows.shows.length, 63);
-    assert.equal(new Set(dates).size, 63);
+    assert.equal(chrisDeliaShows.shows.length, 66);
+    assert.equal(new Set(dates).size, 66);
+    const uncasville = chrisDeliaShows.shows.filter((show) => show.city === "Uncasville");
+    assert.deepEqual(
+      uncasville.map((show) => `${show.date} ${show.time}`),
+      ["2027-04-29 20:00", "2027-04-30 20:00", "2027-05-01 18:00"],
+    );
+    assert.equal(
+      uncasville.every(
+        (show) =>
+          show.venue === "Comix Roadhouse" &&
+          show.ticketUrl === "https://www.comixroadhouse.com/comics/chris-d-elia-050127",
+      ),
+      true,
+    );
     const stockholm = chrisDeliaShows.shows.filter((show) => show.city === "Stockholm");
     assert.deepEqual(
       stockholm.map((show) => show.date),
@@ -402,6 +458,71 @@ describe("Chris D'Elia seed", () => {
     const chrisShows = next.shows.filter((show) => show.comedianId === "chris-delia");
     assert.equal(chris?.name, "Chris D'Elia");
     assert.equal(chrisShows.length, chrisDeliaShows.shows.length);
+  });
+});
+
+describe("2026-10-05 city pins", () => {
+  it("resolves every new night to an existing city pin", () => {
+    assert.equal(findCity("Stamford")?.lat, 41.0534);
+    assert.equal(findCity("Stamford")?.lng, -73.5387);
+    assert.equal(findCity("stamford, ct")?.city, "Stamford");
+    assert.equal(findCity("Uncasville")?.lat, 41.4343);
+    assert.equal(findCity("Uncasville")?.lng, -72.1101);
+    assert.equal(findCity("uncasville, ct")?.city, "Uncasville");
+    assert.equal(findCity("mohegan sun")?.city, "Uncasville");
+
+    const added = [
+      ...jeffArcuriShows.shows.filter((show) =>
+        [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-11-12",
+          "2026-11-13",
+          "2026-11-14",
+          "2026-12-17",
+          "2026-12-18",
+          "2026-12-19",
+          "2027-01-27",
+          "2027-01-28",
+          "2027-01-31",
+          "2027-02-03",
+          "2027-02-04",
+          "2027-02-23",
+          "2027-02-24",
+          "2027-03-04",
+          "2027-03-11",
+          "2027-03-13",
+          "2027-03-17",
+          "2027-03-18",
+          "2027-03-19",
+          "2027-03-20",
+          "2027-04-09",
+          "2027-04-10",
+          "2027-04-11",
+          "2027-04-21",
+          "2027-04-22",
+          "2027-04-23",
+          "2027-04-25",
+          "2027-05-15",
+          "2027-06-06",
+        ].includes(show.date),
+      ),
+      ...chrisDeliaShows.shows.filter((show) => show.city === "Uncasville"),
+      ...comedianShows.shows.filter((show) => show.id === "dc-2026-10-27-austin"),
+    ];
+    assert.equal(added.length, 36);
+    for (const show of added) {
+      const pin = findCity(show.city);
+      assert.ok(pin, `${show.id} ${show.city}`);
+      assert.equal(typeof pin?.lat, "number");
+      assert.equal(typeof pin?.lng, "number");
+    }
+    assert.equal(findCity("Portland")?.lat, 45.5152);
+    assert.equal(
+      jeffArcuriShows.shows.find((show) => show.date === "2027-01-27")?.city,
+      "Portland",
+    );
   });
 });
 

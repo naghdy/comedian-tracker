@@ -14,7 +14,7 @@ type Row = [
   time?: string,
 ];
 
-/** One row per calendar night from chrisdelia.com. Stockholm 27 Oct added 2026-09-28. */
+/** One row per calendar night from chrisdelia.com. Stockholm 27 Oct added 2026-09-28. Uncasville 29 Apr–1 May 2027 added 2026-10-05. */
 const rows: Row[] = [
   ["2026-09-11", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700"],
   ["2026-09-12", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700", "20:45"],
@@ -76,6 +76,9 @@ const rows: Row[] = [
   ["2027-04-22", "The Comedy Zone", "Jacksonville", "FL", "US", "https://www.comedyzone.com/events/142381", "19:15"],
   ["2027-04-23", "The Comedy Zone", "Jacksonville", "FL", "US", "https://www.comedyzone.com/events/142381"],
   ["2027-04-24", "The Comedy Zone", "Jacksonville", "FL", "US", "https://www.comedyzone.com/events/142381"],
+  ["2027-04-29", "Comix Roadhouse", "Uncasville", "CT", "US", "https://www.comixroadhouse.com/comics/chris-d-elia-050127", "20:00"],
+  ["2027-04-30", "Comix Roadhouse", "Uncasville", "CT", "US", "https://www.comixroadhouse.com/comics/chris-d-elia-050127", "20:00"],
+  ["2027-05-01", "Comix Roadhouse", "Uncasville", "CT", "US", "https://www.comixroadhouse.com/comics/chris-d-elia-050127", "18:00"],
   ["2027-05-13", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261", "19:30"],
   ["2027-05-14", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261"],
   ["2027-05-15", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261"],
@@ -106,9 +109,9 @@ writeFileSync(
   out,
   `${JSON.stringify(
     {
-      generatedAt: "2026-09-28",
+      generatedAt: "2026-10-05",
       sourceNotes:
-        "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28). One row per calendar night (multiple club showtimes collapsed). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
+        "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
       shows,
     },
     null,

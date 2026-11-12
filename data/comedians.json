@@ -5,7 +5,7 @@
       "name": "Ricky Gervais",
       "color": "#e2b93b",
       "tourUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
-      "notes": "Legend tour: Live Nation UK / Chortle listings as of 2026-09-09."
+      "notes": "Legend tour: Live Nation UK / Chortle listings as of 2026-09-09. 2027 UK nights (Guildford through Oxford, 5 Jan–27 Jul 2027) added from Live Nation UK 2026-11-12."
     },
     {
       "id": "dave-chappelle",
@@ -20,7 +20,7 @@
       "aliases": ["Andrew Schultz", "Schulz", "Schultz"],
       "color": "#3b82d6",
       "tourUrl": "https://www.theandrewschulz.com/",
-      "notes": "Official calendar is the Laylo embed on theandrewschulz.com (drop 1e3551fe-33d5-4a86-8364-3edb80ccdd62). Ticketmaster/Live Nation only list Houston + West Nyack. Seeded all 16 official club nights as of 2026-09-09. Alias Schultz is the same person."
+      "notes": "Official calendar is the Laylo embed on theandrewschulz.com (drop 1e3551fe-33d5-4a86-8364-3edb80ccdd62). Ticketmaster/Live Nation only list Houston + West Nyack. Seeded all 16 official club nights as of 2026-09-09; 15 as of 2026-11-12 after the drop listed Stardome Birmingham as 7 Nov only. Alias Schultz is the same person."
     },
     {
       "id": "mark-gagnon",
@@ -42,7 +42,7 @@
       "aliases": ["Chris Delia", "Chris D Elia"],
       "color": "#22d3ee",
       "tourUrl": "https://www.chrisdelia.com/",
-      "notes": "Seeded 2026-09-10 from official hub chrisdelia.com. Stockholm Sodra Teatern 26–27 Oct (27 Oct added 2026-09-28). One row per calendar night. Hamburg time from Elbphilharmonie/Laeiszhalle. No Sample placeholders."
+      "notes": "Seeded 2026-09-10 from official hub chrisdelia.com. Stockholm Sodra Teatern 26–27 Oct (27 Oct added 2026-09-28). St. Louis, Hollywood, Timonium, Calgary, San Antonio, Bloomington MN and Oklahoma City nights added 2026-11-12. One row per calendar night. Hamburg time from Elbphilharmonie/Laeiszhalle. No Sample placeholders."
     }
   ]
 }

@@ -101,3 +101,17 @@ Ricky Gervais start times for Manchester 12–13 Oct and Brighton 16–17 Nov mo
 New city pins: Stamford CT and Uncasville CT. Seed key `v11` → `v12`.
 
 Rationale: the Monday digest checked these nights on the official sources the same day. Existing listed nights that those sources still show were kept.
+
+## 2026-11-12 — Refresh: Gervais 2027, D'Elia additions, Schulz Stardome
+
+Ricky Gervais gained 16 "Ricky Gervais: Legend" nights in 2027 from Live Nation UK, all 19:30: Guildford G Live 5–6 Jan, Bournemouth International Centre 11–12 Jan, Utilita Arena Cardiff 2–3 Feb, O2 Apollo Manchester 8–9 Feb, York Barbican 15–16 Feb, Motorpoint Arena Nottingham 4 Mar, Glasgow SEC Armadillo 17–18 May, Leeds first direct bank arena 24 Jun, New Theatre Oxford 26–27 Jul. The page's International tab could not be read; no international nights were added. Gervais is 38.
+
+Chris D'Elia gained 18 nights from chrisdelia.com: St. Louis Helium 4–5 Dec 2026, Hollywood Dolby Theatre 31 Dec 2026, Timonium Magoobys Joke House 11–13 Mar 2027, Calgary Yuk Yuk's 18–20 Mar, San Antonio Laugh Out Loud 8–10 Apr, Bloomington MN House of Comedy 6–9 May, Oklahoma City Bricktown 10–11 Sep 2027. San Diego 28 Nov moved from AleSmith Brewery to The Legacy Performance Institute (new Buy Tickets link). D'Elia is 84.
+
+Andrew Schulz's Laylo drop now lists Stardome Comedy Club Birmingham as 7 Nov 2026 only, so the 6 Nov row was removed. Schulz is 15; the `refresh-tours` assertion and tests moved from 16 to 15.
+
+Checked and unchanged: Jeff Arcuri (Seated widget matches all 2027 nights; 2026 club runs show only their first night there, so the hand-verified runs stay), Mark Gagnon (Detroit 17–18 Dec, Salt Lake City 8–9 Jan; "more dates coming soon"), Dave Chappelle (Live Nation lists only a past 11 Nov Yellow Springs event presenting Yasiin Bey, not added).
+
+New city pins: Bournemouth, York (named `York, England` so trip searches for New York don't match it), Nottingham, Glasgow, Leeds, Oxford, Hollywood, Timonium, Calgary, Bloomington MN, Oklahoma City. Seed key `v12` → `v13`.
+
+Rationale: the official sources listed these nights on 2026-11-12. Existing listed nights those sources still show were kept; past nights were not pruned for being past.

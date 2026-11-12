@@ -4,8 +4,9 @@ import { mergeShows } from "./lookupShows";
 import { namesMatch } from "./names";
 import { SEED_COMEDIANS, SEED_SHOWS } from "./seedData";
 
-const KEY = "comedian-tracker:v12";
+const KEY = "comedian-tracker:v13";
 const LEGACY_KEYS = [
+  "comedian-tracker:v12",
   "comedian-tracker:v11",
   "comedian-tracker:v10",
   "comedian-tracker:v9",

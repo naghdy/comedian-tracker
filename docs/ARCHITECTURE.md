@@ -58,17 +58,17 @@ Default is **dark**.
 
 ## localStorage seed
 
-Current key: `comedian-tracker:v12` in `src/lib/storage.ts`.
+Current key: `comedian-tracker:v13` in `src/lib/storage.ts`.
 
-`LEGACY_KEYS` (newest first): `v11`, `v10`, `v9`, `v8`, `v7`, `v6`, `v5`, `v4`.
+`LEGACY_KEYS` (newest first): `v12`, `v11`, `v10`, `v9`, `v8`, `v7`, `v6`, `v5`, `v4`.
 
 `load()`:
 
-1. If `v12` parses as `{ comedians, shows }`, use it as-is. It is **not** re-merged with the JSON seed.
+1. If `v13` parses as `{ comedians, shows }`, use it as-is. It is **not** re-merged with the JSON seed.
 2. Otherwise walk `LEGACY_KEYS` and run `hydrateSeedShows` on the first snapshot that parses.
 3. Otherwise clone the bundled seed.
 
-`useTrackerState` writes the current state back to `v12` on every change, so a legacy migration is persisted once.
+`useTrackerState` writes the current state back to `v13` on every change, so a legacy migration is persisted once.
 
 `hydrateSeedShows` (also exported as deprecated `hydrateJeffSeed`) for each seed comedian:
 
@@ -76,9 +76,9 @@ Current key: `comedian-tracker:v12` in `src/lib/storage.ts`.
 - Match: drop that comedian’s rows unless `source` is `user` or `lookup`, then merge the seed rows (`mergeShows`). Remap `comedianId` (and ids) when the stored id differs from the seed id.
 - Fill a missing `tourUrl`, `notes`, or `aliases` from the seed. Replace `tourUrl` when it is in `STALE_TOUR_URLS` (old Ticketmaster artist pages, `theandrewschulz.com` without `www`, and the Jeff site URLs that were replaced by the Live Nation artist page).
 
-Because a populated `v12` is never hydrated again, **any seed change must bump `KEY` and append the previous key to `LEGACY_KEYS`.**
+Because a populated `v13` is never hydrated again, **any seed change must bump `KEY` and append the previous key to `LEGACY_KEYS`.**
 
-**Reset seed** (`resetSeed`) confirms with “Restore the starter roster and seed shows?”, writes a fresh clone of the bundled seed to `v12`, and clears roster, city, comedian, and trip filters in `App`.
+**Reset seed** (`resetSeed`) confirms with “Restore the starter roster and seed shows?”, writes a fresh clone of the bundled seed to `v13`, and clears roster, city, comedian, and trip filters in `App`.
 
 ## City geocoding
 
@@ -109,7 +109,7 @@ The roster UI does not call this. Add-comedian and per-comedian refresh were rem
 - Fetches Helium / Improv / SeatEngine pages in `data/venue-pages.json`, parses unique calendar days (`src/lib/parseVenueHtml.ts`), and **merges** Jeff Arcuri hits into `data/jeff-arcuri-shows.json` (existing rows kept).
 - Pages that fail or parse to zero nights are skipped. The script does not invent dates.
 - Rewrites `generatedAt` on a file it changes.
-- Exits 1 unless Andrew Schulz has exactly 16 nights, or if a show is missing `id` / `comedianId` / `city` / `date`, or if `comedianId` is not on the roster. A real change to the Schulz count has to update that assertion and `src/lib/storage.test.ts`.
+- Exits 1 unless Andrew Schulz has exactly 15 nights, or if a show is missing `id` / `comedianId` / `city` / `date`, or if `comedianId` is not on the roster. A real change to the Schulz count has to update that assertion and `src/lib/storage.test.ts`.
 
 It does not bump the localStorage key, open a PR, or deploy. Chris D'Elia is regenerated separately by `npx tsx scripts/write-chris-delia-seed.ts`. Jeff’s hand-verified list is `npx tsx scripts/write-jeff-arcuri-seed.ts` (that script overwrites `data/jeff-arcuri-shows.json`).
 

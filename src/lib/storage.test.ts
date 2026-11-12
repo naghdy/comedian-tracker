@@ -121,18 +121,18 @@ describe("jeff seed dates", () => {
 });
 
 describe("Andrew Schulz seed", () => {
-  it("has 16 official Laylo nights including Columbus Funny Bone", () => {
+  it("has 15 official Laylo nights including Columbus Funny Bone", () => {
     const schulz = comedianShows.shows.filter(
       (show) => show.comedianId === "andrew-schulz",
     );
-    assert.equal(schulz.length, 16);
+    assert.equal(schulz.length, 15);
     assert.equal(schulz.filter((show) => show.city === "New Brunswick").length, 2);
     assert.equal(schulz.filter((show) => show.city === "Indianapolis").length, 2);
     assert.equal(schulz.filter((show) => show.city === "Columbus").length, 2);
-    assert.equal(schulz.filter((show) => show.city === "Birmingham, AL").length, 2);
+    assert.equal(schulz.filter((show) => show.city === "Birmingham, AL").length, 1);
   });
 
-  it("migrates a 4-date Schulz snapshot to the full 16-night Laylo calendar", () => {
+  it("migrates a 4-date Schulz snapshot to the full 15-night Laylo calendar", () => {
     const incoming: StoredState = {
       comedians: [
         {
@@ -183,7 +183,7 @@ describe("Andrew Schulz seed", () => {
     };
     const next = hydrateJeffSeed(incoming);
     const schulz = next.shows.filter((show) => show.comedianId === "andrew-schulz");
-    assert.equal(schulz.length, 16);
+    assert.equal(schulz.length, 15);
     assert.equal(
       schulz.some((show) => show.city === "Indianapolis"),
       true,
@@ -386,8 +386,8 @@ describe("Chris D'Elia seed", () => {
 
   it("has one listed night per official calendar day", () => {
     const dates = chrisDeliaShows.shows.map((show) => show.date);
-    assert.equal(chrisDeliaShows.shows.length, 66);
-    assert.equal(new Set(dates).size, 66);
+    assert.equal(chrisDeliaShows.shows.length, 84);
+    assert.equal(new Set(dates).size, 84);
     const uncasville = chrisDeliaShows.shows.filter((show) => show.city === "Uncasville");
     assert.deepEqual(
       uncasville.map((show) => `${show.date} ${show.time}`),
@@ -526,3 +526,29 @@ describe("2026-10-05 city pins", () => {
   });
 });
 
+
+describe("2026-11-12 refresh", () => {
+  it("adds 16 Gervais 2027 nights and 18 D'Elia nights, all pinned", () => {
+    const gervais2027 = comedianShows.shows.filter(
+      (show) => show.comedianId === "ricky-gervais" && show.date.startsWith("2027-"),
+    );
+    assert.equal(gervais2027.length, 16);
+    assert.equal(
+      comedianShows.shows.filter((show) => show.comedianId === "ricky-gervais").length,
+      38,
+    );
+    const newDelia = chrisDeliaShows.shows.filter((show) =>
+      ["St. Louis", "Hollywood", "Timonium", "Calgary", "San Antonio", "Bloomington, MN", "Oklahoma City"].includes(show.city),
+    );
+    assert.equal(newDelia.length, 18);
+    for (const show of [...gervais2027, ...newDelia]) {
+      assert.ok(findCity(show.city), `no pin for ${show.id} (${show.city})`);
+    }
+    assert.equal(findCity("York, England")?.city, "York, England");
+    assert.equal(findCity("New York")?.city, "New York");
+    assert.equal(
+      chrisDeliaShows.shows.find((show) => show.id === "cd-2026-11-28-san-diego")?.venue,
+      "The Legacy Performance Institute",
+    );
+  });
+});

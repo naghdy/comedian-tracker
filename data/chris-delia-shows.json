@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-05",
-  "sourceNotes": "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
+  "generatedAt": "2026-11-12",
+  "sourceNotes": "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05; St. Louis Helium 4–5 Dec, Hollywood Dolby 31 Dec, Timonium 11–13 Mar, Calgary 18–20 Mar, San Antonio Laugh Out Loud 8–10 Apr, Bloomington MN 6–9 May, Oklahoma City 10–11 Sep 2027 added and San Diego 28 Nov venue moved to The Legacy Performance Institute on 2026-11-12). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Laugh Out Loud 8–10 Apr 2027 is on the hub. No invented Sample dates.",
   "shows": [
     {
       "id": "cd-2026-09-11-phoenix",
@@ -337,12 +337,36 @@
       "id": "cd-2026-11-28-san-diego",
       "comedianId": "chris-delia",
       "title": "Chris D'Elia",
-      "venue": "AleSmith Brewery",
+      "venue": "The Legacy Performance Institute",
       "city": "San Diego",
       "region": "CA",
       "country": "US",
       "date": "2026-11-28",
-      "ticketUrl": "https://www.eventbrite.com/e/chris-delia-alesmith-brewing-on-sat-nov-28-one-night-only-tickets-1999009435032",
+      "ticketUrl": "https://www.eventbrite.com/e/chris-delia-legacy-performance-institute-on-sat-nov-28-one-night-only-tickets-2003943124831",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2026-12-04-st-louis",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Helium Comedy Club",
+      "city": "St. Louis",
+      "region": "MO",
+      "country": "US",
+      "date": "2026-12-04",
+      "ticketUrl": "https://st-louis.heliumcomedy.com/events/146660",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2026-12-05-st-louis",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Helium Comedy Club",
+      "city": "St. Louis",
+      "region": "MO",
+      "country": "US",
+      "date": "2026-12-05",
+      "ticketUrl": "https://st-louis.heliumcomedy.com/events/146660",
       "source": "listed"
     },
     {
@@ -416,6 +440,18 @@
       "country": "US",
       "date": "2026-12-19",
       "ticketUrl": "https://indianapolis.heliumcomedy.com/events/142021",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2026-12-31-hollywood",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Dolby Theatre",
+      "city": "Hollywood",
+      "region": "CA",
+      "country": "US",
+      "date": "2026-12-31",
+      "ticketUrl": "https://www.ticketmaster.com/event/09006556CAB2D5D5",
       "source": "listed"
     },
     {
@@ -615,6 +651,80 @@
       "source": "listed"
     },
     {
+      "id": "cd-2027-03-11-timonium",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Magoobys Joke House",
+      "city": "Timonium",
+      "region": "MD",
+      "country": "US",
+      "date": "2027-03-11",
+      "time": "19:30",
+      "ticketUrl": "https://www.magoobysjokehouse.com/events/143383",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-03-12-timonium",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Magoobys Joke House",
+      "city": "Timonium",
+      "region": "MD",
+      "country": "US",
+      "date": "2027-03-12",
+      "ticketUrl": "https://www.magoobysjokehouse.com/events/143383",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-03-13-timonium",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Magoobys Joke House",
+      "city": "Timonium",
+      "region": "MD",
+      "country": "US",
+      "date": "2027-03-13",
+      "ticketUrl": "https://www.magoobysjokehouse.com/events/143383",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-03-18-calgary",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Yuk Yuk's",
+      "city": "Calgary",
+      "region": "AB",
+      "country": "Canada",
+      "date": "2027-03-18",
+      "time": "19:00",
+      "ticketUrl": "https://www.yukyuks.com/calgary/show/chris-delia-44753",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-03-19-calgary",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Yuk Yuk's",
+      "city": "Calgary",
+      "region": "AB",
+      "country": "Canada",
+      "date": "2027-03-19",
+      "ticketUrl": "https://www.yukyuks.com/calgary/show/chris-delia-44753",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-03-20-calgary",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Yuk Yuk's",
+      "city": "Calgary",
+      "region": "AB",
+      "country": "Canada",
+      "date": "2027-03-20",
+      "ticketUrl": "https://www.yukyuks.com/calgary/show/chris-delia-44753",
+      "source": "listed"
+    },
+    {
       "id": "cd-2027-03-25-austin",
       "comedianId": "chris-delia",
       "title": "Chris D'Elia",
@@ -649,6 +759,43 @@
       "country": "US",
       "date": "2027-03-27",
       "ticketUrl": "https://www.capcitycomedy.com/events/142262",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-04-08-san-antonio",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Laugh Out Loud Comedy Club",
+      "city": "San Antonio",
+      "region": "TX",
+      "country": "US",
+      "date": "2027-04-08",
+      "time": "19:30",
+      "ticketUrl": "https://improvtx.com/sanantonio/comic/chris+d%27elia/",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-04-09-san-antonio",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Laugh Out Loud Comedy Club",
+      "city": "San Antonio",
+      "region": "TX",
+      "country": "US",
+      "date": "2027-04-09",
+      "ticketUrl": "https://improvtx.com/sanantonio/comic/chris+d%27elia/",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-04-10-san-antonio",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Laugh Out Loud Comedy Club",
+      "city": "San Antonio",
+      "region": "TX",
+      "country": "US",
+      "date": "2027-04-10",
+      "ticketUrl": "https://improvtx.com/sanantonio/comic/chris+d%27elia/",
       "source": "listed"
     },
     {
@@ -765,6 +912,56 @@
       "source": "listed"
     },
     {
+      "id": "cd-2027-05-06-bloomington-mn",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "House of Comedy",
+      "city": "Bloomington, MN",
+      "region": "MN",
+      "country": "US",
+      "date": "2027-05-06",
+      "time": "19:30",
+      "ticketUrl": "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206126",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-05-07-bloomington-mn",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "House of Comedy",
+      "city": "Bloomington, MN",
+      "region": "MN",
+      "country": "US",
+      "date": "2027-05-07",
+      "ticketUrl": "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206127",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-05-08-bloomington-mn",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "House of Comedy",
+      "city": "Bloomington, MN",
+      "region": "MN",
+      "country": "US",
+      "date": "2027-05-08",
+      "ticketUrl": "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206129",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-05-09-bloomington-mn",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "House of Comedy",
+      "city": "Bloomington, MN",
+      "region": "MN",
+      "country": "US",
+      "date": "2027-05-09",
+      "time": "19:00",
+      "ticketUrl": "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206131",
+      "source": "listed"
+    },
+    {
       "id": "cd-2027-05-13-rutherford",
       "comedianId": "chris-delia",
       "title": "Chris D'Elia",
@@ -799,6 +996,30 @@
       "country": "US",
       "date": "2027-05-15",
       "ticketUrl": "https://www.bananascomedyclub.com/events/142261",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-09-10-oklahoma-city",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Bricktown Comedy Club",
+      "city": "Oklahoma City",
+      "region": "OK",
+      "country": "US",
+      "date": "2027-09-10",
+      "ticketUrl": "https://www.bricktowncomedy.com/events/145806",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-09-11-oklahoma-city",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "Bricktown Comedy Club",
+      "city": "Oklahoma City",
+      "region": "OK",
+      "country": "US",
+      "date": "2027-09-11",
+      "ticketUrl": "https://www.bricktowncomedy.com/events/145806",
       "source": "listed"
     }
   ]

@@ -207,15 +207,15 @@ async function main() {
   console.log(`shows.json generatedAt: ${data.generatedAt ?? "(none)"}`);
   console.log(`Seed shows: ${shows.length}`);
   console.log(`Sample / placeholder shows: ${samples.length}`);
-  console.log(`Andrew Schulz nights: ${schulzNights.length} (expect 16)`);
+  console.log(`Andrew Schulz nights: ${schulzNights.length} (expect 15)`);
   console.log(`Comedians with at least one show:`);
   for (const c of comedians.comedians) {
     const n = shows.filter((s) => s.comedianId === c.id).length;
     console.log(`  - ${c.name}: ${n}`);
   }
 
-  if (schulzNights.length !== 16) {
-    console.error(`Expected 16 Andrew Schulz nights, found ${schulzNights.length}`);
+  if (schulzNights.length !== 15) {
+    console.error(`Expected 15 Andrew Schulz nights, found ${schulzNights.length}`);
     process.exit(1);
   }
   if (missingComedian.length || missingFields.length) {

@@ -14,7 +14,7 @@ type Row = [
   time?: string,
 ];
 
-/** One row per calendar night from chrisdelia.com. Stockholm 27 Oct added 2026-09-28. Uncasville 29 Apr–1 May 2027 added 2026-10-05. */
+/** One row per calendar night from chrisdelia.com. Stockholm 27 Oct added 2026-09-28. Uncasville 29 Apr–1 May 2027 added 2026-10-05. St. Louis, Hollywood, Timonium, Calgary, San Antonio, Bloomington MN, Oklahoma City added and San Diego 28 Nov venue updated 2026-11-12. */
 const rows: Row[] = [
   ["2026-09-11", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700"],
   ["2026-09-12", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700", "20:45"],
@@ -44,13 +44,16 @@ const rows: Row[] = [
   ["2026-11-15", "Palm Beach Improv", "Wellington, FL", "FL", "US", "https://www.palmbeachimprov.com/events/140732", "18:00"],
   ["2026-11-20", "Rose City Comedy", "Tyler", "TX", "US", "https://www.tixr.com/groups/rosecitycomedy/events/chris-d-elia-special-event--191012"],
   ["2026-11-21", "Rose City Comedy", "Tyler", "TX", "US", "https://www.tixr.com/groups/rosecitycomedy/events/chris-d-elia-special-event--191012"],
-  ["2026-11-28", "AleSmith Brewery", "San Diego", "CA", "US", "https://www.eventbrite.com/e/chris-delia-alesmith-brewing-on-sat-nov-28-one-night-only-tickets-1999009435032"],
+  ["2026-11-28", "The Legacy Performance Institute", "San Diego", "CA", "US", "https://www.eventbrite.com/e/chris-delia-legacy-performance-institute-on-sat-nov-28-one-night-only-tickets-2003943124831"],
+  ["2026-12-04", "Helium Comedy Club", "St. Louis", "MO", "US", "https://st-louis.heliumcomedy.com/events/146660"],
+  ["2026-12-05", "Helium Comedy Club", "St. Louis", "MO", "US", "https://st-louis.heliumcomedy.com/events/146660"],
   ["2026-12-11", "Skyline Comedy Club", "Appleton", "WI", "US", "https://www.skylinecomedy.com/events/136903"],
   ["2026-12-12", "Skyline Comedy Club", "Appleton", "WI", "US", "https://www.skylinecomedy.com/events/136903"],
   ["2026-12-13", "Skyline Comedy Club", "Appleton", "WI", "US", "https://www.skylinecomedy.com/events/136903", "18:00"],
   ["2026-12-17", "Helium Comedy Club", "Indianapolis", "IN", "US", "https://indianapolis.heliumcomedy.com/events/142021"],
   ["2026-12-18", "Helium Comedy Club", "Indianapolis", "IN", "US", "https://indianapolis.heliumcomedy.com/events/142021"],
   ["2026-12-19", "Helium Comedy Club", "Indianapolis", "IN", "US", "https://indianapolis.heliumcomedy.com/events/142021"],
+  ["2026-12-31", "Dolby Theatre", "Hollywood", "CA", "US", "https://www.ticketmaster.com/event/09006556CAB2D5D5"],
   ["2027-01-08", "Houston Improv", "Houston", "TX", "US", "https://improvtx.com/houston/comic/chris+d%27elia/"],
   ["2027-01-09", "Houston Improv", "Houston", "TX", "US", "https://improvtx.com/houston/comic/chris+d%27elia/"],
   ["2027-01-10", "Houston Improv", "Houston", "TX", "US", "https://improvtx.com/houston/comic/chris+d%27elia/", "19:00"],
@@ -67,9 +70,18 @@ const rows: Row[] = [
   ["2027-02-26", "Addison Improv", "Addison", "TX", "US", "https://improvtx.com/addison/comic/chris+d%27elia/"],
   ["2027-02-27", "Addison Improv", "Addison", "TX", "US", "https://improvtx.com/addison/comic/chris+d%27elia/"],
   ["2027-02-28", "Addison Improv", "Addison", "TX", "US", "https://improvtx.com/addison/comic/chris+d%27elia/", "19:30"],
+  ["2027-03-11", "Magoobys Joke House", "Timonium", "MD", "US", "https://www.magoobysjokehouse.com/events/143383", "19:30"],
+  ["2027-03-12", "Magoobys Joke House", "Timonium", "MD", "US", "https://www.magoobysjokehouse.com/events/143383"],
+  ["2027-03-13", "Magoobys Joke House", "Timonium", "MD", "US", "https://www.magoobysjokehouse.com/events/143383"],
+  ["2027-03-18", "Yuk Yuk's", "Calgary", "AB", "Canada", "https://www.yukyuks.com/calgary/show/chris-delia-44753", "19:00"],
+  ["2027-03-19", "Yuk Yuk's", "Calgary", "AB", "Canada", "https://www.yukyuks.com/calgary/show/chris-delia-44753"],
+  ["2027-03-20", "Yuk Yuk's", "Calgary", "AB", "Canada", "https://www.yukyuks.com/calgary/show/chris-delia-44753"],
   ["2027-03-25", "Cap City Comedy Club", "Austin", "TX", "US", "https://www.capcitycomedy.com/events/142262", "19:30"],
   ["2027-03-26", "Cap City Comedy Club", "Austin", "TX", "US", "https://www.capcitycomedy.com/events/142262"],
   ["2027-03-27", "Cap City Comedy Club", "Austin", "TX", "US", "https://www.capcitycomedy.com/events/142262"],
+  ["2027-04-08", "Laugh Out Loud Comedy Club", "San Antonio", "TX", "US", "https://improvtx.com/sanantonio/comic/chris+d%27elia/", "19:30"],
+  ["2027-04-09", "Laugh Out Loud Comedy Club", "San Antonio", "TX", "US", "https://improvtx.com/sanantonio/comic/chris+d%27elia/"],
+  ["2027-04-10", "Laugh Out Loud Comedy Club", "San Antonio", "TX", "US", "https://improvtx.com/sanantonio/comic/chris+d%27elia/"],
   ["2027-04-15", "Goodnights Comedy Club", "Raleigh", "NC", "US", "https://www.goodnightscomedy.com/events/142299", "19:30"],
   ["2027-04-16", "Goodnights Comedy Club", "Raleigh", "NC", "US", "https://www.goodnightscomedy.com/events/142299"],
   ["2027-04-17", "Goodnights Comedy Club", "Raleigh", "NC", "US", "https://www.goodnightscomedy.com/events/142299"],
@@ -79,9 +91,15 @@ const rows: Row[] = [
   ["2027-04-29", "Comix Roadhouse", "Uncasville", "CT", "US", "https://www.comixroadhouse.com/comics/chris-d-elia-050127", "20:00"],
   ["2027-04-30", "Comix Roadhouse", "Uncasville", "CT", "US", "https://www.comixroadhouse.com/comics/chris-d-elia-050127", "20:00"],
   ["2027-05-01", "Comix Roadhouse", "Uncasville", "CT", "US", "https://www.comixroadhouse.com/comics/chris-d-elia-050127", "18:00"],
+  ["2027-05-06", "House of Comedy", "Bloomington, MN", "MN", "US", "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206126", "19:30"],
+  ["2027-05-07", "House of Comedy", "Bloomington, MN", "MN", "US", "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206127"],
+  ["2027-05-08", "House of Comedy", "Bloomington, MN", "MN", "US", "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206129"],
+  ["2027-05-09", "House of Comedy", "Bloomington, MN", "MN", "US", "https://www.tixr.com/groups/houseofcomedymn/events/chris-d-elia-special-presentation-206131", "19:00"],
   ["2027-05-13", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261", "19:30"],
   ["2027-05-14", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261"],
   ["2027-05-15", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261"],
+  ["2027-09-10", "Bricktown Comedy Club", "Oklahoma City", "OK", "US", "https://www.bricktowncomedy.com/events/145806"],
+  ["2027-09-11", "Bricktown Comedy Club", "Oklahoma City", "OK", "US", "https://www.bricktowncomedy.com/events/145806"],
 ];
 
 const shows = rows.map(([date, venue, city, region, country, ticketUrl, time]) => {
@@ -109,9 +127,9 @@ writeFileSync(
   out,
   `${JSON.stringify(
     {
-      generatedAt: "2026-10-05",
+      generatedAt: "2026-11-12",
       sourceNotes:
-        "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Live Nation-only dates omitted. No invented Sample dates.",
+        "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05; St. Louis Helium 4–5 Dec, Hollywood Dolby 31 Dec, Timonium 11–13 Mar, Calgary 18–20 Mar, San Antonio Laugh Out Loud 8–10 Apr, Bloomington MN 6–9 May, Oklahoma City 10–11 Sep 2027 added and San Diego 28 Nov venue moved to The Legacy Performance Institute on 2026-11-12). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Laugh Out Loud 8–10 Apr 2027 is on the hub. No invented Sample dates.",
       shows,
     },
     null,

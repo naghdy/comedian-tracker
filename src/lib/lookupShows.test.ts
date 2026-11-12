@@ -34,7 +34,7 @@ describe("namesMatch", () => {
 });
 
 describe("seedListedShows", () => {
-  it("returns upcoming Andrew Schulz nights from the 16-night Laylo calendar", () => {
+  it("returns upcoming Andrew Schulz nights from the 15-night Laylo calendar", () => {
     const rows = seedListedShows({
       comedianId: "andrew-schulz",
       name: "Andrew Schulz",
@@ -46,7 +46,7 @@ describe("seedListedShows", () => {
     );
     assert.equal(
       comedianShows.shows.filter((show) => show.comedianId === "andrew-schulz").length,
-      16,
+      15,
     );
     assert.equal(rows.length, upcoming.length);
     assert.deepEqual(

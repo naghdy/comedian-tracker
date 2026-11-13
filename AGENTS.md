@@ -23,7 +23,7 @@ Node 22 in GitHub Actions (`.github/workflows/pages.yml`). Vite `base` is `/come
 
 ## Where data lives
 
-Seed JSON is in `data/` and bundled by `src/lib/seedData.ts` (`shows.json` + `jeff-arcuri-shows.json` + `chris-delia-shows.json` + `mo-amer-shows.json`). City pins come from `data/cities.json`. The browser copy is `localStorage` key `comedian-tracker:v14`. Schema, sources, and ID rules: [docs/DATA.md](docs/DATA.md).
+Seed JSON is in `data/` and bundled by `src/lib/seedData.ts` (`shows.json` + `jeff-arcuri-shows.json` + `chris-delia-shows.json` + `mo-amer-shows.json` + `aaron-chen-shows.json` + `jimmy-o-yang-shows.json`). City pins come from `data/cities.json`. The browser copy is `localStorage` key `comedian-tracker:v15`. Schema, sources, and ID rules: [docs/DATA.md](docs/DATA.md).
 
 ## Golden rules
 

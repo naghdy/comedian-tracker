@@ -50,6 +50,21 @@
       "color": "#a78bfa",
       "tourUrl": "https://moamer.com/shows/",
       "notes": "Seeded 2026-11-13 from the official tour page moamer.com/shows: 18 upcoming nights, San Jose 13 Nov 2026 to San Diego 13 Feb 2027. Page shows no years; years and times confirmed on venue ticket pages."
+    },
+    {
+      "id": "aaron-chen",
+      "name": "Aaron Chen",
+      "color": "#ef4444",
+      "tourUrl": "https://www.aaronchencomedy.com/",
+      "notes": "Australian stand-up from Sydney, now in New York. Seeded 2026-11-13 from the official site aaronchencomedy.com (Technology tour): 24 upcoming nights, Newcastle NSW 26 Nov 2026 to Vancouver 17 Apr 2027. Site shows no years; years from Live Nation and venue pages. Thirroul seeded as 27 Nov per the venue and Live Nation (site says 28 Nov)."
+    },
+    {
+      "id": "jimmy-o-yang",
+      "name": "Jimmy O. Yang",
+      "aliases": ["Jimmy O Yang", "Jimmy Yang"],
+      "color": "#84cc16",
+      "tourUrl": "https://www.jimmycomedy.com/shows/",
+      "notes": "Seeded 2026-11-13 from the official tour page jimmycomedy.com/shows (jimmyoyang.com redirects there): Has No Friends Tour, 39 nights, Tampa 15 Jan to Las Vegas 30 May 2027. Page shows no years; all listed nights are upcoming, so 2027, confirmed on Live Nation/Ticketmaster and venue pages where readable."
     }
   ]
 }

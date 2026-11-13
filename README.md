@@ -72,7 +72,7 @@ npm run preview  # serve the build
 - **Agenda**: chronological list, extra comedian/city filters, empty states, add/remove shows.
 - **Trip checker**: city + start/end dates. Case-insensitive partial city match. Headline: *In Houston these days…*
 
-Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Mark Gagnon, Jeff Arcuri, Chris D'Elia, Mo Amer.
+Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Mark Gagnon, Jeff Arcuri, Chris D'Elia, Mo Amer, Aaron Chen, Jimmy O. Yang.
 
 ## Live lookup
 
@@ -95,11 +95,13 @@ Multiple showtimes on the same night at the same venue collapse to one agenda ro
 | `data/jeff-arcuri-shows.json` | Jeff Arcuri seed dates |
 | `data/chris-delia-shows.json` | Chris D'Elia seed dates |
 | `data/mo-amer-shows.json` | Mo Amer seed dates |
+| `data/aaron-chen-shows.json` | Aaron Chen seed dates |
+| `data/jimmy-o-yang-shows.json` | Jimmy O. Yang seed dates |
 | `data/cities.json` | Static lat/lng lookup (no geocoding API key) |
 | `data/laylo-drops.json` | Official Laylo embed drop IDs (Andrew Schulz homepage calendar) |
 | `data/venue-pages.json` | Club event URLs to scrape from Node (`npm run refresh-tours`) |
 
-Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026-09-10**; Chappelle Karmageddon on **2026-09-16**; DC benefit + second MSG night on **2026-09-21**; Atlanta and Stockholm second night on **2026-09-28**; weekly refresh on **2026-10-05**; refresh on **2026-11-12**; Mo Amer on **2026-11-13**). There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
+Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026-09-10**; Chappelle Karmageddon on **2026-09-16**; DC benefit + second MSG night on **2026-09-21**; Atlanta and Stockholm second night on **2026-09-28**; weekly refresh on **2026-10-05**; refresh on **2026-11-12**; Mo Amer, Aaron Chen and Jimmy O. Yang on **2026-11-13**). There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
 
 | Comedian | Real dates seeded | Sources |
 | --- | --- | --- |
@@ -110,8 +112,10 @@ Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026
 | Jeff Arcuri | **82** (one row per calendar day) | Official Seated widget on [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows) (primary as of 2026-10-05); [Live Nation artist page](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) (`tourUrl`); [Ticketmaster artist page](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710); venue pages (Summit City, Brea Improv, Orlando Funny Bone, Fort Lauderdale Improv, Huntsville Levity Live). 2026 clubs are titled "Jeff Arcuri: Fresh Cut"; 2027 is "Jeff Arcuri: The Road Trip Tour". Unverified **Oxnard Oct 2026** and **Mississauga Sep 2026** are omitted. No 2026-01 dates. |
 | Chris D'Elia | **84** (one row per calendar night, 11 Sep 2026–11 Sep 2027) | Official hub [chrisdelia.com](https://www.chrisdelia.com/) (`tourUrl`) plus each night’s Buy Tickets URL. Stockholm Sodra Teatern 26–27 Oct (27 Oct added 2026-09-28). Uncasville Comix Roadhouse 29 Apr–1 May 2027. St. Louis, Hollywood (Dolby 31 Dec), Timonium, Calgary, San Antonio, Bloomington MN and Oklahoma City added 2026-11-12. Hamburg 25 Oct corroborated by [Elbphilharmonie/Laeiszhalle](https://www.elbphilharmonie.de/en/whats-on/chris-delia/29092). Multiple club showtimes on the same night collapsed. |
 | Mo Amer | **18** (one row per calendar night, 13 Nov 2026–13 Feb 2027) | Official tour page [moamer.com/shows](https://moamer.com/shows/) (`tourUrl`). The page prints month and day only, so each night's year and earliest start time were confirmed on the venue's own ticket page. San Jose, Denver, Honolulu, Seattle, Phoenix, Austin, San Diego. |
+| Aaron Chen | **24** (one row per calendar night, 26 Nov 2026–17 Apr 2027) | Official site [aaronchencomedy.com](https://www.aaronchencomedy.com/) (`tourUrl`), Technology tour. Month and day only on the site; years from the [Live Nation artist page](https://www.livenation.com/artist/K8vZ9174lIV/aaron-chen-events) and venue pages. Australia (Newcastle, Thirroul, Canberra, Darwin, Brisbane, Melbourne, Sydney), US and Canada (Calgary, Vancouver). Thirroul is 27 Nov per the venue and Live Nation; the site prints 28 Nov. |
+| Jimmy O. Yang | **39** (one row per calendar night, 15 Jan–30 May 2027) | Official tour page [jimmycomedy.com/shows](https://www.jimmycomedy.com/shows/) (`tourUrl`; jimmyoyang.com redirects there), Has No Friends Tour. Month and day only; 2027 confirmed on Live Nation/Ticketmaster and venue pages where readable. US and Canada (Toronto, Vancouver). |
 
-Existing browsers may still have an older `localStorage` snapshot. **v4–v13** snapshots are migrated once into `comedian-tracker:v14`: Dave Chappelle’s listed nights become the Duke Ellington School DC benefit, Fastball Mesa, and the Karmageddon arena run including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and both NY Comedy Festival MSG dates (stale Ticketmaster tour URL replaced with Live Nation), missing seed comedians (including **Chris D'Elia**, now **84** nights, and **Mo Amer**, **18** nights) and their listed nights are added, Jeff Arcuri empty rows pick up the **82** seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **15-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
+Existing browsers may still have an older `localStorage` snapshot. **v4–v14** snapshots are migrated once into `comedian-tracker:v15`: Dave Chappelle’s listed nights become the Duke Ellington School DC benefit, Fastball Mesa, and the Karmageddon arena run including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and both NY Comedy Festival MSG dates (stale Ticketmaster tour URL replaced with Live Nation), missing seed comedians (including **Chris D'Elia**, now **84** nights, **Mo Amer**, **18** nights, **Aaron Chen**, **24** nights, and **Jimmy O. Yang**, **39** nights) and their listed nights are added, Jeff Arcuri empty rows pick up the **82** seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **15-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
 
 Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
 
@@ -134,6 +138,8 @@ Suggested extra sources (respect robots.txt / ToS; prefer official pages):
 - Jeff Arcuri — [jeffarcuri.com/shows](https://www.jeffarcuri.com/shows) / [Live Nation](https://www.livenation.com/artist/K8vZ9179td0/jeff-arcuri-events) / [Ticketmaster](https://www.ticketmaster.com/jeff-arcuri-tickets/artist/2569710)
 - Chris D'Elia — [chrisdelia.com](https://www.chrisdelia.com/)
 - Mo Amer — [moamer.com/shows](https://moamer.com/shows/)
+- Aaron Chen — [aaronchencomedy.com](https://www.aaronchencomedy.com/)
+- Jimmy O. Yang — [jimmycomedy.com/shows](https://www.jimmycomedy.com/shows/)
 
 A reasonable cadence is a Monday cron or GitHub Action that rewrites `data/shows.json` and bumps `generatedAt`. User-added shows live only in `localStorage` and are not overwritten by that file.
 

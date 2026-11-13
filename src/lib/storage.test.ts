@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { findCity } from "./geo";
+import { coordsForShow, findCity } from "./geo";
 import { hydrateJeffSeed, hydrateSeedShows } from "./storage";
 import type { StoredState } from "../types";
 import comedianShows from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
 import chrisDeliaShows from "../../data/chris-delia-shows.json";
 import moAmerShows from "../../data/mo-amer-shows.json";
+import aaronChenShows from "../../data/aaron-chen-shows.json";
+import jimmyOYangShows from "../../data/jimmy-o-yang-shows.json";
 import comedians from "../../data/comedians.json";
 
 describe("hydrateJeffSeed", () => {
@@ -557,7 +559,7 @@ describe("2026-11-12 refresh", () => {
 describe("2026-11-13 Mo Amer", () => {
   it("adds Mo Amer to the roster with 18 listed nights, one per date, all pinned", () => {
     const roster = comedians.comedians.map((comedian) => comedian.id);
-    assert.equal(roster.at(-1), "mo-amer");
+    assert.ok(roster.includes("mo-amer"));
     assert.equal(moAmerShows.shows.length, 18);
     assert.equal(new Set(moAmerShows.shows.map((show) => show.date)).size, 18);
     for (const show of moAmerShows.shows) {
@@ -579,5 +581,50 @@ describe("2026-11-13 Mo Amer", () => {
       next.shows.filter((show) => show.comedianId === "mo-amer").length,
       18,
     );
+  });
+});
+
+describe("2026-11-13 Aaron Chen and Jimmy O. Yang", () => {
+  const cases = [
+    { id: "aaron-chen", prefix: "ac", file: aaronChenShows, count: 24, first: "2026-11-26", last: "2027-04-17" },
+    { id: "jimmy-o-yang", prefix: "jy", file: jimmyOYangShows, count: 39, first: "2027-01-15", last: "2027-05-30" },
+  ];
+
+  it("adds both to the end of the roster, Aaron Chen first", () => {
+    const roster = comedians.comedians.map((comedian) => comedian.id);
+    assert.deepEqual(roster.slice(-2), ["aaron-chen", "jimmy-o-yang"]);
+  });
+
+  for (const c of cases) {
+    it(`${c.id}: ${c.count} listed nights, one per date, all pinned`, () => {
+      assert.equal(c.file.shows.length, c.count);
+      assert.equal(new Set(c.file.shows.map((show) => show.date)).size, c.count);
+      assert.equal(c.file.shows[0]?.date, c.first);
+      assert.equal(c.file.shows.at(-1)?.date, c.last);
+      for (const show of c.file.shows) {
+        assert.equal(show.comedianId, c.id);
+        assert.equal(show.source, "listed");
+        assert.match(show.id, new RegExp(`^${c.prefix}-\\d{4}-\\d{2}-\\d{2}-[a-z-]+$`));
+        assert.ok(coordsForShow(show), `no pin for ${show.id} (${show.city})`);
+      }
+    });
+
+    it(`${c.id}: hydration adds the nights to a stored roster that lacks them`, () => {
+      const next = hydrateSeedShows({ comedians: [], shows: [] });
+      assert.ok(next.comedians.some((comedian) => comedian.id === c.id));
+      assert.equal(next.shows.filter((show) => show.comedianId === c.id).length, c.count);
+    });
+  }
+
+  it("pins Aaron Chen's Newcastle night in Australia, not Newcastle upon Tyne", () => {
+    const newcastle = aaronChenShows.shows.find((show) => show.id === "ac-2026-11-26-newcastle");
+    assert.ok(newcastle);
+    assert.ok((coordsForShow(newcastle)?.lat ?? 0) < 0);
+    assert.equal(findCity("Newcastle")?.city, "Newcastle upon Tyne");
+  });
+
+  it("seeds Thirroul on 27 Nov, as the venue and Live Nation list it", () => {
+    assert.ok(aaronChenShows.shows.some((show) => show.id === "ac-2026-11-27-thirroul"));
+    assert.equal(aaronChenShows.shows.some((show) => show.date === "2026-11-28"), false);
   });
 });

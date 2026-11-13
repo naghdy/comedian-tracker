@@ -16,6 +16,7 @@ import {
   slugify,
   sortChronological,
   tripMatches,
+  upcomingShows,
 } from "./lib/filters";
 import type { Show, TripQuery } from "./types";
 
@@ -34,13 +35,17 @@ export default function App() {
     applyTheme(theme);
   }, [theme]);
 
+  // Past nights stay in storage but are hidden everywhere: map, agenda,
+  // trip checker and roster counts all start from today.
+  const upcoming = useMemo(() => upcomingShows(state.shows), [state.shows]);
+
   const showCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    for (const show of state.shows) {
+    for (const show of upcoming) {
       counts[show.comedianId] = (counts[show.comedianId] ?? 0) + 1;
     }
     return counts;
-  }, [state.shows]);
+  }, [upcoming]);
 
   const visibleShows = useMemo(() => {
     const rosterFilter = selectedIds.length ? selectedIds : undefined;
@@ -50,23 +55,23 @@ export default function App() {
         ? rosterFilter.filter((id) => id === comedianFilter)
         : extra;
     return sortChronological(
-      filterShows(state.shows, {
+      filterShows(upcoming, {
         comedianIds,
         city: cityFilter || undefined,
       }),
     );
-  }, [state.shows, selectedIds, cityFilter, comedianFilter]);
+  }, [upcoming, selectedIds, cityFilter, comedianFilter]);
 
   const tripHits = useMemo(() => {
     if (!trip) return [];
     const rosterFilter = selectedIds.length ? selectedIds : undefined;
     return sortChronological(
       tripMatches(
-        filterShows(state.shows, { comedianIds: rosterFilter }),
+        filterShows(upcoming, { comedianIds: rosterFilter }),
         trip,
       ),
     );
-  }, [state.shows, trip, selectedIds]);
+  }, [upcoming, trip, selectedIds]);
 
   function toggleComedian(id: string) {
     setSelectedIds((current) =>

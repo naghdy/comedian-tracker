@@ -123,3 +123,9 @@ Mo Amer joins the roster (last in the sidebar) with 18 nights from his official 
 The official page prints month and day without a year. Years and earliest start times were confirmed on each venue's ticket page. Honolulu 12 Dec and San Diego 13 Feb carry no time because neither could be confirmed on the venue side; 13 Feb stays because the official page lists it. Nights earlier in 2026 still printed on the page were not seeded.
 
 New city pins: Honolulu, San Jose. Seed key `v13` → `v14`.
+
+## 2026-11-13 — Show only upcoming nights
+
+The agenda opened on September 2026 because nothing filtered by date. Nabil asked for the list to start from today. `upcomingShows` now hides nights before the viewer's local date across the map, agenda, trip checker and roster counts.
+
+Rationale: past nights are still useful as history in the seed files, and the data rules say not to prune a night only because it has passed, so this is a display filter. Seed JSON and the seed key are unchanged.

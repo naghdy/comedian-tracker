@@ -34,6 +34,20 @@ export function tripMatches(shows: Show[], trip: TripQuery) {
   });
 }
 
+/** Local calendar date as YYYY-MM-DD (the viewer's own day, not UTC). */
+export function todayISO(now: Date = new Date()) {
+  return [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+/** Shows on or after `today`. Past nights stay in storage; they are only hidden. */
+export function upcomingShows(shows: Show[], today: string = todayISO()) {
+  return shows.filter((show) => show.date >= today);
+}
+
 export function sortChronological(shows: Show[]) {
   return [...shows].sort((a, b) => {
     const date = a.date.localeCompare(b.date);

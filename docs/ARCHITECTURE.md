@@ -29,12 +29,14 @@ Desktop is a two-column grid (`--sidebar: 280px` + main). Below 980px the sideba
 
 | Region | Component | Behavior |
 | --- | --- | --- |
-| Left | `src/components/Roster.tsx` | Curator-managed color chips. Click a row to filter map, agenda, and trip results. Show count sits on the right of the name. **Reset seed** is at the bottom. Light/Dark toggle is in the brand row. There are no add, remove, refresh, or tour-link controls. |
+| Left | `src/components/Roster.tsx` | Curator-managed color chips. Click a row to filter map, agenda, and trip results. Upcoming-show count sits on the right of the name. **Reset seed** is at the bottom. Light/Dark toggle is in the brand row. There are no add, remove, refresh, or tour-link controls. |
 | Top of main | `src/components/ShowMap.tsx` | Google Map. Color-coded circle pins, click opens an info window (title, venue, date, ticket link). |
-| Middle | `src/components/Agenda.tsx` | Chronological list. City text filter and comedian `<select>` stack with the roster filter. **Add show** opens `ShowForm` (saved as `source: "user"`). Each card can remove that show. |
+| Middle | `src/components/Agenda.tsx` | Chronological list of upcoming shows (today onward). City text filter and comedian `<select>` stack with the roster filter. **Add show** opens `ShowForm` (saved as `source: "user"`). Each card can remove that show. |
 | Bottom | `src/components/TripChecker.tsx` | City + start/end. Case-insensitive partial city match via `cityMatches`. Headline from `tripHeadline`: `In Houston these days…`. |
 
 `src/App.tsx` owns filter state, theme, and show add/remove. Roster membership is not editable in the UI.
+
+Only upcoming nights are shown. `App` runs `upcomingShows` (`src/lib/filters.ts`) on the stored shows before anything else, so the map, agenda, trip checker and roster counts all start from the viewer's local calendar day (`todayISO`). Past nights stay in `localStorage` and the seed JSON; they are hidden, not deleted, so no seed-key bump is involved.
 
 ## Google Maps
 

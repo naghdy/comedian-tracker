@@ -43,6 +43,13 @@
       "color": "#22d3ee",
       "tourUrl": "https://www.chrisdelia.com/",
       "notes": "Seeded 2026-09-10 from official hub chrisdelia.com. Stockholm Sodra Teatern 26–27 Oct (27 Oct added 2026-09-28). St. Louis, Hollywood, Timonium, Calgary, San Antonio, Bloomington MN and Oklahoma City nights added 2026-11-12. One row per calendar night. Hamburg time from Elbphilharmonie/Laeiszhalle. No Sample placeholders."
+    },
+    {
+      "id": "mo-amer",
+      "name": "Mo Amer",
+      "color": "#a78bfa",
+      "tourUrl": "https://moamer.com/shows/",
+      "notes": "Seeded 2026-11-13 from the official tour page moamer.com/shows: 18 upcoming nights, San Jose 13 Nov 2026 to San Diego 13 Feb 2027. Page shows no years; years and times confirmed on venue ticket pages."
     }
   ]
 }

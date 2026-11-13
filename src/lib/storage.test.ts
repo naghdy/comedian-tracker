@@ -1,11 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { findCity } from "./geo";
-import { hydrateJeffSeed } from "./storage";
+import { hydrateJeffSeed, hydrateSeedShows } from "./storage";
 import type { StoredState } from "../types";
 import comedianShows from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
 import chrisDeliaShows from "../../data/chris-delia-shows.json";
+import moAmerShows from "../../data/mo-amer-shows.json";
 import comedians from "../../data/comedians.json";
 
 describe("hydrateJeffSeed", () => {
@@ -549,6 +550,34 @@ describe("2026-11-12 refresh", () => {
     assert.equal(
       chrisDeliaShows.shows.find((show) => show.id === "cd-2026-11-28-san-diego")?.venue,
       "The Legacy Performance Institute",
+    );
+  });
+});
+
+describe("2026-11-13 Mo Amer", () => {
+  it("adds Mo Amer to the roster with 18 listed nights, one per date, all pinned", () => {
+    const roster = comedians.comedians.map((comedian) => comedian.id);
+    assert.equal(roster.at(-1), "mo-amer");
+    assert.equal(moAmerShows.shows.length, 18);
+    assert.equal(new Set(moAmerShows.shows.map((show) => show.date)).size, 18);
+    for (const show of moAmerShows.shows) {
+      assert.equal(show.comedianId, "mo-amer");
+      assert.equal(show.source, "listed");
+      assert.match(show.id, /^ma-\d{4}-\d{2}-\d{2}-[a-z-]+$/);
+      assert.ok(findCity(show.city), `no pin for ${show.id} (${show.city})`);
+    }
+    assert.equal(findCity("San Jose")?.city, "San Jose");
+    assert.equal(findCity("Honolulu")?.city, "Honolulu");
+    assert.equal(moAmerShows.shows[0]?.date, "2026-11-13");
+    assert.equal(moAmerShows.shows.at(-1)?.date, "2027-02-13");
+  });
+
+  it("adds Mo Amer and his nights to a stored roster that lacks him", () => {
+    const next = hydrateSeedShows({ comedians: [], shows: [] });
+    assert.ok(next.comedians.some((comedian) => comedian.id === "mo-amer"));
+    assert.equal(
+      next.shows.filter((show) => show.comedianId === "mo-amer").length,
+      18,
     );
   });
 });

@@ -3,10 +3,12 @@ import comedianSeed from "../../data/comedians.json";
 import showSeed from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
 import chrisDeliaShows from "../../data/chris-delia-shows.json";
+import moAmerShows from "../../data/mo-amer-shows.json";
 
 export const SEED_COMEDIANS = comedianSeed.comedians as Comedian[];
 export const SEED_SHOWS = [
   ...(showSeed.shows as Show[]),
   ...(jeffArcuriShows.shows as Show[]),
   ...(chrisDeliaShows.shows as Show[]),
+  ...(moAmerShows.shows as Show[]),
 ];

@@ -115,3 +115,11 @@ Checked and unchanged: Jeff Arcuri (Seated widget matches all 2027 nights; 2026 
 New city pins: Bournemouth, York (named `York, England` so trip searches for New York don't match it), Nottingham, Glasgow, Leeds, Oxford, Hollywood, Timonium, Calgary, Bloomington MN, Oklahoma City. Seed key `v12` → `v13`.
 
 Rationale: the official sources listed these nights on 2026-11-12. Existing listed nights those sources still show were kept; past nights were not pruned for being past.
+
+## 2026-11-13 — Add Mo Amer
+
+Mo Amer joins the roster (last in the sidebar) with 18 nights from his official tour page, moamer.com/shows: San Jose Improv 13–14 Nov 2026, Comedy Works Downtown Denver 19–21 Nov, Blue Note Hawaii Honolulu 11–12 Dec, Emerald City Comedy Club Seattle 8–10 Jan 2027, Stand Up Live Phoenix 22–23 Jan, Cap City Comedy Club Austin 29–31 Jan, American Comedy Co. San Diego 11–13 Feb 2027. His rows live in `data/mo-amer-shows.json` (prefix `ma`).
+
+The official page prints month and day without a year. Years and earliest start times were confirmed on each venue's ticket page. Honolulu 12 Dec and San Diego 13 Feb carry no time because neither could be confirmed on the venue side; 13 Feb stays because the official page lists it. Nights earlier in 2026 still printed on the page were not seeded.
+
+New city pins: Honolulu, San Jose. Seed key `v13` → `v14`.

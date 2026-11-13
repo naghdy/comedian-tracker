@@ -124,6 +124,16 @@ The official page prints month and day without a year. Years and earliest start 
 
 New city pins: Honolulu, San Jose. Seed key `v13` → `v14`.
 
+## 2026-11-13 — Add Aaron Chen and Jimmy O. Yang
+
+Aaron Chen (Australian stand-up from Sydney, now in New York) and Jimmy O. Yang join the end of the roster, in that order. Rows live in `data/aaron-chen-shows.json` (prefix `ac`) and `data/jimmy-o-yang-shows.json` (prefix `jy`).
+
+Aaron Chen: 24 nights from aaronchencomedy.com, the Technology tour. Australia 26 Nov–17 Dec 2026 (Newcastle, Thirroul, Canberra, Darwin, Brisbane 10–11 Dec, Melbourne, Sydney), US 15 Jan–10 Apr 2027 (Dallas, Houston, Boston, Philadelphia, Portland, Seattle, Irvine 18–20 Feb, Chicago, Honolulu, Sacramento, San Francisco, New York), Canada 16–17 Apr 2027 (Calgary, Vancouver). The site gives no years; Live Nation and venue pages do. Thirroul follows the venue and Live Nation (27 Nov) rather than the site (28 Nov).
+
+Jimmy O. Yang: 39 nights from jimmycomedy.com/shows, the Has No Friends Tour, 15 Jan–30 May 2027 across the US plus Toronto and Vancouver. No years printed; every night is upcoming, so 2027, and Live Nation/Ticketmaster and the venue pages that could be read agree.
+
+New city pins: Brisbane, Canberra, Darwin, Grand Rapids, Jersey City, Kahului (Maui), Medford, Melbourne, Newcastle NSW (named `Newcastle, NSW` so it doesn't capture Newcastle upon Tyne), Reno, Sydney, Thirroul, Tucson. Seed key `v14` → `v15`.
+
 ## 2026-11-13 — Show only upcoming nights
 
 The agenda opened on September 2026 because nothing filtered by date. Nabil asked for the list to start from today. `upcomingShows` now hides nights before the viewer's local date across the map, agenda, trip checker and roster counts.

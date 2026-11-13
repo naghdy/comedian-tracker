@@ -27,7 +27,7 @@ export function Agenda({
   return (
     <section className="panel agenda">
       <h2>Agenda</h2>
-      <p className="lede">Chronological list of tracked shows. Filters stack with the roster chips.</p>
+      <p className="lede">Upcoming shows from today, in date order. Filters stack with the roster chips.</p>
       <div className="agenda-toolbar">
         <input
           value={cityFilter}

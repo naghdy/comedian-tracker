@@ -87,7 +87,7 @@ Because a populated `v16` is never hydrated again, **any seed change must bump `
 
 ## City geocoding
 
-There is no Geocoding API. `src/lib/geo.ts` loads `data/cities.json` and matches case-insensitively, ignoring periods. Exact city or alias first, then substring either way. `knownCities()` feeds the datalist on `ShowForm`.
+There is no Geocoding API. `src/lib/geo.ts` loads `data/cities.json` and matches case-insensitively, ignoring periods. Exact city or alias first, then a whole-word match either way (so the alias `la` doesn't match inside "England" or "Portland"). For a show with a `region`, `coordsForShow` first tries `"{city}, {region}"` as an exact city or alias (how `Newcastle` + `NSW` reaches `Newcastle, NSW`), then falls back to the city alone; it never fuzzy-matches the joined string. `knownCities()` feeds the datalist on `ShowForm`.
 
 Lookup rows from Ticketmaster or SeatGeek can carry venue lat/lng, so those pins work before a `cities.json` edit. Seed rows generally do not store lat/lng; they need a city row.
 

@@ -147,7 +147,7 @@ Array of 142 cities. No envelope.
 | `lat`, `lng` | yes | Decimal degrees. |
 | `aliases` | no | Extra match strings. Periods are ignored. |
 
-Matching is exact (city or alias), then substring in either direction (`findCity`). Trip search uses the same table (`cityMatches`).
+Matching is exact (city or alias), then whole words in either direction (`findCity`). With a `region`, the pin is an exact match on `"{city}, {region}"` if one exists, else the city alone. Trip search uses the same table (`cityMatches`).
 
 ## `data/laylo-drops.json`
 

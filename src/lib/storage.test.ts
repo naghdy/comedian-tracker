@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { coordsForShow, findCity } from "./geo";
 import { hydrateJeffSeed, hydrateSeedShows } from "./storage";
+import { SEED_SHOWS } from "./seedData";
 import type { StoredState } from "../types";
 import comedianShows from "../../data/shows.json";
 import jeffArcuriShows from "../../data/jeff-arcuri-shows.json";
@@ -661,5 +662,36 @@ describe("2026-11-16 Zarna Garg", () => {
     assert.ok(portland);
     assert.equal(coordsForShow(portland)?.lat, 43.6591);
     assert.equal(findCity("Montréal")?.city, "Montreal");
+  });
+});
+
+describe("2026-11-16 map pins with a region", () => {
+  it("pins England, Birmingham AL and Portland ME nights in the right place", () => {
+    const at = (id: string) => {
+      const show = SEED_SHOWS.find((s) => s.id === id);
+      assert.ok(show, id);
+      return coordsForShow(show);
+    };
+    assert.deepEqual(at("rg-2026-12-03-sheffield"), { lat: 53.3811, lng: -1.4701 });
+    assert.deepEqual(at("cd-2026-10-20-manchester"), { lat: 53.4808, lng: -2.2426 });
+    assert.deepEqual(at("ja-2027-05-14-portland-me"), { lat: 43.6591, lng: -70.2568 });
+    assert.deepEqual(at("cd-2026-09-24-birmingham-al"), { lat: 33.5186, lng: -86.8104 });
+    assert.equal(at("ac-2026-11-26-newcastle")?.lat, findCity("Newcastle, NSW")?.lat);
+  });
+
+  it("never pins a seed night in Los Angeles unless it is a Los Angeles night", () => {
+    const la = findCity("Los Angeles");
+    for (const show of SEED_SHOWS) {
+      const pin = coordsForShow(show);
+      if (pin?.lat === la?.lat && pin?.lng === la?.lng) {
+        assert.equal(findCity(show.city)?.city, "Los Angeles", `${show.id} (${show.city}, ${show.region}) pinned in LA`);
+      }
+    }
+  });
+
+  it("matches short aliases only as whole words", () => {
+    assert.equal(findCity("Sheffield, England")?.city, "Sheffield");
+    assert.equal(findCity("Oxford, England")?.city, "Oxford");
+    assert.equal(findCity("Washington DC area")?.city, "Washington");
   });
 });

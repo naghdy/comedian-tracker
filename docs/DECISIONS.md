@@ -134,6 +134,12 @@ Jimmy O. Yang: 39 nights from jimmycomedy.com/shows, the Has No Friends Tour, 15
 
 New city pins: Brisbane, Canberra, Darwin, Grand Rapids, Jersey City, Kahului (Maui), Medford, Melbourne, Newcastle NSW (named `Newcastle, NSW` so it doesn't capture Newcastle upon Tyne), Reno, Sydney, Thirroul, Tucson. Seed key `v14` → `v15`.
 
+## 2026-11-16 — Fix map pins for rows with a region
+
+24 seed nights were pinned in the wrong place: 19 Ricky Gervais England nights and Chris D'Elia's Manchester night in Los Angeles, Jeff Arcuri's Portland ME night in Los Angeles, and three Birmingham, AL nights in Birmingham, England. `coordsForShow` joined city and region (`"Sheffield, England"`, `"Portland, ME, ME"`) and ran the fuzzy substring match on that string, where the Los Angeles alias `la` sits inside "England" and "Portland", and `Birmingham` is a substring of `"Birmingham, AL, AL"`.
+
+Fix: the joined string is only tried as an exact city or alias; otherwise the city alone is used. The substring fallback in `findCity` now needs whole words. No other seed night moved (checked all 349). Display-only, so no seed-key bump.
+
 ## 2026-11-16 — Add Zarna Garg
 
 Zarna Garg joins the end of the roster with 26 nights from her official site, zarnagarg.com/tickets (a Bandsintown list): Australia 21 Nov–6 Dec 2026 (Sydney Opera House, Seymour Centre York Theatre 24–28 Nov, Brisbane, Melbourne National Theatre and Palais, Adelaide), Canada 11–12 Dec (Montreal, Halifax), then the US 18 Dec 2026–27 Mar 2027 (Atlanta, Washington, New York Beacon 31 Dec, Kansas City 14–16 Jan, Ledyard, Portland ME, Charleston, Honolulu, Las Vegas, Anaheim, Bethlehem, Hershey). Rows live in `data/zarna-garg-shows.json` (prefix `zg`).

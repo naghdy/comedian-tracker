@@ -56,7 +56,7 @@ function pinIcon(color: string, theme: "dark" | "light"): google.maps.Symbol {
     scale: 6.5,
     fillColor: color,
     fillOpacity: 0.95,
-    strokeColor: theme === "dark" ? "#14161b" : "#f5f6f7",
+    strokeColor: theme === "dark" ? "#0e1630" : "#f7f7f5",
     strokeWeight: 1.5,
   };
 }
@@ -82,7 +82,7 @@ function fitMap(map: google.maps.Map, markers: Plotted[]) {
 function mapOptions(theme: "dark" | "light"): google.maps.MapOptions {
   return {
     styles: theme === "dark" ? DARK_MAP_STYLES : LIGHT_MAP_STYLES,
-    backgroundColor: theme === "dark" ? "#111318" : "#e9ebee",
+    backgroundColor: theme === "dark" ? "#0b1226" : "#e6e8ee",
     streetViewControl: false,
     mapTypeControl: false,
     fullscreenControl: true,

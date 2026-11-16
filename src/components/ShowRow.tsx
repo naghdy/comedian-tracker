@@ -11,6 +11,7 @@ type Props = {
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+/** One night, set like a line on a tour poster: date, who, where, when. */
 export function ShowRow({ show, comedian, today, onRemove }: Props) {
   const name = comedian?.name ?? "Unknown";
   const tour = tourTitle(name, show.title);
@@ -26,37 +27,31 @@ export function ShowRow({ show, comedian, today, onRemove }: Props) {
       transition={{ duration: 0.24, ease: EASE }}
     >
       <div className="row-inner">
-        <div className={`row-date${isToday ? " is-today" : ""}`}>
-          <span className="row-day">{day}</span>
+        <p className={`row-date${isToday ? " is-today" : ""}`}>
           <span className="row-weekday">{isToday ? "Tonight" : weekday}</span>
+          <span className="row-day">{day}</span>
+        </p>
+        <div className="row-who">
+          <p className="row-name">{name}</p>
+          {tour || show.sample ? (
+            <p className="row-tour">
+              {tour}
+              {show.sample ? <span className="tag">Sample</span> : null}
+            </p>
+          ) : null}
         </div>
-        <div className="row-body">
-          <p className="row-title">
-            <span className="dot" aria-hidden="true" />
-            <span className="row-name">{name}</span>
-            {tour ? <span className="row-tour">{tour}</span> : null}
-            {show.sample ? <span className="tag">Sample</span> : null}
-          </p>
-          <p className="row-meta">
-            {show.venue}
-            <span className="sep" aria-hidden="true">
-              ·
-            </span>
+        <div className="row-where">
+          <p className="row-venue">{show.venue}</p>
+          <p className="row-place">
             {placeLabel(show)}
-            {time ? (
-              <>
-                <span className="sep" aria-hidden="true">
-                  ·
-                </span>
-                {time}
-              </>
-            ) : null}
+            {time ? <span className="row-time-inline"> · {time}</span> : null}
           </p>
         </div>
+        <p className="row-time">{time ?? ""}</p>
         <div className="row-actions">
           {show.ticketUrl ? (
             <a
-              className="text-link"
+              className="tickets"
               href={show.ticketUrl}
               target="_blank"
               rel="noreferrer"

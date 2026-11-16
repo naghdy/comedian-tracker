@@ -43,7 +43,7 @@ export function Agenda({
   return (
     <section className="section listings" aria-labelledby="listings-title">
       <header className="section-head">
-        <h2 id="listings-title">Upcoming</h2>
+        <h2 id="listings-title">Dates</h2>
         <p className="section-meta">
           {shows.length} {shows.length === 1 ? "night" : "nights"}
         </p>
@@ -91,7 +91,10 @@ export function Agenda({
         ) : (
           groups.map((group) => (
             <div key={group.key} className="month">
-              <h3 className="month-label">{group.label}</h3>
+              <h3 className="month-label">
+                {group.label.replace(/ \d{4}$/, "")}{" "}
+                <span>{group.label.slice(-4)}</span>
+              </h3>
               <ol className="rows">
                 <AnimatePresence initial={false}>
                   {group.shows.map((show) => (

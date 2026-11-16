@@ -114,19 +114,9 @@ export default function App() {
             comedians={state.comedians}
             showCounts={showCounts}
             totalNights={upcoming.length}
-            today={today}
             selectedIds={selectedIds}
             onToggle={toggleComedian}
             onClear={() => setSelectedIds([])}
-            onReset={() => {
-              if (window.confirm("Restore the starter roster and seed shows?")) {
-                setState(resetSeed());
-                setSelectedIds([]);
-                setCityFilter("");
-                setComedianFilter("");
-                setTrip(null);
-              }
-            }}
             theme={theme}
             onToggleTheme={() => {
               const next = theme === "dark" ? "light" : "dark";
@@ -157,6 +147,24 @@ export default function App() {
               onClear={() => setTrip(null)}
             />
           </main>
+          <footer className="foot">
+            <p>Dates come from official tour pages and venue listings, checked weekly.</p>
+            <button
+              type="button"
+              className="text-btn"
+              onClick={() => {
+                if (window.confirm("Restore the starter roster and seed shows?")) {
+                  setState(resetSeed());
+                  setSelectedIds([]);
+                  setCityFilter("");
+                  setComedianFilter("");
+                  setTrip(null);
+                }
+              }}
+            >
+              Reset seed
+            </button>
+          </footer>
           <AnimatePresence>
             {formOpen ? (
               <ShowForm

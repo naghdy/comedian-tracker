@@ -26,14 +26,15 @@ Copy `.env.example` to `.env.local` for local runs. Pages injects the same names
 
 ## Layout
 
-Desktop is a two-column grid (`--rail: 300px` + main). Below 960px the rail stacks above the main column and the roster becomes two columns.
+One centred column, up to 1200px wide, laid out like a festival poster: header, map, dates, trip checker, footer. Each section opens with a thick rule. Date rows are a five-column grid on desktop (date, who, where, time, actions); below 900px the time folds into the place line, and below 640px each row stacks beside its date.
 
 | Region | Component | Behavior |
 | --- | --- | --- |
-| Left rail | `src/components/Roster.tsx` | Title, one-line description and the total of upcoming nights. Below it the roster ("On tour"): each row is a name, its upcoming count and a thin bar in the comedian's colour scaled to the busiest comedian. Click a row to filter map, agenda, and trip results; **Show everyone** clears it. Light/Dark and **Reset seed** sit at the bottom. There are no add, remove, refresh, or tour-link controls. |
+| Header | `src/components/Roster.tsx` | Top bar with the total of upcoming nights and Light/Dark. A large "Comedian Tracker" title. Below it the lineup ("On tour"): every comedian's name, sorted by upcoming nights, set larger the busier they are (`bill-top` at 55% or more of the busiest, `bill-mid` at 25%, `bill-low` below, `bill-off` for none), with the count beside it. Click a name to filter map, agenda, and trip results; **Show everyone** clears it. There are no add, remove, refresh, or tour-link controls. |
 | Top of main | `src/components/ShowMap.tsx` | Google Map. Color-coded circle pins, click opens an info window (title, venue, date, ticket link). |
-| Middle | `src/components/Agenda.tsx` | Upcoming shows (today onward) grouped under sticky month headings, one `ShowRow` per night: date chip (weekday + day, "Tonight" inverted), name, tour title with the comedian's name stripped (`tourTitle` in `src/lib/display.ts`), venue, place and time, a **Tickets** link and a remove button that shows on hover. City text filter and comedian `<select>` stack with the roster filter. **Add a show** opens `ShowForm` (saved as `source: "user"`). |
+| Middle | `src/components/Agenda.tsx` | Upcoming shows (today onward) grouped under large month headings, one `ShowRow` per night: weekday over a large day number ("Tonight" and an outlined number for today), name, tour title with the comedian's name stripped (`tourTitle` in `src/lib/display.ts`), venue, place and time, a **Tickets** link and a remove button that shows on hover. City text filter and comedian `<select>` stack with the roster filter. **Add a show** opens `ShowForm` (saved as `source: "user"`). |
 | Bottom | `src/components/TripChecker.tsx` | City + from/to, defaulting to today and a week out. Case-insensitive partial city match via `cityMatches`. Results reuse `ShowRow` under a headline like `3 nights in Houston, 18–25 Nov`. |
+| Footer | `src/App.tsx` | Where the dates come from, and **Reset seed**. |
 
 `src/App.tsx` owns filter state, theme, and show add/remove. Roster membership is not editable in the UI.
 

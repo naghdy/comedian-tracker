@@ -1,5 +1,5 @@
 import type { Show, TripQuery } from "../types";
-import { cityMatches, findCity } from "./geo";
+import { cityMatches } from "./geo";
 
 export function inDateRange(date: string, start?: string, end?: string) {
   if (start && date < start) return false;
@@ -79,13 +79,6 @@ export function formatShowDate(date: string, time?: string) {
   const period = h >= 12 ? "PM" : "AM";
   const hour12 = ((h + 11) % 12) + 1;
   return `${label} · ${hour12}:${String(m).padStart(2, "0")} ${period}`;
-}
-
-export function tripHeadline(city: string) {
-  const match = findCity(city);
-  const trimmed = (match?.city ?? city).trim();
-  if (!trimmed) return "In town these days…";
-  return `In ${trimmed} these days…`;
 }
 
 export const ROSTER_COLORS = [

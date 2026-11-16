@@ -105,11 +105,29 @@ function parseState(raw: string | null): StoredState | null {
   }
 }
 
+// Storage can throw (private windows, blocked site data); the tracker still
+// works from the seed in that case, it just won't remember changes.
+function readKey(key: string) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function writeKey(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* ignore */
+  }
+}
+
 function load(): StoredState {
-  const current = parseState(localStorage.getItem(KEY));
+  const current = parseState(readKey(KEY));
   if (current) return current;
   for (const legacyKey of LEGACY_KEYS) {
-    const legacy = parseState(localStorage.getItem(legacyKey));
+    const legacy = parseState(readKey(legacyKey));
     if (legacy) return hydrateSeedShows(legacy);
   }
   return structuredClone(seed);
@@ -121,7 +139,7 @@ export function useTrackerState() {
   );
 
   useEffect(() => {
-    localStorage.setItem(KEY, JSON.stringify(state));
+    writeKey(KEY, JSON.stringify(state));
   }, [state]);
 
   return [state, setState] as const;
@@ -129,6 +147,6 @@ export function useTrackerState() {
 
 export function resetSeed(): StoredState {
   const next = structuredClone(seed);
-  localStorage.setItem(KEY, JSON.stringify(next));
+  writeKey(KEY, JSON.stringify(next));
   return next;
 }

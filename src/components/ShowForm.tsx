@@ -1,4 +1,5 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import * as m from "motion/react-m";
 import type { Comedian, Show } from "../types";
 import { knownCities } from "../lib/geo";
 
@@ -14,6 +15,14 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
   const known = cities.some(
     (c) => c.toLowerCase() === city.trim().toLowerCase(),
   );
+
+  useEffect(() => {
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,10 +48,29 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
   }
 
   return (
-    <div className="modal" role="dialog" aria-modal="true" aria-label="Add show">
-      <form className="modal-card" onSubmit={submit}>
-        <h2 style={{ marginTop: 0 }}>Add show</h2>
-        <p className="lede">Saved in this browser via localStorage. No account required.</p>
+    <m.div
+      className="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="add-show-title"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18 }}
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <m.form
+        className="modal-card"
+        onSubmit={submit}
+        initial={{ opacity: 0, y: 12, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 8, scale: 0.99 }}
+        transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <h2 id="add-show-title">Add a show</h2>
+        <p className="section-lede">Saved in this browser only.</p>
         <label className="field">
           <span>Comedian</span>
           <select name="comedianId" required defaultValue={comedians[0]?.id}>
@@ -55,7 +83,7 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
         </label>
         <label className="field">
           <span>Title</span>
-          <input name="title" placeholder="Show title" required />
+          <input name="title" placeholder="Tour or show name" required />
         </label>
         <div className="grid-2">
           <label className="field">
@@ -80,9 +108,9 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
           </label>
         </div>
         {city && !known ? (
-          <p className="lede">
-            “{city}” is not in the static lat/lng table, so it will appear in
-            the agenda but not on the map until you add coordinates in{" "}
+          <p className="hint">
+            “{city}” isn’t in the city table yet, so it will be listed but not
+            pinned on the map until coordinates are added to{" "}
             <code>data/cities.json</code>.
           </p>
         ) : null}
@@ -107,18 +135,18 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
           </label>
         </div>
         <label className="field">
-          <span>Ticket URL (optional)</span>
+          <span>Ticket link (optional)</span>
           <input name="ticketUrl" type="url" placeholder="https://" />
         </label>
-        <div className="row-actions">
+        <div className="form-actions">
           <button className="btn" type="submit">
             Save show
           </button>
-          <button className="btn ghost" type="button" onClick={onClose}>
+          <button className="btn btn-quiet" type="button" onClick={onClose}>
             Cancel
           </button>
         </div>
-      </form>
-    </div>
+      </m.form>
+    </m.div>
   );
 }

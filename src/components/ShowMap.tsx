@@ -8,7 +8,7 @@ import {
 import type { Comedian, Show } from "../types";
 import { coordsForShow } from "../lib/geo";
 import { formatShowDate } from "../lib/filters";
-import { DARK_MAP_STYLES } from "../lib/mapStyles";
+import { DARK_MAP_STYLES, LIGHT_MAP_STYLES } from "../lib/mapStyles";
 
 type Props = {
   shows: Show[];
@@ -50,14 +50,14 @@ function plotShows(shows: Show[]): Plotted[] {
   );
 }
 
-function pinIcon(color: string): google.maps.Symbol {
+function pinIcon(color: string, theme: "dark" | "light"): google.maps.Symbol {
   return {
     path: google.maps.SymbolPath.CIRCLE,
-    scale: 8,
+    scale: 6.5,
     fillColor: color,
-    fillOpacity: 1,
-    strokeColor: "#ffffff",
-    strokeWeight: 2,
+    fillOpacity: 0.95,
+    strokeColor: theme === "dark" ? "#0e1630" : "#f7f7f5",
+    strokeWeight: 1.5,
   };
 }
 
@@ -81,8 +81,8 @@ function fitMap(map: google.maps.Map, markers: Plotted[]) {
 
 function mapOptions(theme: "dark" | "light"): google.maps.MapOptions {
   return {
-    styles: theme === "dark" ? DARK_MAP_STYLES : [],
-    backgroundColor: theme === "dark" ? "#0b1018" : "#d7e0ea",
+    styles: theme === "dark" ? DARK_MAP_STYLES : LIGHT_MAP_STYLES,
+    backgroundColor: theme === "dark" ? "#0b1226" : "#e6e8ee",
     streetViewControl: false,
     mapTypeControl: false,
     fullscreenControl: true,
@@ -180,7 +180,7 @@ function GoogleMapCanvas({
           <Marker
             key={marker.show.id}
             position={{ lat: marker.lat, lng: marker.lng }}
-            icon={pinIcon(comedian?.color ?? "#c4f542")}
+            icon={pinIcon(comedian?.color ?? "#888888", theme)}
             title={`${comedian?.name ?? "Unknown"} — ${marker.show.title}`}
             onClick={() => setActiveId(marker.show.id)}
           />
@@ -194,7 +194,7 @@ function GoogleMapCanvas({
           <div className="popup">
             <h3>
               {byId[active.show.comedianId]?.name ?? "Unknown"}{" "}
-              {active.show.sample ? <span className="badge">Sample</span> : null}
+              {active.show.sample ? <span className="tag">Sample</span> : null}
             </h3>
             <p>{active.show.title}</p>
             <p>
@@ -218,22 +218,20 @@ function GoogleMapCanvas({
 
 export function ShowMap({ shows, comedians, theme }: Props) {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY?.trim() ?? "";
-  const plotted = plotShows(shows).length;
-  const missing = shows.length - plotted;
+  const plotted = plotShows(shows);
+  const missing = shows.length - plotted.length;
+  const cities = new Set(plotted.map((p) => p.show.city.toLowerCase())).size;
 
   return (
-    <section className="panel map-wrap">
-      <div className="map-head">
-        <div>
-          <h2>Map</h2>
-          <p className="lede">
-            Color-coded pins on Google Maps.
-            {missing > 0
-              ? ` ${missing} show${missing === 1 ? "" : "s"} skipped — city not in the static lat/lng table.`
-              : ""}
-          </p>
-        </div>
-      </div>
+    <section className="section map-section" aria-labelledby="map-title">
+      <header className="section-head">
+        <h2 id="map-title">On the map</h2>
+        <p className="section-meta">
+          {plotted.length} {plotted.length === 1 ? "night" : "nights"} in {cities}{" "}
+          {cities === 1 ? "city" : "cities"}
+          {missing > 0 ? ` · ${missing} not pinned (city not in the table)` : ""}
+        </p>
+      </header>
       {apiKey ? (
         <GoogleMapCanvas
           apiKey={apiKey}
@@ -242,11 +240,13 @@ export function ShowMap({ shows, comedians, theme }: Props) {
           theme={theme}
         />
       ) : (
-        <MapFallback title="Google Maps API key missing">
+        <MapFallback title="No map in this build">
           <p>
-            Set <code>VITE_GOOGLE_MAPS_API_KEY</code> and rebuild. Roster, trip
-            checker, and agenda still work without it.
+            The Google Maps key isn’t set, so the map is off. Everything else
+            works without it.
           </p>
+          <details>
+            <summary>How to turn it on</summary>
           <ul>
             <li>
               GitHub Pages: repo <strong>Settings → Secrets and variables → Actions</strong>,
@@ -258,6 +258,7 @@ export function ShowMap({ shows, comedians, theme }: Props) {
               restart <code>npm run dev</code>.
             </li>
           </ul>
+          </details>
         </MapFallback>
       )}
     </section>

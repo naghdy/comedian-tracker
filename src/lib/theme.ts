@@ -19,5 +19,9 @@ export function applyTheme(theme: Theme) {
 
 export function persistTheme(theme: Theme) {
   applyTheme(theme);
-  localStorage.setItem(KEY, theme);
+  try {
+    localStorage.setItem(KEY, theme);
+  } catch {
+    /* ignore */
+  }
 }

@@ -145,3 +145,17 @@ Rationale: past nights are still useful as history in the seed files, and the da
 Nabil bought `comediantracker.com` and wants it as the main address. Hosting stays on GitHub Pages: the repo already deploys there with Actions, and Pages supports a custom apex domain with a free HTTPS certificate, so there was no reason to move hosts.
 
 Vite `base` goes from `/comedian-tracker/` to `./`. Relative asset paths work at the domain root and at the old `naghdy.com/comedian-tracker/` path, so this change can merge before or after the domain is switched without breaking the site. `og:url` and the `og:image`/`twitter:image` URLs now point at `https://comediantracker.com/`. The domain itself is set in **Settings → Pages**, not in a `CNAME` file, since Actions publishing ignores that file.
+
+## 2026-11-16 — Redesign
+
+Nabil asked for the site to feel smoother and less obviously AI-generated. What read as template: Sora + IBM Plex Sans, radial colour glows behind the page, a neon lime accent, a glass sidebar, every block in a rounded bordered card (cards inside cards), a stock microphone icon, a red **Remove** button on every row, rows that repeat the name ("Mo Amer — Mo Amer"), developer copy ("Color-coded pins on Google Maps", "case-insensitive partial match") and a trip checker that opened on past dates.
+
+The new look takes its cue from the dates list on a tour poster: a tall condensed face (Big Shoulders Display) for the title, section heads, month headings and day numbers, Hanken Grotesk for the rest, a cool charcoal ground, and no accent colour of its own, so the comedians' colours are the only colour. Cards are gone; the agenda is grouped by month with a date chip per night. The roster shows each comedian's upcoming count as a thin bar in their colour. The map uses matching quiet tiles in both themes.
+
+Motion (`motion`, Motion for React) handles the few animated moments: the list eases in after a filter change, removed rows collapse, the add-show dialog and trip results fade in. It respects reduced-motion settings and its animation code loads in a separate chunk after first paint (about 14 KB gzipped, plus about 18 KB in the main bundle). The 3D, video and canvas libraries were considered and left out as too heavy for a list page.
+
+His first look: "Now it looks very similar." The first pass had restyled the old layout without changing it, so the second pass changes the structure. The sidebar is gone. The page is one centred column with a large title and a festival-style lineup, where a comedian's name is set larger the more upcoming nights they have. Dates are set as a bill: a large day number, the name in capitals, venue and place, time, and a **Tickets** pill. The palette moved from charcoal to midnight navy with bone text (light theme: off-white with navy ink), and the map tiles follow it. Light/Dark moved to the top bar and **Reset seed** to the footer.
+
+His second look: he liked the colours but found the header too big, and the roster may grow to about 50 comedians. The title moved into a slim top bar, and the lineup became a compact grid of names (count and a share-of-busiest bar in each comedian's colour), sorted by upcoming nights and folded to the busiest 15 past 18 names.
+
+Kept: map first in the content, trip checker at the bottom, dark by default, no roster add/remove/refresh controls, upcoming-only filter. `localStorage` reads and writes are now wrapped so a blocked storage doesn't blank the page. No seed data changed, so no seed-key bump.

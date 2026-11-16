@@ -9,6 +9,7 @@ import chrisDeliaShows from "../../data/chris-delia-shows.json";
 import moAmerShows from "../../data/mo-amer-shows.json";
 import aaronChenShows from "../../data/aaron-chen-shows.json";
 import jimmyOYangShows from "../../data/jimmy-o-yang-shows.json";
+import zarnaGargShows from "../../data/zarna-garg-shows.json";
 import comedians from "../../data/comedians.json";
 
 describe("hydrateJeffSeed", () => {
@@ -590,9 +591,9 @@ describe("2026-11-13 Aaron Chen and Jimmy O. Yang", () => {
     { id: "jimmy-o-yang", prefix: "jy", file: jimmyOYangShows, count: 39, first: "2027-01-15", last: "2027-05-30" },
   ];
 
-  it("adds both to the end of the roster, Aaron Chen first", () => {
+  it("adds both to the roster, Aaron Chen first", () => {
     const roster = comedians.comedians.map((comedian) => comedian.id);
-    assert.deepEqual(roster.slice(-2), ["aaron-chen", "jimmy-o-yang"]);
+    assert.equal(roster.indexOf("jimmy-o-yang"), roster.indexOf("aaron-chen") + 1);
   });
 
   for (const c of cases) {
@@ -626,5 +627,39 @@ describe("2026-11-13 Aaron Chen and Jimmy O. Yang", () => {
   it("seeds Thirroul on 27 Nov, as the venue and Live Nation list it", () => {
     assert.ok(aaronChenShows.shows.some((show) => show.id === "ac-2026-11-27-thirroul"));
     assert.equal(aaronChenShows.shows.some((show) => show.date === "2026-11-28"), false);
+  });
+});
+
+describe("2026-11-16 Zarna Garg", () => {
+  it("adds Zarna Garg to the end of the roster", () => {
+    const roster = comedians.comedians.map((comedian) => comedian.id);
+    assert.equal(roster.at(-1), "zarna-garg");
+  });
+
+  it("seeds 26 listed nights, one per date, all pinned", () => {
+    assert.equal(zarnaGargShows.shows.length, 26);
+    assert.equal(new Set(zarnaGargShows.shows.map((show) => show.date)).size, 26);
+    assert.equal(zarnaGargShows.shows[0]?.date, "2026-11-21");
+    assert.equal(zarnaGargShows.shows.at(-1)?.date, "2027-03-27");
+    for (const show of zarnaGargShows.shows) {
+      assert.equal(show.comedianId, "zarna-garg");
+      assert.equal(show.source, "listed");
+      assert.match(show.id, /^zg-\d{4}-\d{2}-\d{2}-[a-z-]+$/);
+      assert.match(show.time ?? "", /^\d{2}:\d{2}$/);
+      assert.ok(coordsForShow(show), `no pin for ${show.id} (${show.city})`);
+    }
+  });
+
+  it("hydration adds her nights to a stored roster that lacks them", () => {
+    const next = hydrateSeedShows({ comedians: [], shows: [] });
+    assert.ok(next.comedians.some((comedian) => comedian.id === "zarna-garg"));
+    assert.equal(next.shows.filter((show) => show.comedianId === "zarna-garg").length, 26);
+  });
+
+  it("pins Portland, ME in Maine and Montréal under its accented spelling", () => {
+    const portland = zarnaGargShows.shows.find((show) => show.id === "zg-2027-01-23-portland");
+    assert.ok(portland);
+    assert.equal(coordsForShow(portland)?.lat, 43.6591);
+    assert.equal(findCity("Montréal")?.city, "Montreal");
   });
 });

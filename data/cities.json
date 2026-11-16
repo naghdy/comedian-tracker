@@ -133,5 +133,12 @@
   {"city":"Wichita","lat":37.6872,"lng":-97.3301,"aliases":["wichita, ks"]},
   {"city":"Wilmington","lat":34.2257,"lng":-77.9447,"aliases":["wilmington, nc"]},
   {"city":"Woking","lat":51.3168,"lng":-0.56},
-  {"city":"York, England","lat":53.96,"lng":-1.0873,"aliases":["york, uk"]}
+  {"city":"York, England","lat":53.96,"lng":-1.0873,"aliases":["york, uk"]},
+  {"city":"Adelaide","lat":-34.9285,"lng":138.6007,"aliases":["adelaide, sa","norwood, sa"]},
+  {"city":"Montreal","lat":45.5019,"lng":-73.5674,"aliases":["montréal","montreal, qc","montréal, qc"]},
+  {"city":"Halifax","lat":44.6488,"lng":-63.5752,"aliases":["halifax, ns"]},
+  {"city":"Ledyard","lat":41.4398,"lng":-72.014,"aliases":["ledyard, ct","mashantucket"]},
+  {"city":"Anaheim","lat":33.8366,"lng":-117.9143,"aliases":["anaheim, ca"]},
+  {"city":"Bethlehem","lat":40.6259,"lng":-75.3705,"aliases":["bethlehem, pa"]},
+  {"city":"Hershey","lat":40.2859,"lng":-76.6502,"aliases":["hershey, pa"]}
 ]

@@ -134,6 +134,12 @@ Jimmy O. Yang: 39 nights from jimmycomedy.com/shows, the Has No Friends Tour, 15
 
 New city pins: Brisbane, Canberra, Darwin, Grand Rapids, Jersey City, Kahului (Maui), Medford, Melbourne, Newcastle NSW (named `Newcastle, NSW` so it doesn't capture Newcastle upon Tyne), Reno, Sydney, Thirroul, Tucson. Seed key `v14` → `v15`.
 
+## 2026-11-16 — Add Zarna Garg
+
+Zarna Garg joins the end of the roster with 26 nights from her official site, zarnagarg.com/tickets (a Bandsintown list): Australia 21 Nov–6 Dec 2026 (Sydney Opera House, Seymour Centre York Theatre 24–28 Nov, Brisbane, Melbourne National Theatre and Palais, Adelaide), Canada 11–12 Dec (Montreal, Halifax), then the US 18 Dec 2026–27 Mar 2027 (Atlanta, Washington, New York Beacon 31 Dec, Kansas City 14–16 Jan, Ledyard, Portland ME, Charleston, Honolulu, Las Vegas, Anaheim, Bethlehem, Hershey). Rows live in `data/zarna-garg-shows.json` (prefix `zg`).
+
+New city pins: Adelaide, Anaheim, Bethlehem, Halifax, Hershey, Ledyard, Montreal. Every new row's `city, region` matches a city or alias exactly, so it never falls through to substring matching. Seed key `v15` → `v16`.
+
 ## 2026-11-13 — Show only upcoming nights
 
 The agenda opened on September 2026 because nothing filtered by date. Nabil asked for the list to start from today. `upcomingShows` now hides nights before the viewer's local date across the map, agenda, trip checker and roster counts.

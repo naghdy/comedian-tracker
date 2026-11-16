@@ -2,8 +2,8 @@
 
 Personal live-show dashboard for a curated comedy roster. No accounts. The roster and shows persist in this browser’s `localStorage`. v1 is Vite + React + TypeScript.
 
-**Live:** [https://naghdy.com/comedian-tracker/](https://naghdy.com/comedian-tracker/)  
-**GitHub Pages:** [https://naghdy.github.io/comedian-tracker/](https://naghdy.github.io/comedian-tracker/)
+**Live:** [https://comediantracker.com/](https://comediantracker.com/) (GitHub Pages custom domain, set in repo **Settings → Pages**)  
+**Before the custom domain:** [https://naghdy.com/comedian-tracker/](https://naghdy.com/comedian-tracker/) and [https://naghdy.github.io/comedian-tracker/](https://naghdy.github.io/comedian-tracker/)
 
 Day-to-day use is the live URL. You do not need a local server.
 
@@ -12,14 +12,14 @@ Day-to-day use is the live URL. You do not need a local server.
 ```bash
 npm install
 cp .env.example .env.local   # Maps key required for the map; Ticketmaster/SeatGeek optional
-npm run dev                  # http://localhost:5173/comedian-tracker/
+npm run dev                  # http://localhost:5173/
 npm test                     # tsx --test src/lib/*.test.ts
 npm run build                # tsc -b && vite build
 npm run preview
 npm run refresh-tours        # Node scrape into seed JSON (not the weekly digest)
 ```
 
-Node 22 in GitHub Actions (`.github/workflows/pages.yml`). Vite `base` is `/comedian-tracker/`.
+Node 22 in GitHub Actions (`.github/workflows/pages.yml`). Vite `base` is `./` (relative), so one build works at the domain root and under a sub-path.
 
 ## Where data lives
 

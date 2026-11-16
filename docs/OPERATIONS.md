@@ -51,12 +51,25 @@ from Actions secrets, then uploads `dist`. The deploy job uses `actions/deploy-p
 
 If the live URL 404s: **Settings → Pages → Build and deployment → Source: GitHub Actions**, then re-run the workflow.
 
+### Custom domain
+
+The site is served at `comediantracker.com` as a GitHub Pages custom domain on this repo. Because the workflow publishes with GitHub Actions, the domain lives only in **Settings → Pages → Custom domain**; there is no `CNAME` file (Pages ignores one in this mode). Keep **Enforce HTTPS** on.
+
+DNS for `comediantracker.com` (GitHub's documented Pages values):
+
+- `A` on `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+- `AAAA` on `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
+- `CNAME` on `www`: `naghdy.github.io` (no repo name). With the apex set as the custom domain, Pages redirects `www` to the apex.
+- `TXT` on `_github-pages-challenge-naghdy`: the value GitHub shows when the domain is verified under the account's **Settings → Pages**. Keep it, it stops anyone else claiming the domain on Pages.
+
+`vite.config.ts` uses a relative `base` (`./`), so the same build also works under a sub-path. localStorage is per origin, so a browser that used the old address starts fresh on the new one (seed roster and dark theme by default).
+
 ### Verify the live bundle
 
 After the workflow is green, confirm the new ids and the new seed key are in the published JavaScript, not only in the git tree.
 
-1. Open [https://naghdy.com/comedian-tracker/](https://naghdy.com/comedian-tracker/) (the Pages host is [https://naghdy.github.io/comedian-tracker/](https://naghdy.github.io/comedian-tracker/)).
-2. In the HTML, follow the module script under `/comedian-tracker/assets/`.
+1. Open [https://comediantracker.com/](https://comediantracker.com/).
+2. In the HTML, follow the module script under `./assets/`.
 3. Search that bundle for a new show id (for example `dc-2026-10-27-austin`) and for the seed key (`comedian-tracker:v15`, or the version you just bumped to).
 
 Vite inlines the JSON seed and the storage key, so both strings are in the JS. A stale Pages deploy will still show the previous ids and key.
@@ -87,8 +100,9 @@ Symptom: the map panel says Google Maps failed to load, or the console reports `
 
 Fix: on the Google Cloud key, enable the Maps JavaScript API and allow these HTTP referrers:
 
-- `naghdy.com/*`
-- `naghdy.github.io/*`
+- `comediantracker.com/*`
+- `www.comediantracker.com/*`
+- `naghdy.com/*` and `naghdy.github.io/*` (old addresses, harmless to keep)
 - `http://localhost:5173/*` for local `npm run dev`
 
 The secret name is `VITE_GOOGLE_MAPS_API_KEY`. After changing the secret, re-run **Deploy GitHub Pages** so the new value is baked into the bundle. Locally, put it in `.env.local` and restart Vite. Do not commit the key.

@@ -65,6 +65,13 @@
       "color": "#84cc16",
       "tourUrl": "https://www.jimmycomedy.com/shows/",
       "notes": "Seeded 2026-11-13 from the official tour page jimmycomedy.com/shows (jimmyoyang.com redirects there): Has No Friends Tour, 39 nights, Tampa 15 Jan to Las Vegas 30 May 2027. Page shows no years; all listed nights are upcoming, so 2027, confirmed on Live Nation/Ticketmaster and venue pages where readable."
+    },
+    {
+      "id": "zarna-garg",
+      "name": "Zarna Garg",
+      "color": "#e879f9",
+      "tourUrl": "https://zarnagarg.com/tickets/",
+      "notes": "Seeded 2026-11-16 from the official site zarnagarg.com/tickets (a Bandsintown list that loads in the browser): 26 upcoming nights, Sydney 21 Nov 2026 to Hershey 27 Mar 2027, across Australia, Canada and the US. Years printed. Australian dates match the BroadwayWorld tour announcement; Las Vegas 12 Feb 2027 matches FOX5 Las Vegas."
     }
   ]
 }

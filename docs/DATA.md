@@ -27,7 +27,7 @@ From `Show.source` in `src/types.ts`:
 
 Seed ids are `{prefix}-{YYYY-MM-DD}-{city-token}`, for example `dc-2026-09-25-washington`.
 
-Chris, Jeff, Mo Amer, Aaron Chen, Jimmy O. Yang, and `scripts/refresh-tours.ts` build the token with a slug: lowercase, non-alphanumerics collapsed to hyphens (`cd-2026-11-28-san-diego`, `ja-2026-09-24-fort-wayne`, `as-2026-11-06-birmingham-al`). `refresh-tours` would rename a Schulz id if it rebuilds the row (`westnyack` becomes `west-nyack`).
+Chris, Jeff, Mo Amer, Aaron Chen, Jimmy O. Yang, Zarna Garg, and `scripts/refresh-tours.ts` build the token with a slug: lowercase, non-alphanumerics collapsed to hyphens (`cd-2026-11-28-san-diego`, `ja-2026-09-24-fort-wayne`, `as-2026-11-06-birmingham-al`). `refresh-tours` would rename a Schulz id if it rebuilds the row (`westnyack` becomes `west-nyack`).
 
 Hand-written rows in `data/shows.json` sometimes use a shorter token than that slug. Leave those ids alone:
 
@@ -51,6 +51,7 @@ Hand-written rows in `data/shows.json` sometimes use a shorter token than that s
 | `ma` | Mo Amer | `data/mo-amer-shows.json` | `ma-2026-11-13-san-jose` |
 | `ac` | Aaron Chen | `data/aaron-chen-shows.json` | `ac-2026-11-26-newcastle` |
 | `jy` | Jimmy O. Yang | `data/jimmy-o-yang-shows.json` | `jy-2027-01-15-tampa` |
+| `zg` | Zarna Garg | `data/zarna-garg-shows.json` | `zg-2026-11-21-sydney` |
 
 `refresh-tours` uses `as-` and `ja-` for those two. Any other scraped comedian gets `{comedianId}-{date}-{city-slug}`.
 
@@ -61,7 +62,7 @@ Ids created in the browser:
 
 ## Show files
 
-`data/shows.json`, `data/jeff-arcuri-shows.json`, `data/chris-delia-shows.json`, `data/mo-amer-shows.json`, `data/aaron-chen-shows.json`, and `data/jimmy-o-yang-shows.json` share one envelope:
+`data/shows.json`, `data/jeff-arcuri-shows.json`, `data/chris-delia-shows.json`, `data/mo-amer-shows.json`, `data/aaron-chen-shows.json`, `data/jimmy-o-yang-shows.json`, and `data/zarna-garg-shows.json` share one envelope:
 
 ```json
 {
@@ -100,8 +101,9 @@ Current counts (all `source: "listed"`, one night per date):
 | `data/mo-amer-shows.json` | 2026-11-13 | 18 |
 | `data/aaron-chen-shows.json` | 2026-11-13 | 24 |
 | `data/jimmy-o-yang-shows.json` | 2026-11-13 | 39 |
+| `data/zarna-garg-shows.json` | 2026-11-16 | 26 |
 
-`src/lib/seedData.ts` concatenates those six `shows` arrays into `SEED_SHOWS`. A new file is invisible until it is imported there.
+`src/lib/seedData.ts` concatenates those seven `shows` arrays into `SEED_SHOWS`. A new file is invisible until it is imported there.
 
 ## `data/comedians.json`
 
@@ -133,7 +135,7 @@ Roster order in the file is the sidebar order.
 
 ## `data/cities.json`
 
-Array of 135 cities. No envelope.
+Array of 142 cities. No envelope.
 
 ```json
 { "city": "Washington", "lat": 38.9072, "lng": -77.0369, "aliases": ["washington, dc", "dc"] }
@@ -188,3 +190,4 @@ Prefer the official page. Ticketmaster or Live Nation alone is not enough when t
 | Mo Amer | Official tour page [moamer.com/shows](https://moamer.com/shows/) (`tourUrl`). The page prints month and day only, so each night's year and earliest start time were confirmed on the venue's own ticket page (San Jose Improv, Comedy Works, Blue Note Hawaii on TicketWeb, Emerald City, Stand Up Live Phoenix, Cap City, American Comedy Co.). | 18 nights, 13 Nov 2026–13 Feb 2027, seeded 2026-11-13. One row per calendar night with the earliest show time; TicketWeb analytics query strings stripped. Honolulu 12 Dec and San Diego 13 Feb have no `time`: moamer.com links the 12 Dec early show to the 11 Dec late-show page, and American Comedy Co. does not list 13 Feb yet. Past 2026 club nights on the page were not seeded. |
 | Aaron Chen | Official site [aaronchencomedy.com](https://www.aaronchencomedy.com/) (`tourUrl`), Tour section, Technology tour. The site prints month and day only; years come from the [Live Nation artist page](https://www.livenation.com/artist/K8vZ9174lIV/aaron-chen-events) and the venue pages (every listed night is after 2026-11-13, so Nov–Dec are 2026 and Jan–Apr are 2027). | 24 nights, 26 Nov 2026–17 Apr 2027, seeded 2026-11-13. One row per night with the earliest venue-printed start time; `time` omitted where no venue or the site printed one. Thirroul is seeded as Fri 27 Nov 2026 because Anita's Theatre and Live Nation both list 27 Nov (7:00pm and 9:15pm), though the site prints 28 Nov. Portland 12 Feb, Calgary 16 Apr and Vancouver 17 Apr are on the official site only so far. Newcastle is NSW: the row keeps `city: "Newcastle"` with `region: "NSW"`, which pins to `Newcastle, NSW` (bare `Newcastle` still resolves to Newcastle upon Tyne). |
 | Jimmy O. Yang | Official tour page [jimmycomedy.com/shows](https://www.jimmycomedy.com/shows/) (`tourUrl`; jimmyoyang.com redirects there), Has No Friends Tour. Month and day only; all listed nights are upcoming, so 2027, confirmed by Live Nation/Ticketmaster (Jersey City, Boston, Beacon Theatre) and by Brea Improv, Irvine Improv, Eccles Theater and Celebrity Theatre pages. | 39 nights, 15 Jan–30 May 2027, seeded 2026-11-13. One row per night with the earliest printed show time. Tampa Funny Bone 15–16 Jan has no `time` (the club's own calendar doesn't show it yet). Irvine 26–27 Mar shows a wait list. Second shows on the same night (Dallas, Denver, Jersey City, Los Angeles, Seattle, Vancouver) are collapsed. |
+| Zarna Garg | Official site [zarnagarg.com/tickets](https://zarnagarg.com/tickets/) (`tourUrl`; `/shows` is the same page). Its Upcoming Shows list is a Bandsintown widget that renders only in a browser, so a plain fetch sees no dates. Years and weekdays are printed. The Australian dates match the [BroadwayWorld announcement](https://www.broadwayworld.com/article/Zarna-Garg-to-Headline-Australian-Tour-20261016) (York Theatre is at the Seymour Centre; Norwood Concert Hall is Adelaide), and Las Vegas 12 Feb matches [FOX5 Las Vegas](https://www.fox5vegas.com/2026/10/07/comedian-zarna-garg-returning-venetian-las-vegas-2027/). | 26 nights, 21 Nov 2026–27 Mar 2027, seeded 2026-11-16. One row per night with the earliest show time; second shows in Atlanta 18 Dec, Washington 19 Dec and Kansas City 16 Jan are collapsed. National Theatre and Palais Theatre (St Kilda) pin to Melbourne. `ticketUrl` is the Bandsintown event page the official list links to, tracking query stripped. Portland uses `city: "Portland"` with `region: "ME"`, which pins to `Portland, ME`. |

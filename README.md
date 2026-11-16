@@ -2,7 +2,7 @@
 
 Personal dashboard for tracking live comedy shows for a curated roster. No account — roster and shows persist in `localStorage`.
 
-**Live site:** [https://naghdy.com/comedian-tracker/](https://naghdy.com/comedian-tracker/)
+**Live site:** [https://comediantracker.com/](https://comediantracker.com/)
 
 Day-to-day use is the live URL. You do not need to run anything locally.
 
@@ -30,7 +30,7 @@ If the live URL 404s:
 The roster, trip checker, and agenda work without a key. The map panel shows a setup message until one is provided.
 
 1. Create a [Maps JavaScript API](https://console.cloud.google.com/google/maps-apis) key in Google Cloud.
-2. Restrict it to `https://naghdy.com/comedian-tracker/*` (and `http://localhost:5173/*` if you develop locally).
+2. Restrict it to `comediantracker.com/*` and `www.comediantracker.com/*` (plus `naghdy.github.io/*`, and `http://localhost:5173/*` if you develop locally).
 3. Add a repo secret named **`VITE_GOOGLE_MAPS_API_KEY`**: **Settings → Secrets and variables → Actions**.
 4. Re-run **Deploy GitHub Pages** so Vite can bake the key into the build.
 
@@ -58,7 +58,7 @@ npm run dev
 npm test                     # lookup merge helpers
 ```
 
-Vite is configured with `base: '/comedian-tracker/'`, so the printed URL is [http://localhost:5173/comedian-tracker/](http://localhost:5173/comedian-tracker/).
+Vite is configured with `base: './'` (relative asset paths), so the printed URL is [http://localhost:5173/](http://localhost:5173/).
 
 ```bash
 npm run build    # production bundle

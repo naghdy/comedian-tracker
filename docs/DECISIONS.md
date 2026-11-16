@@ -139,3 +139,9 @@ New city pins: Brisbane, Canberra, Darwin, Grand Rapids, Jersey City, Kahului (M
 The agenda opened on September 2026 because nothing filtered by date. Nabil asked for the list to start from today. `upcomingShows` now hides nights before the viewer's local date across the map, agenda, trip checker and roster counts.
 
 Rationale: past nights are still useful as history in the seed files, and the data rules say not to prune a night only because it has passed, so this is a display filter. Seed JSON and the seed key are unchanged.
+
+## 2026-11-16 — Move to comediantracker.com
+
+Nabil bought `comediantracker.com` and wants it as the main address. Hosting stays on GitHub Pages: the repo already deploys there with Actions, and Pages supports a custom apex domain with a free HTTPS certificate, so there was no reason to move hosts.
+
+Vite `base` goes from `/comedian-tracker/` to `./`. Relative asset paths work at the domain root and at the old `naghdy.com/comedian-tracker/` path, so this change can merge before or after the domain is switched without breaking the site. `og:url` and the `og:image`/`twitter:image` URLs now point at `https://comediantracker.com/`. The domain itself is set in **Settings → Pages**, not in a `CNAME` file, since Actions publishing ignores that file.

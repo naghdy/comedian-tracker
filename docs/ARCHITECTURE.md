@@ -11,7 +11,7 @@ Vite 6 + React 18 + TypeScript. No router, no auth, no backend. The production b
 | Types | `src/types.ts` (`Comedian`, `Show`, `CityCoord`, `TripQuery`, `StoredState`) |
 | Styles | `src/index.css` (CSS variables, dark default). Fonts: Sora (display), IBM Plex Sans (body), loaded from Google Fonts in `index.html`. |
 | Map | `@react-google-maps/api` in `src/components/ShowMap.tsx`. Dark tile JSON: `src/lib/mapStyles.ts`. |
-| Build | `npm run build` → `tsc -b && vite build`. `vite.config.ts` sets `base: '/comedian-tracker/'`, dev server port `5173`, `host: true`. |
+| Build | `npm run build` → `tsc -b && vite build`. `vite.config.ts` sets `base: './'` (relative asset URLs, so the build works at `comediantracker.com/` and under any sub-path), dev server port `5173`, `host: true`. |
 
 Env vars (all optional at compile time, all public in the bundle — never commit real values):
 
@@ -44,8 +44,9 @@ Only upcoming nights are shown. `App` runs `upcomingShows` (`src/lib/filters.ts`
 
 The key is a GitHub repo secret named `VITE_GOOGLE_MAPS_API_KEY` (**Settings → Secrets and variables → Actions**). The Pages workflow passes it into `npm run build`, so Vite bakes it into the JS bundle. HTTP referrer restrictions on the key must allow:
 
-- `naghdy.com/*`
-- `naghdy.github.io/*`
+- `comediantracker.com/*`
+- `www.comediantracker.com/*`
+- `naghdy.com/*` and `naghdy.github.io/*` (old addresses)
 - `http://localhost:5173/*` for local dev
 
 Pins: `coordsForShow` uses `show.lat` / `show.lng` when both are finite, otherwise `data/cities.json` (city, or `"city, region"` when a region is set). Shows with no match stay in the agenda and are counted in the map lede as skipped. Several shows in the same city for the same comedian are nudged apart so the pins do not stack. Default view is `{ lat: 39.5, lng: -45 }` at zoom 3; one pin zooms to 6; many pins call `fitBounds`. Dark theme applies `DARK_MAP_STYLES`; light theme uses Google’s default light tiles (`styles: []`).
@@ -123,7 +124,7 @@ It does not bump the localStorage key, open a PR, or deploy. Chris D'Elia is reg
 | --- | --- |
 | `favicon.ico`, `favicon.svg`, `favicon-32.png`, `icon-512.png` | Icons |
 | `apple-touch-icon.png` | Apple touch icon |
-| `og-image.png` | `og:image` and `twitter:image` (1200×630), absolute URL `https://naghdy.com/comedian-tracker/og-image.png` |
+| `og-image.png` | `og:image` and `twitter:image` (1200×630), absolute URL `https://comediantracker.com/og-image.png` |
 | `.nojekyll` | Stops GitHub Pages from running Jekyll |
 
-`og:url` is `https://naghdy.com/comedian-tracker/`.
+`og:url` is `https://comediantracker.com/`.

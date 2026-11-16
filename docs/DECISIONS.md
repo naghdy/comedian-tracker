@@ -145,3 +145,13 @@ Rationale: past nights are still useful as history in the seed files, and the da
 Nabil bought `comediantracker.com` and wants it as the main address. Hosting stays on GitHub Pages: the repo already deploys there with Actions, and Pages supports a custom apex domain with a free HTTPS certificate, so there was no reason to move hosts.
 
 Vite `base` goes from `/comedian-tracker/` to `./`. Relative asset paths work at the domain root and at the old `naghdy.com/comedian-tracker/` path, so this change can merge before or after the domain is switched without breaking the site. `og:url` and the `og:image`/`twitter:image` URLs now point at `https://comediantracker.com/`. The domain itself is set in **Settings → Pages**, not in a `CNAME` file, since Actions publishing ignores that file.
+
+## 2026-11-16 — Redesign
+
+Nabil asked for the site to feel smoother and less obviously AI-generated. What read as template: Sora + IBM Plex Sans, radial colour glows behind the page, a neon lime accent, a glass sidebar, every block in a rounded bordered card (cards inside cards), a stock microphone icon, a red **Remove** button on every row, rows that repeat the name ("Mo Amer — Mo Amer"), developer copy ("Color-coded pins on Google Maps", "case-insensitive partial match") and a trip checker that opened on past dates.
+
+The new look takes its cue from the dates list on a tour poster: a tall condensed face (Big Shoulders Display) for the title, section heads, month headings and day numbers, Hanken Grotesk for the rest, a cool charcoal ground, and no accent colour of its own, so the comedians' colours are the only colour. Cards are gone; the agenda is grouped by month with a date chip per night. The roster shows each comedian's upcoming count as a thin bar in their colour. The map uses matching quiet tiles in both themes.
+
+Motion (`motion`, Motion for React) handles the few animated moments: the list eases in after a filter change, removed rows collapse, the add-show dialog and trip results fade in. It respects reduced-motion settings and its animation code loads in a separate chunk after first paint (about 14 KB gzipped, plus about 18 KB in the main bundle). The 3D, video and canvas libraries were considered and left out as too heavy for a list page.
+
+Kept: map on top, trip checker at the bottom, dark by default, no roster add/remove/refresh controls, upcoming-only filter. `localStorage` reads and writes are now wrapped so a blocked storage doesn't blank the page. No seed data changed, so no seed-key bump.

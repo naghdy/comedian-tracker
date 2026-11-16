@@ -3,107 +3,114 @@ import type { Comedian } from "../types";
 type Props = {
   comedians: Comedian[];
   showCounts: Record<string, number>;
+  totalNights: number;
+  today: string;
   selectedIds: string[];
   onToggle: (id: string) => void;
+  onClear: () => void;
   onReset: () => void;
   theme: "dark" | "light";
   onToggleTheme: () => void;
 };
 
+function shortDate(today: string) {
+  const [y, mo, d] = today.split("-").map(Number);
+  return new Date(Date.UTC(y, mo - 1, d)).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    timeZone: "UTC",
+  });
+}
+
 export function Roster({
   comedians,
   showCounts,
+  totalNights,
+  today,
   selectedIds,
   onToggle,
+  onClear,
   onReset,
   theme,
   onToggleTheme,
 }: Props) {
+  const filtering = selectedIds.length > 0;
+  const busiest = Math.max(1, ...comedians.map((c) => showCounts[c.id] ?? 0));
+
   return (
-    <aside className="sidebar">
-      <div className="brand-row">
-        <div className="brand">
-          <div className="brand-mark" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
-              <path
-                d="M16 6c-2.8 0-5 2.1-5 4.8v6.4c0 2.7 2.2 4.8 5 4.8s5-2.1 5-4.8V10.8C21 8.1 18.8 6 16 6Z"
-                fill="currentColor"
-                style={{ color: "var(--accent)" }}
-              />
-              <path
-                d="M8.5 16.2c0 4.1 3.4 7.5 7.5 7.5s7.5-3.4 7.5-7.5M16 23.7v3.2M12.2 26.9h7.6"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-          <div>
-            <h1>Comedian Tracker</h1>
-            <p>Personal live-show dashboard</p>
-          </div>
+    <aside className="rail">
+      <header className="masthead">
+        <h1>
+          Comedian <span>Tracker</span>
+        </h1>
+        <p className="standfirst">
+          Every upcoming night for the comics I follow, from{" "}
+          {shortDate(today)} on.
+        </p>
+        <p className="tally">
+          <span className="tally-number">{totalNights}</span> nights booked
+        </p>
+      </header>
+
+      <nav className="index" aria-labelledby="index-title">
+        <div className="index-head">
+          <h2 id="index-title">On tour</h2>
+          {filtering ? (
+            <button type="button" className="text-btn" onClick={onClear}>
+              Show everyone
+            </button>
+          ) : null}
         </div>
+        {comedians.length === 0 ? (
+          <p className="empty">No one on the list yet.</p>
+        ) : (
+          <ul className={`index-list${filtering ? " is-filtering" : ""}`}>
+            {comedians.map((comedian) => {
+              const selected = selectedIds.includes(comedian.id);
+              const count = showCounts[comedian.id] ?? 0;
+              const countLabel =
+                count === 0
+                  ? "no upcoming nights"
+                  : `${count} upcoming ${count === 1 ? "night" : "nights"}`;
+              return (
+                <li key={comedian.id}>
+                  <button
+                    type="button"
+                    className={`index-row${selected ? " is-selected" : ""}${count === 0 ? " is-empty" : ""}`}
+                    style={{ ["--chip" as string]: comedian.color }}
+                    onClick={() => onToggle(comedian.id)}
+                    aria-pressed={selected}
+                    aria-label={`${comedian.name}, ${countLabel}`}
+                  >
+                    <span className="index-name">{comedian.name}</span>
+                    <span className="index-count" aria-hidden="true">
+                      {count === 0 ? "–" : count}
+                    </span>
+                    <span className="index-bar" aria-hidden="true">
+                      <span style={{ width: `${(count / busiest) * 100}%` }} />
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </nav>
+
+      <footer className="rail-foot">
         <button
           type="button"
-          className="theme-toggle"
+          className="text-btn"
           onClick={onToggleTheme}
           aria-pressed={theme === "light"}
-          title="Switch color theme"
         >
-          {theme === "dark" ? "Light" : "Dark"}
+          {theme === "dark" ? "Light mode" : "Dark mode"}
         </button>
-      </div>
-
-      <div className="roster-block">
-        <p className="section-label">Roster</p>
-        <div className="roster">
-          {comedians.length === 0 ? (
-            <div className="empty">Roster is empty.</div>
-          ) : (
-            comedians.map((comedian) => {
-              const active =
-                selectedIds.length === 0 || selectedIds.includes(comedian.id);
-              const count = showCounts[comedian.id] ?? 0;
-              const countLabel = `${count} ${count === 1 ? "show" : "shows"}`;
-              return (
-                <button
-                  key={comedian.id}
-                  type="button"
-                  className={`chip ${active && selectedIds.length ? "active" : ""}`}
-                  style={{ ["--chip" as string]: comedian.color }}
-                  onClick={() => onToggle(comedian.id)}
-                  aria-pressed={selectedIds.includes(comedian.id)}
-                  aria-label={`${comedian.name}, ${countLabel}`}
-                >
-                  <span className="swatch" />
-                  <span className="chip-name">{comedian.name}</span>
-                  <span className="chip-count" title={countLabel}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })
-          )}
-        </div>
-        {selectedIds.length > 0 ? (
-          <button
-            type="button"
-            className="reset"
-            style={{ marginTop: 8 }}
-            onClick={() => selectedIds.forEach(onToggle)}
-          >
-            Clear roster filter
-          </button>
-        ) : null}
-      </div>
-
-      <button
-        className="reset roster-reset"
-        type="button"
-        onClick={onReset}
-      >
-        Reset seed
-      </button>
+        <span aria-hidden="true">·</span>
+        <button type="button" className="text-btn" onClick={onReset}>
+          Reset seed
+        </button>
+      </footer>
     </aside>
   );
 }

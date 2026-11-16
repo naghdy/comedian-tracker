@@ -9,8 +9,9 @@ Vite 6 + React 18 + TypeScript. No router, no auth, no backend. The production b
 | Entry | `index.html`, `src/main.tsx` |
 | App shell | `src/App.tsx` |
 | Types | `src/types.ts` (`Comedian`, `Show`, `CityCoord`, `TripQuery`, `StoredState`) |
-| Styles | `src/index.css` (CSS variables, dark default). Fonts: Sora (display), IBM Plex Sans (body), loaded from Google Fonts in `index.html`. |
-| Map | `@react-google-maps/api` in `src/components/ShowMap.tsx`. Dark tile JSON: `src/lib/mapStyles.ts`. |
+| Styles | `src/index.css` (CSS variables, dark default, no single accent colour; comedians' colours are the only colour). Fonts: Big Shoulders Display (headings, months, day numbers), Hanken Grotesk (everything else), loaded from Google Fonts in `index.html`. |
+| Motion | `motion` (`motion/react`). `LazyMotion` in `App.tsx` loads the animation features from `src/lib/motionFeatures.ts` as a separate chunk after first paint; components use `motion/react-m`. `MotionConfig reducedMotion="user"` honours the OS setting. |
+| Map | `@react-google-maps/api` in `src/components/ShowMap.tsx`. Tile styles for both themes: `src/lib/mapStyles.ts`. |
 | Build | `npm run build` → `tsc -b && vite build`. `vite.config.ts` sets `base: './'` (relative asset URLs, so the build works at `comediantracker.com/` and under any sub-path), dev server port `5173`, `host: true`. |
 
 Env vars (all optional at compile time, all public in the bundle — never commit real values):
@@ -25,14 +26,14 @@ Copy `.env.example` to `.env.local` for local runs. Pages injects the same names
 
 ## Layout
 
-Desktop is a two-column grid (`--sidebar: 280px` + main). Below 980px the sidebar stacks above the main column.
+Desktop is a two-column grid (`--rail: 300px` + main). Below 960px the rail stacks above the main column and the roster becomes two columns.
 
 | Region | Component | Behavior |
 | --- | --- | --- |
-| Left | `src/components/Roster.tsx` | Curator-managed color chips. Click a row to filter map, agenda, and trip results. Upcoming-show count sits on the right of the name. **Reset seed** is at the bottom. Light/Dark toggle is in the brand row. There are no add, remove, refresh, or tour-link controls. |
+| Left rail | `src/components/Roster.tsx` | Title, one-line description and the total of upcoming nights. Below it the roster ("On tour"): each row is a name, its upcoming count and a thin bar in the comedian's colour scaled to the busiest comedian. Click a row to filter map, agenda, and trip results; **Show everyone** clears it. Light/Dark and **Reset seed** sit at the bottom. There are no add, remove, refresh, or tour-link controls. |
 | Top of main | `src/components/ShowMap.tsx` | Google Map. Color-coded circle pins, click opens an info window (title, venue, date, ticket link). |
-| Middle | `src/components/Agenda.tsx` | Chronological list of upcoming shows (today onward). City text filter and comedian `<select>` stack with the roster filter. **Add show** opens `ShowForm` (saved as `source: "user"`). Each card can remove that show. |
-| Bottom | `src/components/TripChecker.tsx` | City + start/end. Case-insensitive partial city match via `cityMatches`. Headline from `tripHeadline`: `In Houston these days…`. |
+| Middle | `src/components/Agenda.tsx` | Upcoming shows (today onward) grouped under sticky month headings, one `ShowRow` per night: date chip (weekday + day, "Tonight" inverted), name, tour title with the comedian's name stripped (`tourTitle` in `src/lib/display.ts`), venue, place and time, a **Tickets** link and a remove button that shows on hover. City text filter and comedian `<select>` stack with the roster filter. **Add a show** opens `ShowForm` (saved as `source: "user"`). |
+| Bottom | `src/components/TripChecker.tsx` | City + from/to, defaulting to today and a week out. Case-insensitive partial city match via `cityMatches`. Results reuse `ShowRow` under a headline like `3 nights in Houston, 18–25 Nov`. |
 
 `src/App.tsx` owns filter state, theme, and show add/remove. Roster membership is not editable in the UI.
 

@@ -156,4 +156,6 @@ Motion (`motion`, Motion for React) handles the few animated moments: the list e
 
 His first look: "Now it looks very similar." The first pass had restyled the old layout without changing it, so the second pass changes the structure. The sidebar is gone. The page is one centred column with a large title and a festival-style lineup, where a comedian's name is set larger the more upcoming nights they have. Dates are set as a bill: a large day number, the name in capitals, venue and place, time, and a **Tickets** pill. The palette moved from charcoal to midnight navy with bone text (light theme: off-white with navy ink), and the map tiles follow it. Light/Dark moved to the top bar and **Reset seed** to the footer.
 
+His second look: he liked the colours but found the header too big, and the roster may grow to about 50 comedians. The title moved into a slim top bar, and the lineup became a compact grid of names (count and a share-of-busiest bar in each comedian's colour), sorted by upcoming nights and folded to the busiest 15 past 18 names.
+
 Kept: map first in the content, trip checker at the bottom, dark by default, no roster add/remove/refresh controls, upcoming-only filter. `localStorage` reads and writes are now wrapped so a blocked storage doesn't blank the page. No seed data changed, so no seed-key bump.

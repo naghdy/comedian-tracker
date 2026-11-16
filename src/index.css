@@ -1,6 +1,6 @@
 /*
- * Comedian Tracker. Set like a festival poster: one big title, a lineup where
- * the busiest comedians get the biggest type, then the dates as a bill.
+ * Comedian Tracker. Set like a tour poster: a slim title bar, the lineup as a
+ * compact index sorted by upcoming nights, then the dates as a bill.
  * A tall condensed face for display, a plain grotesk for the rest, midnight
  * navy and bone, no accent colour. The comedians' own colours do the
  * signalling.
@@ -152,176 +152,178 @@ code {
   border-top: 3px solid var(--ink);
 }
 
-/* ---------- Header: title and lineup ---------- */
+/* ---------- Header: one bar, then the lineup ---------- */
 
 .top {
-  padding-bottom: 64px;
+  padding-bottom: 56px;
 }
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding: 18px 0 16px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.wordmark span {
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.topbar-end {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
   font-size: 0.8rem;
   color: var(--ink-3);
 }
 
-.topbar strong {
+.topbar-count strong {
   color: var(--ink);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
-.title {
-  margin: 28px 0 0;
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(3.6rem, 13.5vw, 11.5rem);
-  line-height: 0.8;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.title span {
-  display: block;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--ink);
-}
-
-@supports not (-webkit-text-stroke: 2px black) {
-  .title span {
-    color: var(--ink-3);
-  }
-}
-
 .lineup {
-  margin-top: 44px;
-  text-align: center;
+  margin-top: 28px;
 }
 
 .lineup-head {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 18px;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-bottom: 6px;
 }
 
 .lineup-head h2 {
   font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-3);
+}
+
+.lineup-head h2 span {
+  margin-left: 6px;
+  color: var(--ink-2);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
 }
 
 .lineup-head p {
   font-size: 0.8rem;
   color: var(--ink-3);
-  min-height: 1.5em;
 }
 
 .lineup-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: baseline;
-  gap: 4px 0;
-  max-width: 1040px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  column-gap: 28px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.lineup-list li {
+.act {
+  position: relative;
   display: flex;
   align-items: baseline;
-}
-
-.lineup-list li + li::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin: 0 clamp(10px, 1.6vw, 20px);
-  border-radius: 50%;
-  background: var(--ink-3);
-  transform: translateY(-0.35em);
-  opacity: 0.6;
-}
-
-.act {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 0 0 2px;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 0 12px;
   border: 0;
+  border-bottom: 1px solid var(--rule);
   background: none;
-  font-family: var(--display);
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  background-image: linear-gradient(var(--chip), var(--chip));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0 3px;
+  text-align: left;
   transition:
     opacity 0.25s var(--ease),
-    color 0.2s var(--ease),
-    background-size 0.3s var(--ease);
+    color 0.2s var(--ease);
 }
 
-.act:hover {
-  background-size: 100% 3px;
+/* A share-of-the-busiest bar in the comedian's colour, sitting on the rule. */
+.act::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: var(--share);
+  height: 2px;
+  background: var(--chip);
+  opacity: 0.85;
+  transition:
+    width 0.5s var(--ease),
+    height 0.15s var(--ease);
+}
+
+.act-name {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .act-count {
-  font-family: var(--sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--ink-3);
+  flex-shrink: 0;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink-2);
   font-variant-numeric: tabular-nums;
-  transform: translateY(0.1em);
 }
 
-.bill-top {
-  font-size: clamp(2.4rem, 6vw, 4.6rem);
-  font-weight: 800;
+.act:hover .act-name {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
 }
 
-.bill-mid {
-  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+.act:hover::after,
+.act.is-selected::after {
+  height: 3px;
 }
 
-.bill-low {
-  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+.act.is-selected .act-name {
   font-weight: 600;
 }
 
-.bill-off {
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
-  font-weight: 600;
+.act.is-selected .act-count {
+  color: var(--ink);
+}
+
+.act.is-empty .act-name,
+.act.is-empty .act-count {
   color: var(--ink-3);
-}
-
-.act.is-selected {
-  background-size: 100% 3px;
 }
 
 .lineup-list.is-filtering .act:not(.is-selected) {
-  opacity: 0.3;
+  opacity: 0.38;
 }
 
 .lineup-list.is-filtering .act:not(.is-selected):hover {
-  opacity: 0.7;
+  opacity: 0.75;
+}
+
+.lineup-more {
+  margin-top: 12px;
 }
 
 /* ---------- Footer ---------- */
@@ -862,15 +864,17 @@ code {
   }
 
   .top {
-    padding-bottom: 48px;
+    padding-bottom: 44px;
   }
 
-  .title span {
-    -webkit-text-stroke-width: 1.5px;
+  .topbar-end {
+    width: 100%;
+    justify-content: space-between;
   }
 
-  .lineup {
-    margin-top: 32px;
+  .lineup-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
   }
 
   .main {

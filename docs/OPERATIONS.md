@@ -11,9 +11,9 @@ Never invent a date. If the official page does not list it, leave it out.
 The curator names the person. The agent finds official dates, then:
 
 1. Add a roster row to `data/comedians.json` (`id`, `name`, `color`, `tourUrl`, `notes`, `aliases` when spellings differ). Sidebar order follows this array.
-2. Add shows to `data/shows.json`, or to a dedicated file imported from `src/lib/seedData.ts` (Jeff, Chris, Mo Amer, Aaron Chen, Jimmy O. Yang and Zarna Garg use dedicated files). One row per calendar night, `source: "listed"`, id `{prefix}-{YYYY-MM-DD}-{city-slug}`. See [DATA.md](DATA.md).
+2. Add shows to `data/shows.json`, or to a dedicated file imported from `src/lib/seedData.ts` (Jeff, Chris, Mo Amer, Aaron Chen, Jimmy O. Yang, Zarna Garg and Andrew Santino use dedicated files). One row per calendar night, `source: "listed"`, id `{prefix}-{YYYY-MM-DD}-{city-slug}`. See [DATA.md](DATA.md).
 3. Add any new city to `data/cities.json` (`city`, `lat`, `lng`, `aliases`) so the map can pin it. A show with no city match and no lat/lng still appears on the agenda.
-4. Bump the seed key in `src/lib/storage.ts`. Today that is `comedian-tracker:v17`. Set `KEY` to the next version and append the old key to `LEGACY_KEYS`. A browser that already has the current key will not re-read the JSON until the key changes.
+4. Bump the seed key in `src/lib/storage.ts`. Today that is `comedian-tracker:v18`. Set `KEY` to the next version and append the old key to `LEGACY_KEYS`. A browser that already has the current key will not re-read the JSON until the key changes.
 5. Update tests that assert counts and migration: `src/lib/storage.test.ts`, and `src/lib/lookupShows.test.ts` if the new or changed comedian is covered there. `npm run refresh-tours` also exits 1 unless Andrew Schulz still has 15 nights — update that assertion when his official calendar actually changes length.
 6. `npm test` and `npm run build`.
 7. Open a PR, merge to `main`, and let Pages deploy. Tell Nabil what was added.
@@ -35,7 +35,7 @@ npx tsx scripts/write-jeff-arcuri-seed.ts    # overwrites data/jeff-arcuri-shows
 
 `npm run refresh-tours` rewrites Schulz from Laylo and merges Jeff club pages. It does not bump localStorage, commit, or deploy. Review the diff before treating it as verified.
 
-`hydrateSeedShows` replaces `listed` rows for each seed comedian and keeps `user` and `lookup` rows. People who already stored `v17` need the key bump; **Reset seed** is the manual escape hatch.
+`hydrateSeedShows` replaces `listed` rows for each seed comedian and keeps `user` and `lookup` rows. People who already stored `v18` need the key bump; **Reset seed** is the manual escape hatch.
 
 ## Deploy
 
@@ -71,7 +71,7 @@ After the workflow is green, confirm the new ids and the new seed key are in the
 
 1. Open [https://comediantracker.com/](https://comediantracker.com/).
 2. In the HTML, follow the module script under `./assets/`.
-3. Search that bundle for a new show id (for example `dc-2026-10-27-austin`) and for the seed key (`comedian-tracker:v17`, or the version you just bumped to).
+3. Search that bundle for a new show id (for example `dc-2026-10-27-austin`) and for the seed key (`comedian-tracker:v18`, or the version you just bumped to).
 
 Vite inlines the JSON seed and the storage key, so both strings are in the JS. A stale Pages deploy will still show the previous ids and key.
 
@@ -106,7 +106,7 @@ Symptom: the live site is new, this browser still shows old nights or an old ros
 
 Cause: `load()` returns whatever is already stored under the current key and does not merge seed JSON again.
 
-Fix: **Reset seed** in the sidebar (confirms, then replaces `comedian-tracker:v17` with the bundled seed and clears filters). A fresh profile does the same. If seed JSON changed and the key was not bumped, existing browsers will stay stale until someone resets or a later bump migrates them.
+Fix: **Reset seed** in the sidebar (confirms, then replaces `comedian-tracker:v18` with the bundled seed and clears filters). A fresh profile does the same. If seed JSON changed and the key was not bumped, existing browsers will stay stale until someone resets or a later bump migrates them.
 
 Theme lives in `comedian-tracker:theme` and is not cleared by Reset seed.
 

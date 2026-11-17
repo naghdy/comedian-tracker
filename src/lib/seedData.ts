@@ -7,6 +7,7 @@ import moAmerShows from "../../data/mo-amer-shows.json";
 import aaronChenShows from "../../data/aaron-chen-shows.json";
 import jimmyOYangShows from "../../data/jimmy-o-yang-shows.json";
 import zarnaGargShows from "../../data/zarna-garg-shows.json";
+import andrewSantinoShows from "../../data/andrew-santino-shows.json";
 
 export const SEED_COMEDIANS = comedianSeed.comedians as Comedian[];
 export const SEED_SHOWS = [
@@ -17,4 +18,5 @@ export const SEED_SHOWS = [
   ...(aaronChenShows.shows as Show[]),
   ...(jimmyOYangShows.shows as Show[]),
   ...(zarnaGargShows.shows as Show[]),
+  ...(andrewSantinoShows.shows as Show[]),
 ];

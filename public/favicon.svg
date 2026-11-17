@@ -1,16 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#0b0b0d"/>
-  <g fill="#d2ff1a">
-    <rect x="11.15" y="4.2" width="9.7" height="11.4" rx="2.7"/>
-    <circle cx="11.15" cy="8.55" r="1.45"/>
-    <circle cx="20.85" cy="8.55" r="1.45"/>
-    <rect x="15.2" y="15.4" width="1.6" height="4.35" rx="0.8"/>
-    <path d="M16 18.9c-2.35 0-4.25 1.9-4.25 4.25 0 1.18.48 2.25 1.26 3.02L16 28.15l2.99-1.98A4.25 4.25 0 0 0 20.25 23.15c0-2.35-1.9-4.25-4.25-4.25Z"/>
-  </g>
-  <g fill="#0b0b0d">
-    <rect x="13.15" y="6.15" width="1.15" height="7.15" rx="0.55"/>
-    <rect x="15.42" y="6.15" width="1.15" height="7.15" rx="0.55"/>
-    <rect x="17.7" y="6.15" width="1.15" height="7.15" rx="0.55"/>
-    <circle cx="16" cy="23.15" r="1.55"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Stage mic in the site's navy (#0e1630) on a transparent background.
+       A white keyline keeps it visible on dark tabs; browsers that apply the
+       dark colour scheme to SVG favicons get a plain white mic instead. -->
+  <style>
+    .mic { fill: #0e1630; }
+    .key { fill: #fff; stroke: #fff; }
+    @media (prefers-color-scheme: dark) { .mic { fill: #fff; } .key { display: none; } }
+  </style>
+  <defs>
+    <g id="m" transform="translate(16 16) scale(1.08) translate(-17 -16.4) rotate(35 16 17)">
+      <circle cx="16" cy="9.6" r="6.4"/>
+      <rect x="11.6" y="16.6" width="8.8" height="2.2" rx="0.6"/>
+      <path d="M12.3 19.6h7.4l-1.9 9.1a1.2 1.2 0 0 1-1.2 1h-1.2a1.2 1.2 0 0 1-1.2-1Z"/>
+    </g>
+  </defs>
+  <use class="key" href="#m" stroke-width="3.70" stroke-linejoin="round"/>
+  <use class="mic" href="#m"/>
 </svg>

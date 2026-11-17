@@ -172,6 +172,16 @@ His second look: he liked the colours but found the header too big, and the rost
 
 Kept: map first in the content, trip checker at the bottom, dark by default, no roster add/remove/refresh controls, upcoming-only filter. `localStorage` reads and writes are now wrapped so a blocked storage doesn't blank the page. No seed data changed, so no seed-key bump.
 
+## 2026-11-17 — Weekly refresh: Gervais in Europe, Aaron Chen Brisbane link
+
+The first weekly check (16 Nov) found new dates that its run could not push, so they ship here. Ricky Gervais gets three 2027 European nights, each read on an official page: Paris Accor Arena 30 Apr 19:30 (Live Nation France), Amsterdam AFAS Live 2 Jul (afaslive.nl, which says the timetable isn't out yet, so no time), and Stockholm Avicii Arena 28 Aug 19:30 (aviciiarena.se). Antwerp, Barcelona, Lisbon, Vienna, Zagreb and Zurich are reported in the press but were not on an official page, so they are left out until they are.
+
+Aaron Chen's Brisbane QPAC nights (10 and 11 Dec) now link to the QPAC encore page, which is where his official site points.
+
+New city pin: Amsterdam. Tests that counted all Gervais rows as UK rows now count `country: "UK"` only. Seed key `v16` → `v17`.
+
+Nabil said he doesn't need a human in the loop for updating dates, so this PR is merged without waiting for him.
+
 ## 2026-11-17 — Navy microphone favicon
 
 Nabil asked for a favicon that fits the redesign: a microphone in the site's blue. The old icon was a lime studio mic on near-black from the first palette. The new one is a handheld stage mic, tilted, in the navy `#0e1630` on a bone `#efe9dc` tile. A navy mark alone disappears on dark browser tabs, so the bone tile carries it on both light and dark tabs. Plain shapes only (ball, collar, handle) so it still reads at 16px. `favicon.svg` is the source; `favicon.ico` (16 + 32), `favicon-32.png`, `icon-512.png` and the full-bleed `apple-touch-icon.png` (180) are rendered from it. Preview: [docs/images/favicon-preview.png](images/favicon-preview.png).

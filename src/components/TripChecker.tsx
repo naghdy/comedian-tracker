@@ -1,13 +1,17 @@
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import type { Comedian, Show, TripQuery } from "../types";
 import { findCity } from "../lib/geo";
 import { addDays, formatRange } from "../lib/display";
+import { inDateRange } from "../lib/filters";
+import { CityCombobox } from "./CityCombobox";
 import { ShowRow } from "./ShowRow";
 
 type Props = {
   comedians: Comedian[];
+  /** Upcoming nights (roster filter applied) the city suggestions come from. */
+  pool: Show[];
   matches: Show[];
   today: string;
   onSearch: (trip: TripQuery) => void;
@@ -17,6 +21,7 @@ type Props = {
 
 export function TripChecker({
   comedians,
+  pool,
   matches,
   today,
   onSearch,
@@ -26,11 +31,16 @@ export function TripChecker({
   const [city, setCity] = useState("");
   const [start, setStart] = useState(today);
   const [end, setEnd] = useState(() => addDays(today, 7));
+  const [from, to] = start <= end ? [start, end] : [end, start];
+  // Suggest only places with someone playing in the chosen dates.
+  const inDates = useMemo(
+    () => pool.filter((show) => inDateRange(show.date, from, to)),
+    [pool, from, to],
+  );
 
   function submit(event: FormEvent) {
     event.preventDefault();
     if (!city.trim() || !start || !end) return;
-    const [from, to] = start <= end ? [start, end] : [end, start];
     onSearch({ city: city.trim(), start: from, end: to });
   }
 
@@ -49,15 +59,14 @@ export function TripChecker({
       </p>
 
       <form className="trip-form" onSubmit={submit}>
-        <label className="field">
-          <span>City</span>
-          <input
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Houston"
-            autoComplete="off"
-          />
-        </label>
+        <CityCombobox
+          shows={inDates}
+          comedians={comedians}
+          value={city}
+          onChange={setCity}
+          label="City"
+          placeholder="Houston"
+        />
         <label className="field">
           <span>From</span>
           <input

@@ -181,3 +181,9 @@ Aaron Chen's Brisbane QPAC nights (10 and 11 Dec) now link to the QPAC encore pa
 New city pin: Amsterdam. Tests that counted all Gervais rows as UK rows now count `country: "UK"` only. Seed key `v16` → `v17`.
 
 Nabil said he doesn't need a human in the loop for updating dates, so this PR is merged without waiting for him.
+
+## 2026-11-17 — City suggestions use the map's place logic
+
+Nabil asked for the city search to autocomplete, using the same destination logic as the map. Suggestions come from the tracker's own `data/cities.json` places, grouped the way the map pins shows (`placeForShow`), rather than from Google Places Autocomplete: every suggestion then has nights behind it, the counts match what the map shows, and no extra Google API or key change is needed.
+
+The text filter now matches the same way. It used to match any substring, so "la" brought up Atlanta, Portland and Orlando, and "Birmingham, AL" also showed Birmingham, England. Exact place names keep only that place, and partial text matches the start of a word. `findExact` now prefers a place's own name over another place's alias (Phoenix over Mesa's `phoenix` alias); no seed pin moved. The trip checker gets the same box, limited to places with a night in the chosen dates. No seed data changed, so no seed-key bump.

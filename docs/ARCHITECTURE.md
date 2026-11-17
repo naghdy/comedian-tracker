@@ -32,8 +32,8 @@ One centred column, up to 1200px wide, laid out like a tour poster: header, map,
 | --- | --- | --- |
 | Header | `src/components/Roster.tsx` | One bar with the "Comedian Tracker" wordmark, the total of upcoming nights and Light/Dark. Below it the lineup ("On tour"): a grid of names sorted by upcoming nights, each with its count and a thin bar in the comedian's colour scaled to the busiest comedian. Over 18 comedians it shows the busiest 15 (plus any selected) with **Show all N**. Click a name to filter map, agenda, and trip results; **Show everyone** clears it. There are no add, remove, refresh, or tour-link controls. |
 | Top of main | `src/components/ShowMap.tsx` | Google Map. Color-coded circle pins, click opens an info window (title, venue, date, ticket link). |
-| Middle | `src/components/Agenda.tsx` | Upcoming shows (today onward) grouped under large month headings, one `ShowRow` per night: weekday over a large day number ("Tonight" and an outlined number for today), name, tour title with the comedian's name stripped (`tourTitle` in `src/lib/display.ts`), venue, place and time, a **Tickets** link and a remove button that shows on hover. City text filter and comedian `<select>` stack with the roster filter. **Add a show** opens `ShowForm` (saved as `source: "user"`). |
-| Bottom | `src/components/TripChecker.tsx` | City + from/to, defaulting to today and a week out. Case-insensitive partial city match via `cityMatches`. Results reuse `ShowRow` under a headline like `3 nights in Houston, 18–25 Nov`. |
+| Middle | `src/components/Agenda.tsx` | Upcoming shows (today onward) grouped under large month headings, one `ShowRow` per night: weekday over a large day number ("Tonight" and an outlined number for today), name, tour title with the comedian's name stripped (`tourTitle` in `src/lib/display.ts`), venue, place and time, a **Tickets** link and a remove button that shows on hover. City box (with suggestions, see below) and comedian `<select>` stack with the roster filter. **Add a show** opens `ShowForm` (saved as `source: "user"`). |
+| Bottom | `src/components/TripChecker.tsx` | City + from/to, defaulting to today and a week out. The city box suggests only places with a night inside the chosen dates. Matching via `cityMatches`. Results reuse `ShowRow` under a headline like `3 nights in Houston, 18–25 Nov`. |
 | Footer | `src/App.tsx` | Where the dates come from, and **Reset seed**. |
 
 `src/App.tsx` owns filter state, theme, and show add/remove. Roster membership is not editable in the UI.
@@ -90,6 +90,21 @@ Because a populated `v17` is never hydrated again, **any seed change must bump `
 There is no Geocoding API. `src/lib/geo.ts` loads `data/cities.json` and matches case-insensitively, ignoring periods. Exact city or alias first, then a whole-word match either way (so the alias `la` doesn't match inside "England" or "Portland"). For a show with a `region`, `coordsForShow` first tries `"{city}, {region}"` as an exact city or alias (how `Newcastle` + `NSW` reaches `Newcastle, NSW`), then falls back to the city alone; it never fuzzy-matches the joined string. `knownCities()` feeds the datalist on `ShowForm`.
 
 Lookup rows from Ticketmaster or SeatGeek can carry venue lat/lng, so those pins work before a `cities.json` edit. Seed rows generally do not store lat/lng; they need a city row.
+
+`findExact` prefers a place's own name over another place's alias, so "Phoenix" is Phoenix even though Mesa lists `phoenix` as an alias.
+
+`placeForShow` is the single resolution step: `coordsForShow` pins with it, and the city boxes match and suggest with it, so the map and the filters always agree on where a night is.
+
+## City suggestions
+
+`src/components/CityCombobox.tsx` is the city box on the dates toolbar and the trip checker. It follows the ARIA combobox pattern (arrows move, Enter picks, Escape closes, a tap picks and drops the phone keyboard; options are at least 44px tall). Suggestions come from `citySuggestions` in `src/lib/geo.ts`:
+
+- Nights are grouped by `placeForShow`, so "LA", "Los Angeles" and "Los Angeles, CA" rows are one suggestion, and "Portland" and "Portland, ME" are two.
+- Each suggestion shows the place, its region or country when the name alone is ambiguous, dots in the colours of who's playing there, and its night count.
+- Ranking: exact name or alias, then name prefix, then alias prefix, then the start of any word, then most nights. An empty box lists the busiest places.
+- The pool is every filter except the city one: the roster and comedian filters for the dates list, the roster filter and the chosen dates for the trip checker. Every suggestion therefore has at least one night behind it.
+
+`cityMatches` uses the same rules for free text. Text that names a place exactly keeps only the nights the map pins there ("Birmingham" is Birmingham, England; "Birmingham, AL" is Alabama). Anything else is read as the start of a word, so "hou" finds Houston but "la" is never found inside Atlanta or Portland, and "ston" finds nothing.
 
 `scripts/merge-cities.ts` is a one-shot merger of extra city rows into `data/cities.json` (run with `npx tsx scripts/merge-cities.ts`). It does not geocode.
 

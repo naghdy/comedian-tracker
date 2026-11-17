@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Comedian } from "../types";
+import { MicIcon } from "./MicIcon";
 
 type Props = {
   comedians: Comedian[];
@@ -46,6 +47,7 @@ export function Roster({
     <header className="top">
       <div className="topbar">
         <h1 className="wordmark">
+          <MicIcon className="wordmark-mic" />
           Comedian <span>Tracker</span>
         </h1>
         <div className="topbar-end">

@@ -181,3 +181,11 @@ Aaron Chen's Brisbane QPAC nights (10 and 11 Dec) now link to the QPAC encore pa
 New city pin: Amsterdam. Tests that counted all Gervais rows as UK rows now count `country: "UK"` only. Seed key `v16` → `v17`.
 
 Nabil said he doesn't need a human in the loop for updating dates, so this PR is merged without waiting for him.
+
+## 2026-11-17 — Navy microphone favicon and title mark
+
+Nabil asked for a favicon that fits the redesign: a microphone in the site's blue. The old icon was a lime studio mic on near-black from the first palette. The first draft put a navy mic on a bone tile; he read the bone as yellow and asked for the site's blue and white only, the mic next to the title too, and smooth transparent edges.
+
+The icon is a tilted handheld stage mic in navy `#0e1630` on a transparent background, with a white keyline so it still shows on dark tabs. `favicon.svg` also carries a `prefers-color-scheme: dark` rule, so browsers that honour it in SVG favicons draw a plain white mic on dark tabs instead. Every PNG is rendered straight from the SVG at its own size (no downscaling) with anti-aliased alpha: `favicon.ico` (16, 32, 48), `favicon-32.png`, `icon-512.png`. `apple-touch-icon.png` (180) has a solid white background with a navy mic, since iOS fills transparency with black.
+
+The same mic sits before the "Comedian Tracker" wordmark (`src/components/MicIcon.tsx`), 1em tall and drawn in `currentColor`, so it takes the title's ink: bone on navy in dark mode, navy in light mode. Preview: [docs/images/favicon-preview.png](images/favicon-preview.png).

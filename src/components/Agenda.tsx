@@ -4,9 +4,12 @@ import * as m from "motion/react-m";
 import type { Comedian, Show } from "../types";
 import { groupByMonth } from "../lib/display";
 import { ShowRow } from "./ShowRow";
+import { CityCombobox } from "./CityCombobox";
 
 type Props = {
   shows: Show[];
+  /** Nights the city suggestions come from: the comedian filters, but not the city one. */
+  cityPool: Show[];
   comedians: Comedian[];
   today: string;
   cityFilter: string;
@@ -21,6 +24,7 @@ type Props = {
 
 export function Agenda({
   shows,
+  cityPool,
   comedians,
   today,
   cityFilter,
@@ -50,15 +54,17 @@ export function Agenda({
       </header>
 
       <div className="toolbar">
-        <label className="field field-inline">
-          <span className="visually-hidden">City</span>
-          <input
-            type="search"
-            value={cityFilter}
-            onChange={(e) => onCityFilter(e.target.value)}
-            placeholder="Any city"
-          />
-        </label>
+        <CityCombobox
+          className="field field-inline"
+          shows={cityPool}
+          comedians={comedians}
+          value={cityFilter}
+          onChange={onCityFilter}
+          label="City"
+          hideLabel
+          type="search"
+          placeholder="Any city"
+        />
         <label className="field field-inline">
           <span className="visually-hidden">Comedian</span>
           <select

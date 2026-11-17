@@ -56,31 +56,38 @@ export default function App() {
     return counts;
   }, [upcoming]);
 
-  const visibleShows = useMemo(() => {
+  const comedianIds = useMemo(() => {
     const rosterFilter = selectedIds.length ? selectedIds : undefined;
-    const extra = comedianFilter ? [comedianFilter] : rosterFilter;
-    const comedianIds =
-      rosterFilter && comedianFilter
-        ? rosterFilter.filter((id) => id === comedianFilter)
-        : extra;
-    return sortChronological(
+    if (rosterFilter && comedianFilter) {
+      return rosterFilter.filter((id) => id === comedianFilter);
+    }
+    return comedianFilter ? [comedianFilter] : rosterFilter;
+  }, [selectedIds, comedianFilter]);
+
+  // What the dates' city box suggests from: every filter but the city itself.
+  const cityPool = useMemo(
+    () => filterShows(upcoming, { comedianIds }),
+    [upcoming, comedianIds],
+  );
+
+  const visibleShows = useMemo(
+    () =>
+      sortChronological(filterShows(cityPool, { city: cityFilter || undefined })),
+    [cityPool, cityFilter],
+  );
+
+  const tripPool = useMemo(
+    () =>
       filterShows(upcoming, {
-        comedianIds,
-        city: cityFilter || undefined,
+        comedianIds: selectedIds.length ? selectedIds : undefined,
       }),
-    );
-  }, [upcoming, selectedIds, cityFilter, comedianFilter]);
+    [upcoming, selectedIds],
+  );
 
   const tripHits = useMemo(() => {
     if (!trip) return [];
-    const rosterFilter = selectedIds.length ? selectedIds : undefined;
-    return sortChronological(
-      tripMatches(
-        filterShows(upcoming, { comedianIds: rosterFilter }),
-        trip,
-      ),
-    );
-  }, [upcoming, trip, selectedIds]);
+    return sortChronological(tripMatches(tripPool, trip));
+  }, [tripPool, trip]);
 
   function toggleComedian(id: string) {
     setSelectedIds((current) =>
@@ -128,6 +135,7 @@ export default function App() {
             <ShowMap shows={visibleShows} comedians={state.comedians} theme={theme} />
             <Agenda
               shows={visibleShows}
+              cityPool={cityPool}
               comedians={state.comedians}
               today={today}
               cityFilter={cityFilter}
@@ -140,6 +148,7 @@ export default function App() {
             />
             <TripChecker
               comedians={state.comedians}
+              pool={tripPool}
               matches={tripHits}
               today={today}
               active={trip}

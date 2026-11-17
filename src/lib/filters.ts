@@ -20,7 +20,7 @@ export function filterShows(
     if (opts.comedianIds?.length && !opts.comedianIds.includes(show.comedianId)) {
       return false;
     }
-    if (opts.city && !cityMatches(show.city, opts.city)) return false;
+    if (opts.city && !cityMatches(show, opts.city)) return false;
     if (!inDateRange(show.date, opts.start, opts.end)) return false;
     return true;
   });

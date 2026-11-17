@@ -195,3 +195,13 @@ The same mic sits before the "Comedian Tracker" wordmark (`src/components/MicIco
 Nabil asked for the city search to autocomplete, using the same destination logic as the map. Suggestions come from the tracker's own `data/cities.json` places, grouped the way the map pins shows (`placeForShow`), rather than from Google Places Autocomplete: every suggestion then has nights behind it, the counts match what the map shows, and no extra Google API or key change is needed.
 
 The text filter now matches the same way. It used to match any substring, so "la" brought up Atlanta, Portland and Orlando, and "Birmingham, AL" also showed Birmingham, England. Exact place names keep only that place, and partial text matches the start of a word. `findExact` now prefers a place's own name over another place's alias (Phoenix over Mesa's `phoenix` alias); no seed pin moved. The trip checker gets the same box, limited to places with a night in the chosen dates. No seed data changed, so no seed-key bump.
+
+## 2026-11-17 — Add Bobby Lee, Andrew Santino and Theo Von
+
+Nabil asked for Bobby Lee, Andrew Santino and Theo Von. They join the end of the roster in that order.
+
+Andrew Santino has 15 nights from his official site, andrewsantino.com: Milwaukee Improv 5–6 Feb, Palm Beach Improv 19–20 Feb, Miami Improv 26–27 Feb, Comedy on State Madison 5–6 Mar, Funny Bone Columbus 12–13 Mar, Comedy Works Downtown Denver 18–21 Mar, and The Chelsea at The Cosmopolitan Las Vegas 27 Mar 2027. Rows live in `data/andrew-santino-shows.json` (prefix `sa`). Madison and Columbus have no `time` because their ticket pages did not load.
+
+Bobby Lee and Theo Von have no upcoming nights anywhere official right now, so they are on the roster with none rather than with guessed dates. Theo Von's tour page says new dates are coming soon. Bobby Lee's Live Nation page lists no upcoming shows, and his own site refuses automated fetches.
+
+New city pins: Milwaukee, West Palm Beach. Seed key `v17` → `v18`.

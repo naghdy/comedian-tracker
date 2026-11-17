@@ -198,4 +198,4 @@ The text filter now matches the same way. It used to match any substring, so "la
 
 ## 2026-11-17 — Google Analytics
 
-Nabil asked for Google Analytics on the site. GA4's gtag.js is added from `src/lib/analytics.ts` with the measurement ID from the build-time secret `VITE_GA_MEASUREMENT_ID`, the same way the Maps key reaches the build. It loads only in production builds and only with a well-formed `G-` ID, so local dev and forks without the secret send nothing. No router, so the default page view on load covers it. No seed data changed, so no seed-key bump.
+Nabil asked for Google Analytics on the site. GA4's gtag.js is added from `src/lib/analytics.ts` with the measurement ID from the build-time env var `VITE_GA_MEASUREMENT_ID`. The ID (`G-7674VEF3BQ`) is public, so it sits in `pages.yml` as a default; a repo secret of the same name overrides it. It loads only in production builds and only with a well-formed `G-` ID, so local dev and forks without the secret send nothing. No router, so the default page view on load covers it. No seed data changed, so no seed-key bump.

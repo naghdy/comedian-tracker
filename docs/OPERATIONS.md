@@ -79,10 +79,12 @@ Vite inlines the JSON seed and the storage key, so both strings are in the JS. A
 
 GA4 loads from `src/lib/analytics.ts`, called once in `src/main.tsx`. It reads the measurement ID from `VITE_GA_MEASUREMENT_ID` and adds Google's gtag.js snippet only in production builds and only when the value looks like `G-` followed by letters and digits. Dev servers and builds without the secret send nothing.
 
-Setup:
+The live ID is `G-7674VEF3BQ` (the comediantracker.com web stream). It is set in `.github/workflows/pages.yml` as the default for `VITE_GA_MEASUREMENT_ID`, since a measurement ID is public anyway. A repo Actions secret with the same name overrides it.
 
-1. In Google Analytics, create a GA4 property and a **Web** data stream for `https://comediantracker.com`. Copy its measurement ID (`G-...`).
-2. In the repo, **Settings → Secrets and variables → Actions → New repository secret**, name `VITE_GA_MEASUREMENT_ID`, value the `G-...` ID.
+To change the ID:
+
+1. In Google Analytics, open the GA4 property's **Web** data stream for `https://comediantracker.com` and copy its measurement ID (`G-...`).
+2. Either edit the default in `pages.yml`, or add a repo secret `VITE_GA_MEASUREMENT_ID` (**Settings → Secrets and variables → Actions**).
 3. Re-run **Deploy GitHub Pages** so the ID is baked into the bundle.
 4. Check: the live page source has a script from `googletagmanager.com/gtag/js?id=G-...`, and GA's **Realtime** report shows your visit.
 

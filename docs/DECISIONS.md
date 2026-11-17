@@ -171,3 +171,7 @@ His first look: "Now it looks very similar." The first pass had restyled the old
 His second look: he liked the colours but found the header too big, and the roster may grow to about 50 comedians. The title moved into a slim top bar, and the lineup became a compact grid of names (count and a share-of-busiest bar in each comedian's colour), sorted by upcoming nights and folded to the busiest 15 past 18 names.
 
 Kept: map first in the content, trip checker at the bottom, dark by default, no roster add/remove/refresh controls, upcoming-only filter. `localStorage` reads and writes are now wrapped so a blocked storage doesn't blank the page. No seed data changed, so no seed-key bump.
+
+## 2026-11-17 — Navy microphone favicon
+
+Nabil asked for a favicon that fits the redesign: a microphone in the site's blue. The old icon was a lime studio mic on near-black from the first palette. The new one is a handheld stage mic, tilted, in the navy `#0e1630` on a bone `#efe9dc` tile. A navy mark alone disappears on dark browser tabs, so the bone tile carries it on both light and dark tabs. Plain shapes only (ball, collar, handle) so it still reads at 16px. `favicon.svg` is the source; `favicon.ico` (16 + 32), `favicon-32.png`, `icon-512.png` and the full-bleed `apple-touch-icon.png` (180) are rendered from it. Preview: [docs/images/favicon-preview.png](images/favicon-preview.png).

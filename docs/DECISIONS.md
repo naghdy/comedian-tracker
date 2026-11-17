@@ -182,6 +182,10 @@ New city pin: Amsterdam. Tests that counted all Gervais rows as UK rows now coun
 
 Nabil said he doesn't need a human in the loop for updating dates, so this PR is merged without waiting for him.
 
-## 2026-11-17 — Navy microphone favicon
+## 2026-11-17 — Navy microphone favicon and title mark
 
-Nabil asked for a favicon that fits the redesign: a microphone in the site's blue. The old icon was a lime studio mic on near-black from the first palette. The new one is a handheld stage mic, tilted, in the navy `#0e1630` on a bone `#efe9dc` tile. A navy mark alone disappears on dark browser tabs, so the bone tile carries it on both light and dark tabs. Plain shapes only (ball, collar, handle) so it still reads at 16px. `favicon.svg` is the source; `favicon.ico` (16 + 32), `favicon-32.png`, `icon-512.png` and the full-bleed `apple-touch-icon.png` (180) are rendered from it. Preview: [docs/images/favicon-preview.png](images/favicon-preview.png).
+Nabil asked for a favicon that fits the redesign: a microphone in the site's blue. The old icon was a lime studio mic on near-black from the first palette. The first draft put a navy mic on a bone tile; he read the bone as yellow and asked for the site's blue and white only, the mic next to the title too, and smooth transparent edges.
+
+The icon is a tilted handheld stage mic in navy `#0e1630` on a transparent background, with a white keyline so it still shows on dark tabs. `favicon.svg` also carries a `prefers-color-scheme: dark` rule, so browsers that honour it in SVG favicons draw a plain white mic on dark tabs instead. Every PNG is rendered straight from the SVG at its own size (no downscaling) with anti-aliased alpha: `favicon.ico` (16, 32, 48), `favicon-32.png`, `icon-512.png`. `apple-touch-icon.png` (180) has a solid white background with a navy mic, since iOS fills transparency with black.
+
+The same mic sits before the "Comedian Tracker" wordmark (`src/components/MicIcon.tsx`), 1em tall and drawn in `currentColor`, so it takes the title's ink: bone on navy in dark mode, navy in light mode. Preview: [docs/images/favicon-preview.png](images/favicon-preview.png).

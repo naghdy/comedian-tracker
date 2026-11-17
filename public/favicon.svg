@@ -1,10 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Handheld stage mic in the site's navy (#0e1630) on a bone tile (#efe9dc),
-       so it reads on both light and dark browser tabs. -->
-  <rect width="32" height="32" rx="7" fill="#efe9dc"/>
-  <g fill="#0e1630" transform="rotate(35 16 17)">
-    <circle cx="16" cy="9.6" r="6.4"/>
-    <rect x="11.6" y="16.6" width="8.8" height="2.2" rx="0.6"/>
-    <path d="M12.3 19.6h7.4l-1.9 9.1a1.2 1.2 0 0 1-1.2 1h-1.2a1.2 1.2 0 0 1-1.2-1Z"/>
-  </g>
+  <!-- Stage mic in the site's navy (#0e1630) on a transparent background.
+       A white keyline keeps it visible on dark tabs; browsers that apply the
+       dark colour scheme to SVG favicons get a plain white mic instead. -->
+  <style>
+    .mic { fill: #0e1630; }
+    .key { fill: #fff; stroke: #fff; }
+    @media (prefers-color-scheme: dark) { .mic { fill: #fff; } .key { display: none; } }
+  </style>
+  <defs>
+    <g id="m" transform="translate(16 16) scale(1.08) translate(-17 -16.4) rotate(35 16 17)">
+      <circle cx="16" cy="9.6" r="6.4"/>
+      <rect x="11.6" y="16.6" width="8.8" height="2.2" rx="0.6"/>
+      <path d="M12.3 19.6h7.4l-1.9 9.1a1.2 1.2 0 0 1-1.2 1h-1.2a1.2 1.2 0 0 1-1.2-1Z"/>
+    </g>
+  </defs>
+  <use class="key" href="#m" stroke-width="3.70" stroke-linejoin="round"/>
+  <use class="mic" href="#m"/>
 </svg>

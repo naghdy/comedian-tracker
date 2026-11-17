@@ -205,3 +205,7 @@ Andrew Santino has 15 nights from his official site, andrewsantino.com: Milwauke
 Bobby Lee and Theo Von have no upcoming nights anywhere official right now, so they are on the roster with none rather than with guessed dates. Theo Von's tour page says new dates are coming soon. Bobby Lee's Live Nation page lists no upcoming shows, and his own site refuses automated fetches.
 
 New city pins: Milwaukee, West Palm Beach. Seed key `v17` → `v18`.
+
+## 2026-11-17 — Google Analytics
+
+Nabil asked for Google Analytics on the site. GA4's gtag.js is added from `src/lib/analytics.ts` with the measurement ID from the build-time env var `VITE_GA_MEASUREMENT_ID`. The ID (`G-7674VEF3BQ`) is public, so it sits in `pages.yml` as a default; a repo secret of the same name overrides it. It loads only in production builds and only with a well-formed `G-` ID, so local dev and forks without the secret send nothing. No router, so the default page view on load covers it. No seed data changed, so no seed-key bump.

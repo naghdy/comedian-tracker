@@ -69,14 +69,13 @@ DNS for `comediantracker.com` (GitHub's documented Pages values):
 
 Clarity records sessions and heatmaps on the live site. `src/main.tsx` calls `loadClarity` from `src/lib/clarity.ts` only in production builds, which adds Clarity's official async tag (`https://www.clarity.ms/tag/<id>`) to the page head. `npm run dev` never loads it. An empty or malformed ID loads nothing.
 
-To turn it on or change project:
+The project for `comediantracker.com` is `zf9s1pvnn4`. The ID is public (it ships in the page source), so it sits in `.github/workflows/pages.yml` as the default for `VITE_CLARITY_PROJECT_ID`. A repo Actions secret with the same name overrides it.
 
-1. In [Clarity](https://clarity.microsoft.com/), create a project for `comediantracker.com` and copy its project ID (**Settings → Overview**).
-2. Set the repo secret `VITE_CLARITY_PROJECT_ID` (**Settings → Secrets and variables → Actions**).
-3. Re-run **Deploy GitHub Pages** so the ID is baked into the bundle.
-4. Check: the live page's Network tab shows a request to `www.clarity.ms/tag/<id>`, and Clarity's dashboard shows the first sessions within about two hours.
+To change project: set the secret `VITE_CLARITY_PROJECT_ID` (**Settings → Secrets and variables → Actions**), or edit the default in `pages.yml`, then re-run **Deploy GitHub Pages** so the new ID is baked into the bundle.
 
-To turn it off, delete the secret and re-run the deploy.
+Check: the live page's Network tab shows a request to `www.clarity.ms/tag/zf9s1pvnn4`, and Clarity's dashboard shows the first sessions within about two hours.
+
+To turn it off, remove the default from `pages.yml` (and the secret, if set) and redeploy.
 
 ### Verify the live bundle
 

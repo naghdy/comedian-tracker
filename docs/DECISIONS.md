@@ -171,3 +171,13 @@ His first look: "Now it looks very similar." The first pass had restyled the old
 His second look: he liked the colours but found the header too big, and the roster may grow to about 50 comedians. The title moved into a slim top bar, and the lineup became a compact grid of names (count and a share-of-busiest bar in each comedian's colour), sorted by upcoming nights and folded to the busiest 15 past 18 names.
 
 Kept: map first in the content, trip checker at the bottom, dark by default, no roster add/remove/refresh controls, upcoming-only filter. `localStorage` reads and writes are now wrapped so a blocked storage doesn't blank the page. No seed data changed, so no seed-key bump.
+
+## 2026-11-17 — Weekly refresh: Gervais in Europe, Aaron Chen Brisbane link
+
+The first weekly check (16 Nov) found new dates that its run could not push, so they ship here. Ricky Gervais gets three 2027 European nights, each read on an official page: Paris Accor Arena 30 Apr 19:30 (Live Nation France), Amsterdam AFAS Live 2 Jul (afaslive.nl, which says the timetable isn't out yet, so no time), and Stockholm Avicii Arena 28 Aug 19:30 (aviciiarena.se). Antwerp, Barcelona, Lisbon, Vienna, Zagreb and Zurich are reported in the press but were not on an official page, so they are left out until they are.
+
+Aaron Chen's Brisbane QPAC nights (10 and 11 Dec) now link to the QPAC encore page, which is where his official site points.
+
+New city pin: Amsterdam. Tests that counted all Gervais rows as UK rows now count `country: "UK"` only. Seed key `v16` → `v17`.
+
+Nabil said he doesn't need a human in the loop for updating dates, so this PR is merged without waiting for him.

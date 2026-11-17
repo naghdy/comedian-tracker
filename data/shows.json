@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-12",
-  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09; 16 nights 5 Jan–27 Jul 2027 added 2026-11-12; Manchester 12–13 Oct and Brighton 16–17 Nov start times corrected to 19:30 on 2026-10-05, doors were 18:30). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (15 club nights; Stardome Birmingham 6 Nov dropped from the drop as of 2026-11-12, which now lists 7 Nov only). Gagnon: markgagnonlive.com.",
+  "generatedAt": "2026-11-17",
+  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09; 16 nights 5 Jan–27 Jul 2027 added 2026-11-12; 3 European 2027 nights added 2026-11-17 from official pages: Paris Accor Arena 30 Apr (Live Nation France), Amsterdam AFAS Live 2 Jul (afaslive.nl, no time published yet), Stockholm Avicii Arena 28 Aug (aviciiarena.se); other European cities reported in the press but not yet on an official page are left out; Manchester 12–13 Oct and Brighton 16–17 Nov start times corrected to 19:30 on 2026-10-05, doors were 18:30). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (15 club nights; Stardome Birmingham 6 Nov dropped from the drop as of 2026-11-12, which now lists 7 Nov only). Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -432,6 +432,18 @@
       "source": "listed"
     },
     {
+      "id": "rg-2027-04-30-paris",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Accor Arena",
+      "city": "Paris",
+      "country": "France",
+      "date": "2027-04-30",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.fr/en/event/ricky-gervais-legend-paris-tickets-edp1702180",
+      "source": "listed"
+    },
+    {
       "id": "rg-2027-05-17-glasgow",
       "comedianId": "ricky-gervais",
       "title": "Ricky Gervais: Legend",
@@ -471,6 +483,17 @@
       "source": "listed"
     },
     {
+      "id": "rg-2027-07-02-amsterdam",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "AFAS Live",
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "date": "2027-07-02",
+      "ticketUrl": "https://www.ticketmaster.nl/event/ricky-gervais-legend-tickets/1018971784",
+      "source": "listed"
+    },
+    {
       "id": "rg-2027-07-26-oxford",
       "comedianId": "ricky-gervais",
       "title": "Ricky Gervais: Legend",
@@ -494,6 +517,18 @@
       "date": "2027-07-27",
       "time": "19:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-08-28-stockholm",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Avicii Arena",
+      "city": "Stockholm",
+      "country": "Sweden",
+      "date": "2027-08-28",
+      "time": "19:30",
+      "ticketUrl": "https://www.axs.com/se/events/1646455/ricky-gervais-tickets",
       "source": "listed"
     },
     {

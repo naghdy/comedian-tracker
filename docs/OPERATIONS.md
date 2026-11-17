@@ -47,6 +47,7 @@ The build job checks out the repo, uses Node 22, `npm ci`, and `npm run build` w
 - `VITE_TICKETMASTER_API_KEY`
 - `VITE_SEATGEEK_CLIENT_ID`
 - `VITE_GA_MEASUREMENT_ID`
+- `VITE_CLARITY_PROJECT_ID`
 
 from Actions secrets, then uploads `dist`. The deploy job uses `actions/deploy-pages`.
 
@@ -64,6 +65,18 @@ DNS for `comediantracker.com` (GitHub's documented Pages values):
 - `TXT` on `_github-pages-challenge-naghdy`: the value GitHub shows when the domain is verified under the account's **Settings → Pages**. Keep it, it stops anyone else claiming the domain on Pages.
 
 `vite.config.ts` uses a relative `base` (`./`), so the same build also works under a sub-path. localStorage is per origin, so a browser that used the old address starts fresh on the new one (seed roster and dark theme by default).
+
+### Microsoft Clarity
+
+Clarity records sessions and heatmaps on the live site. `src/main.tsx` calls `loadClarity` from `src/lib/clarity.ts` only in production builds, which adds Clarity's official async tag (`https://www.clarity.ms/tag/<id>`) to the page head. `npm run dev` never loads it. An empty or malformed ID loads nothing.
+
+The project for `comediantracker.com` is `zf9s1pvnn4`. The ID is public (it ships in the page source), so it sits in `.github/workflows/pages.yml` as the default for `VITE_CLARITY_PROJECT_ID`. A repo Actions secret with the same name overrides it.
+
+To change project: set the secret `VITE_CLARITY_PROJECT_ID` (**Settings → Secrets and variables → Actions**), or edit the default in `pages.yml`, then re-run **Deploy GitHub Pages** so the new ID is baked into the bundle.
+
+Check: the live page's Network tab shows a request to `www.clarity.ms/tag/zf9s1pvnn4`, and Clarity's dashboard shows the first sessions within about two hours.
+
+To turn it off, remove the default from `pages.yml` (and the secret, if set) and redeploy.
 
 ### Verify the live bundle
 

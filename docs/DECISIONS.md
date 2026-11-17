@@ -209,3 +209,7 @@ New city pins: Milwaukee, West Palm Beach. Seed key `v17` → `v18`.
 ## 2026-11-17 — Google Analytics
 
 Nabil asked for Google Analytics on the site. GA4's gtag.js is added from `src/lib/analytics.ts` with the measurement ID from the build-time env var `VITE_GA_MEASUREMENT_ID`. The ID (`G-7674VEF3BQ`) is public, so it sits in `pages.yml` as a default; a repo secret of the same name overrides it. It loads only in production builds and only with a well-formed `G-` ID, so local dev and forks without the secret send nothing. No router, so the default page view on load covers it. No seed data changed, so no seed-key bump.
+
+## 2026-11-17 — Microsoft Clarity
+
+Nabil asked to add Microsoft Clarity. The project ID is a build-time env var, `VITE_CLARITY_PROJECT_ID`, set in `.github/workflows/pages.yml` (project `zf9s1pvnn4`; the ID is public, since it ships in the page). A repo Actions secret of the same name overrides it. The tag loads only in production builds and does nothing when the ID is empty, so local dev sends no data. `src/lib/clarity.ts` adds Clarity's official async script tag and queue stub directly rather than pasting the inline snippet into `index.html`, so the ID can come from the build and be checked before use.

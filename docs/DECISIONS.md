@@ -195,3 +195,7 @@ The same mic sits before the "Comedian Tracker" wordmark (`src/components/MicIco
 Nabil asked for the city search to autocomplete, using the same destination logic as the map. Suggestions come from the tracker's own `data/cities.json` places, grouped the way the map pins shows (`placeForShow`), rather than from Google Places Autocomplete: every suggestion then has nights behind it, the counts match what the map shows, and no extra Google API or key change is needed.
 
 The text filter now matches the same way. It used to match any substring, so "la" brought up Atlanta, Portland and Orlando, and "Birmingham, AL" also showed Birmingham, England. Exact place names keep only that place, and partial text matches the start of a word. `findExact` now prefers a place's own name over another place's alias (Phoenix over Mesa's `phoenix` alias); no seed pin moved. The trip checker gets the same box, limited to places with a night in the chosen dates. No seed data changed, so no seed-key bump.
+
+## 2026-11-17 — Microsoft Clarity
+
+Nabil asked to add Microsoft Clarity. The project ID is a build-time env var, `VITE_CLARITY_PROJECT_ID`, passed from a repo Actions secret the same way the Maps key is, so no ID lives in the repo. The tag loads only in production builds and does nothing when the ID is empty, so local dev and forks send no data. `src/lib/clarity.ts` adds Clarity's official async script tag and queue stub directly rather than pasting the inline snippet into `index.html`, so the ID can come from the build and be checked before use.

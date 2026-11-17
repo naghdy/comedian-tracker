@@ -21,6 +21,7 @@ Env vars (all optional at compile time, all public in the bundle — never commi
 | `VITE_GOOGLE_MAPS_API_KEY` | Maps JavaScript API. Map panel only. |
 | `VITE_TICKETMASTER_API_KEY` | Ticketmaster Discovery, `src/lib/lookupShows.ts`. |
 | `VITE_SEATGEEK_CLIENT_ID` | SeatGeek events, same module. |
+| `VITE_CLARITY_PROJECT_ID` | Microsoft Clarity, `src/lib/clarity.ts`. Production builds only; empty means no tag. |
 
 Copy `.env.example` to `.env.local` for local runs. Pages injects the same names from repo Actions secrets (see `.github/workflows/pages.yml`).
 

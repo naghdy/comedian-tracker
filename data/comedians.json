@@ -72,6 +72,27 @@
       "color": "#e879f9",
       "tourUrl": "https://zarnagarg.com/tickets/",
       "notes": "Seeded 2026-11-16 from the official site zarnagarg.com/tickets (a Bandsintown list that loads in the browser): 26 upcoming nights, Sydney 21 Nov 2026 to Hershey 27 Mar 2027, across Australia, Canada and the US. Years printed. Australian dates match the BroadwayWorld tour announcement; Las Vegas 12 Feb 2027 matches FOX5 Las Vegas."
+    },
+    {
+      "id": "bobby-lee",
+      "name": "Bobby Lee",
+      "color": "#14b8a6",
+      "tourUrl": "https://www.livenation.com/artist/K8vZ917uPQV/bobby-lee-events",
+      "notes": "Added 2026-11-17 with no upcoming nights. The Finally Tour ran in 2026 (Australia and New Zealand in August), and the Live Nation artist page says there are no upcoming shows. His own site bobbyleelive.com refuses automated fetches, so it could not be read; add dates when an official listing shows them."
+    },
+    {
+      "id": "andrew-santino",
+      "name": "Andrew Santino",
+      "color": "#fb7185",
+      "tourUrl": "https://www.andrewsantino.com/",
+      "notes": "Seeded 2026-11-17 from the official site andrewsantino.com (homepage tour list, The Red Rocket Tour): 15 nights, Milwaukee 5 Feb to Las Vegas 27 Mar 2027. Site shows no years; years and times from the venue pages it links to and FOX5 Las Vegas. Madison and Columbus have no time yet."
+    },
+    {
+      "id": "theo-von",
+      "name": "Theo Von",
+      "color": "#a8a29e",
+      "tourUrl": "https://www.theovon.com/tour",
+      "notes": "Added 2026-11-17 with no upcoming nights. His official tour page (Return of the Rat Tour) says new tour dates are coming soon and lists none."
     }
   ]
 }

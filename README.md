@@ -72,7 +72,7 @@ npm run preview  # serve the build
 - **Agenda**: chronological list, extra comedian/city filters, empty states, add/remove shows.
 - **Trip checker**: city + start/end dates. Case-insensitive partial city match. Headline: *In Houston these days…*
 
-Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Mark Gagnon, Jeff Arcuri, Chris D'Elia, Mo Amer, Aaron Chen, Jimmy O. Yang, Zarna Garg.
+Starter roster: Ricky Gervais, Dave Chappelle, Andrew Schulz (alias Schultz), Mark Gagnon, Jeff Arcuri, Chris D'Elia, Mo Amer, Aaron Chen, Jimmy O. Yang, Zarna Garg, Bobby Lee, Andrew Santino, Theo Von.
 
 ## Live lookup
 
@@ -98,11 +98,12 @@ Multiple showtimes on the same night at the same venue collapse to one agenda ro
 | `data/aaron-chen-shows.json` | Aaron Chen seed dates |
 | `data/jimmy-o-yang-shows.json` | Jimmy O. Yang seed dates |
 | `data/zarna-garg-shows.json` | Zarna Garg seed dates |
+| `data/andrew-santino-shows.json` | Andrew Santino seed dates |
 | `data/cities.json` | Static lat/lng lookup (no geocoding API key) |
 | `data/laylo-drops.json` | Official Laylo embed drop IDs (Andrew Schulz homepage calendar) |
 | `data/venue-pages.json` | Club event URLs to scrape from Node (`npm run refresh-tours`) |
 
-Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026-09-10**; Chappelle Karmageddon on **2026-09-16**; DC benefit + second MSG night on **2026-09-21**; Atlanta and Stockholm second night on **2026-09-28**; weekly refresh on **2026-10-05**; refresh on **2026-11-12**; Mo Amer, Aaron Chen and Jimmy O. Yang on **2026-11-13**; Zarna Garg on **2026-11-16**). There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
+Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026-09-10**; Chappelle Karmageddon on **2026-09-16**; DC benefit + second MSG night on **2026-09-21**; Atlanta and Stockholm second night on **2026-09-28**; weekly refresh on **2026-10-05**; refresh on **2026-11-12**; Mo Amer, Aaron Chen and Jimmy O. Yang on **2026-11-13**; Zarna Garg on **2026-11-16**; Bobby Lee, Andrew Santino and Theo Von on **2026-11-17**). There are **no Sample placeholders**. Prefer fewer confirmed dates over invented ones.
 
 | Comedian | Real dates seeded | Sources |
 | --- | --- | --- |
@@ -116,8 +117,11 @@ Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026
 | Aaron Chen | **24** (one row per calendar night, 26 Nov 2026–17 Apr 2027) | Official site [aaronchencomedy.com](https://www.aaronchencomedy.com/) (`tourUrl`), Technology tour. Month and day only on the site; years from the [Live Nation artist page](https://www.livenation.com/artist/K8vZ9174lIV/aaron-chen-events) and venue pages. Australia (Newcastle, Thirroul, Canberra, Darwin, Brisbane, Melbourne, Sydney), US and Canada (Calgary, Vancouver). Thirroul is 27 Nov per the venue and Live Nation; the site prints 28 Nov. |
 | Jimmy O. Yang | **39** (one row per calendar night, 15 Jan–30 May 2027) | Official tour page [jimmycomedy.com/shows](https://www.jimmycomedy.com/shows/) (`tourUrl`; jimmyoyang.com redirects there), Has No Friends Tour. Month and day only; 2027 confirmed on Live Nation/Ticketmaster and venue pages where readable. US and Canada (Toronto, Vancouver). |
 | Zarna Garg | **26** (one row per calendar night, 21 Nov 2026–27 Mar 2027) | Official site [zarnagarg.com/tickets](https://zarnagarg.com/tickets/) (`tourUrl`), a Bandsintown list that only renders in a browser. Years printed. Australia (Sydney, Brisbane, Melbourne, Adelaide), Canada (Montreal, Halifax) and the US. |
+| Bobby Lee | **0** | No upcoming nights: the [Live Nation artist page](https://www.livenation.com/artist/K8vZ917uPQV/bobby-lee-events) (`tourUrl`) lists none, and his own site refuses automated fetches. |
+| Andrew Santino | **15** (one row per calendar night, 5 Feb–27 Mar 2027) | Official site [andrewsantino.com](https://www.andrewsantino.com/) (`tourUrl`). Month and day only; years and times from the venue pages it links to and FOX5 Las Vegas. Milwaukee, West Palm Beach, Miami, Madison, Columbus, Denver, Las Vegas. |
+| Theo Von | **0** | Official tour page [theovon.com/tour](https://www.theovon.com/tour) (`tourUrl`) says new dates are coming soon. |
 
-Existing browsers may still have an older `localStorage` snapshot. **v4–v16** snapshots are migrated once into `comedian-tracker:v17`: Dave Chappelle’s listed nights become the Duke Ellington School DC benefit, Fastball Mesa, and the Karmageddon arena run including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and both NY Comedy Festival MSG dates (stale Ticketmaster tour URL replaced with Live Nation), missing seed comedians (including **Chris D'Elia**, now **84** nights, **Mo Amer**, **18** nights, **Aaron Chen**, **24** nights, **Jimmy O. Yang**, **39** nights, and **Zarna Garg**, **26** nights) and their listed nights are added, Jeff Arcuri empty rows pick up the **82** seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **15-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
+Existing browsers may still have an older `localStorage` snapshot. **v4–v17** snapshots are migrated once into `comedian-tracker:v18`: Dave Chappelle’s listed nights become the Duke Ellington School DC benefit, Fastball Mesa, and the Karmageddon arena run including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and both NY Comedy Festival MSG dates (stale Ticketmaster tour URL replaced with Live Nation), missing seed comedians (including **Chris D'Elia**, now **84** nights, **Mo Amer**, **18** nights, **Aaron Chen**, **24** nights, **Jimmy O. Yang**, **39** nights, and **Zarna Garg**, **26** nights) and their listed nights are added, Jeff Arcuri empty rows pick up the **82** seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **15-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
 
 Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
 
@@ -143,6 +147,9 @@ Suggested extra sources (respect robots.txt / ToS; prefer official pages):
 - Aaron Chen — [aaronchencomedy.com](https://www.aaronchencomedy.com/)
 - Jimmy O. Yang — [jimmycomedy.com/shows](https://www.jimmycomedy.com/shows/)
 - Zarna Garg — [zarnagarg.com/tickets](https://zarnagarg.com/tickets/)
+- Bobby Lee — [Live Nation artist page](https://www.livenation.com/artist/K8vZ917uPQV/bobby-lee-events)
+- Andrew Santino — [andrewsantino.com](https://www.andrewsantino.com/)
+- Theo Von — [theovon.com/tour](https://www.theovon.com/tour)
 
 A reasonable cadence is a Monday cron or GitHub Action that rewrites `data/shows.json` and bumps `generatedAt`. User-added shows live only in `localStorage` and are not overwritten by that file.
 

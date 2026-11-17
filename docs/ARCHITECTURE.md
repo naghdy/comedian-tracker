@@ -21,6 +21,7 @@ Env vars (all optional at compile time, all public in the bundle — never commi
 | `VITE_GOOGLE_MAPS_API_KEY` | Maps JavaScript API. Map panel only. |
 | `VITE_TICKETMASTER_API_KEY` | Ticketmaster Discovery, `src/lib/lookupShows.ts`. |
 | `VITE_SEATGEEK_CLIENT_ID` | SeatGeek events, same module. |
+| `VITE_GA_MEASUREMENT_ID` | Google Analytics 4 (`G-...`), `src/lib/analytics.ts`. Production builds only. |
 | `VITE_CLARITY_PROJECT_ID` | Microsoft Clarity, `src/lib/clarity.ts`. Production builds only; empty means no tag. |
 
 Copy `.env.example` to `.env.local` for local runs. Pages injects the same names from repo Actions secrets (see `.github/workflows/pages.yml`).
@@ -64,17 +65,17 @@ Default is **dark**.
 
 ## localStorage seed
 
-Current key: `comedian-tracker:v17` in `src/lib/storage.ts`.
+Current key: `comedian-tracker:v18` in `src/lib/storage.ts`.
 
-`LEGACY_KEYS` (newest first): `v15`, `v14`, `v13`, `v12`, `v11`, `v10`, `v9`, `v8`, `v7`, `v6`, `v5`, `v4`.
+`LEGACY_KEYS` (newest first): `v17`, `v16`, `v15`, `v14`, `v13`, `v12`, `v11`, `v10`, `v9`, `v8`, `v7`, `v6`, `v5`, `v4`.
 
 `load()`:
 
-1. If `v17` parses as `{ comedians, shows }`, use it as-is. It is **not** re-merged with the JSON seed.
+1. If `v18` parses as `{ comedians, shows }`, use it as-is. It is **not** re-merged with the JSON seed.
 2. Otherwise walk `LEGACY_KEYS` and run `hydrateSeedShows` on the first snapshot that parses.
 3. Otherwise clone the bundled seed.
 
-`useTrackerState` writes the current state back to `v17` on every change, so a legacy migration is persisted once.
+`useTrackerState` writes the current state back to `v18` on every change, so a legacy migration is persisted once.
 
 `hydrateSeedShows` (also exported as deprecated `hydrateJeffSeed`) for each seed comedian:
 
@@ -82,9 +83,9 @@ Current key: `comedian-tracker:v17` in `src/lib/storage.ts`.
 - Match: drop that comedian’s rows unless `source` is `user` or `lookup`, then merge the seed rows (`mergeShows`). Remap `comedianId` (and ids) when the stored id differs from the seed id.
 - Fill a missing `tourUrl`, `notes`, or `aliases` from the seed. Replace `tourUrl` when it is in `STALE_TOUR_URLS` (old Ticketmaster artist pages, `theandrewschulz.com` without `www`, and the Jeff site URLs that were replaced by the Live Nation artist page).
 
-Because a populated `v17` is never hydrated again, **any seed change must bump `KEY` and append the previous key to `LEGACY_KEYS`.**
+Because a populated `v18` is never hydrated again, **any seed change must bump `KEY` and append the previous key to `LEGACY_KEYS`.**
 
-**Reset seed** (`resetSeed`) confirms with “Restore the starter roster and seed shows?”, writes a fresh clone of the bundled seed to `v17`, and clears roster, city, comedian, and trip filters in `App`.
+**Reset seed** (`resetSeed`) confirms with “Restore the starter roster and seed shows?”, writes a fresh clone of the bundled seed to `v18`, and clears roster, city, comedian, and trip filters in `App`.
 
 ## City geocoding
 

@@ -11,6 +11,7 @@ import moAmerShows from "../../data/mo-amer-shows.json";
 import aaronChenShows from "../../data/aaron-chen-shows.json";
 import jimmyOYangShows from "../../data/jimmy-o-yang-shows.json";
 import zarnaGargShows from "../../data/zarna-garg-shows.json";
+import andrewSantinoShows from "../../data/andrew-santino-shows.json";
 import comedians from "../../data/comedians.json";
 
 describe("hydrateJeffSeed", () => {
@@ -630,9 +631,9 @@ describe("2026-11-13 Aaron Chen and Jimmy O. Yang", () => {
 });
 
 describe("2026-11-16 Zarna Garg", () => {
-  it("adds Zarna Garg to the end of the roster", () => {
+  it("adds Zarna Garg to the roster after Jimmy O. Yang", () => {
     const roster = comedians.comedians.map((comedian) => comedian.id);
-    assert.equal(roster.at(-1), "zarna-garg");
+    assert.equal(roster.indexOf("zarna-garg"), roster.indexOf("jimmy-o-yang") + 1);
   });
 
   it("seeds 26 listed nights, one per date, all pinned", () => {
@@ -744,5 +745,55 @@ describe("2026-11-17 weekly refresh", () => {
     for (const id of ["rg-2027-04-30-paris", "rg-2027-07-02-amsterdam", "rg-2027-08-28-stockholm"]) {
       assert.equal(at(id).comedianId, "ricky-gervais");
     }
+  });
+});
+
+describe("2026-11-17 Bobby Lee, Andrew Santino and Theo Von", () => {
+  it("adds all three to the end of the roster in that order", () => {
+    const roster = comedians.comedians.map((comedian) => comedian.id);
+    assert.deepEqual(roster.slice(-3), ["bobby-lee", "andrew-santino", "theo-von"]);
+  });
+
+  it("seeds 15 listed Santino nights, one per date, all pinned", () => {
+    assert.equal(andrewSantinoShows.shows.length, 15);
+    assert.equal(new Set(andrewSantinoShows.shows.map((show) => show.date)).size, 15);
+    assert.equal(andrewSantinoShows.shows[0]?.date, "2027-02-05");
+    assert.equal(andrewSantinoShows.shows.at(-1)?.date, "2027-03-27");
+    const dates = andrewSantinoShows.shows.map((show) => show.date);
+    assert.deepEqual(dates, [...dates].sort());
+    for (const show of andrewSantinoShows.shows) {
+      assert.equal(show.comedianId, "andrew-santino");
+      assert.equal(show.source, "listed");
+      assert.match(show.id, /^sa-\d{4}-\d{2}-\d{2}-[a-z-]+$/);
+      assert.ok(show.ticketUrl?.startsWith("https://"), show.id);
+      assert.ok(coordsForShow(show), `no pin for ${show.id} (${show.city})`);
+    }
+  });
+
+  it("leaves time off only where no venue printed one", () => {
+    const untimed = andrewSantinoShows.shows
+      .filter((show) => !(show as { time?: string }).time)
+      .map((show) => show.id);
+    assert.deepEqual(untimed, [
+      "sa-2027-03-05-madison",
+      "sa-2027-03-06-madison",
+      "sa-2027-03-12-columbus",
+      "sa-2027-03-13-columbus",
+    ]);
+  });
+
+  it("pins Milwaukee and West Palm Beach", () => {
+    assert.equal(findCity("Milwaukee, WI")?.city, "Milwaukee");
+    assert.equal(findCity("Palm Beach")?.city, "West Palm Beach");
+  });
+
+  it("hydration adds all three, with no invented nights for Bobby Lee or Theo Von", () => {
+    const next = hydrateSeedShows({ comedians: [], shows: [] });
+    for (const id of ["bobby-lee", "andrew-santino", "theo-von"]) {
+      assert.ok(next.comedians.some((comedian) => comedian.id === id), id);
+    }
+    assert.equal(next.shows.filter((show) => show.comedianId === "andrew-santino").length, 15);
+    assert.equal(SEED_SHOWS.some((show) => show.comedianId === "bobby-lee"), false);
+    assert.equal(SEED_SHOWS.some((show) => show.comedianId === "theo-von"), false);
   });
 });

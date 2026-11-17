@@ -141,5 +141,7 @@
   {"city":"Ledyard","lat":41.4398,"lng":-72.014,"aliases":["ledyard, ct","mashantucket"]},
   {"city":"Anaheim","lat":33.8366,"lng":-117.9143,"aliases":["anaheim, ca"]},
   {"city":"Bethlehem","lat":40.6259,"lng":-75.3705,"aliases":["bethlehem, pa"]},
-  {"city":"Hershey","lat":40.2859,"lng":-76.6502,"aliases":["hershey, pa"]}
+  {"city":"Hershey","lat":40.2859,"lng":-76.6502,"aliases":["hershey, pa"]},
+  {"city":"Milwaukee","lat":43.0389,"lng":-87.9065,"aliases":["milwaukee, wi"]},
+  {"city":"West Palm Beach","lat":26.7153,"lng":-80.0534,"aliases":["west palm beach, fl","palm beach"]}
 ]

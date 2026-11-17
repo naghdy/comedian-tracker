@@ -195,3 +195,7 @@ The same mic sits before the "Comedian Tracker" wordmark (`src/components/MicIco
 Nabil asked for the city search to autocomplete, using the same destination logic as the map. Suggestions come from the tracker's own `data/cities.json` places, grouped the way the map pins shows (`placeForShow`), rather than from Google Places Autocomplete: every suggestion then has nights behind it, the counts match what the map shows, and no extra Google API or key change is needed.
 
 The text filter now matches the same way. It used to match any substring, so "la" brought up Atlanta, Portland and Orlando, and "Birmingham, AL" also showed Birmingham, England. Exact place names keep only that place, and partial text matches the start of a word. `findExact` now prefers a place's own name over another place's alias (Phoenix over Mesa's `phoenix` alias); no seed pin moved. The trip checker gets the same box, limited to places with a night in the chosen dates. No seed data changed, so no seed-key bump.
+
+## 2026-11-17 — Google Analytics
+
+Nabil asked for Google Analytics on the site. GA4's gtag.js is added from `src/lib/analytics.ts` with the measurement ID from the build-time secret `VITE_GA_MEASUREMENT_ID`, the same way the Maps key reaches the build. It loads only in production builds and only with a well-formed `G-` ID, so local dev and forks without the secret send nothing. No router, so the default page view on load covers it. No seed data changed, so no seed-key bump.

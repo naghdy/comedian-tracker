@@ -46,6 +46,7 @@ The build job checks out the repo, uses Node 22, `npm ci`, and `npm run build` w
 - `VITE_GOOGLE_MAPS_API_KEY`
 - `VITE_TICKETMASTER_API_KEY`
 - `VITE_SEATGEEK_CLIENT_ID`
+- `VITE_GA_MEASUREMENT_ID`
 
 from Actions secrets, then uploads `dist`. The deploy job uses `actions/deploy-pages`.
 
@@ -73,6 +74,19 @@ After the workflow is green, confirm the new ids and the new seed key are in the
 3. Search that bundle for a new show id (for example `dc-2026-10-27-austin`) and for the seed key (`comedian-tracker:v17`, or the version you just bumped to).
 
 Vite inlines the JSON seed and the storage key, so both strings are in the JS. A stale Pages deploy will still show the previous ids and key.
+
+### Google Analytics
+
+GA4 loads from `src/lib/analytics.ts`, called once in `src/main.tsx`. It reads the measurement ID from `VITE_GA_MEASUREMENT_ID` and adds Google's gtag.js snippet only in production builds and only when the value looks like `G-` followed by letters and digits. Dev servers and builds without the secret send nothing.
+
+Setup:
+
+1. In Google Analytics, create a GA4 property and a **Web** data stream for `https://comediantracker.com`. Copy its measurement ID (`G-...`).
+2. In the repo, **Settings → Secrets and variables → Actions → New repository secret**, name `VITE_GA_MEASUREMENT_ID`, value the `G-...` ID.
+3. Re-run **Deploy GitHub Pages** so the ID is baked into the bundle.
+4. Check: the live page source has a script from `googletagmanager.com/gtag/js?id=G-...`, and GA's **Realtime** report shows your visit.
+
+The site has no client-side router, so the page view sent on load is the only one. Enhanced measurement in the stream settings adds scrolls and outbound clicks (ticket links) without code changes.
 
 ## Weekly digest
 

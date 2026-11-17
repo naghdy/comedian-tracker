@@ -534,14 +534,12 @@ describe("2026-10-05 city pins", () => {
 
 describe("2026-11-12 refresh", () => {
   it("adds 16 Gervais 2027 nights and 18 D'Elia nights, all pinned", () => {
-    const gervais2027 = comedianShows.shows.filter(
-      (show) => show.comedianId === "ricky-gervais" && show.date.startsWith("2027-"),
+    const gervaisUk = comedianShows.shows.filter(
+      (show) => show.comedianId === "ricky-gervais" && show.country === "UK",
     );
+    const gervais2027 = gervaisUk.filter((show) => show.date.startsWith("2027-"));
     assert.equal(gervais2027.length, 16);
-    assert.equal(
-      comedianShows.shows.filter((show) => show.comedianId === "ricky-gervais").length,
-      38,
-    );
+    assert.equal(gervaisUk.length, 38);
     const newDelia = chrisDeliaShows.shows.filter((show) =>
       ["St. Louis", "Hollywood", "Timonium", "Calgary", "San Antonio", "Bloomington, MN", "Oklahoma City"].includes(show.city),
     );
@@ -693,5 +691,58 @@ describe("2026-11-16 map pins with a region", () => {
     assert.equal(findCity("Sheffield, England")?.city, "Sheffield");
     assert.equal(findCity("Oxford, England")?.city, "Oxford");
     assert.equal(findCity("Washington DC area")?.city, "Washington");
+  });
+});
+
+describe("2026-11-17 weekly refresh", () => {
+  const gervais = comedianShows.shows.filter((show) => show.comedianId === "ricky-gervais");
+  const at = (id: string) => {
+    const show = SEED_SHOWS.find((s) => s.id === id);
+    assert.ok(show, id);
+    return show;
+  };
+
+  it("adds 3 European Gervais nights, 41 in all", () => {
+    assert.equal(gervais.length, 41);
+    const europe = gervais.filter((show) => show.country !== "UK");
+    assert.deepEqual(
+      europe.map((show) => [show.id, show.venue, show.date, (show as { time?: string }).time ?? null]),
+      [
+        ["rg-2027-04-30-paris", "Accor Arena", "2027-04-30", "19:30"],
+        ["rg-2027-07-02-amsterdam", "AFAS Live", "2027-07-02", null],
+        ["rg-2027-08-28-stockholm", "Avicii Arena", "2027-08-28", "19:30"],
+      ],
+    );
+    for (const show of europe) {
+      assert.equal(show.source, "listed");
+      assert.ok(show.ticketUrl?.startsWith("https://"), show.id);
+    }
+  });
+
+  it("keeps Gervais rows in date order", () => {
+    const dates = gervais.map((show) => show.date);
+    assert.deepEqual(dates, [...dates].sort());
+  });
+
+  it("pins the new nights to the right cities", () => {
+    assert.deepEqual(coordsForShow(at("rg-2027-04-30-paris")), { lat: 48.8566, lng: 2.3522 });
+    assert.deepEqual(coordsForShow(at("rg-2027-07-02-amsterdam")), { lat: 52.3676, lng: 4.9041 });
+    assert.deepEqual(coordsForShow(at("rg-2027-08-28-stockholm")), { lat: 59.3293, lng: 18.0686 });
+    assert.equal(findCity("Amsterdam, Netherlands")?.city, "Amsterdam");
+  });
+
+  it("points Aaron Chen's Brisbane nights at the QPAC encore page", () => {
+    for (const id of ["ac-2026-12-10-brisbane", "ac-2026-12-11-brisbane"]) {
+      assert.equal(
+        aaronChenShows.shows.find((show) => show.id === id)?.ticketUrl,
+        "https://www.qpac.com.au/whats-on/2026/aaron-chen-encore/",
+      );
+    }
+  });
+
+  it("ships the new nights in the bundled seed", () => {
+    for (const id of ["rg-2027-04-30-paris", "rg-2027-07-02-amsterdam", "rg-2027-08-28-stockholm"]) {
+      assert.equal(at(id).comedianId, "ricky-gervais");
+    }
   });
 });

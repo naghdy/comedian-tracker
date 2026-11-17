@@ -95,11 +95,11 @@ Current counts (all `source: "listed"`, one night per date):
 
 | File | `generatedAt` | Rows |
 | --- | --- | --- |
-| `data/shows.json` | 2026-11-12 | 76 = Gervais 38 + Chappelle 12 + Schulz 15 + Gagnon 11 |
+| `data/shows.json` | 2026-11-17 | 79 = Gervais 41 (38 UK + 3 Europe) + Chappelle 12 + Schulz 15 + Gagnon 11 |
 | `data/jeff-arcuri-shows.json` | 2026-10-05 | 82 |
 | `data/chris-delia-shows.json` | 2026-11-12 | 84 |
 | `data/mo-amer-shows.json` | 2026-11-13 | 18 |
-| `data/aaron-chen-shows.json` | 2026-11-13 | 24 |
+| `data/aaron-chen-shows.json` | 2026-11-17 | 24 |
 | `data/jimmy-o-yang-shows.json` | 2026-11-13 | 39 |
 | `data/zarna-garg-shows.json` | 2026-11-16 | 26 |
 
@@ -135,7 +135,7 @@ Roster order in the file is the sidebar order.
 
 ## `data/cities.json`
 
-Array of 142 cities. No envelope.
+Array of 143 cities. No envelope.
 
 ```json
 { "city": "Washington", "lat": 38.9072, "lng": -77.0369, "aliases": ["washington, dc", "dc"] }

@@ -392,8 +392,8 @@ describe("Chris D'Elia seed", () => {
 
   it("has one listed night per official calendar day", () => {
     const dates = chrisDeliaShows.shows.map((show) => show.date);
-    assert.equal(chrisDeliaShows.shows.length, 84);
-    assert.equal(new Set(dates).size, 84);
+    assert.equal(chrisDeliaShows.shows.length, 87);
+    assert.equal(new Set(dates).size, 87);
     const uncasville = chrisDeliaShows.shows.filter((show) => show.city === "Uncasville");
     assert.deepEqual(
       uncasville.map((show) => `${show.date} ${show.time}`),
@@ -636,11 +636,11 @@ describe("2026-11-16 Zarna Garg", () => {
     assert.equal(roster.indexOf("zarna-garg"), roster.indexOf("jimmy-o-yang") + 1);
   });
 
-  it("seeds 26 listed nights, one per date, all pinned", () => {
-    assert.equal(zarnaGargShows.shows.length, 26);
-    assert.equal(new Set(zarnaGargShows.shows.map((show) => show.date)).size, 26);
+  it("seeds 30 listed nights, one per date, all pinned", () => {
+    assert.equal(zarnaGargShows.shows.length, 30);
+    assert.equal(new Set(zarnaGargShows.shows.map((show) => show.date)).size, 30);
     assert.equal(zarnaGargShows.shows[0]?.date, "2026-11-21");
-    assert.equal(zarnaGargShows.shows.at(-1)?.date, "2027-03-27");
+    assert.equal(zarnaGargShows.shows.at(-1)?.date, "2027-05-08");
     for (const show of zarnaGargShows.shows) {
       assert.equal(show.comedianId, "zarna-garg");
       assert.equal(show.source, "listed");
@@ -653,7 +653,7 @@ describe("2026-11-16 Zarna Garg", () => {
   it("hydration adds her nights to a stored roster that lacks them", () => {
     const next = hydrateSeedShows({ comedians: [], shows: [] });
     assert.ok(next.comedians.some((comedian) => comedian.id === "zarna-garg"));
-    assert.equal(next.shows.filter((show) => show.comedianId === "zarna-garg").length, 26);
+    assert.equal(next.shows.filter((show) => show.comedianId === "zarna-garg").length, 30);
   });
 
   it("pins Portland, ME in Maine and Montréal under its accented spelling", () => {
@@ -703,15 +703,14 @@ describe("2026-11-17 weekly refresh", () => {
     return show;
   };
 
-  it("adds 3 European Gervais nights, 41 in all", () => {
-    assert.equal(gervais.length, 41);
-    const europe = gervais.filter((show) => show.country !== "UK");
+  it("adds 3 European Gervais nights", () => {
+    const europe = ["rg-2027-04-30-paris", "rg-2027-07-02-amsterdam", "rg-2027-08-28-stockholm"].map(at);
     assert.deepEqual(
-      europe.map((show) => [show.id, show.venue, show.date, (show as { time?: string }).time ?? null]),
+      europe.map((show) => [show.id, show.venue, show.date]),
       [
-        ["rg-2027-04-30-paris", "Accor Arena", "2027-04-30", "19:30"],
-        ["rg-2027-07-02-amsterdam", "AFAS Live", "2027-07-02", null],
-        ["rg-2027-08-28-stockholm", "Avicii Arena", "2027-08-28", "19:30"],
+        ["rg-2027-04-30-paris", "Accor Arena", "2027-04-30"],
+        ["rg-2027-07-02-amsterdam", "AFAS Live", "2027-07-02"],
+        ["rg-2027-08-28-stockholm", "Avicii Arena", "2027-08-28"],
       ],
     );
     for (const show of europe) {
@@ -774,12 +773,7 @@ describe("2026-11-17 Bobby Lee, Andrew Santino and Theo Von", () => {
     const untimed = andrewSantinoShows.shows
       .filter((show) => !(show as { time?: string }).time)
       .map((show) => show.id);
-    assert.deepEqual(untimed, [
-      "sa-2027-03-05-madison",
-      "sa-2027-03-06-madison",
-      "sa-2027-03-12-columbus",
-      "sa-2027-03-13-columbus",
-    ]);
+    assert.deepEqual(untimed, ["sa-2027-03-05-madison", "sa-2027-03-06-madison"]);
   });
 
   it("pins Milwaukee and West Palm Beach", () => {
@@ -795,5 +789,100 @@ describe("2026-11-17 Bobby Lee, Andrew Santino and Theo Von", () => {
     assert.equal(next.shows.filter((show) => show.comedianId === "andrew-santino").length, 15);
     assert.equal(SEED_SHOWS.some((show) => show.comedianId === "bobby-lee"), false);
     assert.equal(SEED_SHOWS.some((show) => show.comedianId === "theo-von"), false);
+  });
+});
+
+describe("2026-11-19 weekly refresh", () => {
+  const at = (id: string) => {
+    const show = SEED_SHOWS.find((s) => s.id === id);
+    assert.ok(show, id);
+    return show;
+  };
+  const timeOf = (id: string) => (at(id) as { time?: string }).time ?? null;
+
+  it("adds 10 Gervais 2027 nights, 51 in all, in date order", () => {
+    const gervais = comedianShows.shows.filter((show) => show.comedianId === "ricky-gervais");
+    assert.equal(gervais.length, 51);
+    assert.equal(gervais.filter((show) => show.country === "UK").length, 38);
+    const added = [
+      ["rg-2027-01-23-antwerp", "Lotto Arena", "Belgium", "19:30"],
+      ["rg-2027-02-27-badalona", "Olímpic Arena Badalona", "Spain", "19:30"],
+      ["rg-2027-03-19-lisbon", "MEO Arena", "Portugal", "19:30"],
+      ["rg-2027-04-09-new-york", "Radio City Music Hall", "US", "19:30"],
+      ["rg-2027-04-10-new-york", "Radio City Music Hall", "US", "19:30"],
+      ["rg-2027-04-12-chicago", "United Center", "US", "19:30"],
+      ["rg-2027-04-24-vienna", "Wiener Stadthalle - Halle D", "Austria", "19:30"],
+      ["rg-2027-06-19-zagreb", "Arena Zagreb", "Croatia", null],
+      ["rg-2027-07-17-zurich", "Hallenstadion", "Switzerland", "19:30"],
+      ["rg-2027-08-14-toronto", "Scotiabank Arena", "Canada", "19:30"],
+    ] as const;
+    for (const [id, venue, country, time] of added) {
+      const show = at(id);
+      assert.equal(show.comedianId, "ricky-gervais");
+      assert.equal(show.venue, venue);
+      assert.equal(show.country, country);
+      assert.equal(timeOf(id), time);
+      assert.equal(show.source, "listed");
+      assert.ok(show.ticketUrl?.startsWith("https://"), id);
+    }
+    assert.equal(timeOf("rg-2027-07-02-amsterdam"), "19:30");
+    const dates = gervais.map((show) => show.date);
+    assert.deepEqual(dates, [...dates].sort());
+  });
+
+  it("pins every new night, including the six new cities", () => {
+    for (const id of [
+      "rg-2027-01-23-antwerp",
+      "rg-2027-02-27-badalona",
+      "rg-2027-03-19-lisbon",
+      "rg-2027-04-09-new-york",
+      "rg-2027-04-12-chicago",
+      "rg-2027-04-24-vienna",
+      "rg-2027-06-19-zagreb",
+      "rg-2027-07-17-zurich",
+      "rg-2027-08-14-toronto",
+      "cd-2027-05-21-new-cumberland",
+      "zg-2027-02-19-chicago",
+      "zg-2027-05-06-nashville",
+    ]) {
+      assert.ok(coordsForShow(at(id)), `no pin for ${id}`);
+    }
+    assert.deepEqual(coordsForShow(at("rg-2027-07-17-zurich")), { lat: 47.3769, lng: 8.5417 });
+    assert.equal(findCity("Zürich")?.city, "Zurich");
+    assert.equal(findCity("Lisboa")?.city, "Lisbon");
+    assert.equal(findCity("Antwerpen")?.city, "Antwerp");
+    assert.equal(findCity("Wien")?.city, "Vienna");
+  });
+
+  it("adds D'Elia's New Cumberland run with a time only where sources agree", () => {
+    const rows = chrisDeliaShows.shows.filter((show) => show.city === "New Cumberland");
+    assert.deepEqual(
+      rows.map((show) => [show.date, (show as { time?: string }).time ?? null]),
+      [
+        ["2027-05-21", null],
+        ["2027-05-22", "18:00"],
+        ["2027-05-23", null],
+      ],
+    );
+    assert.ok(rows.every((show) => show.venue === "HBG Comedy Zone" && show.region === "PA"));
+  });
+
+  it("adds Zarna Garg's Chicago and Nashville nights and moves Portland to 19:00", () => {
+    for (const id of ["zg-2027-02-19-chicago", "zg-2027-05-06-nashville", "zg-2027-05-07-nashville", "zg-2027-05-08-nashville"]) {
+      assert.equal(timeOf(id), "19:00");
+    }
+    assert.equal(at("zg-2027-02-19-chicago").venue, "The Vic Theatre");
+    assert.equal(timeOf("zg-2027-01-23-portland"), "19:00");
+  });
+
+  it("fills in start times from the venue pages", () => {
+    assert.equal(timeOf("ma-2026-12-12-honolulu"), "18:30");
+    assert.ok(at("ma-2026-12-12-honolulu").ticketUrl?.includes("/14301374"));
+    assert.equal(timeOf("sa-2027-03-12-columbus"), "19:00");
+    assert.equal(timeOf("sa-2027-03-13-columbus"), "18:30");
+    assert.equal(timeOf("as-2026-12-04-raleigh"), "19:00");
+    assert.equal(timeOf("as-2026-12-05-raleigh"), "19:00");
+    assert.equal(timeOf("as-2026-12-11-columbus"), "19:00");
+    assert.equal(timeOf("as-2026-12-12-columbus"), "18:30");
   });
 });

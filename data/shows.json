@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-17",
-  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09; 16 nights 5 Jan–27 Jul 2027 added 2026-11-12; 3 European 2027 nights added 2026-11-17 from official pages: Paris Accor Arena 30 Apr (Live Nation France), Amsterdam AFAS Live 2 Jul (afaslive.nl, no time published yet), Stockholm Avicii Arena 28 Aug (aviciiarena.se); other European cities reported in the press but not yet on an official page are left out; Manchester 12–13 Oct and Brighton 16–17 Nov start times corrected to 19:30 on 2026-10-05, doors were 18:30). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (15 club nights; Stardome Birmingham 6 Nov dropped from the drop as of 2026-11-12, which now lists 7 Nov only). Gagnon: markgagnonlive.com.",
+  "generatedAt": "2026-11-19",
+  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09; 16 nights 5 Jan–27 Jul 2027 added 2026-11-12; 3 European 2027 nights added 2026-11-17 from official pages: Paris Accor Arena 30 Apr (Live Nation France), Amsterdam AFAS Live 2 Jul (afaslive.nl, no time published yet), Stockholm Avicii Arena 28 Aug (aviciiarena.se); 10 more 2027 nights added 2026-11-19 from the Live Nation US artist page and each night's Live Nation event page: Antwerp Lotto Arena 23 Jan, Badalona Olímpic Arena 27 Feb, Lisbon MEO Arena 19 Mar, New York Radio City 9–10 Apr, Chicago United Center 12 Apr, Vienna Wiener Stadthalle 24 Apr, Zagreb Arena Zagreb 19 Jun (no time: the Live Nation Adria page did not load), Zurich Hallenstadion 17 Jul, Toronto Scotiabank Arena 14 Aug; Amsterdam 2 Jul start time 19:30 from Live Nation NL (2026-11-19); Manchester 12–13 Oct and Brighton 16–17 Nov start times corrected to 19:30 on 2026-10-05, doors were 18:30). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (15 club nights; Stardome Birmingham 6 Nov dropped from the drop as of 2026-11-12, which now lists 7 Nov only; Raleigh Goodnights 4–5 Dec and Columbus Funny Bone 11–12 Dec start times from the venue pages, 2026-11-19). Gagnon: markgagnonlive.com.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -341,6 +341,18 @@
       "source": "listed"
     },
     {
+      "id": "rg-2027-01-23-antwerp",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Lotto Arena",
+      "city": "Antwerp",
+      "country": "Belgium",
+      "date": "2027-01-23",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.be/event/ricky-gervais-legend-antwerpen-tickets-edp1701558",
+      "source": "listed"
+    },
+    {
       "id": "rg-2027-02-02-cardiff",
       "comedianId": "ricky-gervais",
       "title": "Ricky Gervais: Legend",
@@ -419,6 +431,18 @@
       "source": "listed"
     },
     {
+      "id": "rg-2027-02-27-badalona",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Olímpic Arena Badalona",
+      "city": "Badalona",
+      "country": "Spain",
+      "date": "2027-02-27",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.es/event/ricky-gervais-legend-badalona-tickets-edp1706103",
+      "source": "listed"
+    },
+    {
       "id": "rg-2027-03-04-nottingham",
       "comedianId": "ricky-gervais",
       "title": "Ricky Gervais: Legend",
@@ -429,6 +453,69 @@
       "date": "2027-03-04",
       "time": "19:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-03-19-lisbon",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "MEO Arena",
+      "city": "Lisbon",
+      "country": "Portugal",
+      "date": "2027-03-19",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.pt/event/legend-lisboa-tickets-edp1706039",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-04-09-new-york",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Radio City Music Hall",
+      "city": "New York",
+      "region": "NY",
+      "country": "US",
+      "date": "2027-04-09",
+      "time": "19:30",
+      "ticketUrl": "https://www.ticketmaster.com/ricky-gervais-legend-new-york-new-york-04-09-2027/event/3C00656691BC2197",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-04-10-new-york",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Radio City Music Hall",
+      "city": "New York",
+      "region": "NY",
+      "country": "US",
+      "date": "2027-04-10",
+      "time": "19:30",
+      "ticketUrl": "https://www.ticketmaster.com/ricky-gervais-legend-new-york-new-york-04-10-2027/event/3C00656691D021A1",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-04-12-chicago",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "United Center",
+      "city": "Chicago",
+      "region": "IL",
+      "country": "US",
+      "date": "2027-04-12",
+      "time": "19:30",
+      "ticketUrl": "https://www.ticketmaster.com/ricky-gervais-legend-chicago-illinois-04-12-2027/event/04006561BEDC675A",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-04-24-vienna",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Wiener Stadthalle - Halle D",
+      "city": "Vienna",
+      "country": "Austria",
+      "date": "2027-04-24",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.at/events/ricky-gervais-legend-wien-tickets-edp1701848",
       "source": "listed"
     },
     {
@@ -470,6 +557,17 @@
       "source": "listed"
     },
     {
+      "id": "rg-2027-06-19-zagreb",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Arena Zagreb",
+      "city": "Zagreb",
+      "country": "Croatia",
+      "date": "2027-06-19",
+      "ticketUrl": "https://www.livenationadria.com/show/1706405/ricky-gervais-legend/zagreb/2027-06-19/en",
+      "source": "listed"
+    },
+    {
       "id": "rg-2027-06-24-leeds",
       "comedianId": "ricky-gervais",
       "title": "Ricky Gervais: Legend",
@@ -490,7 +588,20 @@
       "city": "Amsterdam",
       "country": "Netherlands",
       "date": "2027-07-02",
+      "time": "19:30",
       "ticketUrl": "https://www.ticketmaster.nl/event/ricky-gervais-legend-tickets/1018971784",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-07-17-zurich",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Hallenstadion",
+      "city": "Zurich",
+      "country": "Switzerland",
+      "date": "2027-07-17",
+      "time": "19:30",
+      "ticketUrl": "https://www.livenation.ch/event/ricky-gervais-legend-z%C3%BCrich-tickets-edp1706227",
       "source": "listed"
     },
     {
@@ -517,6 +628,19 @@
       "date": "2027-07-27",
       "time": "19:30",
       "ticketUrl": "https://www.livenation.co.uk/ricky-gervais-tickets-adp2051",
+      "source": "listed"
+    },
+    {
+      "id": "rg-2027-08-14-toronto",
+      "comedianId": "ricky-gervais",
+      "title": "Ricky Gervais: Legend",
+      "venue": "Scotiabank Arena",
+      "city": "Toronto",
+      "region": "ON",
+      "country": "Canada",
+      "date": "2027-08-14",
+      "time": "19:30",
+      "ticketUrl": "https://www.ticketmaster.ca/ricky-gervais-legend-toronto-ontario-08-14-2027/event/10006563F017B343",
       "source": "listed"
     },
     {
@@ -832,6 +956,7 @@
       "region": "NC",
       "country": "US",
       "date": "2026-12-04",
+      "time": "19:00",
       "ticketUrl": "https://www.goodnightscomedy.com/events/142206",
       "source": "listed"
     },
@@ -844,6 +969,7 @@
       "region": "NC",
       "country": "US",
       "date": "2026-12-05",
+      "time": "19:00",
       "ticketUrl": "https://www.goodnightscomedy.com/events/142206",
       "source": "listed"
     },
@@ -856,6 +982,7 @@
       "region": "OH",
       "country": "US",
       "date": "2026-12-11",
+      "time": "19:00",
       "ticketUrl": "https://www.etix.com/ticket/e/1060481/andrew-schulz-columbus-funny-bone-comedy-club-columbus",
       "source": "listed"
     },
@@ -868,6 +995,7 @@
       "region": "OH",
       "country": "US",
       "date": "2026-12-12",
+      "time": "18:30",
       "ticketUrl": "https://www.etix.com/ticket/e/1060481/andrew-schulz-columbus-funny-bone-comedy-club-columbus",
       "source": "listed"
     },

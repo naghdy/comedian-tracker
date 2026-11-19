@@ -14,7 +14,7 @@ type Row = [
   time?: string,
 ];
 
-/** One row per calendar night from chrisdelia.com. Stockholm 27 Oct added 2026-09-28. Uncasville 29 Apr–1 May 2027 added 2026-10-05. St. Louis, Hollywood, Timonium, Calgary, San Antonio, Bloomington MN, Oklahoma City added and San Diego 28 Nov venue updated 2026-11-12. */
+/** One row per calendar night from chrisdelia.com. Stockholm 27 Oct added 2026-09-28. Uncasville 29 Apr–1 May 2027 added 2026-10-05. St. Louis, Hollywood, Timonium, Calgary, San Antonio, Bloomington MN, Oklahoma City added and San Diego 28 Nov venue updated 2026-11-12. New Cumberland PA HBG Comedy Zone 21–23 May 2027 added 2026-11-19; only 22 May has a time because the hub and the club page disagree on 21 and 23 May. */
 const rows: Row[] = [
   ["2026-09-11", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700"],
   ["2026-09-12", "Stand Up Live", "Phoenix", "AZ", "US", "https://phoenix.standuplive.com/events/137700", "20:45"],
@@ -98,6 +98,9 @@ const rows: Row[] = [
   ["2027-05-13", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261", "19:30"],
   ["2027-05-14", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261"],
   ["2027-05-15", "Bananas Comedy Club", "Rutherford", "NJ", "US", "https://www.bananascomedyclub.com/events/142261"],
+  ["2027-05-21", "HBG Comedy Zone", "New Cumberland", "PA", "US", "https://www.harrisburgcomedyzone.com/events/147383"],
+  ["2027-05-22", "HBG Comedy Zone", "New Cumberland", "PA", "US", "https://www.harrisburgcomedyzone.com/events/147383", "18:00"],
+  ["2027-05-23", "HBG Comedy Zone", "New Cumberland", "PA", "US", "https://www.harrisburgcomedyzone.com/events/147383"],
   ["2027-09-10", "Bricktown Comedy Club", "Oklahoma City", "OK", "US", "https://www.bricktowncomedy.com/events/145806"],
   ["2027-09-11", "Bricktown Comedy Club", "Oklahoma City", "OK", "US", "https://www.bricktowncomedy.com/events/145806"],
 ];
@@ -127,9 +130,9 @@ writeFileSync(
   out,
   `${JSON.stringify(
     {
-      generatedAt: "2026-11-12",
+      generatedAt: "2026-11-19",
       sourceNotes:
-        "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05; St. Louis Helium 4–5 Dec, Hollywood Dolby 31 Dec, Timonium 11–13 Mar, Calgary 18–20 Mar, San Antonio Laugh Out Loud 8–10 Apr, Bloomington MN 6–9 May, Oklahoma City 10–11 Sep 2027 added and San Diego 28 Nov venue moved to The Legacy Performance Institute on 2026-11-12). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Laugh Out Loud 8–10 Apr 2027 is on the hub. No invented Sample dates.",
+        "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05; St. Louis Helium 4–5 Dec, Hollywood Dolby 31 Dec, Timonium 11–13 Mar, Calgary 18–20 Mar, San Antonio Laugh Out Loud 8–10 Apr, Bloomington MN 6–9 May, Oklahoma City 10–11 Sep 2027 added and San Diego 28 Nov venue moved to The Legacy Performance Institute on 2026-11-12; New Cumberland PA HBG Comedy Zone 21–23 May 2027 added 2026-11-19, with a time only on 22 May (18:00) because the hub and the club's own page print different times for 21 and 23 May). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Laugh Out Loud 8–10 Apr 2027 is on the hub. No invented Sample dates.",
       shows,
     },
     null,

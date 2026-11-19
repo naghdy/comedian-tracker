@@ -125,7 +125,7 @@
   {"city":"Uncasville","lat":41.4343,"lng":-72.1101,"aliases":["uncasville, ct","mohegan sun"]},
   {"city":"Vancouver","lat":49.2827,"lng":-123.1207},
   {"city":"Victoria","lat":48.4284,"lng":-123.3656,"aliases":["victoria, bc"]},
-  {"city":"Vienna","lat":48.2082,"lng":16.3738,"aliases":["vienna, austria"]},
+  {"city":"Vienna","lat":48.2082,"lng":16.3738,"aliases":["vienna, austria","wien"]},
   {"city":"Washington","lat":38.9072,"lng":-77.0369,"aliases":["washington, dc","dc","d.c.","washington dc"]},
   {"city":"Watford","lat":51.6565,"lng":-0.3903},
   {"city":"Wellington, FL","lat":26.6587,"lng":-80.2414,"aliases":["wellington fl","wellington, florida"]},
@@ -143,5 +143,11 @@
   {"city":"Bethlehem","lat":40.6259,"lng":-75.3705,"aliases":["bethlehem, pa"]},
   {"city":"Hershey","lat":40.2859,"lng":-76.6502,"aliases":["hershey, pa"]},
   {"city":"Milwaukee","lat":43.0389,"lng":-87.9065,"aliases":["milwaukee, wi"]},
-  {"city":"West Palm Beach","lat":26.7153,"lng":-80.0534,"aliases":["west palm beach, fl","palm beach"]}
+  {"city":"West Palm Beach","lat":26.7153,"lng":-80.0534,"aliases":["west palm beach, fl","palm beach"]},
+  {"city":"Antwerp","lat":51.2194,"lng":4.4025,"aliases":["antwerpen","antwerp, belgium"]},
+  {"city":"Badalona","lat":41.45,"lng":2.2474,"aliases":["badalona, spain"]},
+  {"city":"Lisbon","lat":38.7223,"lng":-9.1393,"aliases":["lisboa","lisbon, portugal"]},
+  {"city":"Zagreb","lat":45.815,"lng":15.9819,"aliases":["zagreb, croatia"]},
+  {"city":"Zurich","lat":47.3769,"lng":8.5417,"aliases":["zürich","zuerich","zurich, switzerland"]},
+  {"city":"New Cumberland","lat":40.2323,"lng":-76.8847,"aliases":["new cumberland, pa"]}
 ]

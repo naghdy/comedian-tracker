@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-13",
-  "sourceNotes": "Mo Amer seeded 2026-11-13 from the official tour page moamer.com/shows (upcoming nights only, 13 Nov 2026–13 Feb 2027). The page prints month and day only; years and earliest start times were confirmed on each venue's own ticket page (San Jose Improv, Comedy Works, Blue Note Hawaii via TicketWeb, Emerald City, Stand Up Live Phoenix, Cap City, American Comedy Co.). One row per calendar night, earliest show time; analytics query strings stripped from TicketWeb links. Honolulu 12 Dec has no time: moamer.com links the early show to the 11 Dec late-show page, so the early time is unconfirmed (ticketUrl is the 12 Dec 21:00 show). San Diego 13 Feb is on moamer.com but not yet on American Comedy Co.'s own pages, so it has no time. No Sample placeholders.",
+  "generatedAt": "2026-11-19",
+  "sourceNotes": "Mo Amer seeded 2026-11-13 from the official tour page moamer.com/shows (upcoming nights only, 13 Nov 2026–13 Feb 2027). The page prints month and day only; years and earliest start times were confirmed on each venue's own ticket page (San Jose Improv, Comedy Works, Blue Note Hawaii via TicketWeb, Emerald City, Stand Up Live Phoenix, Cap City, American Comedy Co.). One row per calendar night, earliest show time; analytics query strings stripped from TicketWeb links. Honolulu 12 Dec start time 18:30 and ticketUrl set to that early show from Blue Note Hawaii's own page (2026-11-19). San Diego 13 Feb is on moamer.com but not yet on American Comedy Co.'s own pages, so it has no time. No Sample placeholders.",
   "shows": [
     {
       "id": "ma-2026-11-13-san-jose",
@@ -89,7 +89,8 @@
       "region": "HI",
       "country": "US",
       "date": "2026-12-12",
-      "ticketUrl": "https://www.ticketweb.com/event/mo-amer-blue-note-hawaii-tickets/14301384?pl=bluenotehawaii",
+      "time": "18:30",
+      "ticketUrl": "https://www.ticketweb.com/event/mo-amer-blue-note-hawaii-tickets/14301374?pl=bluenotehawaii",
       "source": "listed"
     },
     {

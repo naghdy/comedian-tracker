@@ -213,3 +213,17 @@ Nabil asked for Google Analytics on the site. GA4's gtag.js is added from `src/l
 ## 2026-11-17 — Microsoft Clarity
 
 Nabil asked to add Microsoft Clarity. The project ID is a build-time env var, `VITE_CLARITY_PROJECT_ID`, set in `.github/workflows/pages.yml` (project `zf9s1pvnn4`; the ID is public, since it ships in the page). A repo Actions secret of the same name overrides it. The tag loads only in production builds and does nothing when the ID is empty, so local dev sends no data. `src/lib/clarity.ts` adds Clarity's official async script tag and queue stub directly rather than pasting the inline snippet into `index.html`, so the ID can come from the build and be checked before use.
+
+## 2026-11-19 — Weekly tour date check: 17 new nights, 7 start times
+
+The Thursday check found new nights for three comedians, each confirmed on an official page:
+
+- Ricky Gervais, 10 more 2027 Legend nights from the Live Nation US artist page and each night's Live Nation event page: Antwerp Lotto Arena 23 Jan, Badalona Olímpic Arena 27 Feb, Lisbon MEO Arena 19 Mar, New York Radio City Music Hall 9–10 Apr, Chicago United Center 12 Apr, Vienna Wiener Stadthalle 24 Apr, Zagreb Arena Zagreb 19 Jun, Zurich Hallenstadion 17 Jul, Toronto Scotiabank Arena 14 Aug. All 19:30 except Zagreb (no time yet). Amsterdam 2 Jul gets its 19:30 start.
+- Chris D'Elia, HBG Comedy Zone, New Cumberland PA, 21–23 May 2027 (chrisdelia.com). Only 22 May has a time: the hub and the club page disagree on 21 and 23 May, so those stay untimed rather than guessed.
+- Zarna Garg, Chicago The Vic Theatre 19 Feb and Nashville Zanies 6–8 May 2027 (zarnagarg.com/tickets). Portland ME 23 Jan now starts at 19:00.
+
+Start times filled in from venue pages: Mo Amer Honolulu 12 Dec 18:30 (ticket link moved to the early show), Andrew Santino Columbus 12–13 Mar, Andrew Schulz Raleigh 4–5 Dec and Columbus 11–12 Dec. Nothing was removed.
+
+New city pins: Antwerp, Badalona, Lisbon, Zagreb, Zurich, New Cumberland; `wien` alias on Vienna. Tests that read the Gervais non-UK rows as "Europe" now list them by id. Seed key `v18` → `v19`.
+
+Nabil said he doesn't need a human in the loop for updating dates, so this PR is merged without waiting for him.

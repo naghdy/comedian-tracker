@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-16",
-  "sourceNotes": "Zarna Garg seeded 2026-11-16 from her official site zarnagarg.com/tickets (the Upcoming Shows list is a Bandsintown widget that loads in the browser; a plain fetch shows no dates). 33 listings, 26 nights, 21 Nov 2026 to 27 Mar 2027, years and weekdays printed. Australian dates match the BroadwayWorld tour announcement (16 Oct 2026; York Theatre is at the Seymour Centre, Norwood Concert Hall is Adelaide), and Las Vegas 12 Feb 2027 9:30pm at The Palazzo Theatre matches FOX5 Las Vegas. One row per calendar night with the earliest show time from the official list; Atlanta 18 Dec, Washington 19 Dec and Kansas City 16 Jan also have a late show. St Kilda venues are pinned to Melbourne. Ticket links are the Bandsintown event pages the official list links to, tracking query stripped. No Sample placeholders.",
+  "generatedAt": "2026-11-19",
+  "sourceNotes": "Zarna Garg seeded 2026-11-16 from her official site zarnagarg.com/tickets (the Upcoming Shows list is a Bandsintown widget that loads in the browser; a plain fetch shows no dates). 33 listings, 26 nights, 21 Nov 2026 to 27 Mar 2027, years and weekdays printed. Australian dates match the BroadwayWorld tour announcement (16 Oct 2026; York Theatre is at the Seymour Centre, Norwood Concert Hall is Adelaide), and Las Vegas 12 Feb 2027 9:30pm at The Palazzo Theatre matches FOX5 Las Vegas. Chicago The Vic Theatre 19 Feb and Nashville Zanies 6–8 May 2027 added 2026-11-19 from the same official list, and Portland ME 23 Jan (rescheduled from 4 Dec 2026) moved to 19:00 there and on the State Theatre's own page. One row per calendar night with the earliest show time from the official list; Atlanta 18 Dec, Washington 19 Dec and Kansas City 16 Jan also have a late show. St Kilda venues are pinned to Melbourne. Ticket links are the Bandsintown event pages the official list links to, tracking query stripped. No Sample placeholders.",
   "shows": [
     {
       "id": "zg-2026-11-21-sydney",
@@ -258,7 +258,7 @@
       "region": "ME",
       "country": "US",
       "date": "2027-01-23",
-      "time": "20:00",
+      "time": "19:00",
       "ticketUrl": "https://www.bandsintown.com/e/108925179",
       "source": "listed"
     },
@@ -315,6 +315,19 @@
       "source": "listed"
     },
     {
+      "id": "zg-2027-02-19-chicago",
+      "comedianId": "zarna-garg",
+      "title": "Zarna Garg",
+      "venue": "The Vic Theatre",
+      "city": "Chicago",
+      "region": "IL",
+      "country": "US",
+      "date": "2027-02-19",
+      "time": "19:00",
+      "ticketUrl": "https://www.bandsintown.com/e/109167630",
+      "source": "listed"
+    },
+    {
       "id": "zg-2027-03-26-bethlehem",
       "comedianId": "zarna-garg",
       "title": "Zarna Garg",
@@ -338,6 +351,45 @@
       "date": "2027-03-27",
       "time": "19:00",
       "ticketUrl": "https://www.bandsintown.com/e/109003880",
+      "source": "listed"
+    },
+    {
+      "id": "zg-2027-05-06-nashville",
+      "comedianId": "zarna-garg",
+      "title": "Zarna Garg",
+      "venue": "Zanies Nashville",
+      "city": "Nashville",
+      "region": "TN",
+      "country": "US",
+      "date": "2027-05-06",
+      "time": "19:00",
+      "ticketUrl": "https://www.bandsintown.com/e/109167592",
+      "source": "listed"
+    },
+    {
+      "id": "zg-2027-05-07-nashville",
+      "comedianId": "zarna-garg",
+      "title": "Zarna Garg",
+      "venue": "Zanies Nashville",
+      "city": "Nashville",
+      "region": "TN",
+      "country": "US",
+      "date": "2027-05-07",
+      "time": "19:00",
+      "ticketUrl": "https://www.bandsintown.com/e/109167596",
+      "source": "listed"
+    },
+    {
+      "id": "zg-2027-05-08-nashville",
+      "comedianId": "zarna-garg",
+      "title": "Zarna Garg",
+      "venue": "Zanies Nashville",
+      "city": "Nashville",
+      "region": "TN",
+      "country": "US",
+      "date": "2027-05-08",
+      "time": "19:00",
+      "ticketUrl": "https://www.bandsintown.com/e/109167609",
       "source": "listed"
     }
   ]

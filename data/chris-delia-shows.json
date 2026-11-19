@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-12",
-  "sourceNotes": "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05; St. Louis Helium 4–5 Dec, Hollywood Dolby 31 Dec, Timonium 11–13 Mar, Calgary 18–20 Mar, San Antonio Laugh Out Loud 8–10 Apr, Bloomington MN 6–9 May, Oklahoma City 10–11 Sep 2027 added and San Diego 28 Nov venue moved to The Legacy Performance Institute on 2026-11-12). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Laugh Out Loud 8–10 Apr 2027 is on the hub. No invented Sample dates.",
+  "generatedAt": "2026-11-19",
+  "sourceNotes": "Chris D'Elia verified from official hub chrisdelia.com (seeded 2026-09-10; Stockholm 27 Oct added 2026-09-28; Uncasville Comix Roadhouse 29 Apr–1 May 2027 added 2026-10-05; St. Louis Helium 4–5 Dec, Hollywood Dolby 31 Dec, Timonium 11–13 Mar, Calgary 18–20 Mar, San Antonio Laugh Out Loud 8–10 Apr, Bloomington MN 6–9 May, Oklahoma City 10–11 Sep 2027 added and San Diego 28 Nov venue moved to The Legacy Performance Institute on 2026-11-12; New Cumberland PA HBG Comedy Zone 21–23 May 2027 added 2026-11-19, with a time only on 22 May (18:00) because the hub and the club's own page print different times for 21 and 23 May). One row per calendar night (multiple club showtimes collapsed; 1 May uses the earliest 18:00). Per-night ticket URLs from official Buy Tickets links. Hamburg time corroborated by Elbphilharmonie/Laeiszhalle. San Antonio Laugh Out Loud 8–10 Apr 2027 is on the hub. No invented Sample dates.",
   "shows": [
     {
       "id": "cd-2026-09-11-phoenix",
@@ -996,6 +996,43 @@
       "country": "US",
       "date": "2027-05-15",
       "ticketUrl": "https://www.bananascomedyclub.com/events/142261",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-05-21-new-cumberland",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "HBG Comedy Zone",
+      "city": "New Cumberland",
+      "region": "PA",
+      "country": "US",
+      "date": "2027-05-21",
+      "ticketUrl": "https://www.harrisburgcomedyzone.com/events/147383",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-05-22-new-cumberland",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "HBG Comedy Zone",
+      "city": "New Cumberland",
+      "region": "PA",
+      "country": "US",
+      "date": "2027-05-22",
+      "time": "18:00",
+      "ticketUrl": "https://www.harrisburgcomedyzone.com/events/147383",
+      "source": "listed"
+    },
+    {
+      "id": "cd-2027-05-23-new-cumberland",
+      "comedianId": "chris-delia",
+      "title": "Chris D'Elia",
+      "venue": "HBG Comedy Zone",
+      "city": "New Cumberland",
+      "region": "PA",
+      "country": "US",
+      "date": "2027-05-23",
+      "ticketUrl": "https://www.harrisburgcomedyzone.com/events/147383",
       "source": "listed"
     },
     {

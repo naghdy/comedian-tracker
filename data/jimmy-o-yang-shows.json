@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-13",
-  "sourceNotes": "Jimmy O. Yang seeded 2026-11-13 from his official tour page jimmycomedy.com/shows (jimmyoyang.com redirects there), 'Has No Friends Tour', 15 Jan–30 May 2027. The page prints month and day only; all listed nights are upcoming, so they are 2027, confirmed by Live Nation/Ticketmaster for Jersey City, Boston and the Beacon Theatre and by the Brea Improv, Irvine Improv, Eccles Theater and Celebrity Theatre pages. One row per calendar night with the earliest show time printed on the official page or the venue page. Tampa Funny Bone 15–16 Jan has no time (not yet on the club's own calendar). Irvine 26–27 Mar shows a wait list only. No Sample placeholders.",
+  "generatedAt": "2026-11-23",
+  "sourceNotes": "Jimmy O. Yang seeded 2026-11-13 from his official tour page jimmycomedy.com/shows (jimmyoyang.com redirects there), 'Has No Friends Tour', 15 Jan–30 May 2027. The page prints month and day only; all listed nights are upcoming, so they are 2027, confirmed by Live Nation/Ticketmaster for Jersey City, Boston and the Beacon Theatre and by the Brea Improv, Irvine Improv, Eccles Theater and Celebrity Theatre pages. One row per calendar night with the earliest show time printed on the official page or the venue page. Tampa Funny Bone 15–16 Jan has no time (not yet on the club's own calendar). Irvine 26–27 Mar shows a wait list only. No Sample placeholders. Medford Chevalier Theatre 3 Apr 2027 at 7:00pm added 2026-11-23 from the official page ('2nd SHOW ADDED!'); year follows the page's date order between Medford 2 Apr and Chicago 9 Apr 2027.",
   "shows": [
     {
       "id": "jy-2027-01-15-tampa",
@@ -336,6 +336,19 @@
       "date": "2027-04-02",
       "time": "19:30",
       "ticketUrl": "https://www.ticketmaster.com/event/01006548212C4F35",
+      "source": "listed"
+    },
+    {
+      "id": "jy-2027-04-03-medford",
+      "comedianId": "jimmy-o-yang",
+      "title": "Jimmy O. Yang: Has No Friends Tour",
+      "venue": "Chevalier Theatre",
+      "city": "Medford",
+      "region": "MA",
+      "country": "US",
+      "date": "2027-04-03",
+      "time": "19:00",
+      "ticketUrl": "https://www.ticketmaster.com/event/01006548212F4F3B",
       "source": "listed"
     },
     {

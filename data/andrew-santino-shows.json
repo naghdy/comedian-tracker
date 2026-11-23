@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-19",
-  "sourceNotes": "Andrew Santino seeded 2026-11-17 from his official site andrewsantino.com (homepage tour list, titled The Red Rocket Tour in the page description). The site prints month and day only: 7 listings, 15 nights, 5 Feb to 27 Mar 2027. Years and start times come from the venue pages the site links to: Palm Beach Improv, Miami Improv and Comedy Works Downtown print 2027, and FOX5 Las Vegas (22 Sep 2026) gives Sat 27 Mar 2027 8pm at The Chelsea, The Cosmopolitan. Milwaukee Improv prints Fri 5 / Sat 6 Feb without a year; those weekdays fall in 2027. The Comedy on State (Madison) Etix page did not load, so those two nights have no time; Columbus Funny Bone 12–13 Mar times are from the club's own Andrew Santino page (2026-11-19); every listed night is after today, so Feb and Mar are 2027. One row per calendar night with the earliest show time. Palm Beach Improv is in West Palm Beach. Ticket links are the ones the official site uses. No Sample placeholders.",
+  "generatedAt": "2026-11-23",
+  "sourceNotes": "Andrew Santino seeded 2026-11-17 from his official site andrewsantino.com (homepage tour list, titled The Red Rocket Tour in the page description). The site prints month and day only: 7 listings, 15 nights, 5 Feb to 27 Mar 2027. Years and start times come from the venue pages the site links to: Palm Beach Improv, Miami Improv and Comedy Works Downtown print 2027, and FOX5 Las Vegas (22 Sep 2026) gives Sat 27 Mar 2027 8pm at The Chelsea, The Cosmopolitan. Milwaukee Improv prints Fri 5 / Sat 6 Feb without a year; those weekdays fall in 2027. The Comedy on State (Madison) Etix page did not load, so those two nights have no time; Columbus Funny Bone 12–13 Mar times are from the club's own Andrew Santino page (2026-11-19); every listed night is after today, so Feb and Mar are 2027. One row per calendar night with the earliest show time. Palm Beach Improv is in West Palm Beach. Ticket links are the ones the official site uses. No Sample placeholders. Madison Comedy on State 5-6 Mar 2027 times (7:00pm early show; 9:30pm late shows too) added 2026-11-23 from the venue's etix page.",
   "shows": [
     {
       "id": "sa-2027-02-05-milwaukee",
@@ -89,6 +89,7 @@
       "region": "WI",
       "country": "US",
       "date": "2027-03-05",
+      "time": "19:00",
       "ticketUrl": "https://www.etix.com/ticket/e/1061986/andrew-santino27-madison-comedy-on-state",
       "source": "listed"
     },
@@ -101,6 +102,7 @@
       "region": "WI",
       "country": "US",
       "date": "2027-03-06",
+      "time": "19:00",
       "ticketUrl": "https://www.etix.com/ticket/e/1061986/andrew-santino27-madison-comedy-on-state",
       "source": "listed"
     },

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-19",
-  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09; 16 nights 5 Jan–27 Jul 2027 added 2026-11-12; 3 European 2027 nights added 2026-11-17 from official pages: Paris Accor Arena 30 Apr (Live Nation France), Amsterdam AFAS Live 2 Jul (afaslive.nl, no time published yet), Stockholm Avicii Arena 28 Aug (aviciiarena.se); 10 more 2027 nights added 2026-11-19 from the Live Nation US artist page and each night's Live Nation event page: Antwerp Lotto Arena 23 Jan, Badalona Olímpic Arena 27 Feb, Lisbon MEO Arena 19 Mar, New York Radio City 9–10 Apr, Chicago United Center 12 Apr, Vienna Wiener Stadthalle 24 Apr, Zagreb Arena Zagreb 19 Jun (no time: the Live Nation Adria page did not load), Zurich Hallenstadion 17 Jul, Toronto Scotiabank Arena 14 Aug; Amsterdam 2 Jul start time 19:30 from Live Nation NL (2026-11-19); Manchester 12–13 Oct and Brighton 16–17 Nov start times corrected to 19:30 on 2026-10-05, doors were 18:30). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (15 club nights; Stardome Birmingham 6 Nov dropped from the drop as of 2026-11-12, which now lists 7 Nov only; Raleigh Goodnights 4–5 Dec and Columbus Funny Bone 11–12 Dec start times from the venue pages, 2026-11-19). Gagnon: markgagnonlive.com.",
+  "generatedAt": "2026-11-23",
+  "sourceNotes": "Verified public listings only. No Sample placeholders. Gervais: Live Nation UK Legend tour (2026-09-09; 16 nights 5 Jan–27 Jul 2027 added 2026-11-12; 3 European 2027 nights added 2026-11-17 from official pages: Paris Accor Arena 30 Apr (Live Nation France), Amsterdam AFAS Live 2 Jul (afaslive.nl, no time published yet), Stockholm Avicii Arena 28 Aug (aviciiarena.se); 10 more 2027 nights added 2026-11-19 from the Live Nation US artist page and each night's Live Nation event page: Antwerp Lotto Arena 23 Jan, Badalona Olímpic Arena 27 Feb, Lisbon MEO Arena 19 Mar, New York Radio City 9–10 Apr, Chicago United Center 12 Apr, Vienna Wiener Stadthalle 24 Apr, Zagreb Arena Zagreb 19 Jun (no time: the Live Nation Adria page did not load), Zurich Hallenstadion 17 Jul, Toronto Scotiabank Arena 14 Aug; Amsterdam 2 Jul start time 19:30 from Live Nation NL (2026-11-19); Manchester 12–13 Oct and Brighton 16–17 Nov start times corrected to 19:30 on 2026-10-05, doors were 18:30). Chappelle: Duke Ellington School benefit DAR Constitution Hall 25 Sep; Fastball Festival Mesa 18 Oct; Karmageddon arenas from Live Nation including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and NY Comedy Festival MSG 6–7 Nov. Past MSG 10 Sep benefit removed. Schulz: official Laylo embed on theandrewschulz.com (15 club nights; Stardome Birmingham 6 Nov dropped from the drop as of 2026-11-12, which now lists 7 Nov only; Raleigh Goodnights 4–5 Dec and Columbus Funny Bone 11–12 Dec start times from the venue pages, 2026-11-19). Gagnon: markgagnonlive.com. Gagnon Detroit 17-18 Dec and Salt Lake City 8-9 Jan ticket links moved 2026-11-23 to the venue pages markgagnonlive.com links.",
   "shows": [
     {
       "id": "rg-2026-09-09-cambridge",
@@ -1100,7 +1100,7 @@
       "country": "US",
       "date": "2026-12-17",
       "time": "19:30",
-      "ticketUrl": "https://markgagnonlive.com/",
+      "ticketUrl": "https://www.micdropcomedydetroit.com/events/132872",
       "source": "listed"
     },
     {
@@ -1113,7 +1113,7 @@
       "country": "US",
       "date": "2026-12-18",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com/",
+      "ticketUrl": "https://www.micdropcomedydetroit.com/events/132872",
       "source": "listed"
     },
     {
@@ -1126,7 +1126,7 @@
       "country": "US",
       "date": "2027-01-08",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com/",
+      "ticketUrl": "https://www.wiseguyscomedy.com/utah/salt-lake-city/the-showroom/e/mark-gagnon",
       "source": "listed"
     },
     {
@@ -1139,7 +1139,7 @@
       "country": "US",
       "date": "2027-01-09",
       "time": "19:00",
-      "ticketUrl": "https://markgagnonlive.com/",
+      "ticketUrl": "https://www.wiseguyscomedy.com/utah/salt-lake-city/the-showroom/e/mark-gagnon",
       "source": "listed"
     }
   ]

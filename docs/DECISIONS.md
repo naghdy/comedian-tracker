@@ -227,3 +227,15 @@ Start times filled in from venue pages: Mo Amer Honolulu 12 Dec 18:30 (ticket li
 New city pins: Antwerp, Badalona, Lisbon, Zagreb, Zurich, New Cumberland; `wien` alias on Vienna. Tests that read the Gervais non-UK rows as "Europe" now list them by id. Seed key `v18` → `v19`.
 
 Nabil said he doesn't need a human in the loop for updating dates, so this PR is merged without waiting for him.
+
+## 2026-11-23 — Weekly tour date check: 1 new night, 4 start times, 4 ticket links
+
+The Monday check found these, each re-checked on an official page:
+
+- Jimmy O. Yang, second Medford night: Chevalier Theatre 3 Apr 2027 at 19:00 (jimmycomedy.com/shows, "2nd SHOW ADDED!"). The page prints no years; it sits between Medford 2 Apr and Chicago 9 Apr 2027, and every listed night is upcoming.
+- Andrew Santino, Madison Comedy on State 5–6 Mar 2027: 19:00 early show both nights (venue's etix page; 21:30 late shows stay collapsed into the one row per night).
+- Chris D'Elia, New Cumberland 21 May 19:00 and 23 May 17:00. chrisdelia.com still prints 18:30 and 18:00; the club's own event page is the more specific source, so the venue's times are used.
+- Mark Gagnon, Detroit 17–18 Dec and Salt Lake City 8–9 Jan ticket links now go to the venue pages that markgagnonlive.com links.
+- Aaron Chen notes: aaronchencomedy.com now prints Thirroul as 27 Nov, matching the seed.
+
+Left unchanged: Zarna Garg Bethlehem 26 Mar stays 19:00 (Bandsintown start and the listing title disagree). Seed key `v19` → `v20`. Merged under Nabil's standing OK for tour date updates.

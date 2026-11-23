@@ -588,7 +588,7 @@ describe("2026-11-13 Mo Amer", () => {
 describe("2026-11-13 Aaron Chen and Jimmy O. Yang", () => {
   const cases = [
     { id: "aaron-chen", prefix: "ac", file: aaronChenShows, count: 24, first: "2026-11-26", last: "2027-04-17" },
-    { id: "jimmy-o-yang", prefix: "jy", file: jimmyOYangShows, count: 39, first: "2027-01-15", last: "2027-05-30" },
+    { id: "jimmy-o-yang", prefix: "jy", file: jimmyOYangShows, count: 40, first: "2027-01-15", last: "2027-05-30" },
   ];
 
   it("adds both to the roster, Aaron Chen first", () => {
@@ -773,7 +773,8 @@ describe("2026-11-17 Bobby Lee, Andrew Santino and Theo Von", () => {
     const untimed = andrewSantinoShows.shows
       .filter((show) => !(show as { time?: string }).time)
       .map((show) => show.id);
-    assert.deepEqual(untimed, ["sa-2027-03-05-madison", "sa-2027-03-06-madison"]);
+    // Madison 5-6 Mar got its 19:00 early show on 2026-11-23 (venue's etix page).
+    assert.deepEqual(untimed, []);
   });
 
   it("pins Milwaukee and West Palm Beach", () => {
@@ -854,14 +855,14 @@ describe("2026-11-19 weekly refresh", () => {
     assert.equal(findCity("Wien")?.city, "Vienna");
   });
 
-  it("adds D'Elia's New Cumberland run with a time only where sources agree", () => {
+  it("adds D'Elia's New Cumberland run, with the venue's times from 2026-11-23", () => {
     const rows = chrisDeliaShows.shows.filter((show) => show.city === "New Cumberland");
     assert.deepEqual(
       rows.map((show) => [show.date, (show as { time?: string }).time ?? null]),
       [
-        ["2027-05-21", null],
+        ["2027-05-21", "19:00"],
         ["2027-05-22", "18:00"],
-        ["2027-05-23", null],
+        ["2027-05-23", "17:00"],
       ],
     );
     assert.ok(rows.every((show) => show.venue === "HBG Comedy Zone" && show.region === "PA"));
@@ -884,5 +885,14 @@ describe("2026-11-19 weekly refresh", () => {
     assert.equal(timeOf("as-2026-12-05-raleigh"), "19:00");
     assert.equal(timeOf("as-2026-12-11-columbus"), "19:00");
     assert.equal(timeOf("as-2026-12-12-columbus"), "18:30");
+  });
+});
+
+describe("2026-11-23 weekly refresh", () => {
+  it("adds Jimmy O. Yang's second Medford night", () => {
+    const row = jimmyOYangShows.shows.find((show) => show.id === "jy-2027-04-03-medford");
+    assert.equal(row?.venue, "Chevalier Theatre");
+    assert.equal((row as { time?: string } | undefined)?.time, "19:00");
+    assert.ok(findCity("Medford"));
   });
 });

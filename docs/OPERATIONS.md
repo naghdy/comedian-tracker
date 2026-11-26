@@ -35,7 +35,7 @@ npx tsx scripts/write-jeff-arcuri-seed.ts    # overwrites data/jeff-arcuri-shows
 
 `npm run refresh-tours` rewrites Schulz from Laylo and merges Jeff club pages. It does not bump localStorage, commit, or deploy. Review the diff before treating it as verified.
 
-`hydrateSeedShows` replaces `listed` rows for each seed comedian and keeps `user` and `lookup` rows. People who already stored `v20` need the key bump; **Reset seed** is the manual escape hatch.
+`hydrateSeedShows` replaces `listed` rows for each seed comedian and keeps `user` and `lookup` rows. People who already stored `v20` need the key bump; clearing the site's data in the browser is the manual escape hatch (the old **Reset seed** button was taken off the public page on 2026-11-26).
 
 ## Deploy
 
@@ -132,9 +132,9 @@ Symptom: the live site is new, this browser still shows old nights or an old ros
 
 Cause: `load()` returns whatever is already stored under the current key and does not merge seed JSON again.
 
-Fix: **Reset seed** in the sidebar (confirms, then replaces `comedian-tracker:v20` with the bundled seed and clears filters). A fresh profile does the same. If seed JSON changed and the key was not bumped, existing browsers will stay stale until someone resets or a later bump migrates them.
+Fix: bump the seed key so every browser re-hydrates, or clear the site's data in that browser (a fresh profile does the same). **Clear nights you added** in the footer only removes visitor-added nights. If seed JSON changed and the key was not bumped, existing browsers will stay stale until someone resets or a later bump migrates them.
 
-Theme lives in `comedian-tracker:theme` and is not cleared by Reset seed.
+Theme lives in `comedian-tracker:theme` and is not cleared by Clear nights you added.
 
 ### Map key referrer errors
 

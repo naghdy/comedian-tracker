@@ -1,26 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import type { Comedian, Show } from "../types";
-import { groupByMonth } from "../lib/display";
+import { dayParts, foldIndex, groupByDay, groupByMonth } from "../lib/display";
 import { ShowRow } from "./ShowRow";
 import { CityCombobox } from "./CityCombobox";
 
 type Props = {
   shows: Show[];
-  /** Nights the city suggestions come from: the comedian filters, but not the city one. */
+  /** Nights the city suggestions come from: the comedian filter, but not the city one. */
   cityPool: Show[];
   comedians: Comedian[];
   today: string;
   cityFilter: string;
-  comedianFilter: string;
   onCityFilter: (value: string) => void;
-  onComedianFilter: (value: string) => void;
-  onAdd: () => void;
+  /** True when a comedian or city is picked: a short list shows in full. */
+  filtered: boolean;
+  onClearFilters: () => void;
   onRemove: (id: string) => void;
   /** Changes whenever the visible set is re-filtered, so the list can ease in. */
   filterKey: string;
 };
+
+/** Unfiltered, the list opens on this many nights (rounded up to a whole day). */
+const FIRST_FOLD = 40;
 
 export function Agenda({
   shows,
@@ -28,15 +31,18 @@ export function Agenda({
   comedians,
   today,
   cityFilter,
-  comedianFilter,
   onCityFilter,
-  onComedianFilter,
-  onAdd,
+  filtered,
+  onClearFilters,
   onRemove,
   filterKey,
 }: Props) {
   const byId = Object.fromEntries(comedians.map((c) => [c.id, c]));
-  const groups = groupByMonth(shows);
+  const [expanded, setExpanded] = useState(false);
+  const cut = filtered || expanded ? shows.length : foldIndex(shows, FIRST_FOLD);
+  const listed = shows.slice(0, cut);
+  const hidden = shows.length - cut;
+  const months = groupByMonth(listed);
   // The first paint shows the list as-is; only later filter changes ease in,
   // so the page never waits on the animation code to become readable.
   const mounted = useRef(false);
@@ -45,78 +51,89 @@ export function Agenda({
   }, []);
 
   return (
-    <section className="section listings" aria-labelledby="listings-title">
+    <section className="section listings" id="listings" aria-labelledby="listings-title">
       <header className="section-head">
-        <h2 id="listings-title">Dates</h2>
-        <p className="section-meta">
-          {shows.length} {shows.length === 1 ? "night" : "nights"}
-        </p>
-      </header>
-
-      <div className="toolbar">
+        <h2 id="listings-title">Listings</h2>
         <CityCombobox
-          className="field field-inline"
+          className="field city-filter"
           shows={cityPool}
           comedians={comedians}
           value={cityFilter}
           onChange={onCityFilter}
-          label="City"
+          label="Filter by city"
           hideLabel
           type="search"
-          placeholder="Any city"
+          placeholder="Filter by city"
         />
-        <label className="field field-inline">
-          <span className="visually-hidden">Comedian</span>
-          <select
-            value={comedianFilter}
-            onChange={(e) => onComedianFilter(e.target.value)}
-          >
-            <option value="">Everyone</option>
-            {comedians.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button className="btn btn-quiet" type="button" onClick={onAdd}>
-          Add a show
-        </button>
-      </div>
+      </header>
+      <p className="section-meta" aria-live="polite">
+        {shows.length} {shows.length === 1 ? "night" : "nights"}
+        {filtered ? (
+          <>
+            {" "}
+            ·{" "}
+            <button type="button" className="text-btn" onClick={onClearFilters}>
+              clear filters
+            </button>
+          </>
+        ) : null}
+      </p>
 
       <m.div
         key={filterKey}
-        initial={mounted.current ? { opacity: 0, y: 6 } : false}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        initial={mounted.current ? { opacity: 0 } : false}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
       >
-        {groups.length === 0 ? (
+        {months.length === 0 ? (
           <p className="empty">
-            Nothing matches. Try another city or clear the filters.
+            {cityFilter.trim()
+              ? `Nobody on the list is playing ${cityFilter.trim()} yet.`
+              : "Nothing matches those filters."}{" "}
+            <button type="button" className="text-btn" onClick={onClearFilters}>
+              Clear filters
+            </button>
           </p>
         ) : (
-          groups.map((group) => (
-            <div key={group.key} className="month">
+          months.map((month) => (
+            <div key={month.key} className="month">
               <h3 className="month-label">
-                {group.label.replace(/ \d{4}$/, "")}{" "}
-                <span>{group.label.slice(-4)}</span>
+                {month.label.replace(/ \d{4}$/, "")} <span>{month.label.slice(-4)}</span>
               </h3>
-              <ol className="rows">
-                <AnimatePresence initial={false}>
-                  {group.shows.map((show) => (
-                    <ShowRow
-                      key={show.id}
-                      show={show}
-                      comedian={byId[show.comedianId]}
-                      today={today}
-                      onRemove={onRemove}
-                    />
-                  ))}
-                </AnimatePresence>
-              </ol>
+              {groupByDay(month.shows).map((day) => {
+                const { day: num, weekday } = dayParts(day.date);
+                const isToday = day.date === today;
+                return (
+                  <div key={day.date} className={`day${isToday ? " is-today" : ""}`}>
+                    <p className="day-date">
+                      <span className="day-weekday">{isToday ? "Tonight" : weekday}</span>
+                      <span className="day-num">{num}</span>
+                    </p>
+                    <ol className="rows">
+                      <AnimatePresence initial={false}>
+                        {day.shows.map((show) => (
+                          <ShowRow
+                            key={show.id}
+                            show={show}
+                            comedian={byId[show.comedianId]}
+                            onRemove={onRemove}
+                          />
+                        ))}
+                      </AnimatePresence>
+                    </ol>
+                  </div>
+                );
+              })}
             </div>
           ))
         )}
+        {hidden > 0 ? (
+          <p className="more">
+            <button type="button" className="btn btn-quiet" onClick={() => setExpanded(true)}>
+              Show the other {hidden} nights
+            </button>
+          </p>
+        ) : null}
       </m.div>
     </section>
   );

@@ -1,4 +1,4 @@
-// Quiet, low-contrast basemaps so the comedians' pins carry the colour.
+// Quiet basemaps in the page's navy and white, so one-colour pins stand out.
 // Hues match the page palette in src/index.css.
 
 export const DARK_MAP_STYLES: google.maps.MapTypeStyle[] = [
@@ -46,20 +46,20 @@ export const DARK_MAP_STYLES: google.maps.MapTypeStyle[] = [
 ];
 
 export const LIGHT_MAP_STYLES: google.maps.MapTypeStyle[] = [
-  { elementType: "geometry", stylers: [{ color: "#e6e8ee" }] },
-  { elementType: "labels.text.fill", stylers: [{ color: "#5a627d" }] },
-  { elementType: "labels.text.stroke", stylers: [{ color: "#e6e8ee" }] },
+  { elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#47506f" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#ffffff" }] },
   { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
   {
     featureType: "administrative",
     elementType: "geometry",
-    stylers: [{ color: "#c3c8d6" }],
+    stylers: [{ color: "#c4cde2" }],
   },
   { featureType: "poi", stylers: [{ visibility: "off" }] },
   {
     featureType: "road",
     elementType: "geometry",
-    stylers: [{ color: "#f8f9fa" }],
+    stylers: [{ color: "#eef2fa" }],
   },
   {
     featureType: "road",
@@ -70,7 +70,7 @@ export const LIGHT_MAP_STYLES: google.maps.MapTypeStyle[] = [
   {
     featureType: "water",
     elementType: "geometry",
-    stylers: [{ color: "#d2d7e3" }],
+    stylers: [{ color: "#dbe5f8" }],
   },
   {
     featureType: "water",

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Comedian } from "../types";
 import { MicIcon } from "./MicIcon";
 
@@ -6,6 +5,7 @@ type Props = {
   comedians: Comedian[];
   showCounts: Record<string, number>;
   totalNights: number;
+  totalCities: number;
   selectedIds: string[];
   onToggle: (id: string) => void;
   onClear: () => void;
@@ -13,99 +13,85 @@ type Props = {
   onToggleTheme: () => void;
 };
 
-/** Past this many names the lineup folds to the busiest ones, with a toggle. */
-const FOLD_AT = 18;
-const FOLDED = 15;
-
+/**
+ * The masthead and the lineup. Names run as one line of credits, busiest
+ * first, and double as the comedian filter. Anyone with no announced nights
+ * sits on a quiet line of their own rather than filtering to an empty list.
+ */
 export function Roster({
   comedians,
   showCounts,
   totalNights,
+  totalCities,
   selectedIds,
   onToggle,
   onClear,
   theme,
   onToggleTheme,
 }: Props) {
-  const [expanded, setExpanded] = useState(false);
   const filtering = selectedIds.length > 0;
-  const busiest = Math.max(1, ...comedians.map((c) => showCounts[c.id] ?? 0));
   // Busiest first; ties keep the curator's order.
   const ordered = comedians
     .map((comedian, index) => ({ comedian, index, count: showCounts[comedian.id] ?? 0 }))
     .sort((a, b) => b.count - a.count || a.index - b.index);
-
-  const folds = ordered.length > FOLD_AT;
-  const visible =
-    folds && !expanded
-      ? ordered.filter(
-          (entry, i) => i < FOLDED || selectedIds.includes(entry.comedian.id),
-        )
-      : ordered;
+  const touring = ordered.filter((entry) => entry.count > 0 || selectedIds.includes(entry.comedian.id));
+  const resting = ordered.filter((entry) => entry.count === 0 && !selectedIds.includes(entry.comedian.id));
 
   return (
     <header className="top">
-      <div className="topbar">
+      <div className="masthead">
         <h1 className="wordmark">
           <MicIcon className="wordmark-mic" />
-          Comedian <span>Tracker</span>
+          Comedian Tracker
         </h1>
-        <div className="topbar-end">
-          <span className="topbar-count">
-            <strong>{totalNights}</strong> upcoming nights
-          </span>
+        <div className="masthead-links">
+          <a href="#trip">Travelling?</a>
           <button
             type="button"
             className="text-btn"
             onClick={onToggleTheme}
             aria-pressed={theme === "light"}
           >
-            {theme === "dark" ? "Light mode" : "Dark mode"}
+            {theme === "dark" ? "Lights up" : "Lights down"}
           </button>
         </div>
       </div>
 
-      <nav className="lineup" aria-labelledby="lineup-title">
+      <p className="standfirst">
+        Where {touring.length} comics are playing next: {totalNights} nights in {totalCities}{" "}
+        {totalCities === 1 ? "city" : "cities"}, taken from their own tour pages and checked
+        every week.
+      </p>
+
+      <div className="lineup" role="group" aria-labelledby="lineup-title">
         <div className="lineup-head">
-          <h2 id="lineup-title">
-            On tour <span>{comedians.length}</span>
-          </h2>
-          <p>
-            {filtering ? (
-              <button type="button" className="text-btn" onClick={onClear}>
-                Show everyone
-              </button>
-            ) : (
-              "Tap a name to see only their dates."
-            )}
-          </p>
+          <h2 id="lineup-title">The lineup</h2>
+          {filtering ? (
+            <button type="button" className="text-btn" onClick={onClear}>
+              Show everyone
+            </button>
+          ) : (
+            <p>Pick a name to see just their nights.</p>
+          )}
         </div>
         {comedians.length === 0 ? (
           <p className="empty">No one on the list yet.</p>
         ) : (
-          <ul className={`lineup-list${filtering ? " is-filtering" : ""}`}>
-            {visible.map(({ comedian, count }) => {
+          <ul className={`cast${filtering ? " is-filtering" : ""}`}>
+            {touring.map(({ comedian, count }) => {
               const selected = selectedIds.includes(comedian.id);
-              const countLabel =
-                count === 0
-                  ? "no upcoming nights"
-                  : `${count} upcoming ${count === 1 ? "night" : "nights"}`;
               return (
                 <li key={comedian.id}>
                   <button
                     type="button"
-                    className={`act${count === 0 ? " is-empty" : ""}${selected ? " is-selected" : ""}`}
-                    style={{
-                      ["--chip" as string]: comedian.color,
-                      ["--share" as string]: `${(count / busiest) * 100}%`,
-                    }}
+                    className={`act${selected ? " is-selected" : ""}`}
                     onClick={() => onToggle(comedian.id)}
                     aria-pressed={selected}
-                    aria-label={`${comedian.name}, ${countLabel}`}
+                    aria-label={`${comedian.name}, ${count} upcoming ${count === 1 ? "night" : "nights"}`}
                   >
                     <span className="act-name">{comedian.name}</span>
                     <span className="act-count" aria-hidden="true">
-                      {count === 0 ? "–" : count}
+                      {count}
                     </span>
                   </button>
                 </li>
@@ -113,17 +99,19 @@ export function Roster({
             })}
           </ul>
         )}
-        {folds ? (
-          <button
-            type="button"
-            className="text-btn lineup-more"
-            onClick={() => setExpanded((v) => !v)}
-            aria-expanded={expanded}
-          >
-            {expanded ? "Show fewer" : `Show all ${ordered.length}`}
-          </button>
+        {resting.length ? (
+          <p className="resting">
+            Not touring right now:{" "}
+            {resting.map(({ comedian }, i) => (
+              <span key={comedian.id}>
+                {i > 0 ? (i === resting.length - 1 ? " and " : ", ") : null}
+                <a href={`comedians/${comedian.id}/`}>{comedian.name}</a>
+              </span>
+            ))}
+            .
+          </p>
         ) : null}
-      </nav>
+      </div>
     </header>
   );
 }

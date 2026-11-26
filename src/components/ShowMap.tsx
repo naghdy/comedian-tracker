@@ -51,13 +51,15 @@ function plotShows(shows: Show[]): Plotted[] {
   );
 }
 
-function pinIcon(color: string, theme: "dark" | "light"): google.maps.Symbol {
+// One pin colour for everyone, so the page stays blue and white. Overlapping
+// pins build up where a city is busy; the popup says who it is.
+function pinIcon(theme: "dark" | "light"): google.maps.Symbol {
   return {
     path: google.maps.SymbolPath.CIRCLE,
-    scale: 6.5,
-    fillColor: color,
-    fillOpacity: 0.95,
-    strokeColor: theme === "dark" ? "#0e1630" : "#f7f7f5",
+    scale: 5.5,
+    fillColor: theme === "dark" ? "#a9c1ff" : "#2148b8",
+    fillOpacity: 0.85,
+    strokeColor: theme === "dark" ? "#0e1630" : "#ffffff",
     strokeWeight: 1.5,
   };
 }
@@ -83,7 +85,7 @@ function fitMap(map: google.maps.Map, markers: Plotted[]) {
 function mapOptions(theme: "dark" | "light"): google.maps.MapOptions {
   return {
     styles: theme === "dark" ? DARK_MAP_STYLES : LIGHT_MAP_STYLES,
-    backgroundColor: theme === "dark" ? "#0b1226" : "#e6e8ee",
+    backgroundColor: theme === "dark" ? "#0b1226" : "#eef2fa",
     streetViewControl: false,
     mapTypeControl: false,
     fullscreenControl: true,
@@ -146,11 +148,8 @@ function GoogleMapCanvas({
 
   if (loadError) {
     return (
-      <MapFallback title="Google Maps failed to load">
-        <p>
-          Check that the Maps JavaScript API is enabled and that{" "}
-          <code>VITE_GOOGLE_MAPS_API_KEY</code> is valid for this host.
-        </p>
+      <MapFallback title="The map didn’t load">
+        <p>Every night is still in the listings below.</p>
       </MapFallback>
     );
   }
@@ -181,8 +180,8 @@ function GoogleMapCanvas({
           <Marker
             key={marker.show.id}
             position={{ lat: marker.lat, lng: marker.lng }}
-            icon={pinIcon(comedian?.color ?? "#888888", theme)}
-            title={`${comedian?.name ?? "Unknown"} — ${marker.show.title}`}
+            icon={pinIcon(theme)}
+            title={`${comedian?.name ?? "Unknown"}, ${marker.show.venue}`}
             onClick={() => setActiveId(marker.show.id)}
           />
         );
@@ -223,15 +222,7 @@ export function ShowMap({ shows, comedians, theme }: Props) {
   const cities = new Set(plotted.map((p) => p.show.city.toLowerCase())).size;
 
   return (
-    <section className="section map-section" aria-labelledby="map-title">
-      <header className="section-head">
-        <h2 id="map-title">On the map</h2>
-        <p className="section-meta">
-          {plotted.length} {plotted.length === 1 ? "night" : "nights"} in {cities}{" "}
-          {cities === 1 ? "city" : "cities"}
-          {missing > 0 ? ` · ${missing} not pinned (city not in the table)` : ""}
-        </p>
-      </header>
+    <section className="map-section" aria-label="Map of upcoming nights">
       {apiKey ? (
         <GoogleMapCanvas
           apiKey={apiKey}
@@ -240,27 +231,16 @@ export function ShowMap({ shows, comedians, theme }: Props) {
           theme={theme}
         />
       ) : (
-        <MapFallback title="No map in this build">
-          <p>
-            The Google Maps key isn’t set, so the map is off. Everything else
-            works without it.
-          </p>
-          <details>
-            <summary>How to turn it on</summary>
-          <ul>
-            <li>
-              GitHub Pages: repo <strong>Settings → Secrets and variables → Actions</strong>,
-              secret name <code>VITE_GOOGLE_MAPS_API_KEY</code>, then re-run{" "}
-              <strong>Deploy GitHub Pages</strong>.
-            </li>
-            <li>
-              Local: copy <code>.env.example</code> to <code>.env.local</code> and
-              restart <code>npm run dev</code>.
-            </li>
-          </ul>
-          </details>
+        // Setup steps for the key live in docs/OPERATIONS.md, not on the page.
+        <MapFallback title="No map here">
+          <p>Every night is still in the listings below.</p>
         </MapFallback>
       )}
+      <p className="map-caption">
+        {plotted.length} {plotted.length === 1 ? "night" : "nights"} in {cities}{" "}
+        {cities === 1 ? "city" : "cities"}. Tap a pin for the venue and tickets.
+        {missing > 0 ? ` ${missing} not pinned yet.` : ""}
+      </p>
     </section>
   );
 }

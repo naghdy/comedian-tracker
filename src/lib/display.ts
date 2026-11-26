@@ -79,12 +79,34 @@ const IMPLIED_BY_REGION = new Set(["US", "USA", "UK"]);
  * The country is dropped where the region already says it (US states, UK nations).
  */
 export function placeLabel(show: Pick<Show, "city" | "region" | "country">) {
-  const parts = [show.city];
-  if (show.region) parts.push(show.region);
+  const parts = [cityAndRegion(show)];
   if (show.country && !(show.region && IMPLIED_BY_REGION.has(show.country))) {
     parts.push(show.country);
   }
   return parts.join(", ");
+}
+
+function sameText(a: string, b: string) {
+  return a.trim().toLowerCase().replace(/\./g, "") === b.trim().toLowerCase().replace(/\./g, "");
+}
+
+/**
+ * The city without a trailing region it already carries. Some seed rows keep
+ * the state in the city ("Birmingham, AL" with region "AL") so the map can
+ * tell them from Birmingham, UK; this gives back "Birmingham".
+ */
+export function bareCity(show: Pick<Show, "city" | "region">) {
+  const city = show.city.trim();
+  if (!show.region) return city;
+  const comma = city.lastIndexOf(",");
+  if (comma < 0) return city;
+  return sameText(city.slice(comma + 1), show.region) ? city.slice(0, comma).trim() : city;
+}
+
+/** "Birmingham, AL": the city and its region once, even when the city already ends with it. */
+export function cityAndRegion(show: Pick<Show, "city" | "region">) {
+  const city = bareCity(show);
+  return show.region ? `${city}, ${show.region}` : city;
 }
 
 /** "18 – 25 Nov" style range for the trip checker headline. */

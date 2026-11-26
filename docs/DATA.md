@@ -83,7 +83,7 @@ Each show matches `Show` in `src/types.ts`:
 | `venue` | yes | |
 | `city` | yes | Must match a `cities.json` name (or alias) to get a pin, unless `lat`/`lng` are set. |
 | `date` | yes | `YYYY-MM-DD`. |
-| `region` | no | State or nation region (`DC`, `England`, …). |
+| `region` | no | State or nation region (`DC`, `England`, …). Labels add it once: a city that already ends with its region (`"Birmingham, AL"` + `"AL"`) shows as `Birmingham, AL`, not `Birmingham, AL, AL` (`cityAndRegion` in `src/lib/display.ts`). |
 | `country` | no | `US`, `UK`, `France`, … |
 | `time` | no | `HH:MM` 24-hour local. Omitted when the source has no single time. |
 | `ticketUrl` | no | Per-night buy link when the source has one. |

@@ -239,3 +239,11 @@ The Monday check found these, each re-checked on an official page:
 - Aaron Chen notes: aaronchencomedy.com now prints Thirroul as 27 Nov, matching the seed.
 
 Left unchanged: Zarna Garg Bethlehem 26 Mar stays 19:00 (Bandsintown start and the listing title disagree). Seed key `v19` → `v20`. Merged under Nabil's standing OK for tour date updates.
+
+## 2026-11-26 — Search pages for each comedian
+
+Nabil asked to work on SEO. The app is a single client-rendered page, so search engines had one URL for the whole site, no `robots.txt`, no sitemap, no canonical and no event data; the dates only existed after JavaScript ran.
+
+Rather than move the app to server rendering or add a router, the build now writes static HTML pages next to the app: one per comedian at `/comedians/<id>/` with their dates in the HTML and schema.org `ComedyEvent` data (the pages people search for, "Jeff Arcuri tour dates"), a `/comedians/` hub, a `noindex` 404 page and a sitemap. The app itself looks the same; its footer now links each comedian page, and `?comedian=<id>` opens it filtered to that comedian. The home page title is now "Comedian Tracker | Upcoming Comedy Tour Dates Worldwide" (share title and site name stay "Comedian Tracker"), and its description adds the four busiest names after the tagline.
+
+The homepage body is not prerendered: React would replace it on load and shift the layout, and Google already renders the app. Static pages build from the seed, so the Pages workflow now also rebuilds daily to keep past nights out of the event data. No seed data changed, so no seed-key bump.

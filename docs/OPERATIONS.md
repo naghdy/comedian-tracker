@@ -103,6 +103,19 @@ To change the ID:
 
 The site has no client-side router, so the page view sent on load is the only one. Enhanced measurement in the stream settings adds scrolls and outbound clicks (ticket links) without code changes.
 
+## Search engines
+
+The build writes per-comedian pages, a sitemap and `robots.txt` (see [ARCHITECTURE.md](ARCHITECTURE.md#search-pages-seo)). Adding a comedian to `data/comedians.json` adds their page and sitemap entry on the next deploy; nothing else to do.
+
+**Deploy GitHub Pages** also runs once a day (09:23 UTC) so past nights drop off the static pages and their event data. GitHub turns scheduled workflows off after 60 days without a commit; re-enable it under **Actions** if that happens.
+
+Owner-only setup (once):
+
+1. Google Search Console: add a **Domain** property for `comediantracker.com`, add the TXT record it shows at the DNS host, verify, then **Sitemaps** → submit `https://comediantracker.com/sitemap.xml`.
+2. Bing Webmaster Tools: **Import from Google Search Console** (or verify by DNS), then submit the same sitemap.
+3. Optional: link Search Console to the GA4 property (**Admin → Product links → Search Console links**) to see search queries in Analytics.
+4. After a deploy, check one comedian page in Google's Rich Results Test for event data.
+
 ## Weekly digest
 
 An external assistant routine runs **Mondays at 08:57 Europe/Zurich**. It is not a workflow in this repo.

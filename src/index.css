@@ -349,6 +349,25 @@ code {
   color: var(--ink-3);
 }
 
+.foot-links {
+  order: 3;
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.foot-links a {
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.foot-links a:hover,
+.foot-links a:focus-visible {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
 /* ---------- Shared bits ---------- */
 
 .text-btn {

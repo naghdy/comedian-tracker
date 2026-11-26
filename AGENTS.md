@@ -14,7 +14,7 @@ npm install
 cp .env.example .env.local   # Maps key required for the map; Ticketmaster/SeatGeek optional
 npm run dev                  # http://localhost:5173/
 npm test                     # tsx --test src/lib/*.test.ts
-npm run build                # tsc -b && vite build
+npm run build                # tsc -b && vite build && SEO pages (scripts/build-seo.ts)
 npm run preview
 npm run refresh-tours        # Node scrape into seed JSON (not the weekly digest)
 ```

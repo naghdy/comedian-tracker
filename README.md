@@ -61,7 +61,7 @@ npm test                     # lookup merge helpers
 Vite is configured with `base: './'` (relative asset paths), so the printed URL is [http://localhost:5173/](http://localhost:5173/).
 
 ```bash
-npm run build    # production bundle
+npm run build    # production bundle, then the static SEO pages (scripts/build-seo.ts)
 npm run preview  # serve the build
 ```
 

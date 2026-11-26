@@ -147,3 +147,21 @@ It does not bump the localStorage key, open a PR, or deploy. Chris D'Elia is reg
 | `.nojekyll` | Stops GitHub Pages from running Jekyll |
 
 `og:url` is `https://comediantracker.com/`.
+
+## Search pages (SEO)
+
+The app is one client-rendered page with no router, so on its own search engines see a single URL. `npm run build` therefore runs `scripts/build-seo.ts` after `vite build`, which writes plain static HTML into `dist/` from the same seed data (`src/lib/seo.ts` holds the page builders; tests in `src/lib/seo.test.ts`):
+
+| Output | What it is |
+| --- | --- |
+| `comedians/<id>/index.html` | One page per comedian: title "Name Tour Dates 2026–2027", description, canonical, Open Graph, the upcoming nights as HTML (month headings, venue, place, time, ticket link), schema.org `ComedyEvent` data for every night plus a `BreadcrumbList`, a link to the tracker filtered to them (`/?comedian=<id>`), their official tour page and links to the other comedians. Comedians with no dates still get a page saying nothing is announced. |
+| `comedians/index.html` | Hub listing every comedian with their upcoming count. |
+| `404.html` | GitHub Pages' not-found page, `noindex`, with links home and to every comedian. |
+| `sitemap.xml` | Home, hub and every comedian page. `lastmod` is the newest `generatedAt` in `data/*.json`. |
+| `index.html` (edited) | Description gains the four busiest names, `WebSite` + `ItemList` JSON-LD is added, and a `<noscript>` list links every comedian page. The visible app is unchanged. |
+
+`public/robots.txt` allows everything and points to the sitemap. `index.html` carries the canonical `https://comediantracker.com/`.
+
+The static pages are inline-styled in the site's navy and bone palette and follow the saved Light/Dark choice. They carry the same GA4 and Clarity tags as the app, built from the same env vars, and only when the IDs are well formed. Only nights from the build day onward are written, so `pages.yml` also runs on a daily schedule to drop past nights. `SEO_TODAY=YYYY-MM-DD` overrides the build day for testing.
+
+`App.tsx` reads `?comedian=<id>` on load and starts with that comedian selected, and the footer links every comedian page so crawlers can reach them from the app too.

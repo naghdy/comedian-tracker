@@ -23,14 +23,24 @@ import {
   tripMatches,
   upcomingShows,
 } from "./lib/filters";
+import { SEED_COMEDIANS } from "./lib/seedData";
 import type { Show, TripQuery } from "./types";
+
+/** `?comedian=<id>` (from a comedian's page) opens the tracker on just them. */
+function comedianFromUrl(): string[] {
+  if (typeof window === "undefined") return [];
+  const id = new URLSearchParams(window.location.search).get("comedian");
+  return id && SEED_COMEDIANS.some((c) => c.id === id) ? [id] : [];
+}
+
+const PAGED_IDS = new Set(SEED_COMEDIANS.map((c) => c.id));
 
 export default function App() {
   const [state, setState] = useTrackerState();
   const [theme, setTheme] = useState<Theme>(() =>
     typeof window === "undefined" ? "dark" : readTheme(),
   );
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>(comedianFromUrl);
   const [cityFilter, setCityFilter] = useState("");
   const [comedianFilter, setComedianFilter] = useState("");
   const [trip, setTrip] = useState<TripQuery | null>(null);
@@ -158,6 +168,15 @@ export default function App() {
           </main>
           <footer className="foot">
             <p>Dates come from official tour pages and venue listings, checked weekly.</p>
+            <nav className="foot-links" aria-label="Tour dates by comedian">
+              {state.comedians
+                .filter((c) => PAGED_IDS.has(c.id))
+                .map((c) => (
+                  <a key={c.id} href={`comedians/${c.id}/`}>
+                    {c.name}
+                  </a>
+                ))}
+            </nav>
             <button
               type="button"
               className="text-btn"

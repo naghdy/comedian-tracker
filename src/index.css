@@ -215,11 +215,14 @@ code {
   color: var(--ink-2);
 }
 
-.masthead-links a {
+.masthead-links a,
+.masthead-links .text-btn {
+  color: var(--ink-2);
   text-decoration: none;
 }
 
-.masthead-links a:hover {
+.masthead-links a:hover,
+.masthead-links .text-btn:hover {
   color: var(--ink);
   text-decoration: underline;
 }
@@ -274,7 +277,7 @@ code {
   align-items: baseline;
 }
 
-.cast li + li::before {
+.cast li:not(:last-child)::after {
   content: "·";
   padding: 0 0.5em;
   color: var(--ink-3);
@@ -302,7 +305,6 @@ code {
   font-family: var(--sans);
   font-size: 0.68em;
   font-weight: 500;
-  font-variant-numeric: tabular-nums;
   color: var(--ink-3);
 }
 

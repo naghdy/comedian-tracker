@@ -6,7 +6,7 @@
 import type { Comedian, Show } from "../types";
 import { clarityTagUrl } from "./clarity";
 import { gaMeasurementId } from "./analytics";
-import { dayParts, formatTime, groupByMonth, placeLabel, tourTitle } from "./display";
+import { bareCity, dayParts, formatTime, groupByMonth, placeLabel, tourTitle } from "./display";
 import { sortChronological, upcomingShows } from "./filters";
 
 export const SITE_URL = "https://comediantracker.com";
@@ -75,7 +75,7 @@ function eventName(comedian: Comedian, show: Show) {
 
 /** schema.org ComedyEvent for one night. Only fields the seed actually has. */
 export function eventJsonLd(comedian: Comedian, show: Show) {
-  const address: Record<string, string> = { "@type": "PostalAddress", addressLocality: show.city };
+  const address: Record<string, string> = { "@type": "PostalAddress", addressLocality: bareCity(show) };
   if (show.region) address.addressRegion = show.region;
   const country = addressCountry(show.country);
   if (country) address.addressCountry = country;

@@ -7,6 +7,7 @@ import {
 } from "@react-google-maps/api";
 import type { Comedian, Show } from "../types";
 import { coordsForShow } from "../lib/geo";
+import { cityAndRegion } from "../lib/display";
 import { formatShowDate } from "../lib/filters";
 import { DARK_MAP_STYLES, LIGHT_MAP_STYLES } from "../lib/mapStyles";
 
@@ -198,8 +199,7 @@ function GoogleMapCanvas({
             </h3>
             <p>{active.show.title}</p>
             <p>
-              {active.show.venue}, {active.show.city}
-              {active.show.region ? `, ${active.show.region}` : ""}
+              {active.show.venue}, {cityAndRegion(active.show)}
             </p>
             <p>{formatShowDate(active.show.date, active.show.time)}</p>
             {active.show.ticketUrl ? (

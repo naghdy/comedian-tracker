@@ -3,7 +3,7 @@ import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import type { Comedian, Show, TripQuery } from "../types";
 import { findCity } from "../lib/geo";
-import { addDays, formatRange } from "../lib/display";
+import { addDays, dayParts, formatRange, groupByDay } from "../lib/display";
 import { inDateRange } from "../lib/filters";
 import { CityCombobox } from "./CityCombobox";
 import { ShowRow } from "./ShowRow";
@@ -49,17 +49,17 @@ export function TripChecker({
   const range = active ? formatRange(active.start, active.end) : "";
 
   return (
-    <section className="section trip" aria-labelledby="trip-title">
+    <section className="section trip" id="trip" aria-labelledby="trip-title">
       <header className="section-head">
-        <h2 id="trip-title">Who’s in town?</h2>
+        <h2 id="trip-title">Going somewhere?</h2>
       </header>
       <p className="section-lede">
-        Going somewhere? Pick the city and your dates to see who’s playing while
-        you’re there.
+        Pick a city and the days you’ll be there, and you’ll see who’s on.
       </p>
 
       <form className="trip-form" onSubmit={submit}>
         <CityCombobox
+          className="field trip-city"
           shows={inDates}
           comedians={comedians}
           value={city}
@@ -110,21 +110,27 @@ export function TripChecker({
           >
             <h3 className="trip-headline">
               {matches.length === 0
-                ? `Nobody on the list is in ${cityName}, ${range}.`
+                ? `Nobody on the list is in ${cityName}, ${range}. Try a few days either side.`
                 : `${matches.length} ${matches.length === 1 ? "night" : "nights"} in ${cityName}, ${range}`}
             </h3>
-            {matches.length > 0 ? (
-              <ol className="rows">
-                {matches.map((show) => (
-                  <ShowRow
-                    key={show.id}
-                    show={show}
-                    comedian={byId[show.comedianId]}
-                    today={today}
-                  />
-                ))}
-              </ol>
-            ) : null}
+            {groupByDay(matches).map((day) => {
+              const { day: num, weekday, month } = dayParts(day.date);
+              return (
+                <div key={day.date} className="day">
+                  <p className="day-date">
+                    <span className="day-weekday">
+                      {weekday} {month}
+                    </span>
+                    <span className="day-num">{num}</span>
+                  </p>
+                  <ol className="rows">
+                    {day.shows.map((show) => (
+                      <ShowRow key={show.id} show={show} comedian={byId[show.comedianId]} />
+                    ))}
+                  </ol>
+                </div>
+              );
+            })}
           </m.div>
         ) : null}
       </AnimatePresence>

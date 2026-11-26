@@ -43,10 +43,6 @@ export function CityCombobox({
   const [active, setActive] = useState(-1);
 
   const suggestions = useMemo(() => citySuggestions(shows, value), [shows, value]);
-  const colorOf = useMemo(
-    () => Object.fromEntries(comedians.map((c) => [c.id, c.color])),
-    [comedians],
-  );
   const nameOf = useMemo(
     () => Object.fromEntries(comedians.map((c) => [c.id, c.name])),
     [comedians],
@@ -192,15 +188,7 @@ export function CityCombobox({
                     )}
                     {s.detail ? <span className="combo-detail">{s.detail}</span> : null}
                   </span>
-                  <span
-                    className="combo-dots"
-                    aria-hidden="true"
-                    title={s.comedianIds.map((cid) => nameOf[cid] ?? cid).join(", ")}
-                  >
-                    {s.comedianIds.slice(0, 5).map((cid) => (
-                      <i key={cid} style={{ background: colorOf[cid] ?? "currentColor" }} />
-                    ))}
-                  </span>
+                  <span className="combo-who">{whoLine(s.comedianIds, nameOf)}</span>
                   <span className="combo-count">
                     {s.nights} {s.nights === 1 ? "night" : "nights"}
                   </span>
@@ -212,4 +200,11 @@ export function CityCombobox({
       </AnimatePresence>
     </div>
   );
+}
+
+/** "Jeff Arcuri", "Jeff Arcuri, Mo Amer" or "Jeff Arcuri, Mo Amer +2". */
+function whoLine(ids: string[], nameOf: Record<string, string>): string {
+  const names = ids.map((id) => nameOf[id] ?? id);
+  if (names.length <= 2) return names.join(", ");
+  return `${names.slice(0, 2).join(", ")} +${names.length - 2}`;
 }

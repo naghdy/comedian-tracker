@@ -69,8 +69,8 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
         exit={{ opacity: 0, y: 8, scale: 0.99 }}
         transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
       >
-        <h2 id="add-show-title">Add a show</h2>
-        <p className="section-lede">Saved in this browser only.</p>
+        <h2 id="add-show-title">Add a night</h2>
+        <p className="section-lede">It stays in this browser and nobody else sees it.</p>
         <label className="field">
           <span>Comedian</span>
           <select name="comedianId" required defaultValue={comedians[0]?.id}>
@@ -109,9 +109,8 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
         </div>
         {city && !known ? (
           <p className="hint">
-            “{city}” isn’t in the city table yet, so it will be listed but not
-            pinned on the map until coordinates are added to{" "}
-            <code>data/cities.json</code>.
+            “{city}” isn’t on the map yet, so the night will be listed but not
+            pinned.
           </p>
         ) : null}
         <div className="grid-2">
@@ -140,7 +139,7 @@ export function ShowForm({ comedians, onClose, onSave }: Props) {
         </label>
         <div className="form-actions">
           <button className="btn" type="submit">
-            Save show
+            Save night
           </button>
           <button className="btn btn-quiet" type="button" onClick={onClose}>
             Cancel

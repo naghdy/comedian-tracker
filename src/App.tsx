@@ -8,7 +8,7 @@ import { TripChecker } from "./components/TripChecker";
 import { ShowMap } from "./components/ShowMap";
 import { Agenda } from "./components/Agenda";
 import { ShowForm } from "./components/ShowForm";
-import { resetSeed, useTrackerState } from "./lib/storage";
+import { useTrackerState } from "./lib/storage";
 import {
   applyTheme,
   persistTheme,
@@ -42,7 +42,6 @@ export default function App() {
   );
   const [selectedIds, setSelectedIds] = useState<string[]>(comedianFromUrl);
   const [cityFilter, setCityFilter] = useState("");
-  const [comedianFilter, setComedianFilter] = useState("");
   const [trip, setTrip] = useState<TripQuery | null>(null);
   const [formOpen, setFormOpen] = useState(false);
 
@@ -66,13 +65,12 @@ export default function App() {
     return counts;
   }, [upcoming]);
 
-  const comedianIds = useMemo(() => {
-    const rosterFilter = selectedIds.length ? selectedIds : undefined;
-    if (rosterFilter && comedianFilter) {
-      return rosterFilter.filter((id) => id === comedianFilter);
-    }
-    return comedianFilter ? [comedianFilter] : rosterFilter;
-  }, [selectedIds, comedianFilter]);
+  const totalCities = useMemo(
+    () => new Set(upcoming.map((show) => show.city.trim().toLowerCase())).size,
+    [upcoming],
+  );
+
+  const comedianIds = selectedIds.length ? selectedIds : undefined;
 
   // What the dates' city box suggests from: every filter but the city itself.
   const cityPool = useMemo(
@@ -86,13 +84,7 @@ export default function App() {
     [cityPool, cityFilter],
   );
 
-  const tripPool = useMemo(
-    () =>
-      filterShows(upcoming, {
-        comedianIds: selectedIds.length ? selectedIds : undefined,
-      }),
-    [upcoming, selectedIds],
-  );
+  const tripPool = cityPool;
 
   const tripHits = useMemo(() => {
     if (!trip) return [];
@@ -121,16 +113,35 @@ export default function App() {
     }));
   }
 
-  const filterKey = `${selectedIds.join(",")}|${cityFilter.trim().toLowerCase()}|${comedianFilter}`;
+  const filterKey = `${selectedIds.join(",")}|${cityFilter.trim().toLowerCase()}`;
+  const filtered = selectedIds.length > 0 || cityFilter.trim() !== "";
+  const addedByVisitor = state.shows.some((show) => show.source === "user");
+
+  function clearFilters() {
+    setSelectedIds([]);
+    setCityFilter("");
+  }
+
+  function clearAdded() {
+    if (!window.confirm("Take off every night you added in this browser?")) return;
+    setState((prev) => ({
+      ...prev,
+      shows: prev.shows.filter((show) => show.source !== "user"),
+    }));
+  }
 
   return (
     <LazyMotion features={loadMotionFeatures} strict>
       <MotionConfig reducedMotion="user">
         <div className="app">
+          <a className="skip-link" href="#listings">
+            Skip to the listings
+          </a>
           <Roster
             comedians={state.comedians}
             showCounts={showCounts}
             totalNights={upcoming.length}
+            totalCities={totalCities}
             selectedIds={selectedIds}
             onToggle={toggleComedian}
             onClear={() => setSelectedIds([])}
@@ -149,10 +160,9 @@ export default function App() {
               comedians={state.comedians}
               today={today}
               cityFilter={cityFilter}
-              comedianFilter={comedianFilter}
               onCityFilter={setCityFilter}
-              onComedianFilter={setComedianFilter}
-              onAdd={() => setFormOpen(true)}
+              filtered={filtered}
+              onClearFilters={clearFilters}
               onRemove={removeShow}
               filterKey={filterKey}
             />
@@ -167,31 +177,35 @@ export default function App() {
             />
           </main>
           <footer className="foot">
-            <p>Dates come from official tour pages and venue listings, checked weekly.</p>
+            <p className="foot-note">
+              Dates come from each comedian’s own tour page or the venue’s listing and are
+              checked every week. If a time here disagrees with the venue, trust the venue.
+            </p>
             <nav className="foot-links" aria-label="Tour dates by comedian">
-              {state.comedians
-                .filter((c) => PAGED_IDS.has(c.id))
-                .map((c) => (
-                  <a key={c.id} href={`comedians/${c.id}/`}>
-                    {c.name}
-                  </a>
-                ))}
+              <h2>Tour dates by comedian</h2>
+              <ul>
+                {state.comedians
+                  .filter((c) => PAGED_IDS.has(c.id))
+                  .map((c) => (
+                    <li key={c.id}>
+                      <a href={`comedians/${c.id}/`}>{c.name}</a>
+                    </li>
+                  ))}
+              </ul>
             </nav>
-            <button
-              type="button"
-              className="text-btn"
-              onClick={() => {
-                if (window.confirm("Restore the starter roster and seed shows?")) {
-                  setState(resetSeed());
-                  setSelectedIds([]);
-                  setCityFilter("");
-                  setComedianFilter("");
-                  setTrip(null);
-                }
-              }}
-            >
-              Reset seed
-            </button>
+            <p className="foot-tools">
+              <button type="button" className="text-btn" onClick={() => setFormOpen(true)}>
+                Add a night you know about
+              </button>
+              {addedByVisitor ? (
+                <>
+                  {" · "}
+                  <button type="button" className="text-btn" onClick={clearAdded}>
+                    Clear nights you added
+                  </button>
+                </>
+              ) : null}
+            </p>
           </footer>
           <AnimatePresence>
             {formOpen ? (

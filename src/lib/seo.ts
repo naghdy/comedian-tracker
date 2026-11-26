@@ -113,38 +113,40 @@ function analyticsTags(opts: SeoOptions) {
   return tags.join("\n    ");
 }
 
-// Same palette as src/index.css: navy and bone, dark by default, light if the
-// visitor picked it on the main page (shared localStorage key).
+// Same palette and type as src/index.css: navy and white with one blue,
+// a serif for names and headings, dark by default, light if the visitor
+// picked it on the main page (shared localStorage key).
 const PAGE_CSS = `
-:root,:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1630;--ink:#efe9dc;--ink-2:#b3b7c6;--ink-3:#7d86a3;--rule:rgba(239,233,220,.1);--rule-strong:rgba(239,233,220,.22);--btn-bg:#efe9dc;--btn-fg:#0e1630}
-:root[data-theme="light"]{color-scheme:light;--bg:#f7f7f5;--ink:#0e1630;--ink-2:#4a5372;--ink-3:#737b96;--rule:rgba(14,22,48,.1);--rule-strong:rgba(14,22,48,.24);--btn-bg:#0e1630;--btn-fg:#f7f7f5}
+:root,:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1630;--ink:#eef2fb;--ink-2:#b6bfd8;--ink-3:#8994b3;--accent:#8cafff;--rule:rgba(238,242,251,.12);--rule-strong:rgba(238,242,251,.28);--btn-bg:#eef2fb;--btn-fg:#0e1630}
+:root[data-theme="light"]{color-scheme:light;--bg:#fff;--ink:#0e1630;--ink-2:#47506f;--ink-3:#69728f;--accent:#2148b8;--rule:rgba(14,22,48,.12);--rule-strong:rgba(14,22,48,.3);--btn-bg:#0e1630;--btn-fg:#fff}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.wrap{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 64px}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:3px solid var(--rule-strong)}
-.brand{display:inline-flex;align-items:center;gap:.35em;font:800 22px/1 "Big Shoulders Display","Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.02em;text-decoration:none}
-.brand svg{width:1em;height:1em}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Public Sans",ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.2em}
+.wrap{max-width:880px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 64px}
+.bar{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:22px 0 14px;border-bottom:1px solid var(--rule-strong)}
+.brand{display:inline-flex;align-items:center;gap:8px;font:650 22px/1.1 "Source Serif 4",Georgia,serif;letter-spacing:-.01em;text-decoration:none}
+.brand svg{width:1.05em;height:1.05em;color:var(--accent)}
 .bar a.home{color:var(--ink-2);font-size:14px}
-h1{font:800 clamp(40px,7vw,72px)/.95 "Big Shoulders Display","Arial Narrow",sans-serif;text-transform:uppercase;margin:40px 0 12px}
-.lede{color:var(--ink-2);max-width:60ch;margin:0 0 20px;font-size:17px}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 32px}
-.btn{display:inline-block;padding:10px 16px;border-radius:999px;background:var(--btn-bg);color:var(--btn-fg);font-weight:600;text-decoration:none}
-.btn-quiet{background:transparent;color:var(--ink);border:1px solid var(--rule-strong)}
-h2{font:700 30px/1 "Big Shoulders Display","Arial Narrow",sans-serif;text-transform:uppercase;margin:36px 0 8px;padding-top:12px;border-top:3px solid var(--rule-strong)}
-h2 span{color:var(--ink-3)}
+h1{font:600 clamp(34px,6vw,56px)/1.05 "Source Serif 4",Georgia,serif;letter-spacing:-.02em;margin:36px 0 12px}
+.lede{color:var(--ink-2);max-width:36em;margin:0 0 20px;font:400 19px/1.4 "Source Serif 4",Georgia,serif}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin:0 0 32px}
+.btn{display:inline-block;padding:10px 18px;border-radius:2px;background:var(--btn-bg);color:var(--btn-fg);font-weight:600;text-decoration:none}
+.btn-quiet{padding:0;background:none;color:var(--ink-2);font-weight:500;text-decoration:underline}
+h2{position:sticky;top:0;background:var(--bg);font:600 19px/1.2 "Source Serif 4",Georgia,serif;margin:32px 0 0;padding:10px 0 8px;border-bottom:1px solid var(--rule-strong)}
+h2 span{font-weight:400;color:var(--ink-3)}
 ol{list-style:none;margin:0;padding:0}
-li.row{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
-.date{margin:0;text-align:center;line-height:1}
-.date small{display:block;color:var(--ink-3);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-.date strong{font:700 30px/1 "Big Shoulders Display","Arial Narrow",sans-serif}
+li.row{display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule)}
+.date{margin:0;line-height:1.1}
+.date small{display:block;color:var(--ink-3);font-size:12px;font-weight:600}
+.date strong{font:500 26px/1 "Source Serif 4",Georgia,serif}
 .where p{margin:0}
-.venue{font-weight:600}
+.venue{font-weight:500}
 .place{color:var(--ink-2);font-size:14px}
-.tickets{font-weight:600;font-size:14px;white-space:nowrap}
+.tickets{font-weight:600;font-size:14px;white-space:nowrap;color:var(--accent);text-decoration:underline}
 .empty{color:var(--ink-2)}
 .others{margin-top:48px}
-.others ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px}
+.others h2{position:static}
+.others ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px}
 .foot{margin-top:48px;color:var(--ink-3);font-size:13px}
 `.trim();
 
@@ -189,7 +191,7 @@ function page(parts: PageParts, opts: SeoOptions) {
     <meta name="twitter:image" content="${SITE_URL}/og-image.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
     ${THEME_SCRIPT}
     <style>${PAGE_CSS}</style>
     ${analyticsTags(opts)}
@@ -254,7 +256,7 @@ function rowsHtml(comedian: Comedian, shows: Show[]) {
           const time = formatTime(show.time);
           const tour = tourTitle(comedian.name, show.title);
           const tickets = show.ticketUrl
-            ? `<a class="tickets" href="${escapeHtml(show.ticketUrl)}" target="_blank" rel="noopener noreferrer">Tickets ↗</a>`
+            ? `<a class="tickets" href="${escapeHtml(show.ticketUrl)}" target="_blank" rel="noopener noreferrer">Tickets</a>`
             : "";
           return `          <li class="row">
             <p class="date"><small>${weekday}</small><strong>${day}</strong></p>
@@ -298,7 +300,7 @@ export function comedianPageHtml(
       ? `<a class="btn" href="/?comedian=${encodeURIComponent(comedian.id)}">See ${name} on the map</a>`
       : "",
     comedian.tourUrl
-      ? `<a class="btn btn-quiet" href="${escapeHtml(comedian.tourUrl)}" target="_blank" rel="noopener noreferrer">Official tour page ↗</a>`
+      ? `<a class="btn btn-quiet" href="${escapeHtml(comedian.tourUrl)}" target="_blank" rel="noopener noreferrer">Their official tour page</a>`
       : "",
   ]
     .filter(Boolean)
@@ -310,7 +312,7 @@ export function comedianPageHtml(
         <div class="actions">
         ${actions}
         </div>
-${shows.length ? rowsHtml(comedian, shows) : `      <p class="empty">Nothing on the bill yet.</p>`}
+${shows.length ? rowsHtml(comedian, shows) : `      <p class="empty">No dates announced right now.</p>`}
       </main>
 ${othersBlock(roster, comedian.id)}`;
 

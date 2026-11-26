@@ -127,3 +127,31 @@ export function addDays(iso: string, days: number) {
   dt.setUTCDate(dt.getUTCDate() + days);
   return dt.toISOString().slice(0, 10);
 }
+
+export type DayGroup = {
+  date: string;
+  shows: Show[];
+};
+
+/** Splits chronologically sorted shows into one group per date, keeping order. */
+export function groupByDay(shows: Show[]): DayGroup[] {
+  const groups: DayGroup[] = [];
+  for (const show of shows) {
+    const last = groups[groups.length - 1];
+    if (last && last.date === show.date) last.shows.push(show);
+    else groups.push({ date: show.date, shows: [show] });
+  }
+  return groups;
+}
+
+/**
+ * How many of `shows` to list before "Show all": at least `min`, then up to the
+ * end of that day, so a date is never split across the fold.
+ */
+export function foldIndex(shows: Pick<Show, "date">[], min: number) {
+  if (shows.length <= min) return shows.length;
+  const lastDate = shows[min - 1].date;
+  let end = min;
+  while (end < shows.length && shows[end].date === lastDate) end += 1;
+  return end;
+}

@@ -9,7 +9,7 @@ Vite 6 + React 18 + TypeScript. No router, no auth, no backend. The production b
 | Entry | `index.html`, `src/main.tsx` |
 | App shell | `src/App.tsx` |
 | Types | `src/types.ts` (`Comedian`, `Show`, `CityCoord`, `TripQuery`, `StoredState`) |
-| Styles | `src/index.css` (CSS variables, dark default, no single accent colour; comedians' colours are the only colour). Fonts: Big Shoulders Display (headings, months, day numbers), Hanken Grotesk (everything else), loaded from Google Fonts in `index.html`. |
+| Styles | `src/index.css` (CSS variables, navy dark default, white light theme, one blue accent; comedian colours are not used in the UI). Fonts: Source Serif 4 (wordmark, headings, names, day numbers, italic tour names), Public Sans (everything else), loaded from Google Fonts in `index.html`. Comedian pages in `src/lib/seo.ts` carry a compact copy of the same palette and fonts. |
 | Motion | `motion` (`motion/react`). `LazyMotion` in `App.tsx` loads the animation features from `src/lib/motionFeatures.ts` as a separate chunk after first paint; components use `motion/react-m`. `MotionConfig reducedMotion="user"` honours the OS setting. |
 | Map | `@react-google-maps/api` in `src/components/ShowMap.tsx`. Tile styles for both themes: `src/lib/mapStyles.ts`. |
 | Build | `npm run build` → `tsc -b && vite build`. `vite.config.ts` sets `base: './'` (relative asset URLs, so the build works at `comediantracker.com/` and under any sub-path), dev server port `5173`, `host: true`. |

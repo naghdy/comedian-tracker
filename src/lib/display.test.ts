@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { addDays, bareCity, cityAndRegion, dayParts, formatRange, formatTime, groupByMonth, placeLabel, tourTitle } from "./display";
+import { addDays, bareCity, cityAndRegion, dayParts, foldIndex, formatRange, formatTime, groupByDay, groupByMonth, placeLabel, tourTitle } from "./display";
 import { SEED_SHOWS } from "./seedData";
 import type { Show } from "../types";
 
@@ -83,5 +83,24 @@ describe("place labels never repeat the region", () => {
         assert.equal(repeated, undefined, `${s.id}: "${label}"`);
       }
     }
+  });
+});
+
+describe("groupByDay and foldIndex", () => {
+  const row = (id: string, date: string) =>
+    ({ id, date, comedianId: "x", title: "", venue: "", city: "" }) as Show;
+  const shows = [row("a", "2026-12-03"), row("b", "2026-12-03"), row("c", "2026-12-04"), row("d", "2026-12-05")];
+
+  it("prints each date once, in order", () => {
+    assert.deepEqual(
+      groupByDay(shows).map((g) => [g.date, g.shows.map((s) => s.id).join("")]),
+      [["2026-12-03", "ab"], ["2026-12-04", "c"], ["2026-12-05", "d"]],
+    );
+  });
+
+  it("never splits a day across the fold", () => {
+    assert.equal(foldIndex(shows, 1), 2);
+    assert.equal(foldIndex(shows, 3), 3);
+    assert.equal(foldIndex(shows, 10), 4);
   });
 });

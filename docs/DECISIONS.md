@@ -247,3 +247,21 @@ Nabil asked to work on SEO. The app is a single client-rendered page, so search 
 Rather than move the app to server rendering or add a router, the build now writes static HTML pages next to the app: one per comedian at `/comedians/<id>/` with their dates in the HTML and schema.org `ComedyEvent` data (the pages people search for, "Jeff Arcuri tour dates"), a `/comedians/` hub, a `noindex` 404 page and a sitemap. The app itself looks the same; its footer now links each comedian page, and `?comedian=<id>` opens it filtered to that comedian. The home page title is now "Comedian Tracker | Upcoming Comedy Tour Dates Worldwide" (share title and site name stay "Comedian Tracker"), and its description adds the four busiest names after the tagline.
 
 The homepage body is not prerendered: React would replace it on load and shift the layout, and Google already renders the app. Static pages build from the seed, so the Pages workflow now also rebuilds daily to keep past nights out of the event data. No seed data changed, so no seed-key bump.
+
+## 2026-11-26 — Listings-style redesign
+
+Nabil asked for a UX overhaul so the site reads less like something generated. The audit (category-colour rainbow, condensed-caps poster type on every line, identical stamped sections, pill buttons, builder copy such as "Reset seed" and Maps setup steps on the public page, one 278-night list with the trip checker out of reach) is in the project files at `ux-overhaul/audit.md`.
+
+The new look is the listings column of a magazine. Source Serif 4 for the wordmark, headings, names and day numbers, italic for tour names; Public Sans for venues, places and controls. Colour is navy and white plus one brighter blue for the selected name, tonight and ticket links, which keeps to Nabil's "blue and white only". The comedian colours are no longer drawn anywhere; pins are one colour.
+
+Layout rules kept: map at the top, trip checker at the bottom, dark default. What changed in use:
+
+- A masthead with a one-line standfirst (how many comics, nights and cities, and where the dates come from) and a "Travelling?" link down to the trip checker.
+- The lineup is one line of names with counts, busiest first, and is the only comedian filter (the duplicate dropdown is gone). Comedians with no dates sit on a "Not touring right now" line linking their pages instead of filtering to an empty list.
+- Listings print each date once per day with the month heading pinned while scrolling. Unfiltered, the list opens on the first 40 or so nights (rounded to a whole day) with a "Show the other N nights" button; any filter shows everything.
+- Only nights the visitor added can be removed. "Reset seed" became "Clear nights you added", shown only when there are some, and "Add a night" moved to the footer.
+- Map errors and the no-key state speak to visitors; setup steps stay in OPERATIONS.md.
+- A skip link to the listings. Comedian pages use the same palette and fonts.
+
+No seed data changed, so no seed-key bump.
+

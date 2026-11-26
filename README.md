@@ -67,8 +67,8 @@ npm run preview  # serve the build
 
 ## What you get
 
-- **Roster** (left): curator-managed color chips. Click a row to filter the map/agenda; show count is on the right. No add/remove/refresh/tour-link controls — tell the assistant which comedians to track and it updates seed JSON. Light/dark toggle (persisted). **Reset seed** restores the JSON files in this browser.
-- **Map**: Google Maps, color-coded pins by comedian, clickable info windows. Dark vs default-light tiles follow the theme. Lookup events include venue lat/lng when Ticketmaster/SeatGeek send them, so new cities can pin without a `cities.json` edit.
+- **Lineup** (top): the touring comedians as one line of names with their night counts, busiest first. Click a name to filter the map and listings. Comedians with no dates sit on a separate line linking their pages. No add/remove/refresh/tour-link controls; the roster lives in seed JSON. Light/dark toggle (persisted).
+- **Map**: Google Maps, one pin colour for everyone, clickable info windows. Dark vs default-light tiles follow the theme. Lookup events include venue lat/lng when Ticketmaster/SeatGeek send them, so new cities can pin without a `cities.json` edit.
 - **Agenda**: chronological list, extra comedian/city filters, empty states, add/remove shows.
 - **Trip checker**: city + start/end dates. Case-insensitive partial city match. Headline: *In Houston these days…*
 
@@ -121,9 +121,9 @@ Dates were seeded from public listings on **2026-09-09** (Chris D'Elia on **2026
 | Andrew Santino | **15** (one row per calendar night, 5 Feb–27 Mar 2027) | Official site [andrewsantino.com](https://www.andrewsantino.com/) (`tourUrl`). Month and day only; years and times from the venue pages it links to and FOX5 Las Vegas. Milwaukee, West Palm Beach, Miami, Madison, Columbus, Denver, Las Vegas. |
 | Theo Von | **0** | Official tour page [theovon.com/tour](https://www.theovon.com/tour) (`tourUrl`) says new dates are coming soon. |
 
-Existing browsers may still have an older `localStorage` snapshot. **v4–v18** snapshots are migrated once into `comedian-tracker:v19`: Dave Chappelle’s listed nights become the Duke Ellington School DC benefit, Fastball Mesa, and the Karmageddon arena run including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and both NY Comedy Festival MSG dates (stale Ticketmaster tour URL replaced with Live Nation), missing seed comedians (including **Chris D'Elia**, now **87** nights, **Mo Amer**, **18** nights, **Aaron Chen**, **24** nights, **Jimmy O. Yang**, **39** nights, and **Zarna Garg**, **30** nights) and their listed nights are added, Jeff Arcuri empty rows pick up the **82** seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **15-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Use **Reset seed** (or a fresh profile) to restore the JSON files.
+Existing browsers may still have an older `localStorage` snapshot. **v4–v18** snapshots are migrated once into `comedian-tracker:v19`: Dave Chappelle’s listed nights become the Duke Ellington School DC benefit, Fastball Mesa, and the Karmageddon arena run including Austin Moody Center 26–27 Oct, Atlanta State Farm Arena 4 Nov, and both NY Comedy Festival MSG dates (stale Ticketmaster tour URL replaced with Live Nation), missing seed comedians (including **Chris D'Elia**, now **87** nights, **Mo Amer**, **18** nights, **Aaron Chen**, **24** nights, **Jimmy O. Yang**, **39** nights, and **Zarna Garg**, **30** nights) and their listed nights are added, Jeff Arcuri empty rows pick up the **82** seed nights, and Andrew Schulz’s four Live Nation dates are replaced with the full **15-night** official Laylo calendar. Stale listed seed rows are replaced; manual and lookup-sourced rows are kept. Clearing the site's data (or a fresh profile) restores the JSON files.
 
-Edits you make in the UI stay in this browser. **Reset seed** in the roster restores the JSON files.
+Nights you add in the UI stay in this browser. **Clear nights you added** in the footer takes them off again.
 
 If you add a city that is not in `data/cities.json` and the show has no lat/lng from lookup, it still appears in the agenda but will not get a map pin until you add coordinates there.
 

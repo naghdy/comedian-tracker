@@ -128,7 +128,7 @@ Current counts (all `source: "listed"`, one night per date):
 | --- | --- | --- |
 | `id` | yes | kebab-case, stable. Show `comedianId` points here. |
 | `name` | yes | Display name. Apostrophes stay (`Chris D'Elia`). |
-| `color` | yes | CSS color for the chip, card bar, and map pin. |
+| `color` | yes | Kept in the data, but no longer drawn: since the 2026-11-26 redesign the site is navy, white and one blue, and every pin is the same colour. |
 | `aliases` | no | Alternate spellings for name match (Schulz/Schultz, D'Elia/Delia). |
 | `tourUrl` | no | Canonical listing page. Shown in data only; the roster has no tour-link control. |
 | `notes` | no | Curator note. Not shown as a field in the roster UI. |
